@@ -1,0 +1,48 @@
+.groupBox {
+    border: 2.5px solid lightgray;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;
+    padding-top: 2px;
+    border-radius: 10px;
+
+}
+
+.goupBoxHeader {
+    padding: 0.2em 0.5em;
+    border: 1px solid rgb(255, 255, 255);
+    font-size: 100%;
+    text-align: center;
+    width: 50%;
+    border-radius: 6px;
+    background-color: rgba(192, 1, 1, 0.932);
+    color: white;
+    font-weight: bold;
+    margin-left: 25%;
+
+}
+
+.myContainer_reg {
+    border: 3px red;
+    width: auto;
+    margin: 0 auto;
+    padding: 10px;
+    margin-top: 2PX;
+    margin-bottom: 20px;
+    background-color: rgba(191, 190, 190, 0.37);
+    margin-left: 10%;
+    margin-right: 10%;
+    border-radius: 10px;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
+}

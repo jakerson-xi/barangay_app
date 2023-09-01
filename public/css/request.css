@@ -1,0 +1,76 @@
+
+
+@media screen and (min-width:992px) {
+    .navbar-collapse {
+        flex-grow: 0;
+    }
+
+    .container-fluid.my-container-fluid {
+        justify-content: center;
+    }
+
+    .topnav a {
+        float: left;
+        display: block;
+        color: black;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: 17px;
+        border-bottom: 3px solid transparent;
+    }
+
+    .topnav a:hover {
+        border-bottom: 3px solid rgb(255, 255, 255);
+    }
+
+    .topnav a.active {
+        border-bottom: 3px solid rgb(255, 255, 255);
+    }
+
+    .myContainer {
+        border: 3px red;
+        width: auto;
+        margin: 0 auto;
+        padding: 10px;
+
+
+
+    }
+
+}
+
+.no-spin::-webkit-inner-spin-button,
+.no-spin::-webkit-outer-spin-button {
+    -webkit-appearance: none !important;
+    margin: 0 !important;
+}
+
+.no-spin {
+    -moz-appearance: textfield !important;
+}
+
+.groupBox {
+    border: 2.5px solid black;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;
+    padding-top: 2px;
+    border-radius: 10px;
+    background-color: white;
+
+}
+
+.goupBoxHeader {
+    padding: 0.2em 0.5em;
+    border: 1px solid rgb(255, 255, 255);
+    font-size: 100%;
+    text-align: center;
+    width: 50%;
+    border-radius: 6px;
+    background-color: rgba(192, 1, 1, 0.932);
+    color: white;
+    font-weight: bold;
+    margin-left: 25%;
+
+}

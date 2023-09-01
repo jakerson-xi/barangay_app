@@ -1,0 +1,6 @@
+# what is the probability of 371 heads in 500 coin flips?
+test.result = binom.test(x = 261, n = 500, p = 0.5)
+# what are the objects in the list?
+names(test.result)
+# use the $ notation to extract an object
+test.result$p.value
