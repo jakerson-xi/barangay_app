@@ -18,9 +18,192 @@ use RealRashid\SweetAlert\Facades\Alert;
 use PHPMailer\PHPMailer\PHPMailer;
 use IDAnalyzer\CoreAPI;
 use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\Registration;
+use IDAnalyzer\DocuPass;
+use IDAnalyzer\Vault;
+use Illuminate\Support\Env;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Storage;
 
 class mainController extends Controller
 {
+
+
+    public function registration_id()
+    {
+
+        $docupass = new DocuPass(ENV('ID_ANALYZER'), "BARANGAY SOUTH SIGNAL VILLAGE WEB APP", "US");
+        $docupass->enableFaceVerification(true, 1, 0.7);
+        $docupass->verifyAge("18-120");
+        $docupass->enableAuthentication(true, "2", 0.6);
+        $docupass->enableDualsideCheck(true);
+        $docupass->setMaxAttempt(2);
+        $docupass->setRedirectionURL(Env('APP_URL')."/registration", "");
+        $docupass->verifyExpiry(true);
+        $docupass->setReusable(true);
+        $result = $docupass->createIframe();
+
+        return view('idAnalyzer', ['frame' => $result]);
+    }
+
+    public function registration(Request $request)
+    {
+
+        $ref = 'docupass_reference=' . $request->reference;
+        $vault = new Vault(ENV('ID_ANALYZER'), "US");
+        $vaultItems = $vault->list([$ref])['items']['0'];
+       // return view('registration', ['item' =>  $vaultItems]);
+       dd($vault->list([$ref]));
+       return view('registration', ['item' =>  $vaultItems, 'ref' => $request->reference ]);
+        // $searchTerm = 'south signal village';
+
+        // // Define an array of addresses to search
+        // $addresses = [$vaultItems['address1'], $vaultItems['address2']];
+
+        // // Initialize a variable to track whether the search term was found
+        // $found = false;
+
+        // // Loop through the addresses
+        // foreach ($addresses as $address) {
+        //     // Convert the address and search term to lowercase and remove spaces
+        //     $address = str_replace(' ', '', strtolower($address));
+        //     $searchTerm = str_replace(' ', '', strtolower($searchTerm));
+
+        //     // Check if the modified address contains the modified search term
+        //     if (strpos($address, $searchTerm) !== false) {
+        //         // The string 'southsignalvillage' (case-insensitive and spaces removed) was found in the current address
+        //         $found = true;
+        //         break; // Exit the loop since we found a match
+        //     }
+        // }
+
+        // if ($found) {
+            
+        //     return view('registration', ['item' =>  $vaultItems, 'ref' => $request->reference ]);
+        // } else {
+        //     Alert::error('Invalid Address', 'We only accept IDs with an address in South Signal Village')->showConfirmButton('Confirm', '#AA0F0A');
+        //     return redirect()->route('home');
+        // }
+    }
+
+    public function addUser(Request $request)
+    {
+
+
+        if (User::where('email', $request->email)->where('isEnabled', 1)->exists()) {
+
+            $data = [
+                'success' => "error",
+                'message' => "error",
+            ];
+            return response()->json($data);
+        } else {
+
+
+
+
+
+            if ($request->has('formFile')) {
+                $url = $request->input('formFile');
+                $response = Http::get($url);
+
+                if ($response->successful()) {
+                    $contents = $response->body();
+                    $filename_front = $request->input('firstName') . '_' . $request->input('lastName') . date('Y-m-d-H-i-s') . 'frontPic.' . pathinfo($url, PATHINFO_EXTENSION);
+                    $file_path = public_path('/residentID') . '/' . $filename_front;
+
+                    // Save the downloaded file to the server
+                    file_put_contents($file_path, $contents);
+                }
+            }
+            if ($request->has('formFile_2')) {
+                $url = $request->input('formFile_2');
+                $response = Http::get($url);
+
+                if ($response->successful()) {
+                    $contents_back = $response->body();
+                    $filename_back = $request->input('firstName') . '_' . $request->input('lastName') . date('Y-m-d-H-i-s') . 'backPic.' . pathinfo($url, PATHINFO_EXTENSION);
+                    $file_path_back  = public_path('/residentID') . '/' . $filename_back;
+
+                    // Save the downloaded file to the server
+                    file_put_contents($file_path_back, $contents_back);
+                }
+            }
+            if ($request->has('face')) {
+                $url = $request->input('face');
+                $response = Http::get($url);
+
+                if ($response->successful()) {
+                    $contents_face = $response->body();
+                    $filename_face = $request->input('firstName') . '_' . $request->input('lastName') . date('Y-m-d-H-i-s') . 'face.' . pathinfo($url, PATHINFO_EXTENSION);
+                    $file_path_face  = public_path('/residentID') . '/' . $filename_face;
+
+                    // Save the downloaded file to the server
+                    file_put_contents($file_path_face, $contents_face);
+                }
+            }
+
+
+            // if ($request->file('formFile')) {
+            //     $file_front = $request->file('formFile');
+            //     $filename_front = $request->firstName . '_' . $request->lastName . date("Y-m-d-H-i-s") . 'frontPic.' . $file_front->getClientOriginalExtension();
+            //     $file_front->move(public_path('/residentID'), $filename_front);
+
+            // }
+            // if ($request->file('formFile_2')) {
+            //     $file_back = $request->file('formFile_2');
+            //     $filename_back = $request->firstName . '_' . $request->lastName . date("Y-m-d-H-i-s") . 'backPic.' . $file_back->getClientOriginalExtension();
+            //     $file_back->move(public_path('/residentID'), $filename_back);
+            // }
+
+
+            User::create([
+                "first_name" => strtoupper($request->firstName),
+                "middle_name" => strtoupper($request->middleName),
+                "last_name" => strtoupper($request->lastName),
+                "suffix" =>  strtoupper($request->suffix),
+                "gender" => $request->gender,
+                "marital_status" =>  $request->marital_status,
+                "nationality" =>  $request->nationality,
+                "birthdate" =>  $request->birthdate,
+                "place_birth" =>  strtoupper($request->birthplace),
+                "address_unitNo" =>  strtoupper($request->unitNo),
+                "address_houseNo" =>  strtoupper($request->houseNo),
+                "address_street" =>  strtoupper($request->street),
+                "address_purok" =>  strtoupper($request->purok),
+                "email" =>  strtolower($request->email),
+                "mobile_num" =>  $request->number,
+                "role" =>  $request->role,
+                "password" => Hash::make($request->password),
+                "valiID_type" => $request->type_validID,
+                "validID_num" => $request->validID_num,
+                "validID_front" => $filename_front,
+                "validID_back" => $filename_back,
+                "OTP" => $request->otp,
+                "isEnabled" => 0,
+                'expiry' => $request->expiry,
+                'face' => $filename_face,
+            ]);
+
+
+            $data = [
+                'fullname' => $request->firstName . " " . $request->lastName . " " . $request->suffix,
+                'link' => env('APP_URL') . "/verifyEmail?email=".strtolower($request->email) . "&key=" . $request->otp,
+            ];
+
+            Mail::to($request->email)->send(new Registration($data));
+
+
+            $data = [
+                'success' => true,
+                'message' => "success",
+            ];
+
+            return response()->json($data);
+        }
+        return response()->json();
+    }
 
     public function terms()
     {
@@ -111,192 +294,9 @@ class mainController extends Controller
         return view("userHome", ['user_info' => $user_info, 'request_type' => $request_type]);
     }
 
-    public function registration()
-    {
-        return view('registration');
-    }
-
-    public function addUser(Request $request)
-    {
-
-
-        if ( User::where('email', $request->email)->where('isEnabled', 1)->exists() ) {
-
-            $data = [
-                'success' => "error",
-                'message' => "error",
-            ];
-            return response()->json($data);
-        } else {
-
-            if ($request->file('formFile')) {
-                $file_front = $request->file('formFile');
-                $filename_front = $request->firstName . '_' . $request->lastName . date("Y-m-d-H-i-s") . 'frontPic.' . $file_front->getClientOriginalExtension();
-                $file_front->move(public_path('/residentID'), $filename_front);
-            }
-            if ($request->file('formFile_2')) {
-                $file_back = $request->file('formFile_2');
-                $filename_back = $request->firstName . '_' . $request->lastName . date("Y-m-d-H-i-s") . 'backPic.' . $file_back->getClientOriginalExtension();
-                $file_back->move(public_path('/residentID'), $filename_back);
-            }
-
-            // Retrieve the uploaded file from the request
-            $userFile_front = public_path('residentID\\' . $filename_front);
-            $userFile_back = public_path('residentID\\' . $filename_back);
-
-            $fileContent_front = file_get_contents($userFile_front);
-            $fileContent_back = file_get_contents($userFile_back);
 
 
 
-            // $client = new \GuzzleHttp\Client();
-
-
-
-            // // Convert the file content to base64 encoding
-            // $base64FileContent_front = base64_encode($fileContent_front);
-            // $base64FileContent_back = base64_encode($fileContent_back);
-
-
-            // $post = [
-            //     'file_base64' =>  $base64FileContent_front,
-            //     'file_back_base64' => $base64FileContent_back,
-            //     'apikey' => 'ZEZiRIDNCR8z8zkB6zpTdxdoHjvlUHiD',
-            //     'authenticate' => true
-            // ];
-            // $ch = curl_init();
-            // curl_setopt($ch, CURLOPT_URL, 'https://api.idanalyzer.com');
-            // curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            // curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($post));
-            // $response = curl_exec($ch);
-
-            // dd(curl_exec($ch));
-
-            // ---------------------------------------------------------------------------------------
-            // // Initialize Core API US Region with your credentials  
-            // $coreapi = new CoreAPI("ZEZiRIDNCR8z8zkB6zpTdxdoHjvlUHiD", "US");
-
-            // // Enable authentication and use 'quick' module to check if ID is authentic
-            // $coreapi->enableAuthentication(true, 'quick');
-
-            // // Analyze ID image by passing URL of the ID image and a face photo (you may also use a local file)
-            // $result = $coreapi->scan("C:\xampp\htdocs\barangay\public\residentID\JAKERSON_BERMUDO2023-07-23-17-40-33frontPic.png", "","");
-
-            // DD($result);
-            // // All information about this ID will be returned in an associative array
-            // $data_result = $result['result'];
-            // $authentication_result = $result['authentication'];
-            // $face_result = $result['face'];
-
-            // dd($data_result);
-            // if($authentication_result){  
-            //     if($authentication_result['score'] > 0.5) {  
-            //         dd("The document uploaded is authentic<br>");  
-
-            //     }else if($authentication_result['score'] > 0.3){  
-            //         dd("The document uploaded looks little bit suspicious<br>");  
-            //     }else{  
-            //         dd("The document uploaded is fake<br>");  
-            //     }
-            // }
-            User::create([
-                "first_name" => strtoupper($request->firstName),
-                "middle_name" => strtoupper($request->middleName),
-                "last_name" => strtoupper($request->lastName),
-                "suffix" =>  strtoupper($request->suffix),
-                "gender" => $request->gender,
-                "marital_status" =>  $request->marital_status,
-                "nationality" =>  $request->nationality,
-                "birthdate" =>  $request->birthdate,
-                "place_birth" =>  strtoupper($request->birthplace),
-                "address_unitNo" =>  strtoupper($request->unitNo),
-                "address_houseNo" =>  strtoupper($request->houseNo),
-                "address_street" =>  strtoupper($request->street),
-                "address_purok" =>  strtoupper($request->purok),
-                "email" =>  strtolower($request->email),
-                "mobile_num" =>  $request->number,
-                "role" =>  $request->role,
-                "password" => Hash::make($request->password),
-                "valiID_type" => $request->type_validID,
-                "validID_num" => $request->validID_num,
-                "validID_front" => $filename_front,
-                "validID_back" => $filename_back,
-                "OTP" => $request->otp,
-                "isEnabled" => 0
-            ]);
-
-            $mail = new PHPMailer(true);     // Passing true enables exceptions
-
-
-            // Email server settings
-            $mail->SMTPDebug = 0;
-            $mail->isSMTP();
-            $mail->Host = 'smtp.gmail.com';             //  smtp host
-            $mail->SMTPAuth = true;
-            $mail->Username = 'jakersonbermudo98@gmail.com';   //  sender username
-            $mail->Password = 'pupszejyyuypahsb';       // sender password
-            $mail->SMTPSecure = 'tls';                  // encryption - ssl/tls
-            $mail->Port = 587;                          // port - 587/465
-
-            $mail->setFrom($mail->Username, 'Barangay South Signal Village');
-            $mail->addAddress(strtolower($request->email));
-
-            $message  = '<html lang="en">
-            <head>
-                <meta charset="UTF-8">
-                <meta http-equiv="X-UA-Compatible" content="IE=edge">
-                <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <title>Document</title>
-                <style>body{height: 100vh;display: flex;justify-content: center;align-items: center;background: linear-gradient(45deg,#e43a15,#e65245)}.card{width: 400px;padding: 80px 50px;position: relative;border-radius: 20px;box-shadow: 0 5px 25px rgba(0,0,0,0.2)}.card h3{color: #111;margin-bottom: 50px;border-left: 5px solid red;padding-left: 10px;line-height: 1em}.inputbox{margin-bottom: 50px}.inputbox input{position:absolute;width: 300px;background:transparent}.inputbox input:focus{color: #495057;background-color: #fff;border-color: #e54b38;outline: 0;box-shadow: none}.inputbox span{position: relative;top: 7px;left: 1px;padding-left: 10px;display: inline-block;transition: 0.5s}.inputbox input:focus ~ span{transform: translateX(-10px) translateY(-32px);font-size: 12px}.inputbox input:valid ~ span{transform: translateX(-10px) translateY(-32px);font-size: 12px}</style>
-            </head>
-            <body>
-            <link
-                    href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
-                    rel="stylesheet"
-                    integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
-                    crossorigin="anonymous">
-                <script
-                    src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
-                    integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
-                    crossorigin="anonymous"></script>
-                <div class="card">
-                <img src="https://th.bing.com/th/id/OIP.7mLt__Duzbo-CN0xL3JT9gHaHa?pid=ImgDet&rs=1" alt="Barangay South SIgnal Village Logo"  class="rounded float-start" alt="southsignal" style="width: 125px ;">
-    
-                    <h3 class="mb-4">Verify Your Resident Account</h3>
-              
-                    <h2>Verify Your Resident Account</h2>
-                    <p>Dear ' . strtoupper($request->firstName) . " " . strtoupper($request->middleName) . " " . strtoupper($request->lastName) . ',</p>
-                    <p>Thank you for creating your resident account. In order to complete the registration process and start using our services, please click on the link below to verify your account:</p>
-                    <p><a href="http://127.0.0.1:8000/verifyEmail?email=' . strtolower($request->email) . '&key=' . $request->otp . '" class="btn btn-primary">Verify Account</a></p>
-                    <p>If you did not create an account with us, please disregard this email.</p>
-                    <p>Thank you,</p>
-                    <p>BARANGAY SOUTH SIGNAL VILLAGE</p>
-                    <br>
-                    <h5 style="font-style: italic; color: gray;">This is a system generated message. Please DO NOT REPLY to this email.</h5>
-                </div>
-            </body>
-         </html>';
-
-
-            $mail->isHTML(true);                // Set email content format to HTML
-
-            $mail->Subject = "BARANGAY SOUTH SIGNAL VILLAGE CONFIRM EMAIL VERIFIACTION";
-            $mail->Body    = $message;
-
-            // $mail->AltBody = plain text version of email body;
-
-            if (!$mail->send()) {
-                return back()->with("failed", "Email not sent.")->withErrors($mail->ErrorInfo);
-            }
-            $data = [
-                'success' => true,
-                'message' => "success",
-            ];
-
-            return response()->json($data);
-        }
-        return response()->json();
-    }
 
     public function user_Dashboard()
     {

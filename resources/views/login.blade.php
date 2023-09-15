@@ -30,7 +30,7 @@
 
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <!-- Checkbox -->
-                <a href="/forgetpasswordpage" target="_blank" class="text-body" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="We will need to verify your account">Forgot password?</a>
+                <a href="forgetpasswordpage" target="_blank" class="text-body" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="We will need to verify your account">Forgot password?</a>
             </div>
             <div class="d-flex justify-content-between align-items-center mb-3">
                 {!! NoCaptcha::renderJs() !!}
@@ -114,7 +114,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <a href="registration" class="btn" style="background-color: #AA0F0A; color:white">Accept</a>
+                <a href="registration_id" class="btn" style="background-color: #AA0F0A; color:white">Accept</a>
             </div>
         </div>
     </div>

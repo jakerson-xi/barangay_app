@@ -18,6 +18,7 @@
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
+        "mailersend/laravel-driver": "^2.2",
         "microsoft/microsoft-graph": "^1.103",
         "phpmailer/phpmailer": "^6.7",
         "phpoffice/phpword": "^1.0",
@@ -70,7 +71,8 @@
         "preferred-install": "dist",
         "sort-packages": true,
         "allow-plugins": {
-            "pestphp/pest-plugin": true
+            "pestphp/pest-plugin": true,
+            "php-http/discovery": true
         }
     },
     "minimum-stability": "dev",

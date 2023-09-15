@@ -10,9 +10,11 @@
 @include('sweetalert::alert')
 
 <div class="myContainer_reg">
+
     <form id="yourForm" method="post" enctype="multipart/form-data" action="{{url('registerUser')}}" class="needs-validation" novalidate>
         @csrf
         <input type="hidden" id="otp" name="otp">
+        <input type="hidden" id="ref" name="ref" value="{{$ref}}">
         <input type="hidden" id="role" name="role" value="resident">
         <div class="card-body mb-4">
             <fieldset class="groupBox">
@@ -20,30 +22,47 @@
                 <div class="col-md-12 row mb-2">
                     <div class="form-group  col-md-4">
                         <label for="firstName">First Name (<em>Unang Pangalan</em>)<span class="text-danger">*</span></label>
-                        <input style="text-transform: uppercase;" id="firstName" name="firstName" type="text" class="form-control" placeholder="First Name" required>
+                        <input style="text-transform: uppercase;" id="firstName" name="firstName" type="text" class="form-control" value="{{ htmlspecialchars($item['firstName']) }}" placeholder="First Name" required>
                         <div class="invalid-feedback">
                             Please enter your first name.
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
+
+                            @if(htmlspecialchars($item['middleName']) != "")
                             <label for="middleName">Middle Name (<em>Gitnang Pangalan</em>)<span class="text-danger">*</span> </label>
-                            <input style="text-transform: uppercase;" id="middleName" name="middleName" type="text" class="form-control" placeholder="Middle Name" required>
+                            <input style="text-transform: uppercase;" id="middleName" name="middleName" type="text" class="form-control" placeholder="Middle Name" value="{{ htmlspecialchars($item['middleName']) }}" required>
                             <div class="invalid-feedback">
                                 Please enter your middle name.
                             </div>
                             <div class="form-check">
-                                <input onchange="hideMiddleName(this);" class="form-check-input" type="checkbox" name="checkMiddleName" id="checkMiddleName" style="border:black">
+                                <input onchange="hideMiddleName(this);" class="form-check-input" type="checkbox"  name="checkMiddleName" id="checkMiddleName" style="border:black" >
                                 <label class="fs-6" for="checkMiddleName" style="color:black">
                                     No Middle Name
                                 </label>
                             </div>
+                            @else
+                            <label for="middleName">Middle Name (<em>Gitnang Pangalan</em>)<span class="text-danger">*</span> </label>
+                            <input style="text-transform: uppercase;" id="middleName" name="middleName" type="text" class="form-control" placeholder="N/A" value="" required readonly>
+                            <div class="invalid-feedback">
+                                Please enter your middle name.
+                            </div>
+                            <div class="form-check">
+                                <input onchange="hideMiddleName(this);" class="form-check-input" type="checkbox"  name="checkMiddleName" id="checkMiddleName" style="border:black" checked>
+                                <label class="fs-6" for="checkMiddleName" style="color:black">
+                                    No Middle Name
+                                </label>
+                            </div>
+                            @endif
+
+
                         </div>
 
                     </div>
                     <div class="form-group col-md-4">
                         <label for="lastName">Last Name (<em>Apelyido</em>)<span class="text-danger">*</span> </label>
-                        <input style="text-transform: uppercase;" id="lastName" name="lastName" type="text" class="form-control" placeholder="Last Name" required>
+                        <input style="text-transform: uppercase;" id="lastName" name="lastName" type="text" class="form-control" placeholder="Last Name" value="{{ htmlspecialchars($item['lastName']) }}" required>
                         <div class="invalid-feedback">
                             Please enter your middle name.
                         </div>
@@ -72,9 +91,18 @@
                     <div class="col-md-3">
                         <label for="">Gender (<em>Kasarian</em>)<span class="text-danger">*</span></label>
                         <select id="gender" name="gender" class="form-select form-control" required>
+                            
+                            @if(htmlspecialchars($item['sex']) == 'M' )
+                            <option value="Male" selected>Male (<em>Lalaki</em>)</option>
+                            <option value="Female">Female (<em>Babae</em>)</option>
+                            @elseif(htmlspecialchars($item['sex']) == 'F' )
+                            <option value="Male">Male (<em>Lalaki</em>)</option>
+                            <option value="Female" selected>Female (<em>Babae</em>)</option>
+                            @else
                             <option value="">Select...</option>
                             <option value="Male">Male (<em>Lalaki</em>)</option>
-                            <option value="Female">Female (<em>Babae</em>)</option>
+                            <option value="Female" >Female (<em>Babae</em>)</option>
+                            @endif
                         </select>
                         <div class="invalid-feedback">
                             Please choose your gender.
@@ -301,11 +329,11 @@
                         <label>Birthdate (<em>Araw ng Kapanganakan</em>)<span class="text-danger">*</span></label>
                         <!-- <input max="{{ \Carbon\Carbon::now()->subYears(18)->format('Y-m-d') }}" type="date" name="birthdate" id="birthdate" class="form-control" required> -->
 
-                        <input type="text" name="birthdate" id="birthdate" value="{{ date('m/d/Y', strtotime('-18 years')) }}" class="form-control" required />
+                        <input type="text" name="birthdate" id="birthdate" value="{{ date(date('m/d/Y', strtotime(htmlspecialchars($item['dob']))), strtotime('-18 years')) }}" class="form-control" required />
                     </div>
                     <div class="form-group col-md-4">
                         <label>Age (<em>Edad</em>)</label>
-                        <input style="text-transform: uppercase;" id="age" type="text" class="form-control form-control" value="18" readonly />
+                        <input style="text-transform: uppercase;" id="age" type="text" class="form-control form-control" value="{{floor((strtotime(date('Y-m-d')) - strtotime(htmlspecialchars($item['dob']))) / (365 * 24 * 60 * 60))}}" readonly />
                     </div>
                     <div class="form-group col-md-4">
                         <label>Place of Birth (<em>Lugar ng Kapanganakan</em>)<span class="text-danger">*</span></label>
@@ -496,12 +524,16 @@
                 <h6 class="mx-2 my-3">Please upload any valid ID to verify your created account. Your ID should contain your address in Barangay South Signal Village. Upload your ID both the front and back. This action will help us to easily verify your application for the online services. </h6>
                 <h6 class="mx-2 my-3"><em>Paki-upload ng kahit anong valid na ID upang magsilbing patunay sa ginawa mong account. Ang iyong ID ay dapat na naglalaman ng iyong kasalukuyang address sa Barangay South Signal Village. I-upload ang harap at likod ng iyong ID upang mapabilis ang pag-verify ng iyong aplikasyon para sa online na serbisyo ng website.</em></h6>
                 <div class="col-md-12 row mb-2">
-                    <div class="form-group col-md-6 mb-2">
+                    <div class="form-group col-md-4 mb-2">
                         <label>Choose Valid ID.<span class="text-danger">*</span></label>
                         <select class="form-control form-select" name="type_validID" id="type_validID" required>
+                            
+                            @if(htmlspecialchars($item['documentType']) == "D")
+                            <option value="Driver’s license" selected>Driver’s license</option>
+                            @elseif(htmlspecialchars($item['documentType']) == "P")
+                            <option value="Philippine passport" selected>Philippine passport</option>
+                            @else
                             <option value="">Select...</option>
-                            <option value="Philippine passport">Philippine passport</option>
-                            <option value="Driver’s license">Driver’s license</option>
                             <option value="SSS UMID Card">SSS UMID Card</option>
                             <option value="PhilHealth ID">PhilHealth ID</option>
                             <option value="TIN Card">TIN Card</option>
@@ -511,56 +543,75 @@
                             <option value="Senior Citizen ID">Senior Citizen ID</option>
                             <option value="OFW ID">OFW ID</option>
                             <option value="Student ID">Student ID</option>
+                            @endif
+
+                            
+                      
+                            
                         </select>
                         <div class="invalid-feedback">
                             Please select ID to upload.
                         </div>
                     </div>
-                    <div class="form-group col-md-6 mb-2">
+                    <div class="form-group col-md-4 mb-2">
                         <label for="validID_num">ID Number<span class="text-danger">*</span></label>
                         <div class="input-group">
-                            <input style="text-transform: uppercase;" type="text" class="form-control mobile" name="validID_num" id="validID_num" placeholder="ID Number" required>
+                            <input style="text-transform: uppercase;" type="text" class="form-control mobile" name="validID_num" id="validID_num" value="{{htmlspecialchars($item['documentNumber'])}}" placeholder="ID Number" required readonly>
                             <div class="invalid-feedback">
                                 Please input your ID number.
-                            </div>
+                            </div> 
+                        </div>
+                    </div>
+                    <div class="form-group col-md-4 mb-2">
+                        <label for="expiry">Expiration Date:<span class="text-danger">*</span></label>
+                        <div class="input-group">
+                            @if(htmlspecialchars($item['expiry']) == "")
+                            <input style="text-transform: uppercase text-center" type="text" class="form-control mobile" name="expiry" id="expiry" placeholder="expiry" value="">
+                            @else
+                            <input style="text-transform: uppercase text-center" type="text" class="form-control mobile" name="expiry" id="expiry" placeholder="expiry" value="{{htmlspecialchars($item['expiry'])}}" required readonly>
+                            @endif
                         </div>
                     </div>
                 </div>
 
                 <div class="col-md-12 row mb-2">
-                    <div class="form-group col-md-6 mb-2">
+                    <div class="form-group col-md-4 mb-2">
                         <div class="">
                             <legend class="goupBoxHeader">Front ID</legend>
                             <div class="mb-5">
                                 <label for="Image" class="form-label"></label>
-                                <input class="form-control" type="file" id="formFile" name="formFile" onchange="preview()" required>
-                                <div class="invalid-feedback">
-                                    Please attach your ID.
-                                </div>
-                                <div class="text-center">
-                                    <button onclick="clearImage()" class="btn mt-3" style="background-color:#AA0F0A; color: white;">Clear</button>
-                                </div>
+                                <input class="form-control" type="hidden" id="formFile" value="{{htmlspecialchars($item['image']['0']['url'])}}" name="formFile" onchange="preview()" required>
+                               
+                               
                             </div>
 
-                            <img id="frame" src="" class="img-fluid" />
+                            <img id="frame" src="{{htmlspecialchars($item['image']['0']['url'])}}" class="img-fluid" />
                         </div>
                     </div>
 
-                    <div class="form-group col-md-6 mb-2">
+                    <div class="form-group col-md-4 mb-2">
                         <div class="">
                             <legend class="goupBoxHeader">Back ID</legend>
                             <div class="mb-5">
                                 <label for="Image" class="form-label"></label>
-                                <input class="form-control" type="file" id="formFile_2" name="formFile_2" onchange="preview_2()" required>
-                                <div class="invalid-feedback">
-                                    Please attach your ID.
-                                </div>
-                                <div class="text-center">
-                                    <button onclick="clearImage_2()" class="btn mt-3" style="background-color:#AA0F0A; color: white;">Clear</button>
-                                </div>
+                                <input class="form-control" type="hidden" id="formFile_2" name="formFile_2" value="{{htmlspecialchars($item['image']['2']['url'])}}" onchange="preview_2()" required>
+                                
 
                             </div>
-                            <img id="frame_2" src="" class="img-fluid" />
+                            <img id="frame_2" src="{{htmlspecialchars($item['image']['2']['url'])}}" class="img-fluid" />
+                        </div>
+
+                    </div>
+                    <div class="form-group col-md-4 mb-2">
+                        <div class="">
+                            <legend class="goupBoxHeader">Face Photo</legend>
+                            <div class="mb-5">
+                                <label for="Image" class="form-label"></label>
+                                <input class="form-control" type="hidden" id="face" name="face" value="{{htmlspecialchars($item['image']['1']['url'])}}" onchange="preview_2()" required>
+                                
+
+                            </div>
+                            <img id="frame_2" src="{{htmlspecialchars($item['image']['1']['url'])}}" class="img-fluid img-thumbnail" />
                         </div>
 
                     </div>
@@ -571,7 +622,7 @@
         <div class="card-footer" style="text-align:center ;">
             <div class="form-group mb-2">
                 <nobr> <input onchange="isCheck(this)" type="checkbox" id="agree">&nbsp; <label for="" id="agreeText" style="cursor: pointer;"> I have read,</nobr> <strong>understood</strong>, and <strong>accepted</strong> the
-                <a href="/policy" target="_blank">Privacy Policy</a> and <a href="/terms" target="_blank">Terms & Conditions.</a></label>
+                <a href="policy" target="_blank">Privacy Policy</a> and <a href="terms" target="_blank">Terms & Conditions.</a></label>
                 <br>
             </div>
             <button type="submit" id="btn" class="btn my-3" style="background-color: #AA0F0A; color: white;" disabled>SUBMIT</button>
@@ -695,8 +746,7 @@
                             //window.location.href = "/registration";
                         }
                     });
-                } 
-                else {
+                } else {
                     // Hide the modal
                     $("#loadingModal").modal("hide");
                     Swal.fire({

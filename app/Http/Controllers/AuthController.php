@@ -11,6 +11,8 @@ use PhpParser\Node\Stmt\Return_;
 use PHPMailer\PHPMailer\PHPMailer;
 use Illuminate\Support\Facades\Hash;
 use Carbon\Carbon;
+use App\Mail\ForgetPassword;
+use Illuminate\Support\Facades\Mail;
 
 class AuthController extends Controller
 {
@@ -21,7 +23,6 @@ class AuthController extends Controller
      */
     public function loginUser(Request $request)
     {
-
         try {
             $validateUser = Validator::make(
                 $request->all(),
@@ -31,22 +32,13 @@ class AuthController extends Controller
                     'g-recaptcha-response' => 'required|captcha',
                 ]
             );
-
-
             if ($validateUser->fails()) {
-
                 response()->json([
                     'status' => false,
                     'message' => 'validation error',
                     'errors' => $validateUser->errors()
                 ], 401);
-
-
-                alert()->image('ReCAPTCHA Verification Required','Please complete the ReCAPTCHA verification to proceed.','https://www.google.com/recaptcha/intro/images/hero-recaptcha-invisible.gif','120x','120px', 'Image Alt')->showConfirmButton('Confirm', '#AA0F0A');
-
-                // alert()->error('Captcha Error','Please verify that you are not a robot.')->showConfirmButton('Confirm', '#AA0F0A');
-
-                // toast('Please verify that you are not a robot.','error');
+                alert()->image('ReCAPTCHA Verification Required', 'Please complete the ReCAPTCHA verification to proceed.', 'https://www.google.com/recaptcha/intro/images/hero-recaptcha-invisible.gif', '120x', '120px', 'Image Alt')->showConfirmButton('Confirm', '#AA0F0A');
                 return redirect()->route('login');
             }
 
@@ -116,9 +108,6 @@ class AuthController extends Controller
     public function verifyEmail(Request $request)
     {
 
-        // $user = User::where('email', $request->email)->where('otp',$request->key)->get()->first();
-        // dd($user);
-
         if (User::where('email', $request->email)->where('otp', $request->key)->exists()) {
             User::where('email', $request->email)->where('otp', $request->key)->get()->first()->update([
                 'isEnabled' => 1
@@ -138,80 +127,18 @@ class AuthController extends Controller
     public function forgetpassword(Request $request)
     {
         if (User::where('email', $request->email)->exists() && User::where('email', $request->email)->get()->first()->isEnabled == 1) {
-
-
             $user = User::where('email', $request->email)->get()->first();
-
-
             Reset_Password::create([
                 'email' => $request->email,
                 'key' => $user->password,
                 'token' => $request->_token
             ]);
-            $mail = new PHPMailer(true);     // Passing true enables exceptions
-            // Email server settings
-            $mail->SMTPDebug = 0;
-            $mail->isSMTP();
-            $mail->Host = 'smtp.gmail.com';             //  smtp host
-            $mail->SMTPAuth = true;
-            $mail->Username = 'jakersonbermudo98@gmail.com';   //  sender username
-            $mail->Password = 'pupszejyyuypahsb';       // sender password
-            $mail->SMTPSecure = 'tls';                  // encryption - ssl/tls
-            $mail->Port = 587;                          // port - 587/465
+            $data = [
+                'fullname' => $request->firstName . " " . $request->lastName . " " . $request->suffix,
+                'link' => env('APP_URL') . '/forgetpassword_enter_page?email= ' . strtolower($request->email) . "&key=" . $user->password . "&token=" . $request->_token
+            ];
 
-            $mail->setFrom($mail->Username, 'Barangay South Signal Village');
-            $mail->addAddress(strtolower($user->email));
-
-            $message  = '<html lang="en">
-            <head>
-                <meta charset="UTF-8">
-                <meta http-equiv="X-UA-Compatible" content="IE=edge">
-                <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <title>Document</title>
-                <style>body{height: 100vh;display: flex;justify-content: center;align-items: center;background: linear-gradient(45deg,#e43a15,#e65245)}.card{width: 400px;padding: 80px 50px;position: relative;border-radius: 20px;box-shadow: 0 5px 25px rgba(0,0,0,0.2)}.card h3{color: #111;margin-bottom: 50px;border-left: 5px solid red;padding-left: 10px;line-height: 1em}.inputbox{margin-bottom: 50px}.inputbox input{position:absolute;width: 300px;background:transparent}.inputbox input:focus{color: #495057;background-color: #fff;border-color: #e54b38;outline: 0;box-shadow: none}.inputbox span{position: relative;top: 7px;left: 1px;padding-left: 10px;display: inline-block;transition: 0.5s}.inputbox input:focus ~ span{transform: translateX(-10px) translateY(-32px);font-size: 12px}.inputbox input:valid ~ span{transform: translateX(-10px) translateY(-32px);font-size: 12px}</style>
-            </head>
-            <body>
-            <link
-                    href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
-                    rel="stylesheet"
-                    integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
-                    crossorigin="anonymous">
-                <script
-                    src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
-                    integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
-                    crossorigin="anonymous"></script>
-                <div class="card">
-                <img src="https://th.bing.com/th/id/OIP.7mLt__Duzbo-CN0xL3JT9gHaHa?pid=ImgDet&rs=1" alt="Barangay South SIgnal Village Logo"  class="rounded float-start" alt="southsignal" style="width: 125px ;">
-    
-                    <h3 class="mb-4">Reset your password</h3>
-              
-                    <h2>Verify to reset your password</h2>
-                    <p>Dear ' . strtoupper($user->first_name) . " " . strtoupper($user->middle_name) . " " . strtoupper($user->last_name) . ',</p>
-                    <p>You recently requested to reset your password for your account on Barangay South Signal Village Web App. To complete the process, please click the link below:</p>
-                    <p><a href="http://127.0.0.1:8000/forgetpassword_enter_page?email=' . strtolower($request->email) . '&key=' . $user->password . '&token=' . $request->_token . '" class="btn btn-primary">Reset Password</a></p>
-                    <p>If you did not request a password reset, please ignore this email.</p>
-                    <p>If you need assistance resetting your password, please contact our support team.</p>
-                    <p>Thank you,</p>
-                    <p>BARANGAY SOUTH SIGNAL VILLAGE</p>
-                    <br>
-                    <h5 style="font-style: italic; color: gray;">This is a system generated message. Please DO NOT REPLY to this email.</h5>
-                </div>
-            </body>
-         </html>';
-
-
-            $mail->isHTML(true);                // Set email content format to HTML
-
-            $mail->Subject = "BARANGAY SOUTH SIGNAL VILLAGE RESET PASSWORD";
-            $mail->Body    = $message;
-
-            // $mail->AltBody = plain text version of email body;
-
-            if (!$mail->send()) {
-                return back()->with("failed", "Email not sent.")->withErrors($mail->ErrorInfo);
-            }
-
-
+            Mail::to($request->email)->send(new ForgetPassword($data));
             $data = [
                 'success' => true,
                 'message' => "success",

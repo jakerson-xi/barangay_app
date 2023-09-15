@@ -227,7 +227,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <a href="registration" class="btn" style="background-color: #AA0F0A; color:white">Accept</a>
+            <a href="registration_id" class="btn" style="background-color: #AA0F0A; color:white">Accept</a>
           </div>
         </div>
       </div>

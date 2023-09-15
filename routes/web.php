@@ -133,7 +133,7 @@ Route::get('/forgetpassword_enter_page', [AuthController::class, 'forgetpassword
 Route::post('/changing_password', [AuthController::class, 'changing_password'])->name('changing_password');
 Route::get('/policy', [mainController::class, 'policy'])->name('policy');
 Route::get('/terms', [mainController::class, 'terms'])->name('terms');
-
+Route::get('/registration_id', [mainController::class, 'registration_id'])->name('registration_id');
 
 
 Route::get('/file', [RequestController::class, 'file'])->name('file');
