@@ -123,7 +123,7 @@
             <hr>
             <ul class="nav nav-pills flex-column mb-auto">
 
-                <a href="admin/dashboard" style="text-align: justify;" type="button" class="btn btn-primary1"><i class="bi bi-bar-chart-fill"></i> Dashboard</a>
+                <a href="{{url('dashboard')}}" style="text-align: justify;" type="button" class="btn btn-primary1"><i class="bi bi-bar-chart-fill"></i> Dashboard</a>
 
                 @if($admin->role == 'Barangay Secretary' || $admin->role == 'Request Manager')
                 <div class="dropdown">
@@ -132,14 +132,13 @@
                     </button>
                     <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownMenuButton1">
                         @if($admin->role == 'Barangay Secretary')
-                        <li><a class="dropdown-item" href="requestType">Manage Services</a></li>
+                        <li><a class="dropdown-item" href="{{url('requestType')}}">Manage Services</a></li>
                         <li>
                             <hr class="dropdown-divider">
                         </li>
                         @endif
-                        <li><a class="dropdown-item" href="view-request-list">View Document Requests</a></li>
-                        <li><a class="dropdown-item" href="processRequest">Process Document Request</a></li>
-
+                        <li><a class="dropdown-item" href="{{url('view-request-list')}}">View Document Requests</a></li>
+                        <li><a class="dropdown-item" href="{{url('processRequest')}}">Process Document Request</a></li>
                     </ul>
                 </div>
                 @endif
@@ -149,8 +148,8 @@
                         <i class="bi bi-ticket-perforated-fill"></i> Concern
                     </button>
                     <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownMenuButton1">
-                        <li><a class="dropdown-item" href="view-concern-list">View Concerns</a></li>
-                        <li><a class="dropdown-item" href="processConcern">Process Concern</a></li>
+                        <li><a class="dropdown-item" href="{{url('view-concern-list')}}">View Concerns</a></li>
+                        <li><a class="dropdown-item" href="{{url('processConcern')}}">Process Concern</a></li>
                     </ul>
                 </div>
                 @endif
@@ -160,16 +159,16 @@
                         <i class="bi bi-database-fill-lock"></i> Barangay Data Report
                     </button>
                     <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownMenuButton1">
-                        <li><a class="dropdown-item" href="listresident">List of Resident account</a></li>
-                        <li><a class="dropdown-item" href="deactlistresident">Deactivated Resident account</a></li>
+                        <li><a class="dropdown-item" href="{{url('listresident')}}">List of Resident account</a></li>
+                        <li><a class="dropdown-item" href="{{url('deactlistresident')}}">Deactivated Resident account</a></li>
                         <li>
                             <hr class="dropdown-divider">
                         </li>
-                        <li><a class="dropdown-item" href="listbarangayemployee">List of Barangay employee account</a></li>
-                        <li><a class="dropdown-item" href="deactlistbarangayemployee">Deactivated Employee Account</a></li>
+                        <li><a class="dropdown-item" href="{{url('listbarangayemployee')}}">List of Barangay employee account</a></li>
+                        <li><a class="dropdown-item" href="{{url('deactlistbarangayemployee')}}">Deactivated Employee Account</a></li>
                         <hr class="dropdown-divider">
-                        <li><a class="dropdown-item" href="view-request-list">View Document Requests</a></li>
-                        <li><a class="dropdown-item" href="view-concern-list">View Concerns</a></li>
+                        <li><a class="dropdown-item" href="{{url('view-request-list')}}">View Document Requests</a></li>
+                        <li><a class="dropdown-item" href="{{url('view-concern-list')}}">View Concerns</a></li>
                     </ul>
                 </div>
                 @endif
@@ -179,8 +178,8 @@
                         <i class="bi bi-people-fill"></i> Manage Resident Account
                     </button>
                     <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownMenuButton1">
-                        <li><a class="dropdown-item" href="listresident">List of Resident account</a></li>
-                        <li><a class="dropdown-item" href="deactlistresident">Deactivated Resident account</a></li>
+                        <li><a class="dropdown-item" href="{{url('listresident')}}">List of Resident account</a></li>
+                        <li><a class="dropdown-item" href="{{url('deactlistresident')}}">Deactivated Resident account</a></li>
                     </ul>
                 </div>
                 @endif
@@ -190,8 +189,8 @@
                         <i class="bi bi-person-badge-fill"></i></i> Manage Employee Account
                     </button>
                     <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownMenuButton1">
-                        <li><a class="dropdown-item" href="listbarangayemployee">List of Barangay employee account</a></li>
-                        <li><a class="dropdown-item" href="addbarangayemployee">Add employee account</a></li>
+                        <li><a class="dropdown-item" href="{{url('listbarangayemployee')}}">List of Barangay employee account</a></li>
+                        <li><a class="dropdown-item" href="{{url('addbarangayemployee')}}">Add employee account</a></li>
                         <li>
                             <hr class="dropdown-divider">
                         </li>
@@ -215,11 +214,11 @@
                     <strong>{{$initial}}</strong>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
-                    <li><a class="dropdown-item" href="myAccount">Account Setting</a></li>
+                    <li><a class="dropdown-item" href="{{url('myAccount')}}">Account Setting</a></li>
                     <li>
                         <hr class="dropdown-divider">
                     </li>
-                    <li><a class="dropdown-item" href="{{url('/signout')}}">Sign out</a></li>
+                    <li><a class="dropdown-item" href="{{url('signout')}}">Sign out</a></li>
                 </ul>
             </div>
         </div>

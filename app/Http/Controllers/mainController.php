@@ -36,7 +36,7 @@ class mainController extends Controller
         $docupass = new DocuPass(ENV('ID_ANALYZER'), "BARANGAY SOUTH SIGNAL VILLAGE WEB APP", "US");
         $docupass->enableFaceVerification(true, 1, 0.7);
         $docupass->verifyAge("18-120");
-        $docupass->enableAuthentication(true, "2", 0.6);
+        $docupass->enableAuthentication(true, "2", 0.3);
         $docupass->enableDualsideCheck(true);
         $docupass->setMaxAttempt(2);
         $docupass->setRedirectionURL(Env('APP_URL')."/registration", "");
@@ -54,7 +54,7 @@ class mainController extends Controller
         $vault = new Vault(ENV('ID_ANALYZER'), "US");
         $vaultItems = $vault->list([$ref])['items']['0'];
        // return view('registration', ['item' =>  $vaultItems]);
-       dd($vault->list([$ref]));
+  
        return view('registration', ['item' =>  $vaultItems, 'ref' => $request->reference ]);
         // $searchTerm = 'south signal village';
 

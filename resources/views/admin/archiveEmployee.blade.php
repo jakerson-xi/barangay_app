@@ -88,14 +88,14 @@
             const userId = $(this).data('user-id');
 
             Swal.fire({
-                title: 'Deactivate Account',
-                text: 'Please enter your password to deactivate your account:',
+                title: 'Reactivate Account',
+                text: 'Please enter your password to reactivate account:',
                 input: 'password',
                 inputAttributes: {
                     autocapitalize: 'off'
                 },
                 showCancelButton: true,
-                confirmButtonText: 'Deactivate',
+                confirmButtonText: 'Reactivate',
                 confirmButtonColor: "#AA0F0A",
                 cancelButtonText: 'Cancel',
                 allowOutsideClick: false,

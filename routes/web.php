@@ -23,7 +23,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/userDashboardProfile', [mainController::class, 'user_Dashboard_Profile'])->name('userDashboard_Profile');
     Route::get('/userDashboardTransaction', [mainController::class, 'user_Dashboard_Transaction'])->name('userDashboard_Transaction');
     Route::get('/signout', [AuthController::class, 'signout'])->name('signout');
-    Route::get('/admin/dashboard', [adminController::class, 'dashboard'])->name('adminDashboard');
+    Route::get('/dashboard', [adminController::class, 'dashboard'])->name('adminDashboard');
     Route::get('/addbarangayemployee', [adminController::class, 'addEmployee'])->name('addEmployee');
     Route::get('/listbarangayemployee', [adminController::class, 'listemployee'])->name('listemployee');
     Route::get('/listresident', [adminController::class, 'listresident'])->name('listresident');
