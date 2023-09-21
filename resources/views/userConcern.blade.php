@@ -204,7 +204,7 @@
                             confirmButtonColor: "#AA0F0A",
                         }).then((result) => {
                             if (result.value) {
-                                window.location.href = "/userDashboard";
+                                window.location.href = "userDashboard";
                             }
                         });
                     }
@@ -218,7 +218,7 @@
                             confirmButtonColor: "#AA0F0A",
                         }).then((result) => {
                             if (result.value) {
-                                window.location.href = "/userDashboard";
+                                window.location.href = "userDashboard";
                             }
                         });
                     }
@@ -232,7 +232,7 @@
                             confirmButtonColor: "#AA0F0A",
                         }).then((result) => {
                             if (result.value) {
-                                window.location.href = "/userDashboard";
+                                window.location.href = "userDashboard";
                             }
                         });
                     }

@@ -36,10 +36,10 @@ class mainController extends Controller
         $docupass = new DocuPass(ENV('ID_ANALYZER'), "BARANGAY SOUTH SIGNAL VILLAGE WEB APP", "US");
         $docupass->enableFaceVerification(true, 1, 0.7);
         $docupass->verifyAge("18-120");
-        $docupass->enableAuthentication(true, "2", 0.3);
+        $docupass->enableAuthentication(true, "2", 0.7);
         $docupass->enableDualsideCheck(true);
         $docupass->setMaxAttempt(2);
-        $docupass->setRedirectionURL(Env('APP_URL')."/registration", "");
+        $docupass->setRedirectionURL(Env('APP_URL') . "/registration", "");
         $docupass->verifyExpiry(true);
         $docupass->setReusable(true);
         $result = $docupass->createIframe();
@@ -53,9 +53,11 @@ class mainController extends Controller
         $ref = 'docupass_reference=' . $request->reference;
         $vault = new Vault(ENV('ID_ANALYZER'), "US");
         $vaultItems = $vault->list([$ref])['items']['0'];
-       // return view('registration', ['item' =>  $vaultItems]);
-  
-       return view('registration', ['item' =>  $vaultItems, 'ref' => $request->reference ]);
+        // return view('registration', ['item' =>  $vaultItems]);
+
+
+        //    dd($vaultItems);
+        return view('registration', ['item' =>  $vaultItems, 'ref' => $request->reference]);
         // $searchTerm = 'south signal village';
 
         // // Define an array of addresses to search
@@ -79,7 +81,7 @@ class mainController extends Controller
         // }
 
         // if ($found) {
-            
+
         //     return view('registration', ['item' =>  $vaultItems, 'ref' => $request->reference ]);
         // } else {
         //     Alert::error('Invalid Address', 'We only accept IDs with an address in South Signal Village')->showConfirmButton('Confirm', '#AA0F0A');
@@ -91,6 +93,31 @@ class mainController extends Controller
     {
 
 
+        $ref = 'docupass_reference=' . $request->ref;
+        $vault = new Vault(ENV('ID_ANALYZER'), "US");
+        $vaultItems = $vault->list([$ref])['items']['0'];
+
+        $fullname = $request->firstName . " " . $request->middleName . " " . $request->lastName;
+
+
+
+
+        // check if the name from the ID and from the reqistration is true
+        if ($vaultItems['fullName'] != $request->firstName . " " . $request->middleName . " " . $request->lastName && levenshtein($vaultItems['fullName'], $fullname) > 6) {
+           
+            $data = [
+                'success' => "error",
+                'type' => "The name on your ID does not match the name you have submitted.",
+                'message' => "error ID",
+                
+            ];
+  
+            return response()->json($data);
+        }
+
+
+
+
         if (User::where('email', $request->email)->where('isEnabled', 1)->exists()) {
 
             $data = [
@@ -99,9 +126,6 @@ class mainController extends Controller
             ];
             return response()->json($data);
         } else {
-
-
-
 
 
             if ($request->has('formFile')) {
@@ -189,7 +213,7 @@ class mainController extends Controller
 
             $data = [
                 'fullname' => $request->firstName . " " . $request->lastName . " " . $request->suffix,
-                'link' => env('APP_URL') . "/verifyEmail?email=".strtolower($request->email) . "&key=" . $request->otp,
+                'link' => env('APP_URL') . "/verifyEmail?email=" . strtolower($request->email) . "&key=" . $request->otp,
             ];
 
             Mail::to($request->email)->send(new Registration($data));

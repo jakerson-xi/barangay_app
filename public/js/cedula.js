@@ -132,7 +132,7 @@ form.addEventListener("submit", function (event) {
                     confirmButtonColor: "#AA0F0A",
                 }).then((result) => {
                     if (result.value) {
-                        window.location.href = "/userDashboard";
+                        window.location.href = "userDashboard";
                     }
                 });
             } else {
@@ -145,7 +145,7 @@ form.addEventListener("submit", function (event) {
                     confirmButtonColor: "#AA0F0A",
                 }).then((result) => {
                     if (result.value) {
-                        window.location.href = "/userDashboard";
+                        window.location.href = "userDashboard";
                     }
                 });
             }

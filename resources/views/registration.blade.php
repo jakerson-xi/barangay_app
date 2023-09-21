@@ -37,7 +37,7 @@
                                 Please enter your middle name.
                             </div>
                             <div class="form-check">
-                                <input onchange="hideMiddleName(this);" class="form-check-input" type="checkbox"  name="checkMiddleName" id="checkMiddleName" style="border:black" >
+                                <input onchange="hideMiddleName(this);" class="form-check-input" type="checkbox" name="checkMiddleName" id="checkMiddleName" style="border:black">
                                 <label class="fs-6" for="checkMiddleName" style="color:black">
                                     No Middle Name
                                 </label>
@@ -49,7 +49,7 @@
                                 Please enter your middle name.
                             </div>
                             <div class="form-check">
-                                <input onchange="hideMiddleName(this);" class="form-check-input" type="checkbox"  name="checkMiddleName" id="checkMiddleName" style="border:black" checked>
+                                <input onchange="hideMiddleName(this);" class="form-check-input" type="checkbox" name="checkMiddleName" id="checkMiddleName" style="border:black" checked>
                                 <label class="fs-6" for="checkMiddleName" style="color:black">
                                     No Middle Name
                                 </label>
@@ -91,7 +91,7 @@
                     <div class="col-md-3">
                         <label for="">Gender (<em>Kasarian</em>)<span class="text-danger">*</span></label>
                         <select id="gender" name="gender" class="form-select form-control" required>
-                            
+
                             @if(htmlspecialchars($item['sex']) == 'M' )
                             <option value="Male" selected>Male (<em>Lalaki</em>)</option>
                             <option value="Female">Female (<em>Babae</em>)</option>
@@ -101,7 +101,7 @@
                             @else
                             <option value="">Select...</option>
                             <option value="Male">Male (<em>Lalaki</em>)</option>
-                            <option value="Female" >Female (<em>Babae</em>)</option>
+                            <option value="Female">Female (<em>Babae</em>)</option>
                             @endif
                         </select>
                         <div class="invalid-feedback">
@@ -527,7 +527,7 @@
                     <div class="form-group col-md-4 mb-2">
                         <label>Choose Valid ID.<span class="text-danger">*</span></label>
                         <select class="form-control form-select" name="type_validID" id="type_validID" required>
-                            
+
                             @if(htmlspecialchars($item['documentType']) == "D")
                             <option value="Driver’s license" selected>Driver’s license</option>
                             @elseif(htmlspecialchars($item['documentType']) == "P")
@@ -542,12 +542,13 @@
                             <option value="Professional Regulation Commission ID">Professional Regulation Commission ID</option>
                             <option value="Senior Citizen ID">Senior Citizen ID</option>
                             <option value="OFW ID">OFW ID</option>
+                            <option value="National ID">National ID</option>
                             <option value="Student ID">Student ID</option>
                             @endif
 
-                            
-                      
-                            
+
+
+
                         </select>
                         <div class="invalid-feedback">
                             Please select ID to upload.
@@ -559,7 +560,7 @@
                             <input style="text-transform: uppercase;" type="text" class="form-control mobile" name="validID_num" id="validID_num" value="{{htmlspecialchars($item['documentNumber'])}}" placeholder="ID Number" required readonly>
                             <div class="invalid-feedback">
                                 Please input your ID number.
-                            </div> 
+                            </div>
                         </div>
                     </div>
                     <div class="form-group col-md-4 mb-2">
@@ -575,43 +576,71 @@
                 </div>
 
                 <div class="col-md-12 row mb-2">
-                    <div class="form-group col-md-4 mb-2">
-                        <div class="">
-                            <legend class="goupBoxHeader">Front ID</legend>
-                            <div class="mb-5">
-                                <label for="Image" class="form-label"></label>
+
+                    <div class="form-group col-md-8 mb-2 row">
+
+
+                        <div class="col-md-12 mb-2">
+                            <legend class="goupBoxHeader">ID</legend>
+                        </div>
+
+                        <div class="form-group col-md-6 mb-2">
+                            <div class="">
+
                                 <input class="form-control" type="hidden" id="formFile" value="{{htmlspecialchars($item['image']['0']['url'])}}" name="formFile" onchange="preview()" required>
-                               
-                               
+
+
+
+
+                                <img id="frame" src="{{htmlspecialchars($item['image']['0']['url'])}}" class="img-fluid" />
                             </div>
-
-                            <img id="frame" src="{{htmlspecialchars($item['image']['0']['url'])}}" class="img-fluid" />
                         </div>
-                    </div>
 
-                    <div class="form-group col-md-4 mb-2">
-                        <div class="">
-                            <legend class="goupBoxHeader">Back ID</legend>
-                            <div class="mb-5">
-                                <label for="Image" class="form-label"></label>
+                        <div class="form-group col-md-6 mb-2">
+                            <div class="">
+                                <!-- <legend class="goupBoxHeader">Back ID</legend> -->
+
                                 <input class="form-control" type="hidden" id="formFile_2" name="formFile_2" value="{{htmlspecialchars($item['image']['2']['url'])}}" onchange="preview_2()" required>
-                                
 
+
+
+                                <img id="frame_2" src="{{htmlspecialchars($item['image']['2']['url'])}}" class="img-fluid" />
                             </div>
-                            <img id="frame_2" src="{{htmlspecialchars($item['image']['2']['url'])}}" class="img-fluid" />
+
                         </div>
 
+
+
                     </div>
+
+
                     <div class="form-group col-md-4 mb-2">
                         <div class="">
                             <legend class="goupBoxHeader">Face Photo</legend>
                             <div class="mb-5">
                                 <label for="Image" class="form-label"></label>
                                 <input class="form-control" type="hidden" id="face" name="face" value="{{htmlspecialchars($item['image']['1']['url'])}}" onchange="preview_2()" required>
-                                
+
 
                             </div>
-                            <img id="frame_2" src="{{htmlspecialchars($item['image']['1']['url'])}}" class="img-fluid img-thumbnail" />
+
+                            @if(htmlspecialchars($item['image']['0']['type']) == "1")
+
+                            <img id="face" src="{{htmlspecialchars($item['image']['0']['url'])}}" class="img-fluid img-thumbnail" />
+
+
+
+                            @elseif(htmlspecialchars($item['image']['1']['type']) == "1")
+
+                            <img id="face" src="{{htmlspecialchars($item['image']['1']['url'])}}" class="img-fluid img-thumbnail" />
+
+                            @else
+
+                            <img id="face" src="{{htmlspecialchars($item['image']['2']['url'])}}" class="img-fluid img-thumbnail" />
+
+
+
+                            @endif
                         </div>
 
                     </div>
@@ -701,7 +730,7 @@
     // Get the form element
     const form = document.getElementById("yourForm");
 
-    // Listen for the submit event
+    // // Listen for the submit event
     form.addEventListener("submit", function(event) {
         if (!form.checkValidity()) {
             // If the form is not valid, show the validation errors
@@ -744,6 +773,22 @@
                             // Focus back on the email input
                             $('#email').focus();
                             //window.location.href = "/registration";
+                        }
+                    });
+                } else if (response.message == 'error ID') {
+                    $("#loadingModal").modal("hide");
+                    Swal.fire({
+                        title: "<h4>ACCOUNT CREATION FAILED</h4>",
+                        icon: "error",
+                        text: response.type,
+                        showCloseButton: false,
+                        showCancelButton: false,
+                        confirmButtonColor: "#AA0F0A",
+                    }).then((result) => {
+                        // Check if the alert was confirmed (e.g., the user clicked OK)
+                        if (result.isConfirmed) {
+                            // Redirect to the /home URL
+                            window.location.href = 'home';
                         }
                     });
                 } else {
