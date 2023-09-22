@@ -42,6 +42,7 @@ class mainController extends Controller
         $docupass->setRedirectionURL(Env('APP_URL') . "/registration", "");
         $docupass->verifyExpiry(true);
         $docupass->setReusable(true);
+        $docupass->setWelcomeMessage("We need to verify your ID before you can create a resident account for the Barangay South Signal Village Web App.");
         $result = $docupass->createIframe();
 
         return view('idAnalyzer', ['frame' => $result]);
@@ -50,6 +51,7 @@ class mainController extends Controller
     public function registration(Request $request)
     {
 
+       
         $ref = 'docupass_reference=' . $request->reference;
         $vault = new Vault(ENV('ID_ANALYZER'), "US");
         $vaultItems = $vault->list([$ref])['items']['0'];
@@ -92,7 +94,7 @@ class mainController extends Controller
     public function addUser(Request $request)
     {
 
-
+    
         $ref = 'docupass_reference=' . $request->ref;
         $vault = new Vault(ENV('ID_ANALYZER'), "US");
         $vaultItems = $vault->list([$ref])['items']['0'];
