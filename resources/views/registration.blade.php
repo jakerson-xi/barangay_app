@@ -588,11 +588,13 @@
                             <div class="">
 
                                 <input class="form-control" type="hidden" id="formFile" value="{{htmlspecialchars($item['image']['0']['url'])}}" name="formFile" onchange="preview()" required>
-
-
-
-
+                                @if(htmlspecialchars($item['image']['0']['url']) == 1)
+                                <img id="frame" src="{{htmlspecialchars($item['image']['1']['url'])}}" class="img-fluid" />
+                                @elseifif(htmlspecialchars($item['image']['1']['url']) == 1)
                                 <img id="frame" src="{{htmlspecialchars($item['image']['0']['url'])}}" class="img-fluid" />
+                                @else
+                                <img id="frame" src="{{htmlspecialchars($item['image']['0']['url'])}}" class="img-fluid" />
+                                @endif
                             </div>
                         </div>
 
@@ -601,10 +603,13 @@
                                 <!-- <legend class="goupBoxHeader">Back ID</legend> -->
 
                                 <input class="form-control" type="hidden" id="formFile_2" name="formFile_2" value="{{htmlspecialchars($item['image']['2']['url'])}}" onchange="preview_2()" required>
-
-
-
+                                @if(htmlspecialchars($item['image']['0']['url']) == 1)
                                 <img id="frame_2" src="{{htmlspecialchars($item['image']['2']['url'])}}" class="img-fluid" />
+                                @elseifif(htmlspecialchars($item['image']['1']['url']) == 1)
+                                <img id="frame_2" src="{{htmlspecialchars($item['image']['2']['url'])}}" class="img-fluid" />
+                                @else
+                                <img id="frame_2" src="{{htmlspecialchars($item['image']['1']['url'])}}" class="img-fluid" />
+                                @endif
                             </div>
 
                         </div>
@@ -626,17 +631,17 @@
 
                             @if(htmlspecialchars($item['image']['0']['type']) == "1")
 
-                            <img id="face" src="{{htmlspecialchars($item['image']['0']['url'])}}" class="img-fluid img-thumbnail" />
+                            <img id="face" src="{{htmlspecialchars($item['image']['0']['url'])}}" class="img-fluid" />
 
 
 
                             @elseif(htmlspecialchars($item['image']['1']['type']) == "1")
 
-                            <img id="face" src="{{htmlspecialchars($item['image']['1']['url'])}}" class="img-fluid img-thumbnail" />
+                            <img id="face" src="{{htmlspecialchars($item['image']['1']['url'])}}" class="img-fluid" />
 
                             @else
 
-                            <img id="face" src="{{htmlspecialchars($item['image']['2']['url'])}}" class="img-fluid img-thumbnail" />
+                            <img id="face" src="{{htmlspecialchars($item['image']['2']['url'])}}" class="img-fluid i" />
 
 
 
