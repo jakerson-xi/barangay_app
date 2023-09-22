@@ -60,56 +60,72 @@
           </div>
         </div>
 
-        <legend class="goupBoxHeader mt-3">Address (Barangay South SIgnal Village)</legend>
-        <div class="col-md-12 row mb-2">
+      </fieldset>
+    </div>
 
-          <div class="col-sm-6 mb-2">
-            <div class="form-group">
-              <label>Room/Flr/Unit No. & Bldg</label>
-              <input style="text-transform: uppercase;" type="text" name="unitNo" class="form-control notCapital" placeholder="{{$user->address_unitNo}}" readonly>
-            </div>
-          </div>
-          <div class="col-sm-6 mb-2">
-            <div class="form-group">
-              <label>House/Lot & Block No.</label>
-              <input style="text-transform: uppercase;" type="text" name="houseNo" class="form-control notCapital" placeholder="{{$user->address_houseNo}}" readonly>
-            </div>
-          </div>
-          <div class="col-sm-6 mb-2">
-            <div class="form-group">
-              <label>Street</label>
-              <input style="text-transform: uppercase;" type="text" name="street" class="form-control notCapital" placeholder="{{$user->address_street}}" readonly>
-            </div>
-          </div>
-          <div class="col-sm-6 mb-2">
-            <div class="form-group">
-              <label>Zone/Purok</label>
-              <input style="text-transform: uppercase;" type="text" name="address" class="form-control notCapital" placeholder="{{$user->address_purok}}" readonly>
-            </div>
+    <fieldset class="groupBox p-4 bg-light border mb-2 bg-body rounded shadow border border-dark">
+      <legend class="goupBoxHeader mt-3">Address (Barangay South SIgnal Village)</legend>
+      <div class="col-md-12 row mb-2">
+
+        <div class="col-sm-6 mb-2">
+          <div class="form-group">
+            <label>Room/Flr/Unit No. & Bldg</label>
+            <input style="text-transform: uppercase;" type="text" name="unitNo" class="form-control notCapital" placeholder="{{$user->address_unitNo}}" readonly>
           </div>
         </div>
-
-        <legend class="goupBoxHeader">ID Information</legend>
-        <div class="col-md-12 row mb-2 text-center">
-          <div class="form-group col-md-6 mb-2">
-            <label class="mb-3">Front ID</label>
-            <div class="input-group text-center">
-              <img width="400" height="200" src="{{url('residentID/'.$user->validID_front)}}" class="img-fluid " alt="...">
-            </div>
+        <div class="col-sm-6 mb-2">
+          <div class="form-group">
+            <label>House/Lot & Block No.</label>
+            <input style="text-transform: uppercase;" type="text" name="houseNo" class="form-control notCapital" placeholder="{{$user->address_houseNo}}" readonly>
           </div>
-          <div class="form-group col-md-6 mb-2">
-            <label class="mb-3">Back ID</label>
-            <div class="input-group text-center">
-              <img width="400" height="200" src="{{url('residentID/'.$user->validID_back)}}" class="img-fluid" alt="...">
-            </div>
+        </div>
+        <div class="col-sm-6 mb-2">
+          <div class="form-group">
+            <label>Street</label>
+            <input style="text-transform: uppercase;" type="text" name="street" class="form-control notCapital" placeholder="{{$user->address_street}}" readonly>
+          </div>
+        </div>
+        <div class="col-sm-6 mb-2">
+          <div class="form-group">
+            <label>Zone/Purok</label>
+            <input style="text-transform: uppercase;" type="text" name="address" class="form-control notCapital" placeholder="{{$user->address_purok}}" readonly>
+          </div>
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset class="groupBox p-4 bg-light border mb-2 bg-body rounded shadow border border-dark">
+      <legend class="goupBoxHeader">ID/Profile Information</legend>
+      <div class="col-md-12 row mb-2 text-center">
+        <div class="form-group col-md-8 mb-2">
+          <label class="mb-3"></label>
+          <div class="input-group text-center ">
+            <img width="400" height="200" src="{{url('residentID/'.$user->validID_front)}}" class="img-fluid mx-3" alt="...">
+
+            <img width="400" height="200" src="{{url('residentID/'.$user->validID_back)}}" class="img-fluid" alt="...">
           </div>
           <div class="form-group text-center mt-3">
             <button data-bs-toggle="modal" data-bs-target="#changeID" type="button" class="btn" style="width:30%; background-color: #AA0F0A; color: white;">
               Update ID</button>
           </div>
         </div>
-        <legend class="goupBoxHeader">Account Information</legend>
+        <div class="form-group col-md-4 mb-2 text-center">
+          <label class="mb-3"></label>
+          <div class="text-center ">
+            <img width="250" height="150" src="{{url('residentID/'.$user->face)}}" class="img-fluid mx-3 text-center" alt="...">
+          </div>
+          <div class="form-group text-center mt-3">
+            <button data-bs-toggle="modal" data-bs-target="#changeID" type="button" class="btn" style="width:30%; background-color: #AA0F0A; color: white;">
+              Update Picture</button>
+          </div>
+        </div>
+      </div>
+    </fieldset>
 
+
+
+    <fieldset class="groupBox p-4 bg-light border mb-2 bg-body rounded shadow border border-dark">
+    <legend class="goupBoxHeader">Account Information</legend>
         <div class="col-md-12 row mb-2">
           <div class="form-group col-md-6 mb-2">
             <label>Email Address</label>
@@ -133,7 +149,7 @@
               </svg> Change Password</button>
           </div>
         </div>
-    </div>
+    </fieldset>
   </div>
 
   @endforeach

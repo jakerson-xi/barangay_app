@@ -431,8 +431,8 @@
                     </div>
                     <div class="col-sm-6 mb-2">
                         <div class="form-group">
-                            <label>Zone <span class="text-danger">*</span></label>
-                            <input style="text-transform: uppercase;" type="text" name="purok" id="purok" class="form-control notCapital" placeholder="Subd./ Phase/ Purok" required>
+                            <label>Zone/Purok <span class="text-danger">*</span></label>
+                            <input style="text-transform: uppercase;" type="text" name="purok" id="purok" class="form-control notCapital" placeholder="Zone/Purok" required>
                         </div>
                     </div>
                 </div>
