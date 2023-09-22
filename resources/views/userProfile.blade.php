@@ -100,13 +100,13 @@
         <div class="form-group col-md-8 mb-2">
           <label class="mb-3"></label>
           <div class="input-group text-center ">
-            <img width="400" height="200" src="{{url('residentID/'.$user->validID_front)}}" class="img-fluid mx-3" alt="...">
+            <img width="400" height="200" src="{{url('residentID/'.$user->validID_front)}}" class="img-fluid m-3" alt="...">
 
-            <img width="400" height="200" src="{{url('residentID/'.$user->validID_back)}}" class="img-fluid" alt="...">
+            <img width="400" height="200" src="{{url('residentID/'.$user->validID_back)}}" class="img-fluid m-3" alt="...">
           </div>
           <div class="form-group text-center mt-3">
             <button data-bs-toggle="modal" data-bs-target="#changeID" type="button" class="btn" style="width:30%; background-color: #AA0F0A; color: white;">
-              Update ID</button>
+            <i class="bi bi-person-vcard-fill"></i> Update ID</button>
           </div>
         </div>
         <div class="form-group col-md-4 mb-2 text-center">
@@ -115,8 +115,8 @@
             <img width="250" height="150" src="{{url('residentID/'.$user->face)}}" class="img-fluid mx-3 text-center" alt="...">
           </div>
           <div class="form-group text-center mt-3">
-            <button data-bs-toggle="modal" data-bs-target="#changeID" type="button" class="btn" style="width:30%; background-color: #AA0F0A; color: white;">
-              Update Picture</button>
+            <button data-bs-toggle="modal" data-bs-target="#changeID" type="button" class="btn" style="width:50%; background-color: #AA0F0A; color: white;">
+            <i class="bi bi-person-bounding-box"></i> Update Picture</button>
           </div>
         </div>
       </div>
