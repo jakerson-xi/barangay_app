@@ -22,12 +22,18 @@
 
 </head>
 
+
 <body style="background-color: rgba(163, 157, 157, 0.37);">
 
   <script src="{{asset('js/userDashboard.js')}}"></script>
   @include('sweetalert::alert')
+
+
   <header>
+
+
     <nav class="main-header navbar navbar-expand " style="background-color: #AA0F0A;">
+
       <div class="container-fluid flex-sm-row">
         <ul class="navbar-nav">
           <li class="nav-item">
@@ -65,6 +71,10 @@
 
       </div>
     </nav>
+
+
+
+
     <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
 
       <div class="offcanvas-header">
@@ -221,11 +231,11 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-        <div class="text-center mb-2">
+          <div class="text-center mb-2">
             <img src="{{asset('assets/imgs/southsignal.png')}}" alt="logo" width="100">
           </div>
-          <p>I hereby authorize the Barangay South Signal Village of Taguig City, to collect and process the data indicated herein for my personal information. I also understand that my personal information is protected by RA 10173 or Data Privacy Act of 2012. The Barangay South Signal Village reserves the right, at its sole discretion, to change, modify, add or remove portions of these Terms and Conditions, at any time. It is your responsibility to check these Terms and Conditions periodically for changes. Your continued use of the South Signal Village Web Application following the posting of changes will mean that you accept and agree to the changes.  </p>
-        <p><em>(Pinahihintulutan ko ang Barangay South Signal Village ng Lungsod ng Taguig upang makolekta at iproseso and datos na ipinahihiwatig dito para sa aking personal na impormasyon. Naiintindihan ko na ang aking personal na impormasyon ay protektado ng RA 10173 o Data Privacy Act of 2012. Ang Barangay South Signal Village ay may karapatan, sa kanilang tanging pagpapasya, na baguhin, magdagdag o magtanggal ng bahagi ng mga Kondisyon at Tuntunin na ito, anumang oras. Ito ay iyong pananagutan na paulit-ulit na suriin ang mga Kondisyon at Tuntunin na ito para sa mga pagbabago. Ang patuloy mong paggamit ng South Signal Village Web Application matapos maipaskil ang mga pagbabago ay nangangahulugan na tinatanggap at sumasang-ayon ka sa mga pagbabago.) </em></p>
+          <p>I hereby authorize the Barangay South Signal Village of Taguig City, to collect and process the data indicated herein for my personal information. I also understand that my personal information is protected by RA 10173 or Data Privacy Act of 2012. The Barangay South Signal Village reserves the right, at its sole discretion, to change, modify, add or remove portions of these Terms and Conditions, at any time. It is your responsibility to check these Terms and Conditions periodically for changes. Your continued use of the South Signal Village Web Application following the posting of changes will mean that you accept and agree to the changes. </p>
+          <p><em>(Pinahihintulutan ko ang Barangay South Signal Village ng Lungsod ng Taguig upang makolekta at iproseso and datos na ipinahihiwatig dito para sa aking personal na impormasyon. Naiintindihan ko na ang aking personal na impormasyon ay protektado ng RA 10173 o Data Privacy Act of 2012. Ang Barangay South Signal Village ay may karapatan, sa kanilang tanging pagpapasya, na baguhin, magdagdag o magtanggal ng bahagi ng mga Kondisyon at Tuntunin na ito, anumang oras. Ito ay iyong pananagutan na paulit-ulit na suriin ang mga Kondisyon at Tuntunin na ito para sa mga pagbabago. Ang patuloy mong paggamit ng South Signal Village Web Application matapos maipaskil ang mga pagbabago ay nangangahulugan na tinatanggap at sumasang-ayon ka sa mga pagbabago.) </em></p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn" style="background-color: #AA0F0A; color:white" data-bs-dismiss="modal">Done</button>

@@ -18,6 +18,22 @@
         img[src=""] {
             display: none;
         }
+
+        .img-container {
+            height: 350px;
+            /* Set the fixed height for the image container */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .img-container img {
+            object-fit: cover;
+            /* Maintain aspect ratio and cover the container */
+            width: 100%;
+            height: 100%;
+        }
     </style>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 
@@ -120,21 +136,30 @@
                             <p class="fs-6  mb-0">Valid ID Number: </p><strong>{{strtoupper($user->validID_num)}}</strong>
                         </div>
                     </div>
+                </div>
+
+                <div class="shadow p-3 mb-3 bg-body rounded">
+                    <p class="fs-4 fw-semibold text-center">ID INFORMATION</p>
+                    <hr>
                     <div class="row my-3 text-center">
-                        <div class="col-md-6 mb-2">
-                            <p class="fs-6  mb-2">Font Id: </p><img width="400" height="200" src="{{url('residentID/'.$user->validID_front)}}" class="img-fluid" alt="...">
+                        <div class="col-md-4 mb-2 img-container">
+                            <img src="{{url('residentID/'.$user->validID_front)}}" class="img-fluid" alt="Front ID">
                         </div>
-                        <div class="col-md-6 mb-2">
-                            <p class="fs-6  mb-2">Back Id: </p> <img width="400" height="200" src="{{url('residentID/'.$user->validID_back)}}" class="img-fluid" alt="...">
+                        <div class="col-md-4 mb-2 img-container">
+                            <img src="{{url('residentID/'.$user->validID_back)}}" class="img-fluid" alt="Back ID">
+                        </div>
+                        <div class="col-md-4 mb-2 img-container">
+                            <img src="{{url('residentID/'.$user->face)}}" class="img-fluid" alt="Face Photo">
                         </div>
                     </div>
                 </div>
+
                 <div class="shadow p-3 mb-3 bg-body rounded ">
                     <p class="fs-4 fw-semibold text-center">OTHER INFORMATION</p>
                     <hr>
                     <div class="row my-3 ">
                         <div class="col-md-6 mb-2 text-center">
-                            <p class="fs-6  mb-2 ">Living with Relatives: <span class="text-danger">*</span></p>
+                            <p class="fs-6  mb-2 ">Living with Relatives? <br>(<em>Nakatira kasama ang mga Kamag-anak ?</em>)<span class="text-danger">*</span></p>
                             <select name="live_relatives" class="form-select form-control w-50 mx-auto d-block" aria-label="Default select example" required>
                                 <option value="">Select...</option>
                                 <option value="Yes">Yes</option>
@@ -142,7 +167,7 @@
                             </select>
                         </div>
                         <div class="col-md-6 mb-2 text-center">
-                            <p class="fs-6  mb-2 ">Type of Residency: <span class="text-danger">*</span></p>
+                            <p class="fs-6  mb-2 ">Type of Residency: <br>(<em>Uri ng Residensiya</em>)<span class="text-danger">*</span></p>
                             <select name="residency_type" class="form-select form-control w-50 mx-auto d-block" aria-label="Default select example" required>
                                 <option value="">Select...</option>
                                 <option value="House Owner">House Owner</option>
@@ -156,7 +181,7 @@
                     <hr>
                     <div class="row mt-3 mb-1">
                         <div class="col-md-4 mb-2">
-                            <label class="text-start mb-2" for="">Type of Application<span class="text-danger">*</span> </label>
+                            <label class="text-start mb-2" for="">Type of Application (<em>Uri ng Aplikasyon</em>)<span class="text-danger">*</span> </label>
                             <select name="request_description" id="applicationType" class="form-select form-control" aria-label="Default select example" required>
                                 <option value="">Select...</option>
                                 <option value="New">New</option>
@@ -164,18 +189,18 @@
                             </select>
                         </div>
                         <div class="col-md-4 mb-2">
-                            <label class="text-start mb-2" for="">Purpose<span class="text-danger">*</span> </label>
+                            <label class="text-start mb-2" for="">Purpose (<em>Layunin ng pag-aaplay</em>)<span class="text-danger">*</span> </label>
                             <textarea name="request_purpose" class="form-control" id="myTextarea" rows="1" required></textarea>
                         </div>
                         <div class="col-md-4 mb-2">
-                            <label class="text-start mb-2" for="">Price </label>
+                            <label class="text-start mb-2" for="">Price (<em>Halaga</em>)</label>
                             <input class="form-control mb-2" value="Php.100.00" type="text" readonly />
                             <input type="hidden" value="100" name="price" />
                             <p class="fw-bolder fs-6 fst-italic  text-danger"><i class="bi bi-exclamation-circle"></i> Payment should be done in barangay office.</p>
                         </div>
                     </div>
                     <div class="" id="upload_id" style="display: none;">
-                        <label class="text-start mb-2" for="">Upload your barangay ID<span class="text-danger">*</span> </label>
+                        <label class="text-start mb-2" for="">Upload your barangay ID (<em>I-upload ang iyong Barangay ID</em>)<span class="text-danger">*</span> </label>
                         <div class="mb-2 me-2">
                             <label for="Image" class="form-label"></label>
                             <input class="form-control me-3 " type="file" id="formFile" name="file" onchange="preview()">
@@ -187,7 +212,7 @@
                             </div>
                             <div class="text-center">
                                 <div class="text-center">
-                                    <button onclick="clearImage()" class="btn mt-3" style="background-color:#AA0F0A; color: white;">Clear</button>
+                                    <button type="button" onclick="clearImage()" class="btn mt-3" style="background-color:#AA0F0A; color: white;">Clear</button>
                                 </div>
                             </div>
 
@@ -199,6 +224,10 @@
                         <nobr> <input onchange="isCheck(this)" type="checkbox" id="agree">&nbsp; <label for="" id="agreeText" style="cursor: pointer;"> I have read,</nobr> <strong>understood</strong>, and <strong>accepted</strong> the
                         <a href="/policy" target="_blank">Privacy Policy</a> and <a href="/terms" target="_blank">Terms & Conditions.</a></label>
                         <br>
+                        <nobr><em>
+                                &nbsp; <label for="" id="agreeText" style="cursor: pointer;"> Nabasa ko,</nobr> <strong>nauunawaan</strong>, at <strong>at tinanggap ko ang</strong> the
+                        <a href="/policy" target="_blank">Patakaran sa Pagkapribado</a> at <a href="/terms" target="_blank">mga Tuntunin at Kondisyon.</a></label>
+                        </em>
                     </div>
                     <div class="text-center">
                         <div class="d-flex justify-content-center mb-3"> <!-- Center the reCAPTCHA elements -->

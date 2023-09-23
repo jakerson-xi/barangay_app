@@ -6,8 +6,27 @@
     -webkit-appearance: none;
     margin: 0;
   }
+
+
+  .img-container {
+    height: 400px;
+    /* Set the fixed height for the image container */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .img-container img {
+    object-fit: cover;
+    /* Maintain aspect ratio and cover the container */
+    width: 100%;
+    height: 100%;
+  }
 </style>
+
 <div class="my-3 mx-3" id="myProfile">
+
   <div class="myContainer">
     <div class="card-body">
       <fieldset class="groupBox p-4 bg-light border mb-2 bg-body rounded shadow border border-dark">
@@ -94,30 +113,33 @@
       </div>
     </fieldset>
 
-    <fieldset class="groupBox p-4 bg-light border mb-2 bg-body rounded shadow border border-dark">
+
+    <fieldset class="groupBox p-4 bg-light border mb-2 bg-body rounded shadow border border-dark ">
       <legend class="goupBoxHeader">ID/Profile Information</legend>
       <div class="col-md-12 row mb-2 text-center">
-        <div class="form-group col-md-8 mb-2">
+        <div class="form-group col-md-4 mb-2 img-container">
           <label class="mb-3"></label>
           <div class="input-group text-center ">
-            <img width="400" height="200" src="{{url('residentID/'.$user->validID_front)}}" class="img-fluid m-3" alt="...">
+            <img  src="{{url('residentID/'.$user->validID_front)}}" class="img-fluid m-3" alt="...">
+          </div>
 
-            <img width="400" height="200" src="{{url('residentID/'.$user->validID_back)}}" class="img-fluid m-3" alt="...">
-          </div>
-          <div class="form-group text-center mt-3">
-            <button data-bs-toggle="modal" data-bs-target="#changeID" type="button" class="btn" style="width:30%; background-color: #AA0F0A; color: white;">
-            <i class="bi bi-person-vcard-fill"></i> Update ID</button>
-          </div>
         </div>
-        <div class="form-group col-md-4 mb-2 text-center">
+        <div class="form-group col-md-4 mb-2 img-container">
+          <label class="mb-3"></label>
+          <div class="input-group text-center ">
+            <img  src="{{url('residentID/'.$user->validID_back)}}" class="img-fluid m-3" alt="...">
+          </div>
+
+        </div>
+        <div class="form-group col-md-4 mb-2 text-center img-container">
           <label class="mb-3"></label>
           <div class="text-center ">
-            <img width="250" height="150" src="{{url('residentID/'.$user->face)}}" class="img-fluid mx-3 text-center" alt="...">
+            <img src="{{url('residentID/'.$user->face)}}" class=" img-fluid mx-3 text-center" alt="...">
           </div>
-          <div class="form-group text-center mt-3">
-            <button data-bs-toggle="modal" data-bs-target="#changeID" type="button" class="btn" style="width:50%; background-color: #AA0F0A; color: white;">
-            <i class="bi bi-person-bounding-box"></i> Update Picture</button>
-          </div>
+        </div>
+        <div class="form-group text-center mt-3">
+          <button data-bs-toggle="modal" data-bs-target="#changeID" type="button" class="btn" style="width:30%; background-color: #AA0F0A; color: white;">
+            <i class="bi bi-person-vcard-fill"></i> Update ID</button>
         </div>
       </div>
     </fieldset>
@@ -125,30 +147,30 @@
 
 
     <fieldset class="groupBox p-4 bg-light border mb-2 bg-body rounded shadow border border-dark">
-    <legend class="goupBoxHeader">Account Information</legend>
-        <div class="col-md-12 row mb-2">
-          <div class="form-group col-md-6 mb-2">
-            <label>Email Address</label>
-            <div class="input-group">
-              <input type="text" name="email" class="form-control" placeholder="{{$user->email}}" readonly>
-              <a data-bs-toggle="modal" data-bs-target="#changeEmail" href="changeEmail" style="background-color: #AA0F0A; color: white; text-decoration: none;" class="input-group-text">UPDATE EMAIL</a>
-            </div>
-          </div>
-          <div class="form-group col-md-6 mb-2">
-            <label for="mobile">Mobile Number</label>
-            <div class="input-group">
-              <div class="input-group-text">+63</div>
-              <input type="text" class="form-control mobile" id="mobileNumber" placeholder="{{$user->mobile_num}}" readonly>
-              <a data-bs-toggle="modal" data-bs-target="#changeMobileNumber" href="changeMobileNumber" style="background-color: #AA0F0A; color: white; text-decoration: none;" class="input-group-text">UPDATE NUMBER</a>
-            </div>
-          </div>
-          <div class="form-group text-center mt-3">
-            <button data-bs-toggle="modal" data-bs-target="#changePassword" type="button" class="btn" style="width:30%; background-color: #AA0F0A; color: white;">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-key-fill" viewBox="0 0 16 16">
-                <path d="M3.5 11.5a3.5 3.5 0 1 1 3.163-5H14L15.5 8 14 9.5l-1-1-1 1-1-1-1 1-1-1-1 1H6.663a3.5 3.5 0 0 1-3.163 2zM2.5 9a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
-              </svg> Change Password</button>
+      <legend class="goupBoxHeader">Account Information</legend>
+      <div class="col-md-12 row mb-2">
+        <div class="form-group col-md-6 mb-2">
+          <label>Email Address</label>
+          <div class="input-group">
+            <input type="text" name="email" class="form-control" placeholder="{{$user->email}}" readonly>
+            <a data-bs-toggle="modal" data-bs-target="#changeEmail" href="changeEmail" style="background-color: #AA0F0A; color: white; text-decoration: none;" class="input-group-text">UPDATE EMAIL</a>
           </div>
         </div>
+        <div class="form-group col-md-6 mb-2">
+          <label for="mobile">Mobile Number</label>
+          <div class="input-group">
+            <div class="input-group-text">+63</div>
+            <input type="text" class="form-control mobile" id="mobileNumber" placeholder="{{$user->mobile_num}}" readonly>
+            <a data-bs-toggle="modal" data-bs-target="#changeMobileNumber" href="changeMobileNumber" style="background-color: #AA0F0A; color: white; text-decoration: none;" class="input-group-text">UPDATE NUMBER</a>
+          </div>
+        </div>
+        <div class="form-group text-center mt-3">
+          <button data-bs-toggle="modal" data-bs-target="#changePassword" type="button" class="btn" style="width:30%; background-color: #AA0F0A; color: white;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-key-fill" viewBox="0 0 16 16">
+              <path d="M3.5 11.5a3.5 3.5 0 1 1 3.163-5H14L15.5 8 14 9.5l-1-1-1 1-1-1-1 1-1-1-1 1H6.663a3.5 3.5 0 0 1-3.163 2zM2.5 9a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
+            </svg> Change Password</button>
+        </div>
+      </div>
     </fieldset>
   </div>
 
@@ -286,104 +308,207 @@
   </form>
 </div>
 
-<!-- MODAL FOR UPDATING ID -->
-<div class="modal fade " id="changeID" aria-hidden="true" aria-labelledby="changeIDLabel" tabindex="-1">
-  <form method="post" enctype="multipart/form-data" action="{{url('/updateID')}}" class="needs-validation" novalidate>
-    @csrf
-    @foreach($user_info as $user)
-    <input type="hidden" name="user_id" id="user_id" value="{{$user->id}}">
-    @endforeach
-    <div class="modal-dialog modal-xl modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalToggleLabel2">Update Valid ID</h5>
-        </div>
-        <div class="modal-body">
-          <div class="col-md-12 row mb-2">
-            <div class="form-group col-md-6 mb-2">
-              <label>Choose Valid ID.<span class="text-danger">*</span></label>
-              <select class="form-control" name="type_validID" id="type_validID" required>
-                <option value="">Valid ID</option>
-                <option value="Philippine passport">Philippine passport</option>
-                <option value="Driver’s license">Driver’s license</option>
-                <option value="SSS UMID Card">SSS UMID Card</option>
-                <option value="PhilHealth ID">PhilHealth ID</option>
-                <option value="TIN Card">TIN Card</option>
-                <option value="Postal ID">Postal ID</option>
-                <option value="Voter’s ID">Voter’s ID</option>
-                <option value="Professional Regulation Commission ID">Professional Regulation Commission ID</option>
-                <option value="Senior Citizen ID">Senior Citizen ID</option>
-                <option value="OFW ID">OFW ID</option>
-                <option value="Student ID">Student ID</option>
-              </select>
-              <div class="invalid-feedback">
-                Please select ID to upload.
-              </div>
-            </div>
-            <div class="form-group col-md-6 mb-2">
-              <label for="validID_num">ID Number<span class="text-danger">*</span></label>
-              <div class="input-group">
-                <input style="text-transform: uppercase;" type="text" class="form-control mobile" name="validID_num" id="validID_num" placeholder="ID Number" required>
+
+<div id="formContainer">
+  <div class="modal fade " id="changeID" aria-hidden="true" aria-labelledby="changeIDLabel" tabindex="-1">
+    <form method="post" id="changeIDForm" enctype="multipart/form-data" action="{{url('/updateID')}}" class="needs-validation" novalidate>
+      @csrf
+      @foreach($user_info as $user)
+      <input type="hidden" name="user_id" id="user_id" value="{{$user->id}}">
+      @endforeach
+      <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalToggleLabel2">Update Valid ID</h5>
+          </div>
+          <div class="modal-body">
+            <div class="col-md-12 row mb-2">
+              <div class="form-group col-md-3 mb-2">
+                <label>Choose Valid ID.<span class="text-danger">*</span></label>
+                <select class="form-control" name="type_validID" id="type_validID" required>
+                  <option value="">Valid ID</option>
+                  <option value="Philippine passport">Philippine passport</option>
+                  <option value="Driver’s license">Driver’s license</option>
+                  <option value="SSS UMID Card">SSS UMID Card</option>
+                  <option value="PhilHealth ID">PhilHealth ID</option>
+                  <option value="TIN Card">TIN Card</option>
+                  <option value="Postal ID">Postal ID</option>
+                  <option value="Voter’s ID">Voter’s ID</option>
+                  <option value="Professional Regulation Commission ID">Professional Regulation Commission ID</option>
+                  <option value="Senior Citizen ID">Senior Citizen ID</option>
+                  <option value="OFW ID">OFW ID</option>
+                  <option value="Student ID">Student ID</option>
+                  <option value="National ID">National ID</option>
+                </select>
                 <div class="invalid-feedback">
-                  Please input your ID number.
+                  Please select ID to upload.
                 </div>
               </div>
             </div>
-          </div>
-          <div class="col-md-12 row mb-2">
-            <div class="form-group col-md-6 mb-2">
-              <div class="">
-                <legend class="goupBoxHeader">Front ID</legend>
-                <div class="mb-5">
-                  <label for="Image" class="form-label"></label>
-                  <input class="form-control" type="file" id="formFile" name="formFile" onchange="preview()" required>
-                  <div class="invalid-feedback">
-                    Please attach your ID.
+            <div class="col-md-12 row mb-2">
+              <div class="form-group col-md-4 mb-2">
+                <div class="">
+                  <legend class="goupBoxHeader">Front ID</legend>
+                  <div class="mb-5">
+                    <label for="Image" class="form-label"></label>
+                    <input class="form-control" type="file" id="formFile" name="formFile" onchange="preview()" required>
+                    <div class="invalid-feedback">
+                      Please attach your ID.
+                    </div>
+                    <div class="text-center">
+                      <button type="button" onclick="clearImage()" class="btn mt-3" style="background-color:#AA0F0A; color: white;">Clear</button>
+                    </div>
                   </div>
-                  <div class="text-center">
-                    <button onclick="clearImage()" class="btn mt-3" style="background-color:#AA0F0A; color: white;">Clear</button>
-                  </div>
+
+                  <img id="frame" src="" class="img-fluid" />
                 </div>
-
-                <img id="frame" src="" class="img-fluid" />
-              </div>
-            </div>
-
-            <div class="form-group col-md-6 mb-2">
-              <div class="">
-                <legend class="goupBoxHeader">Back ID</legend>
-                <div class="mb-5">
-                  <label for="Image" class="form-label"></label>
-                  <input class="form-control" type="file" id="formFile_2" name="formFile_2" onchange="preview_2()" required>
-                  <div class="invalid-feedback">
-                    Please attach your ID.
-                  </div>
-                  <div class="text-center">
-                    <button onclick="clearImage_2()" class="btn mt-3" style="background-color:#AA0F0A; color: white;">Clear</button>
-                  </div>
-
-                </div>
-                <img id="frame_2" src="" class="img-fluid" />
               </div>
 
-            </div>
+              <div class="form-group col-md-4 mb-2">
+                <div class="">
+                  <legend class="goupBoxHeader">Back ID</legend>
+                  <div class="mb-5">
+                    <label for="Image" class="form-label"></label>
+                    <input class="form-control" type="file" id="formFile_2" name="formFile_2" onchange="preview_2()" required>
+                    <div class="invalid-feedback">
+                      Please attach your ID.
+                    </div>
+                    <div class="text-center">
+                      <button type="button" onclick="clearImage_2()" class="btn mt-3" style="background-color:#AA0F0A; color: white;">Clear</button>
+                    </div>
 
-          </div>
-          <div class="modal-footer">
-            <button type="submit" class="btn btn-primary" style="background-color: #AA0F0A; color: white;">Save</button>
-            <button type="reset" class="btn btn-secondary" class="btn-close" data-bs-dismiss="modal" aria-label="Close">Cancel</button>
+                  </div>
+                  <img id="frame_2" src="" class="img-fluid" />
+                </div>
+
+              </div>
+
+              <div class="form-group col-md-4 mb-2">
+                <div class="">
+                  <legend class="goupBoxHeader">Face Photo</legend>
+                  <div class="mb-5">
+                    <label for="Image" class="form-label"></label>
+                    <input class="form-control" type="file" id="face" name="face" onchange="preview_3()" required>
+                    <div class="invalid-feedback">
+                      Please attach your Face Photo.
+                    </div>
+                    <div class="text-center">
+                      <button type="button" onclick="clearImage_3()" class="btn mt-3" style="background-color:#AA0F0A; color: white;">Clear</button>
+                    </div>
+
+                  </div>
+                  <img id="frame_face" src="" class="img-fluid" />
+                </div>
+
+              </div>
+
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary" style="background-color: #AA0F0A; color: white;">Save</button>
+              <button type="reset" class="btn btn-secondary" class="btn-close" data-bs-dismiss="modal" aria-label="Close">Cancel</button>
+            </div>
           </div>
         </div>
+    </form>
+  </div>
+</div>
+
+<!-- MODAL FOR UPDATING ID -->
+
+
+<div class="modal fade" id="loadingModal" tabindex="-1" role="dialog" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content ">
+      <div class="modal-body text-center my-3">
+        <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+        </div>
+        <p class="mt-3">Please wait...</p>
       </div>
-  </form>
+    </div>
+  </div>
 </div>
 
-</div>
-
-
+<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="{{asset('js/userProfile.js')}}"></script>
+<script src="sweetalert2.all.min.js"></script>
+<script>
+  // Get the form element
+  const form = document.getElementById("changeIDForm");
 
+  // Listen for the submit event
+  form.addEventListener("submit", function(event) {
+    if (!form.checkValidity()) {
+      // If the form is not valid, show the validation errors
+
+      event.preventDefault();
+      return;
+    }
+    event.preventDefault(); // Prevent the form from being submitted normally
+
+    // Show the modal
+    $("#loadingModal").modal("show");
+    $("#changeID").modal("hide");
+    // Get the form data
+    const formData = new FormData(form);
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 15000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+      }
+    })
+    // Make the AJAX request
+    $.ajax({
+        type: "POST",
+        url: form.action,
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function(response) {
+          // Hide the modal
+          $("#loadingModal").modal("hide");
+          form.reset();
+          frame_face.src = "";
+          frame_2.src = "";
+          frame.src = "";
+          if (response.success) {
+            Toast.fire({
+              icon: 'success',
+              title: response.message
+            })
+
+
+          } else {
+            Toast.fire({
+              icon: 'error',
+              title: response.message
+            })
+
+          }
+        },
+        error: function(error) {
+          // Hide the modal
+          $("#loadingModal").modal("hide");
+          form.reset();
+          frame_face.src = "";
+          frame_2.src = "";
+          frame.src = "";
+          Toast.fire({
+            icon: 'error',
+            title: error.message
+          })
+          // Handle the error (e.g. show an error message)
+        },
+      }
+
+    );
+  });
+</script>
 </body>
 
 </html>

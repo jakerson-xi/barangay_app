@@ -176,6 +176,15 @@ function clearImage_2() {
     frame_2.src = "";
 }
 
+function preview_3() {
+    frame_face.src = URL.createObjectURL(event.target.files[0]);
+}
+
+function clearImage_3() {
+    document.getElementById("face").value = null;
+    frame_face.src = "";
+}
+
 const fileInput = document.querySelector("#formFile");
 
 fileInput.addEventListener("change", function() {

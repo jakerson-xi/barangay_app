@@ -18,6 +18,22 @@
         img[src=""] {
             display: none;
         }
+
+        .img-container {
+            height: 350px;
+            /* Set the fixed height for the image container */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .img-container img {
+            object-fit: cover;
+            /* Maintain aspect ratio and cover the container */
+            width: 100%;
+            height: 100%;
+        }
     </style>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
     </script>
@@ -131,12 +147,19 @@
                             <strong>{{strtoupper($user->validID_num)}}</strong>
                         </div>
                     </div>
+                </div>
+                <div class="shadow p-3 mb-3 bg-body rounded">
+                    <p class="fs-4 fw-semibold text-center">ID INFORMATION</p>
+                    <hr>
                     <div class="row my-3 text-center">
-                        <div class="col-md-6 mb-2">
-                            <p class="fs-6  mb-2">Font Id: </p><img width="400" height="200" src="{{url('residentID/'.$user->validID_front)}}" class="img-fluid" alt="...">
+                        <div class="col-md-4 mb-2 img-container">
+                            <img src="{{url('residentID/'.$user->validID_front)}}" class="img-fluid" alt="Front ID">
                         </div>
-                        <div class="col-md-6 mb-2">
-                            <p class="fs-6  mb-2">Back Id: </p> <img width="400" height="200" src="{{url('residentID/'.$user->validID_back)}}" class="img-fluid" alt="...">
+                        <div class="col-md-4 mb-2 img-container">
+                            <img src="{{url('residentID/'.$user->validID_back)}}" class="img-fluid" alt="Back ID">
+                        </div>
+                        <div class="col-md-4 mb-2 img-container">
+                            <img src="{{url('residentID/'.$user->face)}}" class="img-fluid" alt="Face Photo">
                         </div>
                     </div>
                 </div>
@@ -145,7 +168,7 @@
                     <hr>
                     <div class="row my-3 ">
                         <div class="col-md-6 mb-2 text-center">
-                            <p class="fs-6  mb-2 ">Living with Relatives: <span class="text-danger">*</span></p>
+                            <p class="fs-6  mb-2 ">Living with Relatives? <br>(<em>Nakatira kasama ang mga Kamag-anak ?</em>)<span class="text-danger">*</span></p>
                             <select name="live_relatives" class="form-select form-control w-50 mx-auto d-block" aria-label="Default select example" required>
                                 <option value="">Select...</option>
                                 <option value="Yes">Yes</option>
@@ -153,7 +176,7 @@
                             </select>
                         </div>
                         <div class="col-md-6 mb-2 text-center">
-                            <p class="fs-6  mb-2 ">Type of Residency: <span class="text-danger">*</span></p>
+                            <p class="fs-6  mb-2 ">Type of Residency: <br>(<em>Uri ng Residensiya</em>)<span class="text-danger">*</span></p>
                             <select name="residency_type" class="form-select form-control w-50 mx-auto d-block" aria-label="Default select example" required>
                                 <option value="">Select...</option>
                                 <option value="House Owner">House Owner</option>
@@ -167,7 +190,7 @@
                     <hr>
                     <div class="row my-3 ">
                         <div class="col-md-4 mb-2">
-                            <label class="text-start mb-2" for="">Type of Application<span class="text-danger">*</span>
+                            <label class="text-start mb-2" for="">Type of Application (<em>Uri ng Aplikasyon</em>)<span class="text-danger">*</span>
                             </label>
                             <select name="request_description" id="applicationType" class="form-select form-control" aria-label="Default select example" required>
                                 <option value="">Select...</option>
@@ -176,21 +199,46 @@
                             </select>
                         </div>
                         <div class="col-md-4 mb-2">
-                            <label class="text-start mb-2" for="">Purpose<span class="text-danger">*</span> </label>
+                            <label class="text-start mb-2" for="">Purpose (<em>Layunin ng pag-aaplay</em>)<span class="text-danger">*</span> </label>
                             <textarea name="request_purpose" class="form-control" id="myTextarea" rows="1" required></textarea>
                         </div>
                         <div class="col-md-4 mb-2">
-                            <label class="text-start mb-2" for="">Price </label>
-                            <input class="form-control mb-2" value="Based on your income" type="text" readonly />
-                            <input type="hidden" value="100" name="price" />
+                            <label class="text-start mb-2" for="">Price (<em>Halaga</em>)</label>
+                            <input class="form-control mb-2" value="Based on your income (batay sa iyong sahod)" type="text" readonly />
+                            <input type="hidden" value="" name="price" />
 
                             <p class="fw-bolder fs-6 fst-italic  text-danger"><i class="bi bi-exclamation-circle"></i>
                                 Payment should be done in barangay office.</p>
 
                         </div>
                     </div>
+                    <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="myModalLabel">MGA KAILANGANG DALHIN:</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <ol>
+                                        <li>Resident for approximately six (6) months in the barangay</li>
+                                        <li>Bring the previous Barangay ID</li>
+                                        <li>Bring any valid ID</li>
+                                        <li>1x1 photo and Valid ID</li>
+                                    </ol>
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="" id="upload_id" style="display: none;">
-                        <label class="text-start mb-2" for="">Upload your necessary document<span class="text-danger">*</span> </label>
+                        <label class="text-start mb-2" for="">Upload your necessary document (<em>I-upload ang kinakailangang dokumento</em>)<span class="text-danger">*</span> </label>
+                        <a href="" data-bs-toggle="modal" data-bs-target="#myModal">
+                            here
+                        </a>
                         <div class="mb-2 me-2">
                             <label for="Image" class="form-label"></label>
                             <input class="form-control me-3 " type="file" id="formFile" name="file" onchange="preview()">

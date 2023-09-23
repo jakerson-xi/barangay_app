@@ -51,11 +51,34 @@ class mainController extends Controller
     public function registration(Request $request)
     {
 
-       
+
+        //to reroute to id analyzer page
+        if ($request->reference == "") {
+            return redirect()->route('registration_id');
+        }
+
         $ref = 'docupass_reference=' . $request->reference;
         $vault = new Vault(ENV('ID_ANALYZER'), "US");
+
+
+        //if the reference is not existing or error
+        if ($vault->list([$ref])['total'] == 0) {
+            return redirect()->route('registration_id');
+        }
+
+        //hold the data from the id analyzer
         $vaultItems = $vault->list([$ref])['items']['0'];
-        // return view('registration', ['item' =>  $vaultItems]);
+        $id_number = $vaultItems['documentNumber'];
+
+
+        #check if the user already registred 
+        if (User::where('validID_num', $id_number)->exists()) {
+
+            Alert::error('User Already Registered', 'The ID number already exists. If you encounter any issues during registration, please contact the barangay.')
+                ->showConfirmButton('Confirm', '#AA0F0A');
+            return redirect()->route('home');
+        }
+
 
 
         //    dd($vaultItems);
@@ -94,31 +117,24 @@ class mainController extends Controller
     public function addUser(Request $request)
     {
 
-    
+
         $ref = 'docupass_reference=' . $request->ref;
         $vault = new Vault(ENV('ID_ANALYZER'), "US");
         $vaultItems = $vault->list([$ref])['items']['0'];
 
         $fullname = $request->firstName . " " . $request->middleName . " " . $request->lastName;
 
-
-
-
         // check if the name from the ID and from the reqistration is true
         if ($vaultItems['fullName'] != $request->firstName . " " . $request->middleName . " " . $request->lastName && levenshtein($vaultItems['fullName'], $fullname) > 6) {
-           
+
             $data = [
                 'success' => "error",
                 'type' => "The name on your ID does not match the name you have submitted.",
                 'message' => "error ID",
-                
             ];
-  
+
             return response()->json($data);
         }
-
-
-
 
         if (User::where('email', $request->email)->where('isEnabled', 1)->exists()) {
 
@@ -182,7 +198,6 @@ class mainController extends Controller
             //     $filename_back = $request->firstName . '_' . $request->lastName . date("Y-m-d-H-i-s") . 'backPic.' . $file_back->getClientOriginalExtension();
             //     $file_back->move(public_path('/residentID'), $filename_back);
             // }
-
 
             User::create([
                 "first_name" => strtoupper($request->firstName),
@@ -460,8 +475,64 @@ class mainController extends Controller
 
     public function updateID(Request $request)
     {
-
+      
+     
+        
         $user_auth = Auth::user();
+
+
+        $coreapi = new CoreAPI(ENV('ID_ANALYZER'), "US");
+        $coreapi->enableAuthentication(true, '2');
+        $coreapi->verifyExpiry(true);
+        $coreapi->verifyDocumentNumber($user_auth->validID_num);
+        $coreapi->enableImageOutput(true, true, "url");
+        $result = $coreapi->scan($request->file('formFile'), $request->file('formFile_2'), $request->file('face'));
+
+        $full_name = $user_auth->first_name . " " . $user_auth->middle_name . " " . $user_auth->last_name;
+
+
+     
+
+
+        if (isset($result['error']['message'])) {
+            $data = [
+                'error' => true,
+                'message' => $result['error']['message'],
+            ];
+            return response()->json($data);
+        }
+        //check if the ID and the face is identical
+        if ($result['face']['confidence'] < 0.7) {
+
+            $data = [
+                'error' => true,
+                'message' => "Face photo is not recognized with your ID",
+            ];
+            return response()->json($data);
+        }
+
+
+        //check if the name from the ID is same with the name of the resident
+        if (levenshtein($result['result']['fullName'], $full_name) > 6) {
+
+            $data = [
+                'error' => true,
+                'message' => "Invalid name from your ID",
+            ];
+            return response()->json($data);
+        }
+
+        //check if the ID NUMBER from the ID is same with the name of the resident
+        if ($result['result']['documentNumber'] == $user_auth->validID_num) {
+            
+            $data = [
+                'error' => true,
+                'message' => "Please upload a new ID",
+            ];
+            return response()->json($data);
+        }
+
+
 
         $data = $request->all();
         $id = strtolower($data['user_id']);
@@ -476,18 +547,36 @@ class mainController extends Controller
             $filename_back = $user_auth->id . '-' . $user_auth->first_name . '-' . $user_auth->last_name . '-' . date("Y-m-d-H-i-s") . '-backPic.' . $file_back->getClientOriginalExtension();
             $file_back->move(public_path('/residentID'), $filename_back);
         }
+        if ($request->file('face')) {
+            $face = $request->file('face');
+            $filename_face = $user_auth->id . '-' . $user_auth->first_name . '-' . $user_auth->last_name . '-' . date("Y-m-d-H-i-s") . '-face.' . $face->getClientOriginalExtension();
+            $face->move(public_path('/residentID'), $filename_face);
+        }
+
+
 
 
         User::where('id',  $id)->first()->update([
             "valiID_type" => $request->type_validID,
-            "validID_num" => $request->validID_num,
+            "validID_num" => $result['result']['documentNumber'],
             "validID_front" => $filename_front,
             "validID_back" => $filename_back,
+            "face" => $filename_face
         ]);
 
-        toast('You successfully updated your valid ID!', 'success');
-        return redirect()->route('userDashboard_Profile');
+
+
+
+        $data = [
+            'success' => true,
+            'message' => "You successfully updated your valid ID!",
+        ];
+
+        return response()->json($data);
     }
+
+
+
     public function request_barangay_id()
     {
 
