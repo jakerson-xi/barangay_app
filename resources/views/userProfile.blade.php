@@ -116,8 +116,8 @@
 
     <fieldset class="groupBox p-4 bg-light border mb-2 bg-body rounded shadow border border-dark ">
       <legend class="goupBoxHeader">ID/Profile Information</legend>
-      <div class="col-md-12 row mb-2 text-center">
-        <div class="form-group col-md-4 mb-2 img-container">
+      <div class="col-md-12 row mb-2 text-center img-container">
+        <div class="form-group col-md-4 mb-2 ">
           <label class="mb-3"></label>
           <div class="input-group text-center ">
             <img  src="{{url('residentID/'.$user->validID_front)}}" class="img-fluid m-3" alt="...">

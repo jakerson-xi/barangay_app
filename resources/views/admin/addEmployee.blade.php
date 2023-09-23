@@ -273,7 +273,7 @@
                     <div class="col-md-12 row mb-2">
                         <div class="form-group col-md-6">
                             <label>Birthdate <span class="text-danger">*</span></label>
-                            <input type="date" id="birthdate" name="birthdate" class="form-control" required>
+                            <input max="{{ \Carbon\Carbon::now()->subYears(18)->format('Y-m-d') }}" type="date" id="birthdate" name="birthdate" class="form-control" required>
                         </div>
                         <div class="form-group col-md-6">
                             <label>Place of Birth <span class="text-danger">*</span></label>

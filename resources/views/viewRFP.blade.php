@@ -21,7 +21,7 @@
 
 
     <style>
-          .img-container {
+        .img-container {
             height: 350px;
             /* Set the fixed height for the image container */
             display: flex;
@@ -49,8 +49,8 @@
         <nav class="main-header navbar navbar-expand " style="background-color: #AA0F0A;">
             <div class="container-fluid flex-sm-row">
                 <ul class="navbar-nav">
-                    
-                    <nobr class="nav-link text-white font-weight-bold"><span><a href="/transactionhistory" style="color:white"><i class="bi bi-arrow-left-circle-fill"></i></a> {{$request->reference_key}}</span></nobr>
+
+                    <nobr class="nav-link text-white font-weight-bold"><span><a href="/payment" style="color:white"><i class="bi bi-arrow-left-circle-fill"></i></a> {{$request->reference_key}}</span></nobr>
                 </ul>
 
 
@@ -150,92 +150,92 @@
 
 
 
-  <!--DATA POLICY-->
-  <div class="modal fade" id="dataPrivacy" tabindex="-1" aria-labelledby="dataPrivacyLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-scrollable">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 style="text-align: center;" class="modal-title" id="exampleModalLabel">Draft Policy on Open Data for the Barangay South Signal Village</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <div class="text-center mb-2">
-            <img src="{{asset('assets/imgs/southsignal.png')}}" alt="logo" width="100">
-          </div>
-          <p>At Barangay South Signal Village, we recognize the importance of protecting your personal data and privacy. We are committed to maintaining the confidentiality and limiting any disclosure of your information in accordance with local laws. This Privacy Policy outlines how we collect, use, share, and protect your personal information when you use our web app.</h3>
-          <h5>Your Rights and Preferences</h5>
-          <p>As an individual, you have certain rights under applicable law with regard to your personal data. These include:</p>
-          <ul>
-            <li>Right of Access - the right to request access to your personal data and be informed about the processing of your personal data;</li>
-            <li>Right to Erasure - the right to request the deletion of your personal data;</li>
-            <li>Right to Restrict Processing - the right to request the restriction of processing of your personal data;</li>
-            <li>Right to Object - the right to object to the processing of your personal data;</li>
-            <li>Right to Data Portability - the right to receive your personal data in a structured, commonly used, and machine-readable format.</li>
-          </ul>
+    <!--DATA POLICY-->
+    <div class="modal fade" id="dataPrivacy" tabindex="-1" aria-labelledby="dataPrivacyLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 style="text-align: center;" class="modal-title" id="exampleModalLabel">Draft Policy on Open Data for the Barangay South Signal Village</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="text-center mb-2">
+                        <img src="{{asset('assets/imgs/southsignal.png')}}" alt="logo" width="100">
+                    </div>
+                    <p>At Barangay South Signal Village, we recognize the importance of protecting your personal data and privacy. We are committed to maintaining the confidentiality and limiting any disclosure of your information in accordance with local laws. This Privacy Policy outlines how we collect, use, share, and protect your personal information when you use our web app.</h3>
+                    <h5>Your Rights and Preferences</h5>
+                    <p>As an individual, you have certain rights under applicable law with regard to your personal data. These include:</p>
+                    <ul>
+                        <li>Right of Access - the right to request access to your personal data and be informed about the processing of your personal data;</li>
+                        <li>Right to Erasure - the right to request the deletion of your personal data;</li>
+                        <li>Right to Restrict Processing - the right to request the restriction of processing of your personal data;</li>
+                        <li>Right to Object - the right to object to the processing of your personal data;</li>
+                        <li>Right to Data Portability - the right to receive your personal data in a structured, commonly used, and machine-readable format.</li>
+                    </ul>
 
-          <h5>How we Collect your Personal Data</h5>
-          <p>We collect your personal data in the following ways:</p>
-          <p> These are the following data needed upon registering, with the corresponding purpose:</p>
-          <ul>
-            <li>Full Name – to properly identify the right person when conducting the registration.</li>
-            <li>Suffix – to know if person have any suffix in their name.</li>
-            <li>Gender – to classify the person based on their sexuality on birth.</li>
-            <li>Civil Status – to describe a person’s relationship with a significant other.</li>
-            <li>Nationality – legal identification of a person in international law and distinguished from citizenship.</li>
-            <li>Birthdate – used for proper identification and in case multiple persons have the same name.</li>
-            <li>Age – to determine the age of the person.</li>
-            <li>Place of Birth – to know where the person was born in.</li>
-            <li>Address – to determine the exact location of the person by the authorities.</li>
-            <li>Valid ID – to validate all the information set by the user.</li>
-            <li>ID Number – to ensure that no two people within the system share the same number.</li>
-            <li>Email – for the system to have an option to have different identification aside from mobile number.</li>
-            <li>Mobile Number – used for unique identification in the system and for the user to be contacted if needed by the barangay officials.</li>
-          </ul>
+                    <h5>How we Collect your Personal Data</h5>
+                    <p>We collect your personal data in the following ways:</p>
+                    <p> These are the following data needed upon registering, with the corresponding purpose:</p>
+                    <ul>
+                        <li>Full Name – to properly identify the right person when conducting the registration.</li>
+                        <li>Suffix – to know if person have any suffix in their name.</li>
+                        <li>Gender – to classify the person based on their sexuality on birth.</li>
+                        <li>Civil Status – to describe a person’s relationship with a significant other.</li>
+                        <li>Nationality – legal identification of a person in international law and distinguished from citizenship.</li>
+                        <li>Birthdate – used for proper identification and in case multiple persons have the same name.</li>
+                        <li>Age – to determine the age of the person.</li>
+                        <li>Place of Birth – to know where the person was born in.</li>
+                        <li>Address – to determine the exact location of the person by the authorities.</li>
+                        <li>Valid ID – to validate all the information set by the user.</li>
+                        <li>ID Number – to ensure that no two people within the system share the same number.</li>
+                        <li>Email – for the system to have an option to have different identification aside from mobile number.</li>
+                        <li>Mobile Number – used for unique identification in the system and for the user to be contacted if needed by the barangay officials.</li>
+                    </ul>
 
-          <h5>What do we use your Personal Data for?</h5>
-          <p>We use your personal data to provide and improve our services to you. This includes:</p>
-          <ul>
-            <li>To communicate with you about our services and provide customer support.</li>
-            <li>To process transactions to our services.</li>
-            <li>To improve our services and develop new features.</li>
-            <li>To comply with legal obligations.</li>
-          </ul>
+                    <h5>What do we use your Personal Data for?</h5>
+                    <p>We use your personal data to provide and improve our services to you. This includes:</p>
+                    <ul>
+                        <li>To communicate with you about our services and provide customer support.</li>
+                        <li>To process transactions to our services.</li>
+                        <li>To improve our services and develop new features.</li>
+                        <li>To comply with legal obligations.</li>
+                    </ul>
 
-          <h5>Sharing your Personal Data</h5>
-          <p>We do not sell, rent, or lease your personal information to third parties without your consent. We may share your personal data with third-party service providers who help us operate our web app or provide services to you. These service providers are required to maintain the confidentiality and security of your personal data. </p>
-          <p>We may also disclose your personal data if required by law, court order, or other legal processes or if we have a good faith belief that such disclosure is necessary to protect our rights or property or the safety of others. </p>
-          <h5>Data Retention and Deletion </h5>
-          <p>We keep your personal data only for as long as necessary to provide you with our services and for legitimate and essential business purposes, such as complying with legal obligations and resolving disputes. We will securely delete or anonymize your personal data when it is no longer needed for these purposes. </p>
-          <h5>Keeping your Data Safe </h5>
-          <p>We take appropriate technical and organizational measures to protect your personal data against unauthorized or unlawful processing, accidental loss, destruction, or damage. We also implement access controls, encryption, and retention policies to protect your personal data. </p>
+                    <h5>Sharing your Personal Data</h5>
+                    <p>We do not sell, rent, or lease your personal information to third parties without your consent. We may share your personal data with third-party service providers who help us operate our web app or provide services to you. These service providers are required to maintain the confidentiality and security of your personal data. </p>
+                    <p>We may also disclose your personal data if required by law, court order, or other legal processes or if we have a good faith belief that such disclosure is necessary to protect our rights or property or the safety of others. </p>
+                    <h5>Data Retention and Deletion </h5>
+                    <p>We keep your personal data only for as long as necessary to provide you with our services and for legitimate and essential business purposes, such as complying with legal obligations and resolving disputes. We will securely delete or anonymize your personal data when it is no longer needed for these purposes. </p>
+                    <h5>Keeping your Data Safe </h5>
+                    <p>We take appropriate technical and organizational measures to protect your personal data against unauthorized or unlawful processing, accidental loss, destruction, or damage. We also implement access controls, encryption, and retention policies to protect your personal data. </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn" style="background-color: #AA0F0A; color:white" data-bs-dismiss="modal">Done</button>
+                </div>
+            </div>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn" style="background-color: #AA0F0A; color:white" data-bs-dismiss="modal">Done</button>
-        </div>
-      </div>
     </div>
-  </div>
-  <!--TERMS AND CONDITION-->
-  <div class="modal fade" id="terms" tabindex="-1" aria-labelledby="termsLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-scrollable">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 style="text-align: center;" class="modal-title" id="exampleModalLabel">Terms and Conditions for the Barangay South Signal Village</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <!--TERMS AND CONDITION-->
+    <div class="modal fade" id="terms" tabindex="-1" aria-labelledby="termsLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 style="text-align: center;" class="modal-title" id="exampleModalLabel">Terms and Conditions for the Barangay South Signal Village</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="text-center mb-2">
+                        <img src="{{asset('assets/imgs/southsignal.png')}}" alt="logo" width="100">
+                    </div>
+                    <p>I hereby authorize the Barangay South Signal Village of Taguig City, to collect and process the data indicated herein for my personal information. I also understand that my personal information is protected by RA 10173 or Data Privacy Act of 2012. The Barangay South Signal Village reserves the right, at its sole discretion, to change, modify, add or remove portions of these Terms and Conditions, at any time. It is your responsibility to check these Terms and Conditions periodically for changes. Your continued use of the South Signal Village Web Application following the posting of changes will mean that you accept and agree to the changes. </p>
+                    <p><em>(Pinahihintulutan ko ang Barangay South Signal Village ng Lungsod ng Taguig upang makolekta at iproseso and datos na ipinahihiwatig dito para sa aking personal na impormasyon. Naiintindihan ko na ang aking personal na impormasyon ay protektado ng RA 10173 o Data Privacy Act of 2012. Ang Barangay South Signal Village ay may karapatan, sa kanilang tanging pagpapasya, na baguhin, magdagdag o magtanggal ng bahagi ng mga Kondisyon at Tuntunin na ito, anumang oras. Ito ay iyong pananagutan na paulit-ulit na suriin ang mga Kondisyon at Tuntunin na ito para sa mga pagbabago. Ang patuloy mong paggamit ng South Signal Village Web Application matapos maipaskil ang mga pagbabago ay nangangahulugan na tinatanggap at sumasang-ayon ka sa mga pagbabago.) </em></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn" style="background-color: #AA0F0A; color:white" data-bs-dismiss="modal">Done</button>
+                </div>
+            </div>
         </div>
-        <div class="modal-body">
-        <div class="text-center mb-2">
-            <img src="{{asset('assets/imgs/southsignal.png')}}" alt="logo" width="100">
-          </div>
-          <p>I hereby authorize the Barangay South Signal Village of Taguig City, to collect and process the data indicated herein for my personal information. I also understand that my personal information is protected by RA 10173 or Data Privacy Act of 2012. The Barangay South Signal Village reserves the right, at its sole discretion, to change, modify, add or remove portions of these Terms and Conditions, at any time. It is your responsibility to check these Terms and Conditions periodically for changes. Your continued use of the South Signal Village Web Application following the posting of changes will mean that you accept and agree to the changes.  </p>
-        <p><em>(Pinahihintulutan ko ang Barangay South Signal Village ng Lungsod ng Taguig upang makolekta at iproseso and datos na ipinahihiwatig dito para sa aking personal na impormasyon. Naiintindihan ko na ang aking personal na impormasyon ay protektado ng RA 10173 o Data Privacy Act of 2012. Ang Barangay South Signal Village ay may karapatan, sa kanilang tanging pagpapasya, na baguhin, magdagdag o magtanggal ng bahagi ng mga Kondisyon at Tuntunin na ito, anumang oras. Ito ay iyong pananagutan na paulit-ulit na suriin ang mga Kondisyon at Tuntunin na ito para sa mga pagbabago. Ang patuloy mong paggamit ng South Signal Village Web Application matapos maipaskil ang mga pagbabago ay nangangahulugan na tinatanggap at sumasang-ayon ka sa mga pagbabago.) </em></p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn" style="background-color: #AA0F0A; color:white" data-bs-dismiss="modal">Done</button>
-        </div>
-      </div>
     </div>
-  </div>
     @foreach($user_info as $user)
 
     <style>
@@ -343,20 +343,20 @@
                         </div>
                     </div>
                     <div class="shadow p-3 mb-3 bg-body rounded">
-                    <p class="fs-4 fw-semibold text-center">ID INFORMATION</p>
-                    <hr>
-                    <div class="row my-3 text-center">
-                        <div class="col-md-4 mb-2 img-container">
-                            <img src="{{url('residentID/'.$request->validID_front)}}" class="img-fluid" alt="Front ID">
-                        </div>
-                        <div class="col-md-4 mb-2 img-container">
-                            <img src="{{url('residentID/'.$request->validID_back)}}" class="img-fluid" alt="Back ID">
-                        </div>
-                        <div class="col-md-4 mb-2 img-container">
-                            <img src="{{url('residentID/'.$request->face)}}" class="img-fluid" alt="Face Photo">
+                        <p class="fs-4 fw-semibold text-center">ID INFORMATION</p>
+                        <hr>
+                        <div class="row my-3 text-center">
+                            <div class="col-md-4 mb-2 img-container">
+                                <img src="{{url('residentID/'.$request->validID_front)}}" class="img-fluid" alt="Front ID">
+                            </div>
+                            <div class="col-md-4 mb-2 img-container">
+                                <img src="{{url('residentID/'.$request->validID_back)}}" class="img-fluid" alt="Back ID">
+                            </div>
+                            <div class="col-md-4 mb-2 img-container">
+                                <img src="{{url('residentID/'.$request->face)}}" class="img-fluid" alt="Face Photo">
+                            </div>
                         </div>
                     </div>
-                </div>
                     @if($request->request_type_id != 5)
                     <div class="shadow p-3 mb-3 bg-body rounded ">
                         <p class="fs-4 fw-semibold text-center">OTHER INFORMATION</p>
@@ -441,7 +441,7 @@
                     </div>
                     @endif
                     <div class="shadow p-4 mb-3 bg-body rounded text-center">
-                        <a href="/transactionhistory" id="btn" type="submit" style="background-color:#AA0F0A; color: white;" class="btn d-block mx-auto w-25">DONE</a>
+                        <a href="/paymongo/{{$request->reference_key}}" id="btn " type="submit" style="" class="btn d-block mx-auto w-25 btn-success">PROCEED TO PAYMENT</a>
                     </div>
                 </div>
             </div>

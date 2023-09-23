@@ -175,12 +175,20 @@
                         <p class="fs-6  mb-0">Valid ID Number: </p><strong>{{strtoupper($request->validID_num)}}</strong>
                     </div>
                 </div>
+            </div>
+            <div class="shadow p-3 mb-3 bg-body rounded ">
+
+                <p class="fs-4 fw-semibold text-center">ID INFORMATION</p>
+                <hr>
                 <div class="row my-3 text-center">
-                    <div class="col-md-6 mb-2">
-                        <p class="fs-6  mb-2">Font Id: </p><img width="400" height="200" src="{{url('residentID/'.$request->validID_front)}}" class="img-fluid" alt="...">
+                    <div class="col-md-4 mb-2 img-container">
+                        <img src="{{url('residentID/'.$request->validID_front)}}" class="img-fluid" alt="Front ID">
                     </div>
-                    <div class="col-md-6 mb-2">
-                        <p class="fs-6  mb-2">Back Id: </p> <img width="400" height="200" src="{{url('residentID/'.$request->validID_back)}}" class="img-fluid" alt="...">
+                    <div class="col-md-4 mb-2 img-container">
+                        <img src="{{url('residentID/'.$request->validID_back)}}" class="img-fluid" alt="Back ID">
+                    </div>
+                    <div class="col-md-4 mb-2 img-container">
+                        <img src="{{url('residentID/'.$request->face)}}" class="img-fluid" alt="Face Photo">
                     </div>
                 </div>
             </div>

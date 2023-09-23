@@ -414,18 +414,21 @@ class mainController extends Controller
 
     public function modifyEmail(Request $request)
     {
+
+
         $data = $request->all();
         $id = strtolower($data['user_id']);
         $new_email = strtolower($data["email"]);
         $userInfo =  User::where('id',  $id)->first();
         $exist =  User::where('email',  $new_email)->count();
 
-        if ($exist > 1) {
+
+        if ($exist >= 1) {
             Alert::error('EMAIL UNSUCCESSFULLY UPDATED', 'Email already registred from different account')->showConfirmButton('Confirm', '#AA0F0A');
             return redirect()->route('userDashboard_Profile');
         }
         if ($new_email == $userInfo->email) {
-            Alert::error('EMAIL UNSUCCESSFULLY UPDATED', 'You entered your old email')->showConfirmButton('Confirm', '#AA0F0A');
+            Alert::error('EMAIL UNSUCCESSFULLY UPDATED', 'Please enter a new email')->showConfirmButton('Confirm', '#AA0F0A');
             return redirect()->route('userDashboard_Profile');
         } else {
             User::where('id',  $id)->first()->update(['email' => $new_email]);
@@ -475,9 +478,9 @@ class mainController extends Controller
 
     public function updateID(Request $request)
     {
-      
-     
-        
+
+
+
         $user_auth = Auth::user();
 
 
@@ -491,7 +494,7 @@ class mainController extends Controller
         $full_name = $user_auth->first_name . " " . $user_auth->middle_name . " " . $user_auth->last_name;
 
 
-     
+
 
 
         if (isset($result['error']['message'])) {
@@ -524,7 +527,7 @@ class mainController extends Controller
 
         //check if the ID NUMBER from the ID is same with the name of the resident
         if ($result['result']['documentNumber'] == $user_auth->validID_num) {
-            
+
             $data = [
                 'error' => true,
                 'message' => "Please upload a new ID",
@@ -630,6 +633,99 @@ class mainController extends Controller
         return view("transactionHistory", ['user_info' => $user_info, 'transaction' => $transactions, 'concern' => $concern]);
     }
 
+    public function paymentList()
+    {
+
+        $user_auth = Auth::user();
+        $user_info = DB::table('users')->where('id', $user_auth->id)->get();
+
+        if (Auth::user()->role != 'resident') {
+            Alert::error('UNAUTHORIZED ACCOUNT', '')->showConfirmButton('Confirm', '#AA0F0A');
+            return redirect()->route('userDashboard');
+        }
+        $transactions = Requests::join('users', 'users.id', '=', 'requests.resident_id')
+            ->join('request_type', 'request_type.request_type_id', '=', 'requests.request_type_id')->select('users.*', 'requests.*', 'request_type.*', 'requests.created_at as request_date')->where('id', $user_auth->id)->where('request_status', "READY FOR PAYMENT")->get();
+
+
+        return view("paymentList", ['user_info' => $user_info, 'transaction' => $transactions]);
+    }
+
+
+    public function payment_request($id)
+    {
+        $user_auth = Auth::user();
+        $user_info = DB::table('users')->where('id', $user_auth->id)->get();
+        $request = Requests::join('users', 'users.id', '=', 'requests.resident_id')
+            ->join('request_type', 'request_type.request_type_id', '=', 'requests.request_type_id')->select('users.*', 'requests.*', 'request_type.*', 'requests.created_at as request_date')->where('reference_key', $id)->get($id);
+
+        return view("viewRFP", ['user_info' => $user_info, 'request' => $request]);
+    }
+
+
+    public function paymongo($id)
+    {
+
+
+        $request = Requests::join('users', 'users.id', '=', 'requests.resident_id')
+            ->join('request_type', 'request_type.request_type_id', '=', 'requests.request_type_id')
+            ->select('users.*', 'requests.*', 'request_type.*', 'requests.created_at as request_date')
+            ->where('reference_key', $id)->get()
+            ->first();
+
+
+       
+            $fullname = $request->first_name . ' ' . $request->middle_name .' ' . $request->last_name;
+        $client = new \GuzzleHttp\Client();
+
+        $response = $client->request('POST', 'https://api.paymongo.com/v1/checkout_sessions', [
+            'body' => '{
+        "data": {
+            "attributes": {
+                "billing":{
+                    "name":"' . $fullname . '",
+                    "email":"' . $request->email . '",
+                    "phone":"' . $request->mobile_num . '"},
+                "send_email_receipt": true,
+                "show_description": true,
+                "show_line_items": true,
+                "description": "Barangay South Signal Village Online Request (including the 2.5% service charge)",
+                "line_items": [
+                    {
+                        "currency": "PHP",
+                        "amount":'. intval(($request->price * 0.025 + $request->price)*100)  .',
+                        "name": "' . str_replace("\r\n", " ", $request->request_type_name) ."(" . $request->request_description. ')",
+                        "quantity": 1,
+                        "description": "'.$request->request_description .'"
+                    }
+                ],
+                "reference_number": "' . $request->reference_key . '",
+                "payment_method_types": ["gcash", "grab_pay", "paymaya"],
+                "success_url": "' . ENV('APP_URL'). '/paymongo_success",
+                "cancel_url":"' . ENV('APP_URL'). '/payment"
+                
+            }
+        }
+    }',
+            'headers' => [
+                'Content-Type' => 'application/json',
+                'accept' => 'application/json',
+                'authorization' => 'Basic c2tfdGVzdF91RmF5VmQ0OW1RYU5jRG9FZEVyWU12aWY6',
+            ],
+        ]);
+
+        $responseData = json_decode($response->getBody(), true);        
+        // Access the 'checkout_url' attribute        
+        $checkoutUrl = $responseData['data']['attributes']['checkout_url'];
+
+        return redirect($checkoutUrl);
+    }
+
+
+    public function paymongo_success(){
+
+
+        dd('success');
+    }
 
 
     public function request_barangay_cedula()

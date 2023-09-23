@@ -3,7 +3,7 @@
 @foreach($admin_info as $admin)
 
 <head>
-<meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -32,6 +32,22 @@
         setInterval(clock, 1000);
     </script>
     <style>
+        .img-container {
+            height: 350px;
+            /* Set the fixed height for the image container */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .img-container img {
+            object-fit: cover;
+            /* Maintain aspect ratio and cover the container */
+            width: 100%;
+            height: 100%;
+        }
+
         .btn-primary1 {
             color: #fff;
             background-color: #720602;

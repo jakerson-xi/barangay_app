@@ -120,6 +120,11 @@
                 </svg> Track Requests/Track Concerns</a>
             </button>
           </li>
+          <li class="nav-item">
+            <button style="width: 100%; text-align: left;" class="btn" type="submit" onclick="" value="" data-bs-dismiss="offcanvas" aria-label="Close">
+              <a class="nav-link" href="payment"><i style="font-size: 20px;"  class="bi bi-cash"></i> Payment</a>
+            </button>
+          </li>
           <hr>
           <li class="nav-item">
             <button style="width: 100%; text-align: left;" type="button" class="btn" data-bs-toggle="modal" data-bs-target="#dataPrivacy">

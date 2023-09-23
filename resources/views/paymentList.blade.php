@@ -389,90 +389,42 @@
             <div class="row gx-5">
                 <div class="col">
                     <div class="p-4 bg-light border mb-3 bg-body rounded shadow border border-dark">
-                        <div class="accordion accordion-flush" id="requestAccordion">
-                            <div class="accordion-item">
-                                <h2 class="accordion-header" id="flush-headingOneRequest">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                                        <h3><i class="bi bi-folder2-open"></i> Request Transaction History</h3>
-                                    </button>
-                                </h2>
-                                <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOneRequest" data-bs-parent="#requestAccordion">
-                                    <div class="accordion-body">
-                                        <div class="table-responsive">
-                                            <table id="transaction" class="table table-bordered table-hover " style="width:100%">
-                                                <thead class="" style="background-color: #AA0F0A; color:white">
-                                                    <tr>
-                                                        <th class="text-center">Ref. Key</th>
-                                                        <th class="text-center">TYPE OF REQUEST</th>
-                                                        <th class="text-center">DATE & TIME</th>
-                                                        <th class="text-center">STATUS</th>
-                                                        <th class="text-center">Action:</th>
-                                                        <th class="text-center" style="display: none;">no.</th>
 
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    @forEach($transaction as $trans)
+                        <h3 class="">Ready for Payment</h3>
+                        <hr>
+                        <div class="table-responsive">
+                            <table id="transaction" class="table table-bordered table-hover " style="width:100%">
+                                <thead class="" style="background-color: #AA0F0A; color:white">
+                                    <tr>
+                                        <th class="text-center">Ref. Key</th>
+                                        <th class="text-center">TYPE OF REQUEST</th>
+                                        <th class="text-center">DATE & TIME</th>
+                                        <th class="text-center">EXPIRATION</th>
+                                        <th class="text-center">Action:</th>
 
-                                                    <tr>
-                                                        <td style="text-transform: uppercase;">{{$trans->reference_key}}</td>
-                                                        <td style="text-transform: uppercase; ">{{$trans->request_type_name. " (". $trans->request_description.")"}}</td>
-                                                        <td style="text-transform: uppercase; ">{{$trans->request_date}}</td>
-                                                        <td class="text-center" style="text-transform: uppercase; ">
-                                                            @if($trans->request_status == 'PENDING')
-                                                            <div class="badge bg-warning text-wrap" style="width: 6rem;">
-                                                                PENDING
-                                                            </div>
-                                                            @endif
-                                                            @if($trans->request_status == 'DENIED')
-                                                            <div class="badge bg-danger text-wrap" style="width: 6rem;">
-                                                                DENIED
-                                                            </div>
-                                                            @endif
-                                                            @if($trans->request_status == 'READY FOR PAYMENT')
-                                                            <div class="badge bg-SUCCESS text-wrap" style="width: 6rem;">
-                                                                READY FOR PAYMENT
-                                                            </div>
-                                                            @endif
-                                                            @if($trans->request_status == 'DONE')
-                                                            <div class="badge bg-PRIMARY text-wrap" style="width: 6rem;">
-                                                                DONE
-                                                            </div>
-                                                            @endif
-                                                            @if($trans->request_status == 'PROCESSING')
-                                                            <div class="badge bg-info text-wrap" style="width: 6rem;">
-                                                                PROCESSING
-                                                            </div>
-                                                            @endif
-                                                        </td>
-                                                        <td class="text-center">
-                                                            <a href="viewRequestdoc/{{$trans->reference_key}}" type="button" class="btn btn-dark"><i class="bi bi-eye-fill"></i> View</a>
-                                                        </td>
-                                                        <td style="display: none;">
-                                                            @if($trans->request_status == 'PENDING')
-                                                            1
-                                                            @endif
-                                                            @if($trans->request_status == 'DENIED')
-                                                            5
-                                                            @endif
-                                                            @if($trans->request_status == 'READY FOR PAYMENT')
-                                                            3
-                                                            @endif
-                                                            @if($trans->request_status == 'DONE')
-                                                            4
-                                                            @endif
-                                                            @if($trans->request_status == 'PROCESSING')
-                                                            2
-                                                            @endif
-                                                        </td>
-                                                    </tr>
-                                                    @endforeach
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @forEach($transaction as $trans)
+
+                                    <tr>
+                                        <td style="text-transform: uppercase;">{{$trans->reference_key}}</td>
+                                        <td style="text-transform: uppercase; ">{{$trans->request_type_name. " (". $trans->request_description.")"}}</td>
+                                        <td style="text-transform: uppercase; ">{{$trans->request_date}}</td>
+
+                                        <!-- <td class="text-center" style="text-transform: uppercase; ">
+                                            <div class="badge bg-SUCCESS text-wrap" style="width: 6rem;">
+                                                READY FOR PAYMENT
+                                            </div>
+                                        </td> -->
+                                        <td style="text-transform: uppercase; ">{{$trans->expiration}}</td>
+                                        <td class="text-center">
+                                            <a href="payment_request/{{$trans->reference_key}}" type="button" class="btn btn-dark"><i class="bi bi-cash-stack"></i> Process Payment</a>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
                         </div>
                     </div>
 
@@ -480,101 +432,6 @@
 
             </div>
 
-        </div>
-
-        <!-- CONCERN -->
-        <div class="container overflow-hidden mt-3">
-            <div class="row gx-5">
-                <div class="col">
-                    <div class="p-4 bg-light border mb-3 bg-body rounded shadow border border-dark">
-                        <div class="accordion accordion-flush" id="accordionFlushExample">
-                            <div class="accordion-item">
-                                <h2 class="accordion-header" id="flush-headingOne">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseOne">
-                                        <h3><i class="bi bi-question-octagon"></i> Concern History</h3>
-                                    </button>
-                                </h2>
-                                <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-                                    <div class="accordion-body">
-                                        <table id="concern" class="table table-bordered table-hover " style="width:100%">
-                                            <thead class="" style="background-color: #AA0F0A; color:white">
-                                                <tr>
-                                                    <th class="text-center">Ref. Key</th>
-                                                    <th class="text-center">TYPE OF CONCERN</th>
-                                                    <th class="text-center">CONCERN TITLE</th>
-                                                    <th class="text-center">DATE & TIME</th>
-                                                    <th class="text-center">STATUS</th>
-                                                    <th class="text-center">Action:</th>
-                                                    <th class="text-center" style="display: none;">no.</th>
-
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @forEach($concern as $concern)
-
-                                                <tr>
-                                                    <td style="text-transform: uppercase;">{{$concern->reference_key}}</td>
-                                                    <td style="text-transform: uppercase; ">{{$concern->concern_type}}</td>
-                                                    <td style="text-transform: uppercase; ">{{$concern->concern_title}}</td>
-                                                    <td style="text-transform: uppercase; ">{{$concern->concern_created_at}}</td>
-                                                    <td class="text-center" style="text-transform: uppercase; ">
-                                                        @if($concern->concern_status == 'PENDING')
-                                                        <div class="badge bg-warning text-wrap" style="width: 6rem;">
-                                                            PENDING
-                                                        </div>
-                                                        @endif
-                                                        @if($concern->concern_status == 'DENIED')
-                                                        <div class="badge bg-danger text-wrap" style="width: 6rem;">
-                                                            DENIED
-                                                        </div>
-                                                        @endif
-                                                        @if($concern->concern_status == 'READY FOR PAYMENT')
-                                                        <div class="badge bg-SUCCESS text-wrap" style="width: 6rem;">
-                                                            READY FOR PAYMENT
-                                                        </div>
-                                                        @endif
-                                                        @if($concern->concern_status == 'DONE')
-                                                        <div class="badge bg-PRIMARY text-wrap" style="width: 6rem;">
-                                                            DONE
-                                                        </div>
-                                                        @endif
-                                                        @if($concern->concern_status == 'PROCESSING')
-                                                        <div class="badge bg-info text-wrap" style="width: 6rem;">
-                                                            PROCESSING
-                                                        </div>
-                                                        @endif
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <a href="viewConcernuser/{{$concern->reference_key}}" type="button" class="btn btn-dark"><i class="bi bi-eye-fill"></i> View</a>
-                                                    </td>
-                                                    <td style="display: none;">
-                                                        @if($concern->concern_status == 'PENDING')
-                                                        1
-                                                        @endif
-                                                        @if($concern->concern_status == 'DENIED')
-                                                        5
-                                                        @endif
-                                                        @if($concern->concern_status == 'READY FOR PAYMENT')
-                                                        3
-                                                        @endif
-                                                        @if($concern->concern_status == 'DONE')
-                                                        4
-                                                        @endif
-                                                        @if($concern->concern_status == 'PROCESSING')
-                                                        2
-                                                        @endif
-                                                    </td>
-                                                </tr>
-                                                @endforeach
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
 
         @endforeach
@@ -590,7 +447,7 @@
                 },
                 responsive: true,
                 order: [
-                    [5, 'asc']
+                    [2, 'asc']
                 ]
             });
         });
