@@ -186,7 +186,7 @@
                     @foreach($web_info as $demo)
                     @if($demo->id >= 11 && $demo->id <=17) <div class="row mb-2 mx-1">
                         <label for="exampleFormControlInput1" class="form-label"><strong>{{$demo->type}}</strong></label>
-                        <input name="dem_{{$demo->id}}" type="number" class="form-control mb-2" id="exampleFormControlInput1" value="{{$demo->content}}">
+                        <input name="dem_{{$demo->id}}" type="number" class="form-control mb-2" id="exampleFormControlInput1" value="{{$demo->content}}" required>
                 </div>
                 @endif
                 @endforeach
@@ -210,14 +210,14 @@
         <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered ">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel"><i class="bi bi-pass"></i> Update Demography</h1>
+                    <h1 class="modal-title fs-5" id="exampleModalLabel"><i class="bi bi-pass"></i> Update Contact</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     @foreach($web_info as $demo)
                     @if($demo->id >= 18 && $demo->id <=25) <div class="row mb-2 mx-1">
                         <label for="exampleFormControlInput1" class="form-label"><strong>{{$demo->type}}</strong></label>
-                        <input name="con_{{$demo->id}}" type="number" class="form-control mb-2" id="exampleFormControlInput1" value="{{$demo->content}}">
+                        <input name="con_{{$demo->id}}" type="number" class="form-control mb-2" id="exampleFormControlInput1" value="{{$demo->content}}" required>
                 </div>
                 @endif
                 @endforeach

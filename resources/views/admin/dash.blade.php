@@ -52,7 +52,7 @@
         <i class="bi bi-back"></i> Report
         </button>
         <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="/admin/dashboard">Services Report</a></li>
+            <li><a class="dropdown-item" href="/dashboard">Services Report</a></li>
             <li><a class="dropdown-item" href="/dashboard-resident">Resident Report</a></li>
             <li><a class="dropdown-item" href="/dashboard-employee">Employee Report</a></li>
         </ul>
