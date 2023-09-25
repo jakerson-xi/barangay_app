@@ -19,7 +19,49 @@
   <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
   <link href="{{asset('css/userDashboard.css')}}" rel="stylesheet">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+    .groupBoxHeader {
+      padding: 0.2em 0.5em;
+      border: 1px solid rgb(255, 255, 255);
+      font-size: 100%;
+      text-align: center;
+      width: auto;
+      border-radius: 6px;
+      background-color: rgba(192, 1, 1, 0.932);
+      color: white;
+      font-weight: bold;
+      margin-top: 5%;
+      margin-bottom: 5%;
 
+    }
+
+    .custom-modal .nav-tabs .nav-link {
+      background-color: rgba(191, 190, 190, 0);
+      /* Change to your desired background color */
+      border-color: rgba(191, 190, 190, 0);
+      color: black;
+      /* Change to your desired text color */
+    }
+
+    .custom-modal .nav-tabs .nav-link.active {
+      background-color: rgba(192, 1, 1, 0.932);
+      border-color: rgba(192, 1, 1, 0.932);
+      /* Change to your desired background color */
+      /* Change to your desired text color */
+      color: white;
+    }
+
+    .custom-modal .nav-link:hover {
+      background-color: rgba(192, 1, 1, 0.932);
+      border-color: rgba(192, 1, 1, 0.932);
+      color: white;
+    }
+
+    .custom-modal p {
+      text-align: justify;
+      margin: 2px;
+    }
+  </style>
 </head>
 
 
@@ -122,7 +164,7 @@
           </li>
           <li class="nav-item">
             <button style="width: 100%; text-align: left;" class="btn" type="submit" onclick="" value="" data-bs-dismiss="offcanvas" aria-label="Close">
-              <a class="nav-link" href="payment"><i style="font-size: 20px;"  class="bi bi-cash"></i> Payment</a>
+              <a class="nav-link" href="payment"><i style="font-size: 20px;" class="bi bi-cash"></i> Payment</a>
             </button>
           </li>
           <hr>
@@ -163,87 +205,389 @@
 
 
   <!--DATA POLICY-->
-  <div class="modal fade" id="dataPrivacy" tabindex="-1" aria-labelledby="dataPrivacyLabel" aria-hidden="true">
+  <div class="modal " id="dataPrivacy" tabindex="-1" aria-labelledby="dataPrivacyLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable">
-      <div class="modal-content">
+      <div class="modal-content custom-modal">
         <div class="modal-header">
-          <h5 style="text-align: center;" class="modal-title" id="exampleModalLabel">Draft Policy on Open Data for the Barangay South Signal Village</h5>
+          <h5 class="modal-title" id="termsConditionsLabel" style="text-align: center;">Privacy Policy of
+            Barangay South Signal Village </h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body">
-          <div class="text-center mb-2">
+        <div class="modal-body " style="width: auto;">
+          <div class="text-center">
             <img src="{{asset('assets/imgs/southsignal.png')}}" alt="logo" width="100">
           </div>
-          <p>At Barangay South Signal Village, we recognize the importance of protecting your personal data and privacy. We are committed to maintaining the confidentiality and limiting any disclosure of your information in accordance with local laws. This Privacy Policy outlines how we collect, use, share, and protect your personal information when you use our web app.</h3>
-          <h5>Your Rights and Preferences</h5>
-          <p>As an individual, you have certain rights under applicable law with regard to your personal data. These include:</p>
-          <ul>
-            <li>Right of Access - the right to request access to your personal data and be informed about the processing of your personal data;</li>
-            <li>Right to Erasure - the right to request the deletion of your personal data;</li>
-            <li>Right to Restrict Processing - the right to request the restriction of processing of your personal data;</li>
-            <li>Right to Object - the right to object to the processing of your personal data;</li>
-            <li>Right to Data Portability - the right to receive your personal data in a structured, commonly used, and machine-readable format.</li>
-          </ul>
-
-          <h5>How we Collect your Personal Data</h5>
-          <p>We collect your personal data in the following ways:</p>
-          <p> These are the following data needed upon registering, with the corresponding purpose:</p>
-          <ul>
-            <li>Full Name – to properly identify the right person when conducting the registration.</li>
-            <li>Suffix – to know if person have any suffix in their name.</li>
-            <li>Gender – to classify the person based on their sexuality on birth.</li>
-            <li>Civil Status – to describe a person’s relationship with a significant other.</li>
-            <li>Nationality – legal identification of a person in international law and distinguished from citizenship.</li>
-            <li>Birthdate – used for proper identification and in case multiple persons have the same name.</li>
-            <li>Age – to determine the age of the person.</li>
-            <li>Place of Birth – to know where the person was born in.</li>
-            <li>Address – to determine the exact location of the person by the authorities.</li>
-            <li>Valid ID – to validate all the information set by the user.</li>
-            <li>ID Number – to ensure that no two people within the system share the same number.</li>
-            <li>Email – for the system to have an option to have different identification aside from mobile number.</li>
-            <li>Mobile Number – used for unique identification in the system and for the user to be contacted if needed by the barangay officials.</li>
-          </ul>
-
-          <h5>What do we use your Personal Data for?</h5>
-          <p>We use your personal data to provide and improve our services to you. This includes:</p>
-          <ul>
-            <li>To communicate with you about our services and provide customer support.</li>
-            <li>To process transactions to our services.</li>
-            <li>To improve our services and develop new features.</li>
-            <li>To comply with legal obligations.</li>
-          </ul>
-
-          <h5>Sharing your Personal Data</h5>
-          <p>We do not sell, rent, or lease your personal information to third parties without your consent. We may share your personal data with third-party service providers who help us operate our web app or provide services to you. These service providers are required to maintain the confidentiality and security of your personal data. </p>
-          <p>We may also disclose your personal data if required by law, court order, or other legal processes or if we have a good faith belief that such disclosure is necessary to protect our rights or property or the safety of others. </p>
-          <h5>Data Retention and Deletion </h5>
-          <p>We keep your personal data only for as long as necessary to provide you with our services and for legitimate and essential business purposes, such as complying with legal obligations and resolving disputes. We will securely delete or anonymize your personal data when it is no longer needed for these purposes. </p>
-          <h5>Keeping your Data Safe </h5>
-          <p>We take appropriate technical and organizational measures to protect your personal data against unauthorized or unlawful processing, accidental loss, destruction, or damage. We also implement access controls, encryption, and retention policies to protect your personal data. </p>
+          <nav>
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+              <button class="nav-link active" id="nav-english-tab" data-bs-toggle="tab" data-bs-target="#nav-english" type="button" role="tab" aria-controls="nav-english" aria-selected="true">English</button>
+              <button class="nav-link" id="nav-tagalog-tab" data-bs-toggle="tab" data-bs-target="#nav-tagalog" type="button" role="tab" aria-controls="nav-tagalog" aria-selected="false">Tagalog</button>
+            </div>
+          </nav>
+          <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="nav-english" role="tabpanel" aria-labelledby="nav-english-tab" tabindex="0">
+              <h3 class="groupBoxHeader">Introduction</h3>
+              <div>
+                <p>At Barangay South Signal Village, we recognize the importance of protecting yourpersonal data and privacy. We are committed to maintaining the confidentiality and limiting any disclosure of your information in accordance with local laws. This Privacy Policy outlines how we collect, use, share, and protect your personal information when you use our web app.</p>
+              </div>
+              <hr style="background-color: #AA0F0A;">
+              <h3 class="groupBoxHeader">Your Rights and Preferences</h3>
+              <div>
+                <p>As an individual, you have certain rights under applicable law with regard to your
+                  personal data.
+                  These
+                  include:</p>
+                <ul>
+                  <li>Right of Access - the right to request access to your personal data and be
+                    informed about the
+                    processing
+                    of your personal data;</li>
+                  <li>Right to Erasure - the right to request the deletion of your personal data;</li>
+                  <li>Right to Restrict Processing - the right to request the restriction of
+                    processing of your personal
+                    data;
+                  </li>
+                  <li>Right to Object - the right to object to the processing of your personal data;
+                  </li>
+                  <li>Right to Data Portability - the right to receive your personal data in a
+                    structured, commonly
+                    used, and
+                    machine-readable format.</li>
+                </ul>
+              </div>
+              <hr style="background-color: #AA0F0A;">
+              <h3 class="groupBoxHeader">How we Collect your Personal Data</h3>
+              <div>
+                <p>We collect your personal data in the following ways:</p>
+                <p> These are the following data needed upon registering, with the corresponding
+                  purpose:</p>
+                <ul>
+                  <li>Full Name – to properly identify the right person when conducting the
+                    registration.</li>
+                  <li>Suffix – to know if person have any suffix in their name.</li>
+                  <li>Gender – to classify the person based on their sexuality on birth.</li>
+                  <li>Civil Status – to describe a person’s relationship with a significant other.
+                  </li>
+                  <li>Nationality – legal identification of a person in international law and
+                    distinguished from
+                    citizenship.
+                  </li>
+                  <li>Birthdate – used for proper identification and in case multiple persons have the
+                    same name.</li>
+                  <li>Age – to determine the age of the person.</li>
+                  <li>Place of Birth – to know where the person was born in.</li>
+                  <li>Address – to determine the exact location of the person by the authorities.</li>
+                  <li>Valid ID – to validate all the information set by the user.</li>
+                  <li>ID Number – to ensure that no two people within the system share the same
+                    number.</li>
+                  <li>Email – for the system to have an option to have different identification aside
+                    from mobile
+                    number.</li>
+                  <li>Mobile Number – used for unique identification in the system and for the user to
+                    be contacted if
+                    needed
+                    by the barangay officials.</li>
+                </ul>
+              </div>
+              <hr style="background-color: white;">
+              <h3 class="groupBoxHeader">What do we use your Personal Data for?</h3>
+              <div>
+                <p>We use your personal data to provide and improve our services to you. This includes:
+                </p>
+                <ul>
+                  <li>To communicate with you about our services and provide customer support.</li>
+                  <li>To process transactions to our services.</li>
+                  <li>To improve our services and develop new features.</li>
+                  <li>To comply with legal obligations.</li>
+                </ul>
+              </div>
+              <hr style="background-color: white;">
+              <h3 class="groupBoxHeader">Sharing your Personal Data</h3>
+              <div>
+                <p>We do not sell, rent, or lease your personal information to third parties without
+                  your consent. We
+                  may share
+                  your personal data with third-party service providers who help us operate our web
+                  app or provide
+                  services to
+                  you. These service providers are required to maintain the confidentiality and
+                  security of your
+                  personal
+                  data. </p>
+                <p>We may also disclose your personal data if required by law, court order, or other
+                  legal processes or
+                  if we
+                  have a good faith belief that such disclosure is necessary to protect our rights or
+                  property or the
+                  safety
+                  of others. </p>
+              </div>
+              <hr style="background-color: white;">
+              <h3 class="groupBoxHeader">Data Retention and Deletion </h3>
+              <div>
+                <p>We keep your personal data only for as long as necessary to provide you with our
+                  services and for
+                  legitimate
+                  and essential business purposes, such as complying with legal obligations and
+                  resolving disputes. We
+                  will
+                  securely delete or anonymize your personal data when it is no longer needed for
+                  these purposes. </p>
+              </div>
+              <hr style="background-color: white;">
+              <h3 class="groupBoxHeader">Keeping your Data Safe </h3>
+              <div>
+                <p>We take appropriate technical and organizational measures to protect your personal
+                  data against
+                  unauthorized
+                  or unlawful processing, accidental loss, destruction, or damage. We also implement
+                  access controls,
+                  encryption, and retention policies to protect your personal data. </p>
+              </div>
+            </div>
+            <!--Nav Tab Tagalog-->
+            <div class="tab-pane fade" id="nav-tagalog" role="tabpanel" aria-labelledby="nav-tagalog-tab" tabindex="0">
+              <h3 class="groupBoxHeader">Panimula</h3>
+              <div>
+                <p>Sa Barangay South Signal Village, kami ay kumikilala sa kahalagahan ng pagprotekta sa
+                  iyong
+                  personal
+                  na
+                  datos at
+                  privacy. Kami ay mayroong pangako na panatilihing konpidensyal ang iyong impormasyon
+                  at limitahan
+                  ang
+                  anumang pagpapahayag ng iyong
+                  impormasyon ayon sa mga lokal na batas. Ang Polisiya ng Privacy na ito ay
+                  naglalayong ipakita kung
+                  paano
+                  namin kinokolekta, ginagamit, ini-share, at
+                  iniingatan ang iyong personal na impormasyon kapag ginagamit mo ang aming web app.
+                </p>
+              </div>
+              <hr style="background-color: white;">
+              <h3 class="groupBoxHeader">Ang Iyong Mga Karapatan at mga Nais</h3>
+              <div>
+                <p>Bilang isang indibidwal, mayroon kang mga karagdagang karapatan sa ilalim ng mga
+                  naaangkop na batas
+                  kaugnay
+                  ng iyong personal na datos. Ito ay kasama ang mga sumusunod:</p>
+                <ul>
+                  <li>Karapatan sa Pag-access - ang karapatan na humiling ng pag-access sa iyong
+                    personal na datos at
+                    maabisuhan tungkol sa pagproseso ng iyong personal na datos;</li>
+                  <li>Karapatan sa Pagbura - ang karapatan na humiling ng pagtanggal ng iyong personal
+                    na datos;
+                  </li>
+                  <li>Karapatan sa Pagpigil ng Paggamit - ang karapatan na humiling ng pagpigil sa
+                    paggamit ng iyong
+                    personal na datos;
+                  </li>
+                  <li>Karapatan sa Pagtutol - ang karapatan na tumutol sa pagproseso ng iyong personal
+                    na datos;</li>
+                  <li>Karapatan sa Portabilidad ng Datos - ang karapatan na matanggap ang iyong
+                    personal na datos sa
+                    isang
+                    makabuluhang, karaniwang ginagamit, at may kakayahang basahin ng makina na
+                    format.</li>
+                </ul>
+              </div>
+              <hr style="background-color: white;">
+              <h3 class="groupBoxHeader">Paano namin Kinokolekta ang Iyong Personal na Datos</h3>
+              <div>
+                <p>Kinokolekta namin ang iyong personal na datos sa mga sumusunod na paraan:</p>
+                <p> Ito ang mga sumusunod na mga datos na kinakailangan sa pagpaparehistro, kasama ang
+                  karampatang
+                  layunin
+                  nito:</p>
+                <ul>
+                  <li>Buong Pangalan – upang wastong kilalanin ang tamang tao sa pagpaparehistro.</li>
+                  <li>Suffix – upang malaman kung may salaysay ang pangalan ng isang tao.</li>
+                  <li>Kasarian – upang uriin ang isang tao batay sa kanilang kasarian noong sila ay
+                    ipinanganak.</li>
+                  <li>Katayuan Sibil – upang ilarawan ang relasyon ng isang tao sa kanilang kasintahan
+                    o kasama sa
+                    buhay
+                  </li>
+                  <li>Nasyonalidad – legal na pagkakakilanlan ng isang tao sa batas pang-internasyonal
+                    na iba sa
+                    pagkamamamayan.
+                  </li>
+                  <li>Petsa ng Kapanganakan – ginagamit para sa tamang pagkilala at sa mga
+                    pagkakataong maraming tao
+                    ang
+                    may parehong pangalan.</li>
+                  <li>Edad – upang malaman ang edad ng isang tao.</li>
+                  <li>Lugar ng Kapanganakan – upang malaman kung saan isinilang ang tao.</li>
+                  <li>Tirahan – upang matukoy ng mga awtoridad ang eksaktong lokasyon ng isang tao.
+                  </li>
+                  <li> Valid ID – upang tiyakin ang lahat ng impormasyon na ibinigay ng gumagamit.
+                  </li>
+                  <li>ID Number – upang tiyakin na walang dalawang tao sa loob ng sistema ang may
+                    parehong numero.
+                  </li>
+                  <li>Email – para sa sistema na magkaroon ng opsiyon na iba't-ibang paraan ng
+                    pagkakakilanlan bukod
+                    sa
+                    numero ng mobile.</li>
+                  <li>Mobile Number – ginagamit para sa pambihirang pagkakakilanlan sa sistema at
+                    upang makontak ang
+                    user
+                    kung kinakailangan ng mga opisyal ng barangay</li>
+                </ul>
+              </div>
+              <hr style="background-color: white;">
+              <h3 class="groupBoxHeader">Para sa Anong Layunin Namin Ginagamit ang Iyong Personal na
+                Datos?
+              </h3>
+              <div>
+                <p>Ginagamit namin ang iyong personal na datos upang magbigay at mapabuti ang aming mga
+                  serbisyo sa
+                  iyo.
+                  Ito ay kasama ang mga sumusunod:</p>
+                <ul>
+                  <li>Upang makipag-ugnayan sa iyo tungkol sa aming mga serbisyo at magbigay ng
+                    suporta sa mga
+                    customer.
+                  </li>
+                  <li>Upang ma-proseso ang mga transaksyon sa aming mga serbisyo..</li>
+                  <li>Upang mapabuti ang aming mga serbisyo at gumawa ng mga bagong feature.</li>
+                  <li>Upang sumunod sa mga legal na obligasyon.</li>
+                </ul>
+              </div>
+              <hr style="background-color: white;">
+              <h3 class="groupBoxHeader">Pagbabahagi ng Iyong Personal na Datos</h3>
+              <div>
+                <p>Hindi namin ibinebenta, inuupa, o inirerentahan ang iyong personal na impormasyon sa
+                  mga third
+                  parties
+                  nang walang iyong pahintulot. Maaring ibahagi namin ang iyong personal na datos sa
+                  mga
+                  third-party service provider na tumutulong sa amin sa pagpapatakbo ng aming web app
+                  o nagbibigay ng
+                  serbisyo sa iyo. Kinakailangang panatilihing konpidensyal at ligtas ng mga service
+                  provider na ito
+                  ang
+                  iyong personal na datos. </p>
+                <p>Maari rin naming ilantad ang iyong personal na datos kung kinakailangan ng batas,
+                  court order, o
+                  iba
+                  pang legal na proseso, o kung kami ay may matino at marerespetadong paniniwala na
+                  ang ganitong
+                  paglantad
+                  ay kinakailangan upang protektahan ang aming mga karapatan o ari-arian o ang
+                  kaligtasan ng iba. </p>
+              </div>
+              <hr style="background-color: white;">
+              <h3 class="groupBoxHeader">Pag-iingat at Pagtanggal ng Datos </h3>
+              <div>
+                <p>Ipinag-iingat namin ang iyong personal na datos hangga't kinakailangan lamang upang
+                  maipagkaloob
+                  ang
+                  aming mga serbisyo at para sa mga lehitimo at mahahalagang layunin ng negosyo, tulad
+                  ng pagsunod sa
+                  mga
+                  legal na obligasyon at pagresolba ng mga alituntunin. Secured naming tatanggalin o
+                  ipapa-anonimisa
+                  ang
+                  iyong personal na datos kapag hindi na ito kinakailangan para sa mga layuning ito.
+                </p>
+              </div>
+              <hr style="background-color: white;">
+              <h3 class="groupBoxHeader">Paagpapanatili ng Kaligtasan ng Inyong Datos </h3>
+              <div>
+                <p>Kami ay gumagamit ng angkop na mga teknikal at organisasyonal na hakbang upang
+                  protektahan ang
+                  inyong
+                  personal na datos laban sa hindi awtorisadong o labag sa batas na pagproseso,
+                  aksidental na
+                  pagkawala,
+                  pagkasira, o pinsala. Kami rin ay nagpapatupad ng mga kontrol sa pag-access,
+                  pag-e-encrypt, at mga
+                  patakaran sa retensyon upang protektahan ang inyong personal na datos </p>
+              </div>
+            </div>
+          </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn" style="background-color: #AA0F0A; color:white" data-bs-dismiss="modal">Done</button>
+          <button type="button" class="btn btn-secondary" style="background-color: #AA0F0A; color:white" data-bs-dismiss="modal">Accept</button>
+
         </div>
       </div>
     </div>
   </div>
   <!--TERMS AND CONDITION-->
-  <div class="modal fade" id="terms" tabindex="-1" aria-labelledby="termsLabel" aria-hidden="true">
+  <div class="modal" id="terms" tabindex="-1" aria-labelledby="termsLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable">
-      <div class="modal-content">
+      <div class="modal-content custom-modal">
         <div class="modal-header">
-          <h5 style="text-align: center;" class="modal-title" id="exampleModalLabel">Terms and Conditions for the Barangay South Signal Village</h5>
+          <h5 class="modal-title" id="termsLabel" style="text-align: center">
+            Terms & Conditions of Barangay South Signal Village
+          </h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body">
-          <div class="text-center mb-2">
+        <div class="modal-body" style="width: auto">
+          <div class="text-center">
             <img src="{{asset('assets/imgs/southsignal.png')}}" alt="logo" width="100">
           </div>
-          <p>I hereby authorize the Barangay South Signal Village of Taguig City, to collect and process the data indicated herein for my personal information. I also understand that my personal information is protected by RA 10173 or Data Privacy Act of 2012. The Barangay South Signal Village reserves the right, at its sole discretion, to change, modify, add or remove portions of these Terms and Conditions, at any time. It is your responsibility to check these Terms and Conditions periodically for changes. Your continued use of the South Signal Village Web Application following the posting of changes will mean that you accept and agree to the changes. </p>
-          <p><em>(Pinahihintulutan ko ang Barangay South Signal Village ng Lungsod ng Taguig upang makolekta at iproseso and datos na ipinahihiwatig dito para sa aking personal na impormasyon. Naiintindihan ko na ang aking personal na impormasyon ay protektado ng RA 10173 o Data Privacy Act of 2012. Ang Barangay South Signal Village ay may karapatan, sa kanilang tanging pagpapasya, na baguhin, magdagdag o magtanggal ng bahagi ng mga Kondisyon at Tuntunin na ito, anumang oras. Ito ay iyong pananagutan na paulit-ulit na suriin ang mga Kondisyon at Tuntunin na ito para sa mga pagbabago. Ang patuloy mong paggamit ng South Signal Village Web Application matapos maipaskil ang mga pagbabago ay nangangahulugan na tinatanggap at sumasang-ayon ka sa mga pagbabago.) </em></p>
+          <nav>
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+              <button class="nav-link active" id="nav-english-tab" data-bs-toggle="tab" data-bs-target="#nav-english" type="button" role="tab" aria-controls="nav-english" aria-selected="true">
+                English
+              </button>
+              <button class="nav-link" id="nav-tagalog-tab" data-bs-toggle="tab" data-bs-target="#nav-tagalog" type="button" role="tab" aria-controls="nav-tagalog" aria-selected="false">
+                Tagalog
+              </button>
+            </div>
+          </nav>
+          <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="nav-english" role="tabpanel" aria-labelledby="nav-english-tab" tabindex="0">
+              <h3 class="groupBoxHeader">Introduction</h3>
+              <div>
+                <p class="m-2">
+                  I hereby authorize the Barangay South Signal Village of
+                  Taguig City, to collect and process the data indicated
+                  herein for my personal information. I also understand that
+                  my personal information is protected by RA 10173 or Data
+                  Privacy Act of 2012. The Barangay South Signal Village
+                  reserves the right, at its sole discretion, to change,
+                  modify, add or remove portions of these Terms and
+                  Conditions, at any time. It is your responsibility to check
+                  these Terms and Conditions periodically for changes. Your
+                  continued use of the South Signal Village Web Application
+                  following the posting of changes will mean that you accept
+                  and agree to the changes.
+                </p>
+              </div>
+            </div>
+            <!--Nav Tab Tagalog-->
+            <div class="tab-pane fade" id="nav-tagalog" role="tabpanel" aria-labelledby="nav-tagalog-tab" tabindex="0">
+              <h3 class="groupBoxHeader">Panimula</h3>
+              <div>
+                <p class="m-2">
+                  Pinahihintulutan ko ang Barangay South Signal Village ng
+                  Lungsod ng Taguig upang makolekta at iproseso and datos na
+                  ipinahihiwatig dito para sa aking personal na impormasyon.
+                  Naiintindihan ko na ang aking personal na impormasyon ay
+                  protektado ng RA 10173 o Data Privacy Act of 2012. Ang
+                  Barangay South Signal Village ay may karapatan, sa kanilang
+                  tanging pagpapasya, na baguhin, magdagdag o magtanggal ng
+                  bahagi ng mga Kondisyon at Tuntunin na ito, anumang oras.
+                  Ito ay iyong pananagutan na paulit-ulit na suriin ang mga
+                  Kondisyon at Tuntunin na ito para sa mga pagbabago. Ang
+                  patuloy mong paggamit ng South Signal Village Web
+                  Application matapos maipaskil ang mga pagbabago ay
+                  nangangahulugan na tinatanggap at sumasang-ayon ka sa mga
+                  pagbabago.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn" style="background-color: #AA0F0A; color:white" data-bs-dismiss="modal">Done</button>
+          <button style="background-color: #aa0f0a; color: white" type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Accept
+          </button>
+        
         </div>
       </div>
     </div>

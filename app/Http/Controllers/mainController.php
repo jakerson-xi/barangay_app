@@ -480,102 +480,111 @@ class mainController extends Controller
     {
 
 
+        try {
+            $user_auth = Auth::user();
 
-        $user_auth = Auth::user();
-
-
-        $coreapi = new CoreAPI(ENV('ID_ANALYZER'), "US");
-        $coreapi->enableAuthentication(true, '2');
-        $coreapi->verifyExpiry(true);
-        $coreapi->verifyDocumentNumber($user_auth->validID_num);
-        $coreapi->enableImageOutput(true, true, "url");
-        $result = $coreapi->scan($request->file('formFile'), $request->file('formFile_2'), $request->file('face'));
-
-        $full_name = $user_auth->first_name . " " . $user_auth->middle_name . " " . $user_auth->last_name;
+            $coreapi = new CoreAPI(ENV('ID_ANALYZER'), "US");
+            $coreapi->enableAuthentication(true, '2');
+            $coreapi->verifyExpiry(true);
+            $coreapi->verifyDocumentNumber($user_auth->validID_num);
+            $coreapi->enableImageOutput(true, true, "url");
+            $result = $coreapi->scan($request->file('formFile'), $request->file('formFile_2'), $request->file('face'));
 
 
+            $full_name = $user_auth->first_name . " " . $user_auth->middle_name . " " . $user_auth->last_name;
+
+
+            if (isset($result['error']['message'])) {
+                $data = [
+                    'error' => true,
+                    'message' => $result['error']['message'],
+                ];
+                return response()->json($data);
+            }
+            //check if the ID and the face is identical
+            if ($result['face']['confidence'] < 0.7) {
+
+                $data = [
+                    'error' => true,
+                    'message' => "Face photo is not recognized with your ID",
+                ];
+                return response()->json($data);
+            }
+
+
+            //check if the name from the ID is same with the name of the resident
+            if (levenshtein($result['result']['fullName'], $full_name) > 6) {
+
+                $data = [
+                    'error' => true,
+                    'message' => "Invalid name from your ID",
+                ];
+                return response()->json($data);
+            }
+
+            //check if the ID NUMBER from the ID is same with the name of the resident
+            if ($result['result']['documentNumber'] == $user_auth->validID_num) {
+
+                $data = [
+                    'error' => true,
+                    'message' => "Please upload a new ID",
+                ];
+                return response()->json($data);
+            }
 
 
 
-        if (isset($result['error']['message'])) {
+            $data = $request->all();
+            $id = strtolower($data['user_id']);
+
+            if ($request->file('formFile')) {
+                $file_front = $request->file('formFile');
+                $filename_front = $user_auth->id . '-' . $user_auth->first_name . '-' . $user_auth->last_name . '-' . date("Y-m-d-H-i-s") . '-frontPic.' . $file_front->getClientOriginalExtension();
+                $file_front->move(public_path('/residentID'), $filename_front);
+            }
+            if ($request->file('formFile_2')) {
+                $file_back = $request->file('formFile_2');
+                $filename_back = $user_auth->id . '-' . $user_auth->first_name . '-' . $user_auth->last_name . '-' . date("Y-m-d-H-i-s") . '-backPic.' . $file_back->getClientOriginalExtension();
+                $file_back->move(public_path('/residentID'), $filename_back);
+            }
+            if ($request->file('face')) {
+                $face = $request->file('face');
+                $filename_face = $user_auth->id . '-' . $user_auth->first_name . '-' . $user_auth->last_name . '-' . date("Y-m-d-H-i-s") . '-face.' . $face->getClientOriginalExtension();
+                $face->move(public_path('/residentID'), $filename_face);
+            }
+
+
+            $expired_date = null;
+
+            if (isset($result['result']['expiry'])) {
+                $expired_date = $result['result']['expiry'];
+            }
+
+            User::where('id',  $id)->first()->update([
+                "valiID_type" => $request->type_validID,
+                "validID_num" => $result['result']['documentNumber'],
+                "validID_front" => $filename_front,
+                "validID_back" => $filename_back,
+                "face" => $filename_face,
+                'expiry' =>  $expired_date
+            ]);
+
+
+
+
+            $data = [
+                'success' => true,
+                'message' => "You successfully updated your valid ID!",
+            ];
+
+            return response()->json($data);
+        } catch (\Throwable $th) {
             $data = [
                 'error' => true,
-                'message' => $result['error']['message'],
+                'message' => $th,
             ];
             return response()->json($data);
         }
-        //check if the ID and the face is identical
-        if ($result['face']['confidence'] < 0.7) {
-
-            $data = [
-                'error' => true,
-                'message' => "Face photo is not recognized with your ID",
-            ];
-            return response()->json($data);
-        }
-
-
-        //check if the name from the ID is same with the name of the resident
-        if (levenshtein($result['result']['fullName'], $full_name) > 6) {
-
-            $data = [
-                'error' => true,
-                'message' => "Invalid name from your ID",
-            ];
-            return response()->json($data);
-        }
-
-        //check if the ID NUMBER from the ID is same with the name of the resident
-        if ($result['result']['documentNumber'] == $user_auth->validID_num) {
-
-            $data = [
-                'error' => true,
-                'message' => "Please upload a new ID",
-            ];
-            return response()->json($data);
-        }
-
-
-
-        $data = $request->all();
-        $id = strtolower($data['user_id']);
-
-        if ($request->file('formFile')) {
-            $file_front = $request->file('formFile');
-            $filename_front = $user_auth->id . '-' . $user_auth->first_name . '-' . $user_auth->last_name . '-' . date("Y-m-d-H-i-s") . '-frontPic.' . $file_front->getClientOriginalExtension();
-            $file_front->move(public_path('/residentID'), $filename_front);
-        }
-        if ($request->file('formFile_2')) {
-            $file_back = $request->file('formFile_2');
-            $filename_back = $user_auth->id . '-' . $user_auth->first_name . '-' . $user_auth->last_name . '-' . date("Y-m-d-H-i-s") . '-backPic.' . $file_back->getClientOriginalExtension();
-            $file_back->move(public_path('/residentID'), $filename_back);
-        }
-        if ($request->file('face')) {
-            $face = $request->file('face');
-            $filename_face = $user_auth->id . '-' . $user_auth->first_name . '-' . $user_auth->last_name . '-' . date("Y-m-d-H-i-s") . '-face.' . $face->getClientOriginalExtension();
-            $face->move(public_path('/residentID'), $filename_face);
-        }
-
-
-
-
-        User::where('id',  $id)->first()->update([
-            "valiID_type" => $request->type_validID,
-            "validID_num" => $result['result']['documentNumber'],
-            "validID_front" => $filename_front,
-            "validID_back" => $filename_back,
-            "face" => $filename_face
-        ]);
-
-
-
-
-        $data = [
-            'success' => true,
-            'message' => "You successfully updated your valid ID!",
-        ];
-
-        return response()->json($data);
     }
 
 
@@ -673,8 +682,8 @@ class mainController extends Controller
             ->first();
 
 
-       
-            $fullname = $request->first_name . ' ' . $request->middle_name .' ' . $request->last_name;
+
+        $fullname = $request->first_name . ' ' . $request->middle_name . ' ' . $request->last_name;
         $client = new \GuzzleHttp\Client();
 
         $response = $client->request('POST', 'https://api.paymongo.com/v1/checkout_sessions', [
@@ -692,16 +701,16 @@ class mainController extends Controller
                 "line_items": [
                     {
                         "currency": "PHP",
-                        "amount":'. intval(($request->price * 0.025 + $request->price)*100)  .',
-                        "name": "' . str_replace("\r\n", " ", $request->request_type_name) ."(" . $request->request_description. ')",
+                        "amount":' . intval(($request->price * 0.025 + $request->price) * 100)  . ',
+                        "name": "' . str_replace("\r\n", " ", $request->request_type_name) . "(" . $request->request_description . ')",
                         "quantity": 1,
-                        "description": "'.$request->request_description .'"
+                        "description": "' . $request->request_description . '"
                     }
                 ],
                 "reference_number": "' . $request->reference_key . '",
                 "payment_method_types": ["gcash", "grab_pay", "paymaya"],
-                "success_url": "' . ENV('APP_URL'). '/paymongo_success",
-                "cancel_url":"' . ENV('APP_URL'). '/payment"
+                "success_url": "' . ENV('APP_URL') . '/paymongo_success",
+                "cancel_url":"' . ENV('APP_URL') . '/payment"
                 
             }
         }
@@ -713,7 +722,7 @@ class mainController extends Controller
             ],
         ]);
 
-        $responseData = json_decode($response->getBody(), true);        
+        $responseData = json_decode($response->getBody(), true);
         // Access the 'checkout_url' attribute        
         $checkoutUrl = $responseData['data']['attributes']['checkout_url'];
 
@@ -721,7 +730,8 @@ class mainController extends Controller
     }
 
 
-    public function paymongo_success(){
+    public function paymongo_success()
+    {
 
 
         dd('success');

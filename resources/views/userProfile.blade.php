@@ -116,31 +116,31 @@
 
     <fieldset class="groupBox p-4 bg-light border mb-2 bg-body rounded shadow border border-dark ">
       <legend class="goupBoxHeader">ID/Profile Information</legend>
-      <div class="col-md-12 row mb-2 text-center img-container">
+      <div class="col-md-12 row mb-2 text-center">
         <div class="form-group col-md-4 mb-2 ">
           <label class="mb-3"></label>
           <div class="input-group text-center ">
-            <img  src="{{url('residentID/'.$user->validID_front)}}" class="img-fluid m-3" alt="...">
+            <img src="{{url('residentID/'.$user->validID_front)}}" class="img-fluid m-3" alt="...">
           </div>
 
         </div>
-        <div class="form-group col-md-4 mb-2 img-container">
+        <div class="form-group col-md-4 mb-2 ">
           <label class="mb-3"></label>
           <div class="input-group text-center ">
-            <img  src="{{url('residentID/'.$user->validID_back)}}" class="img-fluid m-3" alt="...">
+            <img src="{{url('residentID/'.$user->validID_back)}}" class="img-fluid m-3" alt="...">
           </div>
 
         </div>
-        <div class="form-group col-md-4 mb-2 text-center img-container">
+        <div class="form-group col-md-4 mb-2 text-center">
           <label class="mb-3"></label>
           <div class="text-center ">
             <img src="{{url('residentID/'.$user->face)}}" class=" img-fluid mx-3 text-center" alt="...">
           </div>
         </div>
-        <div class="form-group text-center mt-3">
-          <button data-bs-toggle="modal" data-bs-target="#changeID" type="button" class="btn" style="width:30%; background-color: #AA0F0A; color: white;">
-            <i class="bi bi-person-vcard-fill"></i> Update ID</button>
-        </div>
+      </div>
+      <div class="form-group text-center mt-3">
+        <button data-bs-toggle="modal" data-bs-target="#changeID" type="button" class="btn" style="width:30%; background-color: #AA0F0A; color: white;">
+          <i class="bi bi-person-vcard-fill"></i> Update ID</button>
       </div>
     </fieldset>
 
@@ -351,7 +351,7 @@
                   <legend class="goupBoxHeader">Front ID</legend>
                   <div class="mb-5">
                     <label for="Image" class="form-label"></label>
-                    <input class="form-control" type="file" id="formFile" name="formFile" onchange="preview()" required>
+                    <input class="form-control" accept="image/*" type="file" id="formFile" name="formFile" onchange="preview()" required>
                     <div class="invalid-feedback">
                       Please attach your ID.
                     </div>
@@ -369,7 +369,7 @@
                   <legend class="goupBoxHeader">Back ID</legend>
                   <div class="mb-5">
                     <label for="Image" class="form-label"></label>
-                    <input class="form-control" type="file" id="formFile_2" name="formFile_2" onchange="preview_2()" required>
+                    <input accept="image/*" class="form-control" type="file" id="formFile_2" name="formFile_2" onchange="preview_2()" required>
                     <div class="invalid-feedback">
                       Please attach your ID.
                     </div>

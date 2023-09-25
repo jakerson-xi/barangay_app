@@ -363,76 +363,77 @@
                             <!-- <input style="text-transform: uppercase;" type="text" name="street" id="street" class="form-control notCapital" placeholder="Street" required> -->
                             <select class="form-select form-control" name="street" id="street" required>
                                 <option value="">Select...</option>
-                                <option value='A. Bonifacio'>A. Bonifacio</option>
-                                <option value='Abad'>Abad</option>
-                                <option value='Aguirre'>Aguirre</option>
+                                <option value='A. Bonifacio St.'>A. Bonifacio St.</option>
+                                <option value='Abad St.'>Abad St.</option>
+                                <option value='Aguirre St.'>Aguirre St.</option>
                                 <option value='Airforce Road'>Airforce Road</option>
                                 <option value='Airforce Road Extn.'>Airforce Road Extn.</option>
                                 <option value='Army Road'>Army Road</option>
-                                <option value='Atis '>Atis </option>
-                                <option value='Banaba'>Banaba</option>
+                                <option value='Atis St.'>Atis St.</option>
+                                <option value='Banaba St.'>Banaba St.</option>
                                 <option value='Bayanihan Road'>Bayanihan Road</option>
-                                <option value='Caliao'>Caliao</option>
-                                <option value='Camia'>Camia</option>
-                                <option value='Col. Ballecer'>Col. Ballecer</option>
+                                <option value='Caliao St.'>Caliao St.</option>
+                                <option value='Camia St.'>Camia St.</option>
                                 <option value='Col. Ballecer Extn.'>Col. Ballecer Extn.</option>
-                                <option value='Col. Gervacio'>Col. Gervacio</option>
-                                <option value='Convergence'>Convergence</option>
-                                <option value='Daisy'>Daisy</option>
-                                <option value='Directo'>Directo</option>
-                                <option value='E. Rodriguez'>E. Rodriguez</option>
-                                <option value='Espedilla'>Espedilla</option>
-                                <option value='Everlasting'>Everlasting</option>
-                                <option value='Friendship'>Friendship</option>
-                                <option value='Gen. Aguinaldo'>Gen. Aguinaldo</option>
-                                <option value='Gen. del Pilar'>Gen. del Pilar</option>
-                                <option value='Gen. Espino'>Gen. Espino</option>
-                                <option value='Gen. Luna'>Gen. Luna</option>
-                                <option value='Gen. Malvar'>Gen. Malvar</option>
-                                <option value='Gen. Mc Arthur'>Gen. Mc Arthur</option>
+                                <option value='Col. Ballecer St.'>Col. Ballecer St.</option>
+                                <option value='Col. Gervacio St.'>Col. Gervacio St.</option>
+                                <option value='Convergence St.'>Convergence St.</option>
+                                <option value='D. Palma St.'>D. Palma St.</option>
+                                <option value='Daisy St.'>Daisy St.</option>
+                                <option value='Directo St.'>Directo St.</option>
+                                <option value='E. Rodriguez St.'>E. Rodriguez St.</option>
+                                <option value='Espedilla St.'>Espedilla St.</option>
+                                <option value='Everlasting St.'>Everlasting St.</option>
+                                <option value='Famela St.'>Famela St.</option>
+                                <option value='Friendship St.'>Friendship St.</option>
+                                <option value='Gen. Aguinaldo St.'>Gen. Aguinaldo St.</option>
+                                <option value='Gen. del Pilar St.'>Gen. del Pilar St.</option>
+                                <option value='Gen. Espino St.'>Gen. Espino St.</option>
+                                <option value='Gen. Luna St.'>Gen. Luna St.</option>
+                                <option value='Gen. Malvar St.'>Gen. Malvar St.</option>
+                                <option value='Gen. Mc Arthur St.'>Gen. Mc Arthur St.</option>
                                 <option value='GHQ Road'>GHQ Road</option>
-                                <option value='Gumamela'>Gumamela</option>
-                                <option value='Hechanova'>Hechanova</option>
-                                <option value='Herbs'>Herbs</option>
-                                <option value='Ilang-Ilang'>Ilang-Ilang</option>
-                                <option value='J.P. Laurel '>J.P. Laurel </option>
-                                <option value='Jasmin'>Jasmin</option>
-                                <option value='Luzon'>Luzon</option>
-                                <option value='Manalili'>Manalili</option>
-                                <option value='Manggahan'>Manggahan</option>
+                                <option value='Gumamela St.'>Gumamela St.</option>
+                                <option value='Hechanova St.'>Hechanova St.</option>
+                                <option value='Herbs St.'>Herbs St.</option>
+                                <option value='Ilang-Ilang St.'>Ilang-Ilang St.</option>
+                                <option value='J.P. Laurel St.'>J.P. Laurel St.</option>
+                                <option value='Jasmin St.'>Jasmin St.</option>
+                                <option value='Luzon St.'>Luzon St.</option>
+                                <option value='M.L. Quezon St.'>M.L. Quezon St.</option>
+                                <option value='Manalili St.'>Manalili St.</option>
                                 <option value='Manggahan Extn.'>Manggahan Extn.</option>
-                                <option value='Martinez'>Martinez</option>
-                                <option value='Mayor Tanyag'>Mayor Tanyag</option>
-                                <option value='Napocor'>Napocor</option>
+                                <option value='Manggahan St.'>Manggahan St.</option>
+                                <option value='Martinez St.'>Martinez St.</option>
+                                <option value='Mayor Tanyag Ave.'>Mayor Tanyag Ave.</option>
                                 <option value='Navy Road'>Navy Road</option>
-                                <option value='Orchid'>Orchid</option>
-                                <option value='Palma'>Palma</option>
-                                <option value='Pamela'>Pamela</option>
-                                <option value='Pardiñas'>Pardiñas</option>
+                                <option value='Orchids St.'>Orchids St.</option>
+                                <option value='Pardiñas St.'>Pardiñas St.</option>
                                 <option value='PC Road'>PC Road</option>
                                 <option value='PNP Road'>PNP Road</option>
-                                <option value='Pres. Garcia'>Pres. Garcia</option>
-                                <option value='Pres. Laurel'>Pres. Laurel</option>
-                                <option value='Pres. M.L. Quezon'>Pres. M.L. Quezon</option>
-                                <option value='Pres. Macapagal'>Pres. Macapagal</option>
-                                <option value='Pres. Magsaysay'>Pres. Magsaysay</option>
-                                <option value='Pres. Magsaysay Extn.'>Pres. Magsaysay Extn.</option>
-                                <option value='Pres. Osmeña'>Pres. Osmeña</option>
-                                <option value='Pres. Quirino'>Pres. Quirino</option>
-                                <option value='Pres. Roxas'>Pres. Roxas</option>
+                                <option value='Preovidencia St.'>Preovidencia St.</option>
+                                <option value='Pres. Garcia St.'>Pres. Garcia St.</option>
+                                <option value='Pres. Laurel St.'>Pres. Laurel St.</option>
+                                <option value='Pres. Macapagal St.'>Pres. Macapagal St.</option>
+                                <option value='Pres. Magsaysay St.'>Pres. Magsaysay St.</option>
+                                <option value='Pres. Magsaysay St.'>Pres. Magsaysay St.</option>
+                                <option value='Pres. Osmeña St.'>Pres. Osmeña St.</option>
+                                <option value='Pres. Quirino St.'>Pres. Quirino St.</option>
+                                <option value='Pres. Roxas St.'>Pres. Roxas St.</option>
                                 <option value='Pres.Quirino Extn.'>Pres.Quirino Extn.</option>
                                 <option value='Providencia Ext.'>Providencia Ext.</option>
-                                <option value='Quintar'>Quintar</option>
-                                <option value='Ranger'>Ranger</option>
-                                <option value='Sto. Niño'>Sto. Niño</option>
-                                <option value='Visayas'>Visayas</option>
+                                <option value='Quintar St.'>Quintar St.</option>
+                                <option value='Ranger Rd.'>Ranger Rd.</option>
+                                <option value='Sto. Niño St.'>Sto. Niño St.</option>
+                                <option value='Visayas St.'>Visayas St.</option>
                             </select>
+
                         </div>
                     </div>
                     <div class="col-sm-6 mb-2">
                         <div class="form-group">
                             <label>Zone <span class="text-danger">*</span></label>
-                            <input style="text-transform: uppercase;" type="text" name="purok" id="purok" class="form-control notCapital" placeholder="Zone" required>
+                            <input style="text-transform: uppercase;" type="text" name="purok" id="purok" class="form-control notCapital" placeholder="Zone" required readonly>
                         </div>
                     </div>
                 </div>
@@ -720,6 +721,88 @@
 <script src="{{asset('js/registration.js')}}"></script>
 <script>
     $(document).ready(function() {
+
+
+        $(document).ready(function() {
+            // Define a mapping of streets to zones
+            var streetToZoneMap = {
+                "Hechanova St.": "Zone 4",
+                "Quintar St.": "Zone 4",
+                "Providencia Ext.": "Zone 4",
+                "Manggahan St.": "Zone 4",
+                "Manggahan Extn.": "Zone 4",
+                "Directo St.": "Zone 4",
+                "Ranger Rd.": "Zone 4",
+                "Pres. Magsaysay St.": "Zone 4",
+                "Preovidencia St.": "Zone 4",
+                "Martinez St.": "Zone 4",
+                "Aguirre St.": "Zone 4",
+                "Convergence St.": "Zone 4",
+                "Army Road": "Zone 4",
+                "Navy Road": "Zone 4",
+                "PNP Road": "Zone 4",
+                "PC Road": "Zone 4",
+                "Airforce Road": "Zone 4",
+                "Airforce Road Extn.": "Zone 4",
+                "Sto. Niño St.": "Zone 4",
+                "Col. Ballecer St.": "Zone 6",
+                "E. Rodriguez St.": "Zone 6",
+                "Visayas St.": "Zone 6",
+                "Luzon St.": "Zone 6",
+                "Caliao St.": "Zone 6",
+                "A. Bonifacio St.": "Zone 6",
+                "Col. Gervacio St.": "Zone 6",
+                "Mayor Tanyag Ave.": "Zone 6",
+                "Gen. del Pilar St.": "Zone 6",
+                "M.L. Quezon St.": "Zone 6",
+                "D. Palma St.": "Zone 6",
+                "Gen. Luna St.": "Zone 6",
+                "Gen. Aguinaldo St.": "Zone 6",
+                "J.P. Laurel St.": "Zone 6",
+                "Pres. Roxas St.": "Zone 6",
+                "Gen. Espino St.": "Zone 6",
+                "Pres. Osmeña St.": "Zone 6",
+                "Abad St.": "Zone 6",
+                "Espedilla St.": "Zone 6",
+                "Gen. Mc Arthur St.": "Zone 6",
+                "Atis St.": "Zone 6",
+                "Pardiñas St.": "Zone 6",
+                "Orchids St.": "Zone 6",
+                "Everlasting St.": "Zone 6",
+                "Famela St.": "Zone 6",
+                "Gumamela St.": "Zone 6",
+                "Daisy St.": "Zone 6",
+                "Banaba St.": "Zone 6",
+                "Camia St.": "Zone 6",
+                "Col. Ballecer Extn.": "Zone 6",
+                "Jasmin St.": "Zone 6",
+                "Ilang-Ilang St.": "Zone 6",
+                "Pres. Macapagal St.": "Zone 6",
+                "Herbs St.": "Zone 6",
+                "Friendship St.": "Zone 6",
+                "GHQ Road": "Zone 6",
+                "Bayanihan Road": "Zone 6",
+                "Pres. Garcia St.": "Zone 6",
+                "Pres. Quirino St.": "Zone 6",
+                "Pres.Quirino Extn.": "Zone 6",
+                "Gen. Malvar St.": "Zone 6",
+                "Pres. Laurel St.": "Zone 6",
+                "Pres. Magsaysay St.": "Zone 6",
+                "Manalili St.": "Zone 6",
+                // Add more streets and zones as needed
+            };
+
+            // Get references to the select and input elements
+            var $streetSelect = $("#street");
+            var $zoneInput = $("#purok");
+
+            // Add an event listener to the select element
+            $streetSelect.on("change", function() {
+                var selectedStreet = $(this).val();
+                var zone = streetToZoneMap[selectedStreet] || ""; // Default to an empty string if no match
+                $zoneInput.val(zone);
+            });
+        });
         // Listen for changes to the birthdate input
         $('#birthdate').on('change', function() {
             // Calculate the age based on the birthdate
@@ -733,82 +816,82 @@
 </script>
 <script>
     // Get the form element
-const form = document.getElementById("yourForm");
+    const form = document.getElementById("yourForm");
 
-// Listen for the submit event
-form.addEventListener("submit", function(event) {
-    // Trigger browser's built-in validation
-    if (!form.reportValidity()) {
-        // If the form is not valid, focus on the first invalid input
-        const invalidInput = form.querySelector(':invalid');
-        if (invalidInput) {
-            invalidInput.focus();
+    // Listen for the submit event
+    form.addEventListener("submit", function(event) {
+        // Trigger browser's built-in validation
+        if (!form.reportValidity()) {
+            // If the form is not valid, focus on the first invalid input
+            const invalidInput = form.querySelector(':invalid');
+            if (invalidInput) {
+                invalidInput.focus();
+            }
+            event.preventDefault();
+            return;
         }
+
+        // The form is valid, proceed with your AJAX request and other actions
         event.preventDefault();
-        return;
-    }
 
-    // The form is valid, proceed with your AJAX request and other actions
-    event.preventDefault();
+        // Show the modal
+        $("#loadingModal").modal("show");
 
-    // Show the modal
-    $("#loadingModal").modal("show");
+        // Get the form data
+        const formData = new FormData(form);
 
-    // Get the form data
-    const formData = new FormData(form);
-
-    // Make the AJAX request
-    $.ajax({
-        type: "POST",
-        url: form.action,
-        data: formData,
-        processData: false,
-        contentType: false,
-        success: function(response) {
-            if (response.message == 'error') {
-                $("#loadingModal").modal("hide");
-                Swal.fire({
-                    title: "<h4>ACCOUNT CREATION FAILED</h4>",
-                    icon: "error",
-                    text: 'Sorry, this email is already registered. Please try logging in or use a different email to create a new account.',
-                    showCloseButton: false,
-                    showCancelButton: false,
-                    confirmButtonColor: "#AA0F0A",
-                }).then((result) => {
-                    if (result.value) {
-                        // Clear the email input
-                        $('#email').val('');
-                        $('#password').val('');
-                        $('#confirm_password').val('');
-                        // Focus back on the email input
-                        $('#email').focus();
-                        //window.location.href = "/registration";
-                    }
-                });
-            } else {
+        // Make the AJAX request
+        $.ajax({
+            type: "POST",
+            url: form.action,
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function(response) {
+                if (response.message == 'error') {
+                    $("#loadingModal").modal("hide");
+                    Swal.fire({
+                        title: "<h4>ACCOUNT CREATION FAILED</h4>",
+                        icon: "error",
+                        text: 'Sorry, this email is already registered. Please try logging in or use a different email to create a new account.',
+                        showCloseButton: false,
+                        showCancelButton: false,
+                        confirmButtonColor: "#AA0F0A",
+                    }).then((result) => {
+                        if (result.value) {
+                            // Clear the email input
+                            $('#email').val('');
+                            $('#password').val('');
+                            $('#confirm_password').val('');
+                            // Focus back on the email input
+                            $('#email').focus();
+                            //window.location.href = "/registration";
+                        }
+                    });
+                } else {
+                    // Hide the modal
+                    $("#loadingModal").modal("hide");
+                    Swal.fire({
+                        title: "<h4>ACCOUNT SUCCESSFULLY CREATED</h4>",
+                        icon: "success",
+                        text: 'You have successfully created your profile account. Please check your email to verify your account.',
+                        showCloseButton: false,
+                        showCancelButton: false,
+                        confirmButtonColor: "#AA0F0A",
+                    }).then((result) => {
+                        if (result.value) {
+                            window.location.href = "/login";
+                        }
+                    });
+                }
+            },
+            error: function(error) {
                 // Hide the modal
                 $("#loadingModal").modal("hide");
-                Swal.fire({
-                    title: "<h4>ACCOUNT SUCCESSFULLY CREATED</h4>",
-                    icon: "success",
-                    text: 'You have successfully created your profile account. Please check your email to verify your account.',
-                    showCloseButton: false,
-                    showCancelButton: false,
-                    confirmButtonColor: "#AA0F0A",
-                }).then((result) => {
-                    if (result.value) {
-                        window.location.href = "/login";
-                    }
-                });
-            }
-        },
-        error: function(error) {
-            // Hide the modal
-            $("#loadingModal").modal("hide");
-            // Handle the error (e.g. show an error message)
-        },
+                // Handle the error (e.g. show an error message)
+            },
+        });
     });
-});
 </script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>

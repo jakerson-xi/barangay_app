@@ -28,7 +28,49 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
     <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <style>
+        .groupBoxHeader {
+            padding: 0.2em 0.5em;
+            border: 1px solid rgb(255, 255, 255);
+            font-size: 100%;
+            text-align: center;
+            width: auto;
+            border-radius: 6px;
+            background-color: rgba(192, 1, 1, 0.932);
+            color: white;
+            font-weight: bold;
+            margin-top: 5%;
+            margin-bottom: 5%;
 
+        }
+
+        .custom-modal .nav-tabs .nav-link {
+            background-color: rgba(191, 190, 190, 0);
+            /* Change to your desired background color */
+            border-color: rgba(191, 190, 190, 0);
+            color: black;
+            /* Change to your desired text color */
+        }
+
+        .custom-modal .nav-tabs .nav-link.active {
+            background-color: rgba(192, 1, 1, 0.932);
+            border-color: rgba(192, 1, 1, 0.932);
+            /* Change to your desired background color */
+            /* Change to your desired text color */
+            color: white;
+        }
+
+        .custom-modal .nav-link:hover {
+            background-color: rgba(192, 1, 1, 0.932);
+            border-color: rgba(192, 1, 1, 0.932);
+            color: white;
+        }
+
+        .custom-modal p {
+            text-align: justify;
+            margin: 2px;
+        }
+    </style>
     <style>
         .form-control::placeholder {
             /* Chrome, Firefox, Opera, Safari 10.1+ */
@@ -268,240 +310,416 @@
 
 
     <!--DATA POLICY-->
-    <div class="modal fade" id="dataPrivacy" tabindex="-1" aria-labelledby="dataPrivacyLabel" aria-hidden="true">
+    <div class="modal " id="dataPrivacy" tabindex="-1" aria-labelledby="dataPrivacyLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-scrollable">
-            <div class="modal-content">
+            <div class="modal-content custom-modal">
                 <div class="modal-header">
-                    <h5 style="text-align: center;" class="modal-title" id="exampleModalLabel">Draft Policy on Open Data for the Barangay South Signal Village</h5>
+                    <h5 class="modal-title" id="termsConditionsLabel" style="text-align: center;">Privacy Policy of
+                        Barangay South Signal Village </h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    <p>WHEREAS, much of the data collected by the Barangay South Signal Village (hereafter, “the Taguig City”) is stored in ways which impede the ability to aggregate, analyze and synthesize it to better allocate public resources; and
-                        <br><br>WHEREAS, access to public information promotes a higher level of civic engagement and allows citizens to provide valuable feedback to government officials regarding local issues; and
-                        <br><br>WHEREAS, every citizen has the right to prompt, efficient service from the government; and
-                        <br><br>WHEREAS, the thoughtful implementation of an open data program improves provision of services, increases transparency and access to public information, and enhances coordination and efficiencies among departments, partner organizations and citizens; and
-                        <br><br>WHEREAS, one goal of an Open Data policy is to proactively provide information currently sought through public records requests, thereby saving the Taguig City time and money; and
-                        <br><br>WHEREAS, in commitment to the spirit of Open Government, the Taguig City will consider public information to be open by default and will proactively publish data and data containing information, consistent with relevant public records law; and
-                        <br><br>WHEREAS, information technologies, including web-based and other Internet applications and services, are an essential means for Open Government, and good government generally; and
-                        <br><br>WHEREAS, by publishing structured standardized data in machine readable formats the Taguig City seeks to encourage the local software community to develop software applications and tools to collect, organize, and share public record data in new and innovative ways; and
-                        <br><br>WHEREAS, the protection of privacy, confidentiality and security will be maintained as a paramount priority while also advancing the government’s transparency and accountability through open data.
-                        <br><br>NOW, THEREFORE, BE IT RESOLVED by the Barangay Captain of the Barangay South Signal Village that:
-                        <br><br>
-                    <h6>Section 1: Definitions</h6>
-                    <p>WHEREAS, much of the data collected by the Barangay South Signal Village (hereafter, “the Taguig City”) is stored in ways which impede the ability to aggregate, analyze and synthesize it to better allocate public resources; and
-                        <br><br>a. “Data” means statistical, factual, quantitative, or qualitative information that is maintained or created by or on behalf of a Taguig City agency. This definition is inclusive of software source code developed or maintained by or on behalf of the Taguig City.
-                        <br><br>b. “Open data” means data that is available online, in an open format, with no legal encumbrances on use or reuse, and is available for all to access and download in full without fees [or a requirement of registration]. “Legal encumbrance” includes federal copyright protections and other, non-statutory legal limitations on how or under what conditions a dataset may be used. This definition is also inclusive of any software source code made available online (“open source software”).
-                        <br><br>c. “Open format” means any widely accepted, nonproprietary, platform-independent, machine-readable data format, which permits automated processing of such data and facilitates analysis and search capabilities.
-                        <br><br>d. “Dataset” means a named collection of related records, with the collection containing data organized or formatted in a specific or prescribed way, often in tabular form.
-                        <br><br>e. “Protected information” means any dataset or portion thereof to which an agency may deny access pursuant to the [state or city public records statute] or any other law or rule or regulation.
-                        <br><br>f. “Sensitive information” means any data which, if published by the Taguig City online, could raise privacy, confidentiality or security concerns or have the potential to jeopardize public health, safety or welfare to an extent that is greater than the potential public benefit of publishing that data.
-                        <br><br>g. “Publishable data” means data which is not protected or sensitive and which has been prepared for release to the public.
-                    </p>
-                    <br><br>
-                    <h6>Section 2: Open Data Program</h6>
-                    WHEREAS, much of the data collected by the Barangay South Signal Village (hereafter, “the Taguig City”) is stored in ways which impede the ability to aggregate, analyze and synthesize it to better allocate public resources; and
-                    <br><br>a. the Taguig City commits to develop and implement practices that will allow it to:
-                    <br><br>
-                    <p class="ms-3">1. Proactively release all publishable Taguig City data, making it freely available in appropriately varied and useful open formats, using an open license with no restrictions on use or reuse, and fully accessible to the broadest range of users to use for varying purposes;
-                        <br><br>2. Publish high quality, updated data with documentation (metadata) and permanence to encourage maximum use;
-                        <br><br>3. Provide or support access to free, historical archives of all released Taguig City data;
-                        <br><br>4. Measure the effectiveness of datasets made available through the Open Data Program by connecting open data efforts to the Taguig City’s programmatic priorities;
-                        <br><br>5. Minimize limitations on the disclosure of public information while appropriately safeguarding protected and sensitive information; and
-                        <br><br>6. Support innovative uses of the Taguig City’s publishable data by agencies, the public, and other partners.
-                    </p>
-                    b. The development and implementation of these practices shall be overseen by the Barangay Captain, reporting to the Barangay Captain [or to the Barangay Captain’s designee].
-                    <br><br>c. The requirements of this Order shall apply to any Taguig City department, office, administrative unit, commission, board, advisory committee or other division of Taguig City government (“agency”), including the records of third party agency contractors that create or acquire information, records, or data on behalf of a Taguig City agency.
-                    <br><br>d. Appropriate funding shall be made available to achieve the goals of this program.
-                    <br><br>
-                    <h6>Section 3: Governance</h6>
-                    a. Implementation of the Open Data Program will be overseen by the Barangay Captain, who will work with the Taguig City’s departments and agencies to:
-                    <br><br>
-                    <p class="ms-3">1. For each Taguig City agency, identify and publish appropriate contact information for a lead open data coordinator who will be responsible for managing that agency’s participation in the Open Data Program;
-                        <br><br>2. Oversee the creation of a comprehensive inventory of datasets held by each Taguig City agency which is published to the central open data location and is regularly updated;
-                        <br><br>3. Develop and implement a process for determining the relative level of risk and public benefit associated with potentially sensitive, non-protected information so as to make a determination about whether and how to publish it;
-                        <br><br>4. Develop and implement a process for prioritizing the release of datasets which takes into account new and existing signals of interest from the public (such as the frequency of public records requests), the Taguig City's programmatic priorities, existing opportunities for data use in the public interest, and cost;
-                        <br><br>5. Proactively consult with members of the public, agency staff, journalists, researchers, and other stakeholders to identify the datasets which will have the greatest benefit to Taguig City residents if published in a high quality manner;
-                        <br><br>6. Establish processes for publishing datasets to the central open data location, including processes for ensuring that datasets are high quality, up-to-date, are in use-appropriate formats, and exclude protected and sensitive information;
-                        <br><br>7. Ensure that appropriate metadata is provided for each dataset in order to facilitate its use;
-                        <br><br>8. Develop and oversee a routinely updated, public timeline for new dataset publication; and
-                        <br><br>9. Make recommendations for historical document inclusion,define a schedule for approved historical document publication
-                    </p>
-                    b. In order to increase and improve use of the Taguig City’s open data, the Barangay Captain will actively encourage agency and public participation through providing regular opportunities for feedback and collaboration.
-                    </p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn" style="background-color: #AA0F0A; color:white" data-bs-dismiss="modal">Done</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade" id="terms" tabindex="-1" aria-labelledby="termsLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-scrollable">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 style="text-align: center;" class="modal-title" id="exampleModalLabel">Terms and Conditions for the Barangay South Signal Village</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
-                    <dl>
-                        <dt>Definition list</dt>
-                        <dd>Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-                            aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                            commodo consequat.</dd>
-                        <dt>Lorem ipsum dolor sit amet</dt>
-                        <dd>Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-                            aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                            commodo consequat.</dd>
-                    </dl>
-                    <dl>
-                        <dt>Definition list</dt>
-                        <dd>Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-                            aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                            commodo consequat.</dd>
-                        <dt>Lorem ipsum dolor sit amet</dt>
-                        <dd>Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-                            aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                            commodo consequat.</dd>
-                    </dl>
-                    <dl>
-                        <dt>Definition list</dt>
-                        <dd>Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-                            aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                            commodo consequat.</dd>
-                        <dt>Lorem ipsum dolor sit amet</dt>
-                        <dd>Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-                            aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                            commodo consequat.</dd>
-                    </dl>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn" style="background-color: #AA0F0A; color:white" data-bs-dismiss="modal">Done</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <body>
-        @foreach($user_info as $user)
-        <!-- REQUEST -->
-        <div class="container overflow-hidden mt-3">
-            <div class="row gx-5">
-                <div class="col">
-                    <div class="p-4 bg-light border mb-3 bg-body rounded shadow border border-dark">
-                        <div class="accordion accordion-flush" id="requestAccordion">
-                            <div class="accordion-item">
-                                <h2 class="accordion-header" id="flush-headingOneRequest">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                                        <h3><i class="bi bi-folder2-open"></i> Request Transaction History</h3>
-                                    </button>
-                                </h2>
-                                <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOneRequest" data-bs-parent="#requestAccordion">
-                                    <div class="accordion-body">
-                                        <div class="table-responsive">
-                                            <table id="transaction" class="table table-bordered table-hover " style="width:100%">
-                                                <thead class="" style="background-color: #AA0F0A; color:white">
-                                                    <tr>
-                                                        <th class="text-center">Ref. Key</th>
-                                                        <th class="text-center">TYPE OF REQUEST</th>
-                                                        <th class="text-center">DATE & TIME</th>
-                                                        <th class="text-center">STATUS</th>
-                                                        <th class="text-center">Action:</th>
-                                                        <th class="text-center" style="display: none;">no.</th>
-
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    @forEach($transaction as $trans)
-
-                                                    <tr>
-                                                        <td style="text-transform: uppercase;">{{$trans->reference_key}}</td>
-                                                        <td style="text-transform: uppercase; ">{{$trans->request_type_name. " (". $trans->request_description.")"}}</td>
-                                                        <td style="text-transform: uppercase; ">{{$trans->request_date}}</td>
-                                                        <td class="text-center" style="text-transform: uppercase; ">
-                                                            @if($trans->request_status == 'PENDING')
-                                                            <div class="badge bg-warning text-wrap" style="width: 6rem;">
-                                                                PENDING
-                                                            </div>
-                                                            @endif
-                                                            @if($trans->request_status == 'DENIED')
-                                                            <div class="badge bg-danger text-wrap" style="width: 6rem;">
-                                                                DENIED
-                                                            </div>
-                                                            @endif
-                                                            @if($trans->request_status == 'READY FOR PAYMENT')
-                                                            <div class="badge bg-SUCCESS text-wrap" style="width: 6rem;">
-                                                                READY FOR PAYMENT
-                                                            </div>
-                                                            @endif
-                                                            @if($trans->request_status == 'DONE')
-                                                            <div class="badge bg-PRIMARY text-wrap" style="width: 6rem;">
-                                                                DONE
-                                                            </div>
-                                                            @endif
-                                                            @if($trans->request_status == 'PROCESSING')
-                                                            <div class="badge bg-info text-wrap" style="width: 6rem;">
-                                                                PROCESSING
-                                                            </div>
-                                                            @endif
-                                                        </td>
-                                                        <td class="text-center">
-                                                            <a href="viewRequestdoc/{{$trans->reference_key}}" type="button" class="btn btn-dark"><i class="bi bi-eye-fill"></i> View</a>
-                                                        </td>
-                                                        <td style="display: none;">
-                                                            @if($trans->request_status == 'PENDING')
-                                                            1
-                                                            @endif
-                                                            @if($trans->request_status == 'DENIED')
-                                                            5
-                                                            @endif
-                                                            @if($trans->request_status == 'READY FOR PAYMENT')
-                                                            3
-                                                            @endif
-                                                            @if($trans->request_status == 'DONE')
-                                                            4
-                                                            @endif
-                                                            @if($trans->request_status == 'PROCESSING')
-                                                            2
-                                                            @endif
-                                                        </td>
-                                                    </tr>
-                                                    @endforeach
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
+                <div class="modal-body " style="width: auto;">
+                    <div class="text-center">
+                        <img src="{{asset('assets/imgs/southsignal.png')}}" alt="logo" width="100">
+                    </div>
+                    <nav>
+                        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                            <button class="nav-link active" id="nav-english-tab" data-bs-toggle="tab" data-bs-target="#nav-english" type="button" role="tab" aria-controls="nav-english" aria-selected="true">English</button>
+                            <button class="nav-link" id="nav-tagalog-tab" data-bs-toggle="tab" data-bs-target="#nav-tagalog" type="button" role="tab" aria-controls="nav-tagalog" aria-selected="false">Tagalog</button>
+                        </div>
+                    </nav>
+                    <div class="tab-content" id="nav-tabContent">
+                        <div class="tab-pane fade show active" id="nav-english" role="tabpanel" aria-labelledby="nav-english-tab" tabindex="0">
+                            <h3 class="groupBoxHeader">Introduction</h3>
+                            <div>
+                                <p>At Barangay South Signal Village, we recognize the importance of protecting yourpersonal data and privacy. We are committed to maintaining the confidentiality and limiting any disclosure of your information in accordance with local laws. This Privacy Policy outlines how we collect, use, share, and protect your personal information when you use our web app.</p>
+                            </div>
+                            <hr style="background-color: #AA0F0A;">
+                            <h3 class="groupBoxHeader">Your Rights and Preferences</h3>
+                            <div>
+                                <p>As an individual, you have certain rights under applicable law with regard to your
+                                    personal data.
+                                    These
+                                    include:</p>
+                                <ul>
+                                    <li>Right of Access - the right to request access to your personal data and be
+                                        informed about the
+                                        processing
+                                        of your personal data;</li>
+                                    <li>Right to Erasure - the right to request the deletion of your personal data;</li>
+                                    <li>Right to Restrict Processing - the right to request the restriction of
+                                        processing of your personal
+                                        data;
+                                    </li>
+                                    <li>Right to Object - the right to object to the processing of your personal data;
+                                    </li>
+                                    <li>Right to Data Portability - the right to receive your personal data in a
+                                        structured, commonly
+                                        used, and
+                                        machine-readable format.</li>
+                                </ul>
+                            </div>
+                            <hr style="background-color: #AA0F0A;">
+                            <h3 class="groupBoxHeader">How we Collect your Personal Data</h3>
+                            <div>
+                                <p>We collect your personal data in the following ways:</p>
+                                <p> These are the following data needed upon registering, with the corresponding
+                                    purpose:</p>
+                                <ul>
+                                    <li>Full Name – to properly identify the right person when conducting the
+                                        registration.</li>
+                                    <li>Suffix – to know if person have any suffix in their name.</li>
+                                    <li>Gender – to classify the person based on their sexuality on birth.</li>
+                                    <li>Civil Status – to describe a person’s relationship with a significant other.
+                                    </li>
+                                    <li>Nationality – legal identification of a person in international law and
+                                        distinguished from
+                                        citizenship.
+                                    </li>
+                                    <li>Birthdate – used for proper identification and in case multiple persons have the
+                                        same name.</li>
+                                    <li>Age – to determine the age of the person.</li>
+                                    <li>Place of Birth – to know where the person was born in.</li>
+                                    <li>Address – to determine the exact location of the person by the authorities.</li>
+                                    <li>Valid ID – to validate all the information set by the user.</li>
+                                    <li>ID Number – to ensure that no two people within the system share the same
+                                        number.</li>
+                                    <li>Email – for the system to have an option to have different identification aside
+                                        from mobile
+                                        number.</li>
+                                    <li>Mobile Number – used for unique identification in the system and for the user to
+                                        be contacted if
+                                        needed
+                                        by the barangay officials.</li>
+                                </ul>
+                            </div>
+                            <hr style="background-color: white;">
+                            <h3 class="groupBoxHeader">What do we use your Personal Data for?</h3>
+                            <div>
+                                <p>We use your personal data to provide and improve our services to you. This includes:
+                                </p>
+                                <ul>
+                                    <li>To communicate with you about our services and provide customer support.</li>
+                                    <li>To process transactions to our services.</li>
+                                    <li>To improve our services and develop new features.</li>
+                                    <li>To comply with legal obligations.</li>
+                                </ul>
+                            </div>
+                            <hr style="background-color: white;">
+                            <h3 class="groupBoxHeader">Sharing your Personal Data</h3>
+                            <div>
+                                <p>We do not sell, rent, or lease your personal information to third parties without
+                                    your consent. We
+                                    may share
+                                    your personal data with third-party service providers who help us operate our web
+                                    app or provide
+                                    services to
+                                    you. These service providers are required to maintain the confidentiality and
+                                    security of your
+                                    personal
+                                    data. </p>
+                                <p>We may also disclose your personal data if required by law, court order, or other
+                                    legal processes or
+                                    if we
+                                    have a good faith belief that such disclosure is necessary to protect our rights or
+                                    property or the
+                                    safety
+                                    of others. </p>
+                            </div>
+                            <hr style="background-color: white;">
+                            <h3 class="groupBoxHeader">Data Retention and Deletion </h3>
+                            <div>
+                                <p>We keep your personal data only for as long as necessary to provide you with our
+                                    services and for
+                                    legitimate
+                                    and essential business purposes, such as complying with legal obligations and
+                                    resolving disputes. We
+                                    will
+                                    securely delete or anonymize your personal data when it is no longer needed for
+                                    these purposes. </p>
+                            </div>
+                            <hr style="background-color: white;">
+                            <h3 class="groupBoxHeader">Keeping your Data Safe </h3>
+                            <div>
+                                <p>We take appropriate technical and organizational measures to protect your personal
+                                    data against
+                                    unauthorized
+                                    or unlawful processing, accidental loss, destruction, or damage. We also implement
+                                    access controls,
+                                    encryption, and retention policies to protect your personal data. </p>
+                            </div>
+                        </div>
+                        <!--Nav Tab Tagalog-->
+                        <div class="tab-pane fade" id="nav-tagalog" role="tabpanel" aria-labelledby="nav-tagalog-tab" tabindex="0">
+                            <h3 class="groupBoxHeader">Panimula</h3>
+                            <div>
+                                <p>Sa Barangay South Signal Village, kami ay kumikilala sa kahalagahan ng pagprotekta sa
+                                    iyong
+                                    personal
+                                    na
+                                    datos at
+                                    privacy. Kami ay mayroong pangako na panatilihing konpidensyal ang iyong impormasyon
+                                    at limitahan
+                                    ang
+                                    anumang pagpapahayag ng iyong
+                                    impormasyon ayon sa mga lokal na batas. Ang Polisiya ng Privacy na ito ay
+                                    naglalayong ipakita kung
+                                    paano
+                                    namin kinokolekta, ginagamit, ini-share, at
+                                    iniingatan ang iyong personal na impormasyon kapag ginagamit mo ang aming web app.
+                                </p>
+                            </div>
+                            <hr style="background-color: white;">
+                            <h3 class="groupBoxHeader">Ang Iyong Mga Karapatan at mga Nais</h3>
+                            <div>
+                                <p>Bilang isang indibidwal, mayroon kang mga karagdagang karapatan sa ilalim ng mga
+                                    naaangkop na batas
+                                    kaugnay
+                                    ng iyong personal na datos. Ito ay kasama ang mga sumusunod:</p>
+                                <ul>
+                                    <li>Karapatan sa Pag-access - ang karapatan na humiling ng pag-access sa iyong
+                                        personal na datos at
+                                        maabisuhan tungkol sa pagproseso ng iyong personal na datos;</li>
+                                    <li>Karapatan sa Pagbura - ang karapatan na humiling ng pagtanggal ng iyong personal
+                                        na datos;
+                                    </li>
+                                    <li>Karapatan sa Pagpigil ng Paggamit - ang karapatan na humiling ng pagpigil sa
+                                        paggamit ng iyong
+                                        personal na datos;
+                                    </li>
+                                    <li>Karapatan sa Pagtutol - ang karapatan na tumutol sa pagproseso ng iyong personal
+                                        na datos;</li>
+                                    <li>Karapatan sa Portabilidad ng Datos - ang karapatan na matanggap ang iyong
+                                        personal na datos sa
+                                        isang
+                                        makabuluhang, karaniwang ginagamit, at may kakayahang basahin ng makina na
+                                        format.</li>
+                                </ul>
+                            </div>
+                            <hr style="background-color: white;">
+                            <h3 class="groupBoxHeader">Paano namin Kinokolekta ang Iyong Personal na Datos</h3>
+                            <div>
+                                <p>Kinokolekta namin ang iyong personal na datos sa mga sumusunod na paraan:</p>
+                                <p> Ito ang mga sumusunod na mga datos na kinakailangan sa pagpaparehistro, kasama ang
+                                    karampatang
+                                    layunin
+                                    nito:</p>
+                                <ul>
+                                    <li>Buong Pangalan – upang wastong kilalanin ang tamang tao sa pagpaparehistro.</li>
+                                    <li>Suffix – upang malaman kung may salaysay ang pangalan ng isang tao.</li>
+                                    <li>Kasarian – upang uriin ang isang tao batay sa kanilang kasarian noong sila ay
+                                        ipinanganak.</li>
+                                    <li>Katayuan Sibil – upang ilarawan ang relasyon ng isang tao sa kanilang kasintahan
+                                        o kasama sa
+                                        buhay
+                                    </li>
+                                    <li>Nasyonalidad – legal na pagkakakilanlan ng isang tao sa batas pang-internasyonal
+                                        na iba sa
+                                        pagkamamamayan.
+                                    </li>
+                                    <li>Petsa ng Kapanganakan – ginagamit para sa tamang pagkilala at sa mga
+                                        pagkakataong maraming tao
+                                        ang
+                                        may parehong pangalan.</li>
+                                    <li>Edad – upang malaman ang edad ng isang tao.</li>
+                                    <li>Lugar ng Kapanganakan – upang malaman kung saan isinilang ang tao.</li>
+                                    <li>Tirahan – upang matukoy ng mga awtoridad ang eksaktong lokasyon ng isang tao.
+                                    </li>
+                                    <li> Valid ID – upang tiyakin ang lahat ng impormasyon na ibinigay ng gumagamit.
+                                    </li>
+                                    <li>ID Number – upang tiyakin na walang dalawang tao sa loob ng sistema ang may
+                                        parehong numero.
+                                    </li>
+                                    <li>Email – para sa sistema na magkaroon ng opsiyon na iba't-ibang paraan ng
+                                        pagkakakilanlan bukod
+                                        sa
+                                        numero ng mobile.</li>
+                                    <li>Mobile Number – ginagamit para sa pambihirang pagkakakilanlan sa sistema at
+                                        upang makontak ang
+                                        user
+                                        kung kinakailangan ng mga opisyal ng barangay</li>
+                                </ul>
+                            </div>
+                            <hr style="background-color: white;">
+                            <h3 class="groupBoxHeader">Para sa Anong Layunin Namin Ginagamit ang Iyong Personal na
+                                Datos?
+                            </h3>
+                            <div>
+                                <p>Ginagamit namin ang iyong personal na datos upang magbigay at mapabuti ang aming mga
+                                    serbisyo sa
+                                    iyo.
+                                    Ito ay kasama ang mga sumusunod:</p>
+                                <ul>
+                                    <li>Upang makipag-ugnayan sa iyo tungkol sa aming mga serbisyo at magbigay ng
+                                        suporta sa mga
+                                        customer.
+                                    </li>
+                                    <li>Upang ma-proseso ang mga transaksyon sa aming mga serbisyo..</li>
+                                    <li>Upang mapabuti ang aming mga serbisyo at gumawa ng mga bagong feature.</li>
+                                    <li>Upang sumunod sa mga legal na obligasyon.</li>
+                                </ul>
+                            </div>
+                            <hr style="background-color: white;">
+                            <h3 class="groupBoxHeader">Pagbabahagi ng Iyong Personal na Datos</h3>
+                            <div>
+                                <p>Hindi namin ibinebenta, inuupa, o inirerentahan ang iyong personal na impormasyon sa
+                                    mga third
+                                    parties
+                                    nang walang iyong pahintulot. Maaring ibahagi namin ang iyong personal na datos sa
+                                    mga
+                                    third-party service provider na tumutulong sa amin sa pagpapatakbo ng aming web app
+                                    o nagbibigay ng
+                                    serbisyo sa iyo. Kinakailangang panatilihing konpidensyal at ligtas ng mga service
+                                    provider na ito
+                                    ang
+                                    iyong personal na datos. </p>
+                                <p>Maari rin naming ilantad ang iyong personal na datos kung kinakailangan ng batas,
+                                    court order, o
+                                    iba
+                                    pang legal na proseso, o kung kami ay may matino at marerespetadong paniniwala na
+                                    ang ganitong
+                                    paglantad
+                                    ay kinakailangan upang protektahan ang aming mga karapatan o ari-arian o ang
+                                    kaligtasan ng iba. </p>
+                            </div>
+                            <hr style="background-color: white;">
+                            <h3 class="groupBoxHeader">Pag-iingat at Pagtanggal ng Datos </h3>
+                            <div>
+                                <p>Ipinag-iingat namin ang iyong personal na datos hangga't kinakailangan lamang upang
+                                    maipagkaloob
+                                    ang
+                                    aming mga serbisyo at para sa mga lehitimo at mahahalagang layunin ng negosyo, tulad
+                                    ng pagsunod sa
+                                    mga
+                                    legal na obligasyon at pagresolba ng mga alituntunin. Secured naming tatanggalin o
+                                    ipapa-anonimisa
+                                    ang
+                                    iyong personal na datos kapag hindi na ito kinakailangan para sa mga layuning ito.
+                                </p>
+                            </div>
+                            <hr style="background-color: white;">
+                            <h3 class="groupBoxHeader">Paagpapanatili ng Kaligtasan ng Inyong Datos </h3>
+                            <div>
+                                <p>Kami ay gumagamit ng angkop na mga teknikal at organisasyonal na hakbang upang
+                                    protektahan ang
+                                    inyong
+                                    personal na datos laban sa hindi awtorisadong o labag sa batas na pagproseso,
+                                    aksidental na
+                                    pagkawala,
+                                    pagkasira, o pinsala. Kami rin ay nagpapatupad ng mga kontrol sa pag-access,
+                                    pag-e-encrypt, at mga
+                                    patakaran sa retensyon upang protektahan ang inyong personal na datos </p>
                             </div>
                         </div>
                     </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" style="background-color: #AA0F0A; color:white" data-bs-dismiss="modal">Accept</button>
 
                 </div>
-
             </div>
-
         </div>
+    </div>
+    <!--TERMS AND CONDITION-->
+    <div class="modal" id="terms" tabindex="-1" aria-labelledby="termsLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content custom-modal">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="termsLabel" style="text-align: center">
+                        Terms & Conditions of Barangay South Signal Village
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" style="width: auto">
+                    <div class="text-center">
+                        <img src="{{asset('assets/imgs/southsignal.png')}}" alt="logo" width="100">
+                    </div>
+                    <nav>
+                        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                            <button class="nav-link active" id="nav-english-tab" data-bs-toggle="tab" data-bs-target="#nav-english" type="button" role="tab" aria-controls="nav-english" aria-selected="true">
+                                English
+                            </button>
+                            <button class="nav-link" id="nav-tagalog-tab" data-bs-toggle="tab" data-bs-target="#nav-tagalog" type="button" role="tab" aria-controls="nav-tagalog" aria-selected="false">
+                                Tagalog
+                            </button>
+                        </div>
+                    </nav>
+                    <div class="tab-content" id="nav-tabContent">
+                        <div class="tab-pane fade show active" id="nav-english" role="tabpanel" aria-labelledby="nav-english-tab" tabindex="0">
+                            <h3 class="groupBoxHeader">Introduction</h3>
+                            <div>
+                                <p class="m-2">
+                                    I hereby authorize the Barangay South Signal Village of
+                                    Taguig City, to collect and process the data indicated
+                                    herein for my personal information. I also understand that
+                                    my personal information is protected by RA 10173 or Data
+                                    Privacy Act of 2012. The Barangay South Signal Village
+                                    reserves the right, at its sole discretion, to change,
+                                    modify, add or remove portions of these Terms and
+                                    Conditions, at any time. It is your responsibility to check
+                                    these Terms and Conditions periodically for changes. Your
+                                    continued use of the South Signal Village Web Application
+                                    following the posting of changes will mean that you accept
+                                    and agree to the changes.
+                                </p>
+                            </div>
+                        </div>
+                        <!--Nav Tab Tagalog-->
+                        <div class="tab-pane fade" id="nav-tagalog" role="tabpanel" aria-labelledby="nav-tagalog-tab" tabindex="0">
+                            <h3 class="groupBoxHeader">Panimula</h3>
+                            <div>
+                                <p class="m-2">
+                                    Pinahihintulutan ko ang Barangay South Signal Village ng
+                                    Lungsod ng Taguig upang makolekta at iproseso and datos na
+                                    ipinahihiwatig dito para sa aking personal na impormasyon.
+                                    Naiintindihan ko na ang aking personal na impormasyon ay
+                                    protektado ng RA 10173 o Data Privacy Act of 2012. Ang
+                                    Barangay South Signal Village ay may karapatan, sa kanilang
+                                    tanging pagpapasya, na baguhin, magdagdag o magtanggal ng
+                                    bahagi ng mga Kondisyon at Tuntunin na ito, anumang oras.
+                                    Ito ay iyong pananagutan na paulit-ulit na suriin ang mga
+                                    Kondisyon at Tuntunin na ito para sa mga pagbabago. Ang
+                                    patuloy mong paggamit ng South Signal Village Web
+                                    Application matapos maipaskil ang mga pagbabago ay
+                                    nangangahulugan na tinatanggap at sumasang-ayon ka sa mga
+                                    pagbabago.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        Close
+                    </button>
+                    <a href="registration" class="btn" style="background-color: #aa0f0a; color: white">Accept</a>
+                </div>
+            </div>
+        </div>
+    </div>
 
-        <!-- CONCERN -->
-        <div class="container overflow-hidden mt-3">
-            <div class="row gx-5">
-                <div class="col">
-                    <div class="p-4 bg-light border mb-3 bg-body rounded shadow border border-dark">
-                        <div class="accordion accordion-flush" id="accordionFlushExample">
-                            <div class="accordion-item">
-                                <h2 class="accordion-header" id="flush-headingOne">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseOne">
-                                        <h3><i class="bi bi-question-octagon"></i> Concern History</h3>
-                                    </button>
-                                </h2>
-                                <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-                                    <div class="accordion-body">
-                                        <table id="concern" class="table table-bordered table-hover " style="width:100%">
+
+    @foreach($user_info as $user)
+    <!-- REQUEST -->
+    <div class="container overflow-hidden mt-3">
+        <div class="row gx-5">
+            <div class="col">
+                <div class="p-4 bg-light border mb-3 bg-body rounded shadow border border-dark">
+                    <div class="accordion accordion-flush" id="requestAccordion">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="flush-headingOneRequest">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                                    <h3><i class="bi bi-folder2-open"></i> Request Transaction History</h3>
+                                </button>
+                            </h2>
+                            <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOneRequest" data-bs-parent="#requestAccordion">
+                                <div class="accordion-body">
+                                    <div class="table-responsive">
+                                        <table id="transaction" class="table table-bordered table-hover " style="width:100%">
                                             <thead class="" style="background-color: #AA0F0A; color:white">
                                                 <tr>
                                                     <th class="text-center">Ref. Key</th>
-                                                    <th class="text-center">TYPE OF CONCERN</th>
-                                                    <th class="text-center">CONCERN TITLE</th>
+                                                    <th class="text-center">TYPE OF REQUEST</th>
                                                     <th class="text-center">DATE & TIME</th>
                                                     <th class="text-center">STATUS</th>
                                                     <th class="text-center">Action:</th>
@@ -510,57 +728,56 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @forEach($concern as $concern)
+                                                @forEach($transaction as $trans)
 
                                                 <tr>
-                                                    <td style="text-transform: uppercase;">{{$concern->reference_key}}</td>
-                                                    <td style="text-transform: uppercase; ">{{$concern->concern_type}}</td>
-                                                    <td style="text-transform: uppercase; ">{{$concern->concern_title}}</td>
-                                                    <td style="text-transform: uppercase; ">{{$concern->concern_created_at}}</td>
+                                                    <td style="text-transform: uppercase;">{{$trans->reference_key}}</td>
+                                                    <td style="text-transform: uppercase; ">{{$trans->request_type_name. " (". $trans->request_description.")"}}</td>
+                                                    <td style="text-transform: uppercase; ">{{$trans->request_date}}</td>
                                                     <td class="text-center" style="text-transform: uppercase; ">
-                                                        @if($concern->concern_status == 'PENDING')
+                                                        @if($trans->request_status == 'PENDING')
                                                         <div class="badge bg-warning text-wrap" style="width: 6rem;">
                                                             PENDING
                                                         </div>
                                                         @endif
-                                                        @if($concern->concern_status == 'DENIED')
+                                                        @if($trans->request_status == 'DENIED')
                                                         <div class="badge bg-danger text-wrap" style="width: 6rem;">
                                                             DENIED
                                                         </div>
                                                         @endif
-                                                        @if($concern->concern_status == 'READY FOR PAYMENT')
+                                                        @if($trans->request_status == 'READY FOR PAYMENT')
                                                         <div class="badge bg-SUCCESS text-wrap" style="width: 6rem;">
                                                             READY FOR PAYMENT
                                                         </div>
                                                         @endif
-                                                        @if($concern->concern_status == 'DONE')
+                                                        @if($trans->request_status == 'DONE')
                                                         <div class="badge bg-PRIMARY text-wrap" style="width: 6rem;">
                                                             DONE
                                                         </div>
                                                         @endif
-                                                        @if($concern->concern_status == 'PROCESSING')
+                                                        @if($trans->request_status == 'PROCESSING')
                                                         <div class="badge bg-info text-wrap" style="width: 6rem;">
                                                             PROCESSING
                                                         </div>
                                                         @endif
                                                     </td>
                                                     <td class="text-center">
-                                                        <a href="viewConcernuser/{{$concern->reference_key}}" type="button" class="btn btn-dark"><i class="bi bi-eye-fill"></i> View</a>
+                                                        <a href="viewRequestdoc/{{$trans->reference_key}}" type="button" class="btn btn-dark"><i class="bi bi-eye-fill"></i> View</a>
                                                     </td>
                                                     <td style="display: none;">
-                                                        @if($concern->concern_status == 'PENDING')
+                                                        @if($trans->request_status == 'PENDING')
                                                         1
                                                         @endif
-                                                        @if($concern->concern_status == 'DENIED')
+                                                        @if($trans->request_status == 'DENIED')
                                                         5
                                                         @endif
-                                                        @if($concern->concern_status == 'READY FOR PAYMENT')
+                                                        @if($trans->request_status == 'READY FOR PAYMENT')
                                                         3
                                                         @endif
-                                                        @if($concern->concern_status == 'DONE')
+                                                        @if($trans->request_status == 'DONE')
                                                         4
                                                         @endif
-                                                        @if($concern->concern_status == 'PROCESSING')
+                                                        @if($trans->request_status == 'PROCESSING')
                                                         2
                                                         @endif
                                                     </td>
@@ -574,11 +791,110 @@
                         </div>
                     </div>
                 </div>
+
             </div>
+
         </div>
 
-        @endforeach
-    </body>
+    </div>
+
+    <!-- CONCERN -->
+    <div class="container overflow-hidden mt-3">
+        <div class="row gx-5">
+            <div class="col">
+                <div class="p-4 bg-light border mb-3 bg-body rounded shadow border border-dark">
+                    <div class="accordion accordion-flush" id="accordionFlushExample">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="flush-headingOne">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseOne">
+                                    <h3><i class="bi bi-question-octagon"></i> Concern History</h3>
+                                </button>
+                            </h2>
+                            <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                                <div class="accordion-body">
+                                    <table id="concern" class="table table-bordered table-hover " style="width:100%">
+                                        <thead class="" style="background-color: #AA0F0A; color:white">
+                                            <tr>
+                                                <th class="text-center">Ref. Key</th>
+                                                <th class="text-center">TYPE OF CONCERN</th>
+                                                <th class="text-center">CONCERN TITLE</th>
+                                                <th class="text-center">DATE & TIME</th>
+                                                <th class="text-center">STATUS</th>
+                                                <th class="text-center">Action:</th>
+                                                <th class="text-center" style="display: none;">no.</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @forEach($concern as $concern)
+
+                                            <tr>
+                                                <td style="text-transform: uppercase;">{{$concern->reference_key}}</td>
+                                                <td style="text-transform: uppercase; ">{{$concern->concern_type}}</td>
+                                                <td style="text-transform: uppercase; ">{{$concern->concern_title}}</td>
+                                                <td style="text-transform: uppercase; ">{{$concern->concern_created_at}}</td>
+                                                <td class="text-center" style="text-transform: uppercase; ">
+                                                    @if($concern->concern_status == 'PENDING')
+                                                    <div class="badge bg-warning text-wrap" style="width: 6rem;">
+                                                        PENDING
+                                                    </div>
+                                                    @endif
+                                                    @if($concern->concern_status == 'DENIED')
+                                                    <div class="badge bg-danger text-wrap" style="width: 6rem;">
+                                                        DENIED
+                                                    </div>
+                                                    @endif
+                                                    @if($concern->concern_status == 'READY FOR PAYMENT')
+                                                    <div class="badge bg-SUCCESS text-wrap" style="width: 6rem;">
+                                                        READY FOR PAYMENT
+                                                    </div>
+                                                    @endif
+                                                    @if($concern->concern_status == 'DONE')
+                                                    <div class="badge bg-PRIMARY text-wrap" style="width: 6rem;">
+                                                        DONE
+                                                    </div>
+                                                    @endif
+                                                    @if($concern->concern_status == 'PROCESSING')
+                                                    <div class="badge bg-info text-wrap" style="width: 6rem;">
+                                                        PROCESSING
+                                                    </div>
+                                                    @endif
+                                                </td>
+                                                <td class="text-center">
+                                                    <a href="viewConcernuser/{{$concern->reference_key}}" type="button" class="btn btn-dark"><i class="bi bi-eye-fill"></i> View</a>
+                                                </td>
+                                                <td style="display: none;">
+                                                    @if($concern->concern_status == 'PENDING')
+                                                    1
+                                                    @endif
+                                                    @if($concern->concern_status == 'DENIED')
+                                                    5
+                                                    @endif
+                                                    @if($concern->concern_status == 'READY FOR PAYMENT')
+                                                    3
+                                                    @endif
+                                                    @if($concern->concern_status == 'DONE')
+                                                    4
+                                                    @endif
+                                                    @if($concern->concern_status == 'PROCESSING')
+                                                    2
+                                                    @endif
+                                                </td>
+                                            </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @endforeach
+
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap5.min.js"></script>
@@ -606,5 +922,6 @@
             });
         });
     </script>
+</body>
 
 </html>
