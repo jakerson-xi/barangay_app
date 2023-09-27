@@ -347,36 +347,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="shadow p-3 mb-3 bg-body rounded">
-                        <p class="fs-4 fw-semibold text-center">ID INFORMATION</p>
-                        <hr>
-                        <div class="row my-3 text-center">
-                            <div class="col-md-4 mb-2 img-container">
-                                <img src="{{url('residentID/'.$request->validID_front)}}" class="img-fluid" alt="Front ID">
-                            </div>
-                            <div class="col-md-4 mb-2 img-container">
-                                <img src="{{url('residentID/'.$request->validID_back)}}" class="img-fluid" alt="Back ID">
-                            </div>
-                            <div class="col-md-4 mb-2 img-container">
-                                <img src="{{url('residentID/'.$request->face)}}" class="img-fluid" alt="Face Photo">
-                            </div>
-                        </div>
-                    </div>
+
                     @if($request->request_type_id != 5)
-                    <div class="shadow p-3 mb-3 bg-body rounded ">
-                        <p class="fs-4 fw-semibold text-center">OTHER INFORMATION</p>
-                        <hr>
-                        <div class="row my-3 ">
-                            <div class="col-md-6 mb-2 text-center">
-                                <p class="fs-6  mb-2 ">Living with Relatives: <span class="text-danger">*</span></p>
-                                <strong>{{strtoupper($request->live_relatives)}}</strong>
-                            </div>
-                            <div class="col-md-6 mb-2 text-center">
-                                <p class="fs-6  mb-2 ">Type of Residency: <span class="text-danger">*</span></p>
-                                <strong>{{strtoupper($request->residency_type)}}</strong>
-                            </div>
-                        </div>
-                    </div>
+
                     @else
                     <div class="shadow p-3 mb-3 bg-body rounded ">
                         <p class="fs-4 fw-semibold text-center">OTHER INFORMATION</p>
@@ -416,12 +389,12 @@
                                 <p><strong>{{$request->request_date}}</strong></p>
                             </div>
                         </div>
+
                         <div class="row my-3 text-center">
                             <div class="col-md-12 mb-2">
-                                <label class="text-start mb-2" for="">Note:<span class="text-danger">*</span> </label>
-                                <p><strong>{{strtoupper($request->request_message)}}</strong></p>
+                                <p class="fs-4 fw-semibold text-center"><strong class="text-danger">NOTE:</strong></p>
+                                <textarea id="note" class="form-control mx-auto text-center" style="width: 50%;" readonly></textarea>
                             </div>
-
                         </div>
                         @if($request->request_description != 'New')
                         <div class="text-center" id="upload_id">
@@ -432,19 +405,42 @@
                         </div>
                         @endif
                     </div>
-                    @if(!is_null($request->pdf_file))
-                    <div class="  shadow p-4 mb-3 bg-body rounded text-center">
-                        <p class="fs-4 fw-semibold text-center">FILE</p>
-                        <hr>
-                        <object data="{{url('wordsDocsFormat/'.$request->pdf_file)}}" type="application/pdf" width="400" height="500">
-                            <p>PDF file could not be displayed. <a href="path/to/your/file.pdf">Download</a> it instead.</p>
-                        </object>
-                        <br>
-                        <a href="{{url('wordsDocsFormat/'.$request->pdf_file)}}" target="_blank" id="btn" type="submit" class="btn mt-3" style="background-color:#428BCA; color: white;">
-                            <i class="bi bi-file-pdf-fill"></i> View full</a>
+                    <!-- <div class="shadow p-3 mb-3 bg-body rounded text-center">
+                        <p class="fs-4 fw-semibold text-center"><strong class="text-danger">NOTE:</strong></p>
+                        <textarea id="note" class="form-control mx-auto" style="width: 50%;" readonly></textarea>
+                    </div> -->
 
+                    <div class="shadow p-4 mb-3 bg-body rounded text-center">
+                        <p class="fs-4 fw-semibold text-center">PAYMENT DETAILS</p>
+                        <hr>
+                        <div class="row my-3 text-center">
+                            <div class="col-md-6 mb-2">
+                                <label class="text-start mb-2" for="">Paymongo Reference #:<span class="text-danger">*</span> </label>
+                                <p><strong>{{strtoupper($paymentDetails->payment_ref)}}</strong></p>
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <label class="text-start mb-2" for="">Payment Method:<span class="text-danger">*</span> </label>
+                                <p><strong>{{strtoupper($paymentDetails->payment_method)}}</strong></p>
+                            </div>
+                        </div>
+                        <div class="row my-3 text-center">
+                            <div class="col-md-6 mb-2">
+                                <label class="text-start mb-2" for="">Total Request Amount:<span class="text-danger">*</span> </label>
+                                <p><strong>PHP {{strtoupper(number_format($paymentDetails->request_price,2))}}</strong></p>
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <label class="text-start mb-2" for="">Service Charge (2.5%):<span class="text-danger">*</span> </label>
+                                <p><strong>PHP {{strtoupper(number_format($paymentDetails->service_charge,2))}}</strong></p>
+                            </div>
+                        </div>
+                        <div class="row my-3 text-center">
+                            <div class="col-md-12 mb-2">
+                                <label class="text-start mb-2 h5" for="">Total Amount Paid:<span class="text-danger">*</span> </label>
+                                <p class="h4"><strong>PHP {{strtoupper(number_format($paymentDetails->request_price + $paymentDetails->service_charge,2))}}</strong></p>
+                            </div>
+                        </div>
                     </div>
-                    @endif
+
                     @if($request->request_status == 'READY FOR PAYMENT')
                     <div class="shadow p-4 mb-3 bg-body rounded text-center">
                         <a href="paymongo/{{$request->reference_key}}" id="btn " type="submit" style="" class="btn d-block mx-auto w-25 btn-success">PROCEED TO PAYMENT</a>
@@ -470,37 +466,13 @@
 <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
 <script src="https://mozilla.github.io/pdf.js/build/pdf.js"></script>
 <script>
-    // Set the URL of the PDF file
-    var url = "{{url('wordsDocsFormat/'.$request->pdf_file)}}";
+    $(document).ready(function() {
 
-    // Load the PDF file
-    pdfjsLib.getDocument(url).promise.then(function(pdf) {
-        // Get the first page of the PDF file
-        pdf.getPage(1).then(function(page) {
-            // Set the scale of the PDF preview
-            var scale = 1.5;
-            // Get the viewport of the PDF page at the specified scale
-            var viewport = page.getViewport({
-                scale: scale
-            });
-            // Set the canvas element to the size of the viewport
-            var canvas = document.createElement('canvas');
-            canvas.width = viewport.width;
-            canvas.height = viewport.height;
-            // Get the context of the canvas element
-            var context = canvas.getContext('2d');
-            // Render the PDF page on the canvas element
-            var renderContext = {
-                canvasContext: context,
-                viewport: viewport
-            };
-            page.render(renderContext).promise.then(function() {
-                // Add the canvas element to the PDF preview container
-                var previewContainer = document.getElementById('pdf-preview');
-                previewContainer.appendChild(canvas);
-            });
-        });
-    });
+        var note = document.getElementById('note');
+
+        note.value = '{{($request->request_message)}}'
+
+    })
 </script>
 @endforeach
 </div>
