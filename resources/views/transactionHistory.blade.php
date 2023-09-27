@@ -760,6 +760,11 @@
                                                             PROCESSING
                                                         </div>
                                                         @endif
+                                                        @if($trans->request_status == 'PAID')
+                                                        <div class="badge  text-wrap" style="width: 6rem; background-color:steelblue">
+                                                        <i class="bi bi-check-circle-fill"></i> PAID
+                                                        </div>
+                                                        @endif
                                                     </td>
                                                     <td class="text-center">
                                                         <a href="viewRequestdoc/{{$trans->reference_key}}" type="button" class="btn btn-dark"><i class="bi bi-eye-fill"></i> View</a>

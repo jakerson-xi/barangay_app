@@ -7,7 +7,9 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Request_History;
 use App\Models\Request_type;
+use App\Models\Payment;
 use App\Models\Requests;
 use App\Models\Concerns;
 use App\Models\Web_App;
@@ -599,7 +601,7 @@ class mainController extends Controller
             Alert::error('THIS REQUEST IS CURRENTLY UNAVAILABLE', '')->showConfirmButton('Confirm', '#AA0F0A');
             return redirect()->route('userDashboard');
         }
-        if (Requests::where('resident_id', $user_auth->id)->where('request_type_id', $request_type[0]->request_type_id)->where('request_status', ['Pending', 'Processing', 'Approved'])->count() != 0) {
+        if (Requests::where('resident_id', $user_auth->id)->where('request_type_id', $request_type[0]->request_type_id)->whereIn('request_status', ['Pending', 'Processing', 'Approved', 'PAID'])->count() != 0) {
             Alert::info('You have already submitted a request', 'Kindly track your request status or if any problem encountered please contact the Barangay')->showConfirmButton('Confirm', '#AA0F0A');
             return redirect()->route('userDashboard');
         }
@@ -652,11 +654,23 @@ class mainController extends Controller
             Alert::error('UNAUTHORIZED ACCOUNT', '')->showConfirmButton('Confirm', '#AA0F0A');
             return redirect()->route('userDashboard');
         }
+
         $transactions = Requests::join('users', 'users.id', '=', 'requests.resident_id')
-            ->join('request_type', 'request_type.request_type_id', '=', 'requests.request_type_id')->select('users.*', 'requests.*', 'request_type.*', 'requests.created_at as request_date')->where('id', $user_auth->id)->where('request_status', "READY FOR PAYMENT")->get();
+            ->join('request_type', 'request_type.request_type_id', '=', 'requests.request_type_id')
+            ->select('users.*', 'requests.*', 'request_type.*', 'requests.created_at as request_date')
+            ->where('id', $user_auth->id)
+            ->where('request_status', 'READY FOR PAYMENT')
+            ->whereNotIn('request_type.request_type_name', ['CONCERN', 'COMMUNITY TAX CERTIFICATE'])
+            ->get();
+        $concern = Requests::join('users', 'users.id', '=', 'requests.resident_id')
+            ->join('request_type', 'request_type.request_type_id', '=', 'requests.request_type_id')
+            ->select('users.*', 'requests.*', 'request_type.*', 'requests.created_at as request_date')
+            ->where('id', $user_auth->id)
+            ->where('request_status', 'PAID')
+            ->whereNotIn('request_type.request_type_name', ['CONCERN', 'COMMUNITY TAX CERTIFICATE'])
+            ->get();
 
-
-        return view("paymentList", ['user_info' => $user_info, 'transaction' => $transactions]);
+        return view("paymentList", ['user_info' => $user_info, 'transaction' => $transactions, 'paid' => $concern]);
     }
 
 
@@ -670,10 +684,22 @@ class mainController extends Controller
         return view("viewRFP", ['user_info' => $user_info, 'request' => $request]);
     }
 
+    public function paid($id)
+    {
+        $user_auth = Auth::user();
+        $user_info = DB::table('users')->where('id', $user_auth->id)->get();
+        $request_list = Requests::join('users', 'users.id', '=', 'requests.resident_id')
+            ->join('request_type', 'request_type.request_type_id', '=', 'requests.request_type_id')->select('users.*', 'requests.*', 'request_type.*', 'requests.created_at as request_date')->where('reference_key', $id)->get();
+
+        $request = $request_list->first();
+        $paymentDetails = Payment::where('request_id', $request->request_id)->where('payment_status', 'PAID')->get()->last();
+
+        return view("paid", ['user_info' => $user_info, 'request' => $request_list, 'paymentDetails' => $paymentDetails]);
+    }
+
 
     public function paymongo($id)
     {
-
 
         $request = Requests::join('users', 'users.id', '=', 'requests.resident_id')
             ->join('request_type', 'request_type.request_type_id', '=', 'requests.request_type_id')
@@ -682,59 +708,189 @@ class mainController extends Controller
             ->first();
 
 
+        if ($request == null) {
 
-        $fullname = $request->first_name . ' ' . $request->middle_name . ' ' . $request->last_name;
-        $client = new \GuzzleHttp\Client();
-
-        $response = $client->request('POST', 'https://api.paymongo.com/v1/checkout_sessions', [
-            'body' => '{
-        "data": {
-            "attributes": {
-                "billing":{
-                    "name":"' . $fullname . '",
-                    "email":"' . $request->email . '",
-                    "phone":"' . $request->mobile_num . '"},
-                "send_email_receipt": true,
-                "show_description": true,
-                "show_line_items": true,
-                "description": "Barangay South Signal Village Online Request (including the 2.5% service charge)",
-                "line_items": [
-                    {
-                        "currency": "PHP",
-                        "amount":' . intval(($request->price * 0.025 + $request->price) * 100)  . ',
-                        "name": "' . str_replace("\r\n", " ", $request->request_type_name) . "(" . $request->request_description . ')",
-                        "quantity": 1,
-                        "description": "' . $request->request_description . '"
-                    }
-                ],
-                "reference_number": "' . $request->reference_key . '",
-                "payment_method_types": ["gcash", "grab_pay", "paymaya"],
-                "success_url": "' . ENV('APP_URL') . '/paymongo_success",
-                "cancel_url":"' . ENV('APP_URL') . '/payment"
-                
-            }
+            return redirect()->route('userDashboard');
         }
-    }',
-            'headers' => [
-                'Content-Type' => 'application/json',
-                'accept' => 'application/json',
-                'authorization' => 'Basic c2tfdGVzdF91RmF5VmQ0OW1RYU5jRG9FZEVyWU12aWY6',
-            ],
-        ]);
+        if ($request->request_status == "READY FOR PAYMENT") {
 
-        $responseData = json_decode($response->getBody(), true);
-        // Access the 'checkout_url' attribute        
-        $checkoutUrl = $responseData['data']['attributes']['checkout_url'];
+            $fullname = $request->first_name . ' ' . $request->middle_name . ' ' . $request->last_name;
+            $client = new \GuzzleHttp\Client();
 
-        return redirect($checkoutUrl);
+            $response = $client->request('POST', 'https://api.paymongo.com/v1/checkout_sessions', [
+                'body' => '{
+            "data": {
+                "attributes": {
+                    "billing":{
+                        "name":"' . $fullname . '",
+                        "email":"' . $request->email . '",
+                        "phone":"' . $request->mobile_num . '"},
+                    "send_email_receipt": true,
+                    "show_description": true,
+                    "show_line_items": true,
+                    "description": "Barangay South Signal Village Online Request (including the 2.5% service charge)",
+                    "line_items": [
+                        {
+                            "currency": "PHP",
+                            "amount":' . intval(($request->price * 0.025 + $request->price) * 100)  . ',
+                            "name": "' . str_replace("\r\n", " ", $request->request_type_name) . "(" . $request->request_description . ')",
+                            "quantity": 1,
+                            "description": "' . $request->request_description . '"
+                        }
+                    ],
+                    "reference_number": "' . $request->reference_key . '",
+                    "payment_method_types": ["gcash", "grab_pay", "paymaya"],
+                    "success_url": "' . ENV('APP_URL') . '/paymongo_success/' . $id . '",
+                    "cancel_url":"' . ENV('APP_URL') . '/paymongo_failed/' . $id . '"
+                    
+                }
+            }
+        }',
+                'headers' => [
+                    'Content-Type' => 'application/json',
+                    'accept' => 'application/json',
+                    'authorization' => 'Basic c2tfdGVzdF91RmF5VmQ0OW1RYU5jRG9FZEVyWU12aWY6',
+                ],
+            ]);
+
+            $responseData = json_decode($response->getBody(), true);
+            // Access the 'checkout_url' attribute        
+            $checkoutUrl = $responseData['data']['attributes']['checkout_url'];
+
+
+
+            Payment::create([
+                'request_id' => $request->request_id,
+                "resident_id" => $request->id,
+                'payment_ref' => $responseData['data']['id'],
+                'payment_status' => 'PENDING PAYMENT',
+                'payment_method' => '',
+                'request_price' => $request->price,
+                'service_charge' => $request->price * 0.025,
+            ]);
+
+
+            return redirect($checkoutUrl);
+        }
+
+        return redirect()->route('userDashboard');
     }
 
+    public function paymongo_failed($id)
+    {
 
-    public function paymongo_success()
+        $info_request = Requests::join('users', 'users.id', '=', 'requests.resident_id')
+            ->join('request_type', 'request_type.request_type_id', '=', 'requests.request_type_id')
+            ->select('users.*', 'requests.*', 'request_type.*', 'requests.created_at as request_date')
+            ->where('reference_key', $id)->get()
+            ->first();
+
+
+        if ($info_request->request_status == 'READY FOR PAYMENT') {
+            $ref = Payment::where('request_id', $info_request->request_id)->first()->payment_ref;
+
+
+            $client = new \GuzzleHttp\Client();
+
+            $response = $client->request('GET', 'https://api.paymongo.com/v1/checkout_sessions/' . $ref . '', [
+                'headers' => [
+                    'accept' => 'application/json',
+                    'authorization' => 'Basic c2tfdGVzdF91RmF5VmQ0OW1RYU5jRG9FZEVyWU12aWY6',
+                ],
+            ]);
+
+            $responseData = json_decode($response->getBody(), true);
+
+
+            $request = Requests::where('reference_key', $id)->first();
+
+            if ($request) {
+                // Modify the request_status field
+                $request->request_status = 'PAID';
+
+                // Save the changes to the database
+                $request->save();
+            }
+
+            Payment::create([
+                'request_id' => $request->request_id,
+                "resident_id" => $info_request->id,
+                'payment_ref' => $responseData['data']['id'],
+                'payment_status' => 'FAILED PAYMENT',
+                'payment_method' => $responseData['data']['attributes']['payment_method_used'],
+                'request_price' => $request->price,
+                'service_charge' => $request->price * 0.025,
+            ]);
+
+            Alert::error('PAYMENT UNSUCCESSFUL', 'Sorry, your payment could not be processed. Please check your payment details and try again.')->showConfirmButton('OK', '#AA0F0A');
+            return redirect()->route('userDashboard');
+        }
+        Alert::error('UNAUTHORIZED PAGE', '')->showConfirmButton('Confirm', '#AA0F0A');
+
+        return redirect()->route('userDashboard');
+    }
+
+    public function paymongo_success($id)
     {
 
 
-        dd('success');
+
+        $info_request = Requests::join('users', 'users.id', '=', 'requests.resident_id')
+            ->join('request_type', 'request_type.request_type_id', '=', 'requests.request_type_id')
+            ->select('users.*', 'requests.*', 'request_type.*', 'requests.created_at as request_date')
+            ->where('reference_key', $id)->get()
+            ->first();
+
+
+        if ($info_request->request_status == 'READY FOR PAYMENT') {
+            $ref = Payment::where('request_id', $info_request->request_id)->first()->payment_ref;
+
+
+            $client = new \GuzzleHttp\Client();
+
+            $response = $client->request('GET', 'https://api.paymongo.com/v1/checkout_sessions/' . $ref . '', [
+                'headers' => [
+                    'accept' => 'application/json',
+                    'authorization' => 'Basic c2tfdGVzdF91RmF5VmQ0OW1RYU5jRG9FZEVyWU12aWY6',
+                ],
+            ]);
+
+            $responseData = json_decode($response->getBody(), true);
+
+
+            $request = Requests::where('reference_key', $id)->first();
+
+            if ($request) {
+                // Modify the request_status field
+                $request->request_status = 'PAID';
+
+                // Save the changes to the database
+                $request->save();
+            }
+
+            Request_History::create([
+                'request_id' => $request->request_id,
+                "processed_by" =>  "Paymongo",
+                'request_id' => $request->request_id,
+                'request_status' => 'PAID',
+            ]);
+
+            Payment::create([
+                'request_id' => $request->request_id,
+                "resident_id" => $info_request->id,
+                'payment_ref' => $responseData['data']['id'],
+                'payment_status' => 'PAID',
+                'payment_method' => $responseData['data']['attributes']['payment_method_used'],
+                'request_price' => $request->price,
+                'service_charge' => $request->price * 0.025,
+            ]);
+
+            Alert::SUCCESS('PAYMENT SUCCESSFUL', '')->showConfirmButton('Confirm', '#AA0F0A');
+            return redirect()->route('userDashboard');
+        }
+        Alert::error('UNAUTHORIZED PAGE', '')->showConfirmButton('Confirm', '#AA0F0A');
+
+        return redirect()->route('userDashboard');
     }
 
 

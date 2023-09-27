@@ -11,6 +11,7 @@ class Payment extends Model
 {
     use HasApiTokens, HasFactory, Notifiable;
     protected $table = 'payment';
+    protected $primaryKey = 'payment_id';
     protected $guarded = [
         
     ];

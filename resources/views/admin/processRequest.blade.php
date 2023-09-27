@@ -144,9 +144,9 @@
                 @endif
                 <td class="text-center">
                     @if($request->request_status == 'PENDING' || $request->request_status == 'PROCESSING')
-                    <a href="/process-pending/{{$request->request_id}}" type="submit" class="btn btn-dark btn-sm"><i class="bi bi-arrow-clockwise"></i> Process</a>
+                    <a href="process-pending/{{$request->request_id}}" type="submit" class="btn btn-dark btn-sm"><i class="bi bi-arrow-clockwise"></i> Process</a>
                     @endif @if($request->request_status == 'READY FOR PAYMENT' )
-                    <a href="/process_RFP/{{$request->request_id}}" type="submit" class="btn btn-dark btn-sm"><i class="bi bi-arrow-clockwise"></i> Process</a>
+                    <a href="process_RFP/{{$request->request_id}}" type="submit" class="btn btn-dark btn-sm"><i class="bi bi-arrow-clockwise"></i> Process</a>
                     @endif
                 </td>
             </tr>

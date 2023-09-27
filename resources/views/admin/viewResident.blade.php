@@ -143,7 +143,7 @@
                 <td class="text-lowercase" style="text-transform: uppercase;">{{$user->email}}</td>
                 <td class="text-center">
 
-                    <a href="/viewResident/{{$user->id}}" type="submit" class="btn btn-success btn-sm"><i class="bi bi-eye-fill"></i> View</a>
+                    <a href="viewResident/{{$user->id}}" type="submit" class="btn btn-success btn-sm"><i class="bi bi-eye-fill"></i> View</a>
                 </td>
                 @foreach($admin_info as $admin)
                 @if($admin->role == 'Administrator')
@@ -243,7 +243,7 @@
                                     confirmButtonColor: "#AA0F0A",
                                 }).then((result) => {
                                     if (result.value) {
-                                        window.location.href = "/listresident";
+                                        window.location.href = "listresident";
                                     }
                                 });
 
@@ -257,7 +257,7 @@
                                     confirmButtonColor: "#AA0F0A",
                                 }).then((result) => {
                                     if (result.value) {
-                                        window.location.href = "/listresident";
+                                        window.location.href = "listresident";
                                     }
                                 });
 
@@ -269,7 +269,7 @@
                         });
                 }
             }).then((result) => {
-                window.location.href = "/listresident";
+                window.location.href = "listresident";
             });;
         });
     });

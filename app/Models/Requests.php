@@ -12,5 +12,6 @@ class Requests extends Model
 
     use HasApiTokens, HasFactory, Notifiable;
     protected $table = 'requests';
+    protected $primaryKey = 'request_id';
     protected $guarded = [];
 }

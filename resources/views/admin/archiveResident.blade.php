@@ -48,7 +48,7 @@
                 <td class="text-lowercase" style="text-transform: uppercase;">{{$user->email}}</td>
                 <td class="text-center">
 
-                    <a href="/viewResident/{{$user->id}}" type="submit" class="btn btn-success btn-sm"><i class="bi bi-eye-fill"></i> View</a>
+                    <a href="viewResident/{{$user->id}}" type="submit" class="btn btn-success btn-sm"><i class="bi bi-eye-fill"></i> View</a>
                 </td>
                 @foreach($admin_info as $admin)
                 @if($admin->role == 'Administrator')

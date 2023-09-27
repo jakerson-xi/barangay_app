@@ -154,7 +154,7 @@
                 <td style="text-transform: uppercase;">{{$request->employee_name}}</td>
                 @endif
                 <td class="text-center">
-                    <a href="/viewRequest/{{$request->reference_key}}" type="submit" class="btn btn-dark btn-sm"><i class="bi bi-eye-fill"></i> View</a>
+                    <a href="viewRequest/{{$request->reference_key}}" type="submit" class="btn btn-dark btn-sm"><i class="bi bi-eye-fill"></i> View</a>
                 </td>
                 <td class="hide-column" style="text-transform: uppercase;">
                     @if($request->request_status == 'PENDING')

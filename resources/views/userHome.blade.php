@@ -101,7 +101,7 @@
                         <div class="p-3 text-center shadow p-3  bg-body rounded">
                             <i class="bi bi-ticket-perforated" style="font-size:xx-large;"></i>
                             <p>SUBMIT<br>CONCERN</p>
-                            @if($request_type[5]->isEnabled == '1' && $user->expiry > date('YYYY-mm-dd') || $user->expiry == "")
+                            @if($request_type[5]->isEnabled == '1' )
                             <a href="create-concern" data-bs-toggle="tooltip" data-bs-placement="top" title="{{$request_type[5]->request_type_name}}" type="button" class="btn" style="background-color:#e4312b; color:white">Click To Apply</a>
                             @else
                             <span data-bs-toggle="tooltip" data-bs-placement="top" Title="{{$request_type[5]->request_type_name}} IS CURRENTLY UNAVAILABLE">

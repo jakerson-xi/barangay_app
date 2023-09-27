@@ -24,7 +24,7 @@
             <div class="row">
                 <div class="col-7">
                     <div class="form-check">
-                        <label class="form-label">Document Status:</label><br>
+                        <label class="form-label">Concern Status:</label><br>
                         <div class="form-check form-check-inline">
                             <input class="form-check-input filter-checkbox" type="checkbox" value="PENDING">
                             <label class="form-check-label" for="inlineCheckbox1">
@@ -148,7 +148,7 @@
                 <td style="text-transform: uppercase;">{{$request->concern_processed_by}}</td>
                 @endif
                 <td class="text-center">
-                    <a href="/viewconcern/{{$request->reference_key}}" type="submit" class="btn btn-dark btn-sm"><i class="bi bi-eye-fill"></i> View</a>
+                    <a href="viewconcern/{{$request->reference_key}}" type="submit" class="btn btn-dark btn-sm"><i class="bi bi-eye-fill"></i> View</a>
                 </td>
                 <td class="hide-column" style="text-transform: uppercase;">
                     @if($request->concern_status == 'PENDING')

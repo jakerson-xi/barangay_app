@@ -275,6 +275,11 @@
                             @if($request->request_status == 'PROCESSING')
                             <div class="badge bg-info text-wrap" style="width: 6rem;background-color:#0d6efd">PROCESSING</div>
                             @endif
+                            @if($request->request_status == 'PAID')
+                            <div class="badge  text-wrap" style="width: 6rem; background-color:steelblue">
+                                <i class="bi bi-check-circle-fill"></i> PAID
+                            </div>
+                            @endif
                         </div>
                         <p class="fs-4 fw-semibold text-center">PERSONAL INFORMATION</p>
                         <hr>
@@ -440,9 +445,11 @@
 
                     </div>
                     @endif
+                    @if($request->request_status == 'READY FOR PAYMENT')
                     <div class="shadow p-4 mb-3 bg-body rounded text-center">
                         <a href="/paymongo/{{$request->reference_key}}" id="btn " type="submit" style="" class="btn d-block mx-auto w-25 btn-success">PROCEED TO PAYMENT</a>
                     </div>
+                    @endif
                 </div>
             </div>
 

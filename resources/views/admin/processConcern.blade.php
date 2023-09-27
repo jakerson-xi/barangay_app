@@ -22,7 +22,7 @@
                 <div class="row">
                     <div class="col-6">
                         <div class="form-check">
-                            <label class="form-label">Document Status:</label><br>
+                            <label class="form-label">Concern Status:</label><br>
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input filter-checkbox" type="checkbox" value="PENDING">
                                 <label class="form-check-label" for="inlineCheckbox1">
@@ -35,12 +35,6 @@
                                     <p class="badge bg-info text-wrap status-class" style="width: 6rem;background-color:#0d6efd">PROCESSING</p>
                                 </label>
                             </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input filter-checkbox" type="checkbox" value="READY FOR PAYMENT">
-                                <label class="form-check-label" for="inlineCheckbox1">
-                                    <p class="badge bg-SUCCESS text-wrap status-class" style="background-color:#198754">READY FOR PAYMENT</p>
-                                </label>
-                            </div>
                         </div>
                     </div>
                     <div class="col-6">
@@ -48,11 +42,14 @@
                         <div class="md-flex mb-3 col">
                             <select id="docTypeDrop" class="form-select form-select-sm md-flex mx-auto w-50" aria-label="Default select example">
                                 <option value='' selected>All</option>
-                                <option value="BARANGAY ID">BARANGAY ID</option>
-                                <option value="COMMUNITY TAX CERTIFICATE">COMMUNITY TAX CERTIFICATE</option>
-                                <option value="BARANGAY CLEARANCE">BARANGAY CLEARANCE</option>
-                                <option value="BARANGAY CERTIFICATION">BARANGAY CERTIFICATION</option>
-                                <option value="ISSUANCE OF BUSINESS CLEARANCE">ISSUANCE OF BUSINESS CLEARANCE</option>
+                                <option value="Infrastructure">Infrastructure (Infrastraktura) (e.g electricity, water, street lights, etc.)</option>
+                                <option value="Transportation">Transportation (Transportasyon)</option>
+                                <option value="Environmental">Environmental (Pangkalikasan) </option>
+                                <option value="Health & Sanitation">Health & Sanitation (Pangkalusugan)</option>
+                                <option value="Safety & Security">Safety & Security (Pangkaligtasan)</option>
+                                <option value="Social Welfare">Social Welfare (barangay assistance)</option>
+                                <option value="Resident Account">Resident Account</option>
+                                <option value="Others">Others (at iba pa)</option>
                             </select>
                         </div>
                     </div>
@@ -136,7 +133,7 @@
                 @endif
                 <td class="text-center">
 
-                    <a href="/process-concern-pending/{{$request->concern_id }}" type="submit" class="btn btn-dark btn-sm"><i class="bi bi-arrow-clockwise"></i> Process</a>
+                    <a href="process-concern-pending/{{$request->concern_id }}" type="submit" class="btn btn-dark btn-sm"><i class="bi bi-arrow-clockwise"></i> Process</a>
 
                 </td>
             </tr>

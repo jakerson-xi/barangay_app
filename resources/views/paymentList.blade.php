@@ -700,7 +700,7 @@
 
     <body>
         @foreach($user_info as $user)
-        <!-- REQUEST -->
+        <!-- READY FOR PAYMENT -->
         <div class="container overflow-hidden mt-3">
             <div class="row gx-5">
                 <div class="col">
@@ -750,6 +750,59 @@
 
         </div>
 
+
+
+     
+        <!-- PAID -->
+        <div class="container overflow-hidden mt-3">
+            <div class="row gx-5">
+                <div class="col">
+                    <div class="p-4 bg-light border mb-3 bg-body rounded shadow border border-dark">
+
+                        <h3 class="">Paid</h3>
+                        <hr>
+                        <div class="table-responsive">
+                            <table id="concern" class="table table-bordered table-hover " style="width:100%">
+                                <thead class="" style="background-color: #AA0F0A; color:white">
+                                    <tr>
+                                        <th class="text-center">Ref. Key</th>
+                                        <th class="text-center">TYPE OF REQUEST</th>
+                                        <th class="text-center">DATE & TIME</th>
+                                        <th class="text-center">EXPIRATION</th>
+                                        <th class="text-center">Action:</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @forEach($paid as $paid)
+
+                                    <tr>
+                                        <td style="text-transform: uppercase;">{{$paid->reference_key}}</td>
+                                        <td style="text-transform: uppercase; ">{{$paid->request_type_name. " (". $paid->request_description.")"}}</td>
+                                        <td style="text-transform: uppercase; ">{{$paid->request_date}}</td>
+
+                                        <!-- <td class="text-center" style="text-transform: uppercase; ">
+                                            <div class="badge bg-SUCCESS text-wrap" style="width: 6rem;">
+                                                READY FOR PAYMENT
+                                            </div>
+                                        </td> -->
+                                        <td style="text-transform: uppercase; ">{{$paid->expiration}}</td>
+                                        <td class="text-center">
+                                            <a href="paid/{{$paid->reference_key}}" type="button" class="btn btn-dark"><i class="bi bi-cash-stack"></i> View</a>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+ 
         @endforeach
     </body>
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
@@ -766,17 +819,18 @@
                     [2, 'asc']
                 ]
             });
-        });
-        $(document).ready(function() {
             $('#concern').DataTable({
                 language: {
                     emptyTable: "No Transaction yet."
                 },
                 responsive: true,
                 order: [
-                    [5, 'asc']
+                    [2, 'asc']
                 ]
             });
+        });
+        $(document).ready(function() {
+
         });
     </script>
 
