@@ -30,7 +30,8 @@
                         <div class="p-3 text-center shadow  bg-body rounded">
                             <i class="bi bi-person-vcard" style="font-size:xx-large;"></i>
                             <p>{{$request_type[0]->request_type_name}}<br>(RESIDENT ID CARD)</p>
-                            @if($request_type[0]->isEnabled == '1' && $user->expiry > date('YYYY-mm-dd') || $user->expiry == "")
+                           
+                            @if($request_type[0]->isEnabled == '1' && ($user->expiry > date('YYYY-mm-dd') || $user->expiry == ""))
                             <a href="request-barangay-id" data-bs-toggle="tooltip" data-bs-placement="top" title="REQUEST {{$request_type[0]->request_type_name}}" type="button" class="btn " style="background-color:#e4312b; color:white">Click To Apply</a>
                            
                             @else
@@ -45,7 +46,7 @@
                         <div class="p-3 text-center shadow p-3  bg-body rounded">
                             <i class="bi bi-bank" style="font-size:xx-large;"></i>
                             <p>{{$request_type[1]->request_type_name}}<br>(CEDULA)</p>
-                            @if($request_type[1]->isEnabled == '1' && $user->expiry > date('YYYY-mm-dd') || $user->expiry == "")
+                            @if($request_type[1]->isEnabled == '1' && ($user->expiry > date('YYYY-mm-dd') || $user->expiry == ""))
                             <a href="request-barangay-cedula" data-bs-toggle="tooltip" data-bs-placement="top" title="REQUEST {{$request_type[1]->request_type_name}}" type="button" class="btn" style="background-color:#e4312b; color:white">Click To Apply</a>
                             @else
                             <span data-bs-toggle="tooltip" data-bs-placement="top" Title="REQUESTING {{$request_type[1]->request_type_name}} IS CURRENTLY UNAVAILABLE">
@@ -58,7 +59,7 @@
                         <div class="p-3 text-center shadow p-3  bg-body rounded">
                             <i class="bi bi-card-text" style="font-size:xx-large;"></i>
                             <p>BARANGAY<BR>CLEARANCE</p>
-                            @if($request_type[2]->isEnabled == '1' && $user->expiry > date('YYYY-mm-dd') || $user->expiry == "")
+                            @if($request_type[2]->isEnabled == '1' && ($user->expiry > date('YYYY-mm-dd') || $user->expiry == ""))
                             <a href="request-barangay-clearance" data-bs-toggle="tooltip" data-bs-placement="top" title="REQUEST {{$request_type[2]->request_type_name}}" type="button" class="btn" style="background-color:#e4312b; color:white">Click To Apply</a>
                             @else
                             <span data-bs-toggle="tooltip" data-bs-placement="top" Title="REQUESTING {{$request_type[2]->request_type_name}} IS CURRENTLY UNAVAILABLE">
@@ -75,7 +76,7 @@
                         <div class="p-3 text-center shadow p-3  bg-body rounded">
                             <i class="bi bi-card-heading" style="font-size:xx-large;"></i>
                             <p>BARANGAY<br>CERTIFICATION</p>
-                            @if($request_type[3]->isEnabled == '1' && $user->expiry > date('YYYY-mm-dd') || $user->expiry == "")
+                            @if($request_type[3]->isEnabled == '1' && ($user->expiry > date('YYYY-mm-dd') || $user->expiry == ""))
                             <a href="request-barangay-certification" data-bs-toggle="tooltip" data-bs-placement="top" title="REQUEST {{$request_type[3]->request_type_name}}" type="button" class="btn" style="background-color:#e4312b; color:white">Click To Apply</a>
                             @else
                             <span data-bs-toggle="tooltip" data-bs-placement="top" Title="REQUESTING {{$request_type[3]->request_type_name}} IS CURRENTLY UNAVAILABLE">
@@ -88,7 +89,7 @@
                         <div class="p-3 text-center shadow p-3  bg-body rounded">
                             <i class="bi bi-buildings" style="font-size:xx-large;"></i>
                             <p>ISSUANCE OF<br>BUSINESS CLEARANCE</p>
-                            @if($request_type[4]->isEnabled == '1' && $user->expiry > date('YYYY-mm-dd') || $user->expiry == "")
+                            @if($request_type[4]->isEnabled == '1' && ($user->expiry > date('YYYY-mm-dd') || $user->expiry == ""))
                             <a href="request-business-clearance" data-bs-toggle="tooltip" data-bs-placement="top" title="REQUEST {{$request_type[4]->request_type_name}}" type="button" class="btn" style="background-color:#e4312b; color:white">Click To Apply</a>
                             @else
                             <span data-bs-toggle="tooltip" data-bs-placement="top" Title="REQUESTING {{$request_type[4]->request_type_name}} IS CURRENTLY UNAVAILABLE">

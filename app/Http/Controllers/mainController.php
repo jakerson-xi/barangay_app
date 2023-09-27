@@ -757,7 +757,7 @@ class mainController extends Controller
             // Access the 'checkout_url' attribute        
             $checkoutUrl = $responseData['data']['attributes']['checkout_url'];
 
-
+            
 
             Payment::create([
                 'request_id' => $request->request_id,
