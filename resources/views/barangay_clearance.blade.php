@@ -246,6 +246,7 @@
                         <div class="mb-2 me-2">
                             <label for="Image" class="form-label"></label>
                             <input class="form-control me-3 MB-3" type="file" id="formFile" name="file" onchange="preview()">
+                            <p class="fw-bolder fs-6 fst-italic  text-danger"><i class="bi bi-exclamation-circle"></i> Maximum allowed file size 20MB</p>
                             <div class="invalid-feedback m-3">
                                 Please attach your ID.
                             </div>

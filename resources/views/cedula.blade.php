@@ -207,8 +207,7 @@
                             <input class="form-control mb-2" value="Based on your income (batay sa iyong sahod)" type="text" readonly />
                             <input type="hidden" value="" name="price" />
 
-                            <p class="fw-bolder fs-6 fst-italic  text-danger"><i class="bi bi-exclamation-circle"></i>
-                                Payment should be done in barangay office.</p>
+                            
 
                         </div>
                     </div>
@@ -242,6 +241,7 @@
                         <div class="mb-2 me-2">
                             <label for="Image" class="form-label"></label>
                             <input class="form-control me-3 " type="file" id="formFile" name="file" onchange="preview()">
+                            <p class="fw-bolder fs-6 fst-italic  text-danger"><i class="bi bi-exclamation-circle"></i> Maximum allowed file size 20MB</p>
                             <div class="invalid-feedback m-3">
                                 Please attach your ID.
                             </div>
