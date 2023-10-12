@@ -979,7 +979,8 @@ class mainController extends Controller
         $user_auth = Auth::user();
         $user_info = DB::table('users')->where('id', $user_auth->id)->get();
         $request = Requests::join('users', 'users.id', '=', 'requests.resident_id')
-            ->join('request_type', 'request_type.request_type_id', '=', 'requests.request_type_id')->select('users.*', 'requests.*', 'request_type.*', 'requests.created_at as request_date')->where('reference_key', $id)->get($id);
+            ->join('request_type', 'request_type.request_type_id', '=', 'requests.request_type_id')->select('users.*', 'requests.*', 'request_type.*', 'requests.created_at as request_date')
+            ->where('reference_key', $id)->get($id);
 
         return view("userviewRequest", ['user_info' => $user_info, 'request' => $request]);
     }

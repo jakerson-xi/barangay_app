@@ -24,6 +24,41 @@ class adminController extends Controller
 {
 
 
+    public function viewPayment($ref)
+    {
+
+        $user = Auth::user();
+        $admin_info = User::where('id', $user->id)->get();
+
+        $transaction_info = Payment::where('payment_ref', $ref)
+            ->join('requests', 'requests.request_id', '=', 'payment.request_id')
+            ->join('users', 'users.id', '=', 'payment.resident_id')
+            ->join('request_type', 'request_type.request_type_id', '=', 'requests.request_type_id')
+            ->select(
+                'payment.*',
+                'request_type.*',
+                'users.*',
+                'requests.*',
+                'payment.created_at as payment_date',
+                'requests.created_at as request_date'
+            )
+            ->first();
+        // dd($transaction_info);
+
+        $client = new \GuzzleHttp\Client();
+
+        $response = $client->request('GET', 'https://api.paymongo.com/v1/payments/'. $ref .'', [
+            'headers' => [
+                'accept' => 'application/json',
+                'authorization' => 'Basic c2tfdGVzdF91RmF5VmQ0OW1RYU5jRG9FZEVyWU12aWY6',
+            ],
+        ]);
+
+        $responseData = json_decode($response->getBody(), true)['data']['attributes']['billing'];
+
+        return view('admin/processOnlinePayment', ['admin_info' => $admin_info, 'payment' => $transaction_info,'billing' => $responseData]);
+    }
+
     public function deact_admin(Request $request)
     {
         $user_status =  DB::table('users')->where('id', $request->id)->first();
@@ -1351,9 +1386,9 @@ class adminController extends Controller
     public function paymongo_details($id)
     {
 
-        
 
-        return redirect('https://dashboard.paymongo.com/payments/'.$id );
+
+        return redirect('https://dashboard.paymongo.com/payments/' . $id);
     }
 
     public function processRequest()
