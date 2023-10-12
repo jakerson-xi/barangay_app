@@ -85,9 +85,9 @@
                 <td style="text-transform: uppercase;">{{$request->payment_created_at}}</td>
                 <td style="text-transform: uppercase" class="text-center">₱ {{number_format($request->request_price, 2, '.', '')}}</td>
                 <td style="text-transform: uppercase" class="text-center">₱ {{number_format($request->service_charge, 2, '.', '')}}</td>
-                <td style="text-transform: uppercase" class="text-center fw-bold ">₱ {{$request->service_charge + $request->request_price}}</td>
+                <td style="text-transform: uppercase" class="text-center fw-bold ">₱ {{number_format($request->service_charge + $request->request_price, 2, '.', '')}}</td>
                 <td style="text-transform: uppercase; " class="text-center">
-                    <a href="" type="submit" class="btn btn-success btn-sm"><i class="bi bi-check2-circle"></i> Confirm</a>
+                    <a href="{{url('viewPayment')}}/{{$request->payment_ref}}" type="submit" class="btn btn-success btn-sm"><i class="bi bi-check2-circle"></i> Confirm</a>
                 </td>
             </tr>
             @endforeach

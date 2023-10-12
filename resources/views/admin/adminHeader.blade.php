@@ -205,10 +205,10 @@
                     <i class="bi bi-cash-stack"></i> Manage Payment
                     </button>
                     <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownMenuButton1">
-                        <li><a class="dropdown-item" href="{{url('listOnlinePayment')}}">List of Payment</a></li>
+                        <li><a class="dropdown-item" href="{{url('dashboard')}}">List of Payment</a></li>
                         <hr class="dropdown-divider">
-                        <li><a class="dropdown-item" href="">Process Onsite Payment Request</a></li>
-                        <li><a class="dropdown-item" href="">Process Online Payment Request</a></li>
+                        <li><a class="dropdown-item" href="{{url('dashboard')}}">Process Onsite Payment Request</a></li>
+                        <li><a class="dropdown-item" href="{{url('listOnl inePayment')}}">Process Online Payment Request</a></li>
                     </ul>
                 </div>
                 @endif

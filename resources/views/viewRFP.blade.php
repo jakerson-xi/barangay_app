@@ -457,14 +457,14 @@
                     </div>
                     <!-- Modal -->
                     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered modal-lg">
+                        <div class="modal-dialog modal-dialog-centered modal-xl">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h1 class="modal-title fs-5" id="exampleModalLabel">Please choose your mode of payment:</h1>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    <p class="text-center fs-5 text-primary mb-0 fw-semibold">Transaction breakdown</p>
+                                    <p class="text-center fs-5 text-danger mb-0 fw-semibold">Transaction breakdown</p>
                                     <p class="text-center fs-6  text-secondary mb-0 fst-italic">Customer pays via e-wallets. All fees are VAT-inclusive. </p>
                                     <hr>
                                     <div class="container">
@@ -473,23 +473,27 @@
 
                                                 <table class="table text-center">
 
-                                                    <td rowspan="2" style="width:25%">
+                                                    <td rowspan="2" style="width:10%">
                                                         <img src="https://assets-global.website-files.com/60c6db70dedd88514dfdf8e9/6149e904ea884776b634fd9d_GCash_Horizontal%20-%20Full%20Blue%20(Transparent).png" class="img-thumbnail" alt="...">
 
-                                                        <div class="badge bg-success text-wrap mt-2" style="width: 6rem;">
-                                                            2.5%
+                                                        <div class="badge text-wrap mt-2" style="width: 9rem;background-color:slategray">
+                                                            2.5% (Service Charge)
                                                         </div>
                                                     </td>
                                                     <td>
-                                                        <p class="text-center fs-5 fw-semibold">Request Price:</p>
-                                                        <p class=" ">Php. {{$formattedNumber = number_format($request->price, 2, '.', '')}}</p>
+                                                        <p class="text-center fw-semibold">Request Price:</p>
+                                                        <p class=" ">₱ {{ number_format($request->price, 2, '.', '')}}</p>
                                                     </td>
                                                     <td>
-                                                        <p class="text-center fs-5 fw-semibold">GCash Fee:</p>
-                                                        <p class=" ">Php. {{$formattedNumber = number_format(($request->price * 1.0256), 2, '.', '')}}</p>
+                                                        <p class="text-center fw-semibold">GCash Fee:</p>
+                                                        <p class=" ">₱  {{number_format(($request->price * 0.0256), 2, '.', '')}}</p>
                                                     </td>
-                                                    <td class="text-center">
-                                                        <a href="/paymongo/{{$request->reference_key}}/gcash" id="btn " type="submit" style="" class="btn btn-primary">PAY</a>
+                                                    <td>
+                                                        <p class="text-center fw-bold">Total Fee:</p>
+                                                        <p class="fw-bold">₱  {{number_format(($request->price * 1.0256) , 2, '.', '')}}</p>
+                                                    </td>
+                                                    <td class="text-center align-middle">
+                                                        <a href="/paymongo/{{$request->reference_key}}/gcash" id="btn " type="submit" style="" class="btn btn-success">PAY</a>
                                                     </td>
                                                 </table>
                                             </div>
@@ -497,51 +501,57 @@
 
                                                 <table class="table text-center">
 
-                                                    <td rowspan="2" style="width:25%">
+                                                    <td rowspan="2" style="width:10%">
                                                         <img src="https://assets-global.website-files.com/60c6db70dedd88514dfdf8e9/6149e904ea8847973534fda6_GCash_Horizontal---Full-Blue-(Transparent).png" class="img-thumbnail" alt="...">
 
-                                                        <div class="badge bg-success text-wrap mt-2" style="width: 6rem;">
-                                                            2.2%
+                                                        <div class="badge text-wrap mt-2" style="width: 9rem;background-color:slategray">
+                                                            2.2% (Service Charge)
                                                         </div>
                                                     </td>
 
                                                     <td>
-                                                        <p class="text-center fs-5 fw-semibold">Request Price:</p>
-                                                        <p class=" ">Php. {{$formattedNumber = number_format($request->price, 2, '.', '')}}</p>
+                                                        <p class="text-center  fw-semibold">Request Price:</p>
+                                                        <p class=" ">₱ {{$formattedNumber = number_format($request->price, 2, '.', '')}}</p>
                                                     </td>
                                                     <td>
-                                                        <p class="text-center fs-5 fw-semibold">GrabPay Fee:</p>
-                                                        <p class=" ">Php. {{$formattedNumber = number_format(($request->price * 1.0225), 2, '.', '')}}</p>
+                                                        <p class="text-center  fw-semibold">GrabPay Fee:</p>
+                                                        <p class=" ">₱ {{$formattedNumber = number_format(($request->price * 0.0225), 2, '.', '')}}</p>
                                                     </td>
-                                                    <td class="text-center">
-                                                        <a href="/paymongo/{{$request->reference_key}}/grab_pay" id="btn " type="submit" style="" class="btn btn-primary">PAY</a>
+                                                    <td>
+                                                        <p class="text-center fw-bold">Total Fee:</p>
+                                                        <p class="fw-bold">₱ {{$formattedNumber = number_format(($request->price * 1.0225), 2, '.', '')}}</p>
+                                                    </td>
+                                                    <td class="text-center align-middle">
+                                                        <a href="/paymongo/{{$request->reference_key}}/grab_pay" id="btn " type="submit" style="" class="btn btn-success">PAY</a>
                                                     </td>
                                                 </table>
 
                                             </div>
                                             <div class="col-12 mb-3">
-
-
                                                 <table class="table text-center">
 
-                                                    <td rowspan="2" style="width:25%">
+                                                    <td rowspan="1" style="width:10%">
                                                         <img src="https://assets-global.website-files.com/60c6db70dedd88514dfdf8e9/62ff6cd412d11d5bb2b55342_maya-logo.png" class="img-thumbnail" alt="...">
 
-                                                        <div class="badge bg-success text-wrap mt-2" style="width: 6rem;">
-                                                            2.0%
+                                                        <div class="badge text-wrap mt-2" style="width: 9rem;background-color:slategray">
+                                                            2.0% (Service Charge)
                                                         </div>
                                                     </td>
 
                                                     <td>
-                                                        <p class="text-center fs-5 fw-semibold">Request Price:</p>
-                                                        <p class=" ">Php. {{$formattedNumber = number_format($request->price, 2, '.', '')}}</p>
+                                                        <p class="text-center fw-semibold">Request Price:</p>
+                                                        <p class=" ">₱ {{$formattedNumber = number_format($request->price, 2, '.', '')}}</p>
                                                     </td>
                                                     <td>
-                                                        <p class="text-center fs-5 fw-semibold">Maya Fee:</p>
-                                                        <p class=" ">Php. {{$formattedNumber = number_format(($request->price * 1.021), 2, '.', '')}}</p>
+                                                        <p class="text-center fw-semibold">Maya Fee:</p>
+                                                        <p class=" ">₱ {{$formattedNumber = number_format(($request->price * 0.021), 2, '.', '')}}</p>
                                                     </td>
-                                                    <td class="text-center">
-                                                        <a href="/paymongo/{{$request->reference_key}}/paymaya" id="btn " type="submit" style="" class="btn btn-primary">PAY</a>
+                                                    <td>
+                                                        <p class="text-center fw-bold">Total Fee:</p>
+                                                        <p class=" fw-bold">₱ {{$formattedNumber = number_format(($request->price * 1.021), 2, '.', '')}}</p>
+                                                    </td>
+                                                    <td class="text-center align-middle">
+                                                        <a href="/paymongo/{{$request->reference_key}}/paymaya" id="btn " type="submit" style="" class="btn btn-success">PAY</a>
                                                     </td>
                                                 </table>
 
@@ -555,7 +565,7 @@
 
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Close</button>
                                 </div>
                             </div>
                         </div>
