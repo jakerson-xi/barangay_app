@@ -199,6 +199,19 @@
                     </ul>
                 </div>
                 @endif
+                @if($admin->role == 'Barangay Treasurer')
+                <div class="dropdown">
+                    <button style="width:100%;text-align: justify;" class="btn btn-primary1 dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="bi bi-cash-stack"></i> Manage Payment
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownMenuButton1">
+                        <li><a class="dropdown-item" href="{{url('listOnlinePayment')}}">List of Payment</a></li>
+                        <hr class="dropdown-divider">
+                        <li><a class="dropdown-item" href="">Process Onsite Payment Request</a></li>
+                        <li><a class="dropdown-item" href="">Process Online Payment Request</a></li>
+                    </ul>
+                </div>
+                @endif
                 @if($admin->role == 'Administrator')
                 <div class="dropdown">
                     <button style="width:100%;text-align: justify;" class="btn btn-primary1 dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">

@@ -416,7 +416,7 @@
                         <div class="row my-3 text-center">
                             <div class="col-md-6 mb-2">
                                 <label class="text-start mb-2" for="">Paymongo Reference #:<span class="text-danger">*</span> </label>
-                                <p><strong>{{strtoupper($paymentDetails->payment_ref)}}</strong></p>
+                                <p><strong>{{$paymentDetails->payment_ref}}</strong></p>
                             </div>
                             <div class="col-md-6 mb-2">
                                 <label class="text-start mb-2" for="">Payment Method:<span class="text-danger">*</span> </label>
@@ -429,8 +429,8 @@
                                 <p><strong>PHP {{strtoupper(number_format($paymentDetails->request_price,2))}}</strong></p>
                             </div>
                             <div class="col-md-6 mb-2">
-                                <label class="text-start mb-2" for="">Service Charge (2.5%):<span class="text-danger">*</span> </label>
-                                <p><strong>PHP {{strtoupper(number_format($paymentDetails->service_charge,2))}}</strong></p>
+                                <label class="text-start mb-2" for="">Service Charge ({{$paymentDetails->service_charge }}%):<span class="text-danger">*</span> </label>
+                                <p><strong>PHP {{strtoupper(number_format($paymentDetails->service_charge + $paymentDetails->request_price,2))}}</strong></p>
                             </div>
                         </div>
                         <div class="row my-3 text-center">

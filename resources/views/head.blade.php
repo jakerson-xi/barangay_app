@@ -249,8 +249,7 @@
       <div class="modal-dialog modal-dialog-scrollable">
         <div class="modal-content custom-modal">
           <div class="modal-header">
-            <h5 class="modal-title" id="termsConditionsLabel" style="text-align: center;">Privacy Policy of
-              Barangay South Signal Village </h5>
+            <h5 class="modal-title" id="termsConditionsLabel" style="text-align: center;">Privacy Policy of Barangay South Signal Village </h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body " style="width: auto;">
@@ -259,12 +258,12 @@
             </div>
             <nav>
               <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                <button class="nav-link active" id="nav-english-tab" data-bs-toggle="tab" data-bs-target="#nav-english" type="button" role="tab" aria-controls="nav-english" aria-selected="true">English</button>
-                <button class="nav-link" id="nav-tagalog-tab" data-bs-toggle="tab" data-bs-target="#nav-tagalog" type="button" role="tab" aria-controls="nav-tagalog" aria-selected="false">Tagalog</button>
+                <button class="nav-link active" id="nav-english-pol-tab" data-bs-toggle="tab" data-bs-target="#nav-english-pol" type="button" role="tab" aria-controls="nav-english" aria-selected="true">English</button>
+                <button class="nav-link" id="nav-tagalog-pol-tab" data-bs-toggle="tab" data-bs-target="#nav-tagalog-pol" type="button" role="tab" aria-controls="nav-tagalog" aria-selected="false">Tagalog</button>
               </div>
             </nav>
             <div class="tab-content" id="nav-tabContent">
-              <div class="tab-pane fade show active" id="nav-english" role="tabpanel" aria-labelledby="nav-english-tab" tabindex="0">
+              <div class="tab-pane fade show active" id="nav-english-pol" role="tabpanel" aria-labelledby="nav-english-tab" tabindex="0">
                 <h3 class="groupBoxHeader">Introduction</h3>
                 <div>
                   <p>At Barangay South Signal Village, we recognize the importance of protecting
@@ -402,7 +401,7 @@
                 </div>
               </div>
               <!--Nav Tab Tagalog-->
-              <div class="tab-pane fade" id="nav-tagalog" role="tabpanel" aria-labelledby="nav-tagalog-tab" tabindex="0">
+              <div class="tab-pane fade" id="nav-tagalog-pol" role="tabpanel" aria-labelledby="nav-tagalog-tab" tabindex="0">
                 <h3 class="groupBoxHeader">Panimula</h3>
                 <div>
                   <p>Sa Barangay South Signal Village, kami ay kumikilala sa kahalagahan ng

@@ -2301,6 +2301,7 @@
         }
     });
 </script>
+
 <script>
     const co_reportSelect = document.querySelector('#co_report_select');
     const co_reportAllDiv = document.querySelector('#co_report_all_div');
@@ -2316,6 +2317,7 @@
         }
     });
 </script>
+
 <script>
     function flipCards() {
         $('#card1').toggleClass('flip-card');
@@ -2336,6 +2338,7 @@
         dataTodayDiv_con.style.display = 'block'; // show the Today data div
     });
 </script>
+
 <script>
     let btnAll = document.getElementById('btnForReqToday');
     let btnToday = document.getElementById('btnForReqAll');
@@ -2352,6 +2355,7 @@
         dataTodayDiv.style.display = 'block'; // show the Today data div
     });
 </script>
+
 <script>
     let btnAll_emp = document.getElementById('btnForReqToday_emp');
     let btnToday_emp = document.getElementById('btnForReqAll_emp');
@@ -2368,6 +2372,7 @@
         dataTodayDiv_emp.style.display = 'block'; // show the Today data div
     });
 </script>
+
 @endforeach
 <script>
     $('.flip-container').click(function() {

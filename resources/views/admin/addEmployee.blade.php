@@ -397,6 +397,7 @@
                                 <option value="Barangay Secretary">Barangay Secretary</option>
                                 <option value="Request Manager">Barangay Request Manager</option>
                                 <option value="Concern Manager">Barangay Concern Manager</option>
+                                <option value="Barangay Treasurer">Barangay Treasurer</option>
                                 <option value="Administrator">Administrator</option>
                             </select>
                         </div>

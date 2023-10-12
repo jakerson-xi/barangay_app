@@ -676,10 +676,13 @@ class mainController extends Controller
 
     public function payment_request($id)
     {
+
+
         $user_auth = Auth::user();
         $user_info = DB::table('users')->where('id', $user_auth->id)->get();
         $request = Requests::join('users', 'users.id', '=', 'requests.resident_id')
             ->join('request_type', 'request_type.request_type_id', '=', 'requests.request_type_id')->select('users.*', 'requests.*', 'request_type.*', 'requests.created_at as request_date')->where('reference_key', $id)->get($id);
+
 
         return view("viewRFP", ['user_info' => $user_info, 'request' => $request]);
     }
@@ -694,19 +697,31 @@ class mainController extends Controller
         $request = $request_list->first();
         $paymentDetails = Payment::where('request_id', $request->request_id)->where('payment_status', 'PAID')->get()->last();
 
+
         return view("paid", ['user_info' => $user_info, 'request' => $request_list, 'paymentDetails' => $paymentDetails]);
     }
 
 
-    public function paymongo($id)
+    public function paymongo($id, $mode)
     {
 
+
+        $service_charge = 0;
+
+        if ($mode == "gcash") {
+            $service_charge = 0.0256;
+        }
+        if ($mode == "grab_pay") {
+            $service_charge = 0.0225;
+        }
+        if ($mode == "paymaya") {
+            $service_charge = 0.021;
+        }
         $request = Requests::join('users', 'users.id', '=', 'requests.resident_id')
             ->join('request_type', 'request_type.request_type_id', '=', 'requests.request_type_id')
             ->select('users.*', 'requests.*', 'request_type.*', 'requests.created_at as request_date')
             ->where('reference_key', $id)->get()
             ->first();
-
 
         if ($request == null) {
 
@@ -728,18 +743,18 @@ class mainController extends Controller
                     "send_email_receipt": true,
                     "show_description": true,
                     "show_line_items": true,
-                    "description": "Barangay South Signal Village Online Request (including the 2.5% service charge)",
+                    "description": "Barangay South Signal Village Online Request (including the ' . $service_charge * 100 . '% service charge)",
                     "line_items": [
                         {
                             "currency": "PHP",
-                            "amount":' . intval(($request->price * 0.025 + $request->price) * 100)  . ',
+                            "amount":' . intval(($request->price * $service_charge + $request->price) * 100)  . ',
                             "name": "' . str_replace("\r\n", " ", $request->request_type_name) . "(" . $request->request_description . ')",
                             "quantity": 1,
                             "description": "' . $request->request_description . '"
                         }
                     ],
                     "reference_number": "' . $request->reference_key . '",
-                    "payment_method_types": ["gcash", "grab_pay", "paymaya"],
+                    "payment_method_types": ["' . $mode . '"],
                     "success_url": "' . ENV('APP_URL') . '/paymongo_success/' . $id . '",
                     "cancel_url":"' . ENV('APP_URL') . '/paymongo_failed/' . $id . '"
                     
@@ -757,18 +772,21 @@ class mainController extends Controller
             // Access the 'checkout_url' attribute        
             $checkoutUrl = $responseData['data']['attributes']['checkout_url'];
 
-            
-
-            Payment::create([
-                'request_id' => $request->request_id,
-                "resident_id" => $request->id,
-                'payment_ref' => $responseData['data']['id'],
-                'payment_status' => 'PENDING PAYMENT',
-                'payment_method' => '',
-                'request_price' => $request->price,
-                'service_charge' => $request->price * 0.025,
-            ]);
-
+            if (Payment::where('request_id', $request->request_id)->where('payment_status', 'PENDING PAYMENT')->exists() == false) {
+                Payment::create([
+                    'request_id' => $request->request_id,
+                    'resident_id' => $request->id,
+                    'payment_ref' => $responseData['data']['id'],
+                    'payment_status' => 'PENDING PAYMENT',
+                    'payment_method' => '',
+                    'request_price' => $request->price,
+                    'service_charge' => ($request->price * $service_charge),
+                ]);
+            } else {
+                Payment::where('request_id', $request->request_id)->get()->first()->update([
+                    'payment_ref' => $responseData['data']['id'],
+                ]);
+            }
 
             return redirect($checkoutUrl);
         }
@@ -857,7 +875,7 @@ class mainController extends Controller
 
             $responseData = json_decode($response->getBody(), true);
 
-
+            // DD($responseData['data']['attributes']['payment_method_used']);
             $request = Requests::where('reference_key', $id)->first();
 
             if ($request) {
@@ -870,19 +888,32 @@ class mainController extends Controller
 
             Request_History::create([
                 'request_id' => $request->request_id,
-                "processed_by" =>  "Paymongo",
+                "processed_by" =>  "Online",
                 'request_id' => $request->request_id,
                 'request_status' => 'PAID',
             ]);
 
+
+            $service_charge = 0;
+
+            if ($responseData['data']['attributes']['payment_method_used'] == "gcash") {
+                $service_charge = 0.0256;
+            }
+            if ($responseData['data']['attributes']['payment_method_used'] == "grab_pay") {
+                $service_charge = 0.0225;
+            }
+            if ($responseData['data']['attributes']['payment_method_used'] == "paymaya") {
+                $service_charge = 0.021;
+            }
+
             Payment::create([
                 'request_id' => $request->request_id,
                 "resident_id" => $info_request->id,
-                'payment_ref' => $responseData['data']['id'],
+                'payment_ref' => $responseData['data']['attributes']['payments'][0]['id'],
                 'payment_status' => 'PAID',
                 'payment_method' => $responseData['data']['attributes']['payment_method_used'],
                 'request_price' => $request->price,
-                'service_charge' => $request->price * 0.025,
+                'service_charge' => $request->price * $service_charge,
             ]);
 
             Alert::SUCCESS('PAYMENT SUCCESSFUL', '')->showConfirmButton('Confirm', '#AA0F0A');

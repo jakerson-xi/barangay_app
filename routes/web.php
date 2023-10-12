@@ -93,9 +93,12 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/payment', [mainController::class, 'paymentList'])->name('paymentList');
     Route::get('/payment_request/{id}', [mainController::class, 'payment_request'])->name('payment_request');
     Route::get('/paid/{id}', [mainController::class, 'paid'])->name('paid');
-    Route::get('/paymongo/{id}', [mainController::class, 'paymongo'])->name('paymongo');
+    Route::get('/paymongo/{id}/{mode}', [mainController::class, 'paymongo'])->name('paymongo');
     Route::get('/paymongo_success/{id}', [mainController::class, 'paymongo_success'])->name('paymongo_success');
     Route::get('/paymongo_failed/{id}', [mainController::class, 'paymongo_failed'])->name('paymongo_failed');
+
+    Route::get('/paymongo_details/{id}', [adminController::class, 'paymongo_details'])->name('paymongo_details');
+    Route::get('/listOnlinePayment', [adminController::class, 'listOnlinePayment'])->name('listOnlinePayment');
 });
 
 //Default homepage

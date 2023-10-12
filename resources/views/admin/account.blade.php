@@ -113,7 +113,7 @@
         </fieldset>
     </div>
     <div class="d-grid gap-2 d-md-block mb-3 ">
-        <a class="btn btn-danger" type="button" href="admin/dashboard">Back</a>
+        <a class="btn btn-danger" type="button" href="{{url()->previous()}}">Back</a>
 
         <button data-bs-toggle="modal" data-bs-target="#changeMobileNumber" class="btn btn-danger float-end mx-1" type="button"><i class="bi bi-phone-fill"></i> Change Mobile Number</button>
         <button data-bs-toggle="modal" data-bs-target="#changeEmail" class="btn btn-danger float-end mx-1" type="button"><i class="bi bi-envelope-fill"></i> Change Email</button>

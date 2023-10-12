@@ -16,6 +16,7 @@ use App\Models\Request_History;
 use App\Models\Concern_History;
 use App\Models\Concerns;
 use App\Models\Web_App;
+use App\Models\Payment;
 use App\Models\Visitor;
 use Carbon\Carbon;
 
@@ -765,8 +766,6 @@ class adminController extends Controller
                     array_push($req_type, $streets->request_type_name);
                     array_push($req_typeTotals, $streets->count);
                 }
-
-
                 $days = [];
                 $dayTotals = [];
                 $weeks = [];
@@ -890,6 +889,11 @@ class adminController extends Controller
                     "yearTotals_con" => array_values($yearTotals_con),
                     'concern_type' => array_values($concern_type),
                     'concern_type_count' => array_values($concern_type_count),
+                ]);
+            }
+            if ($user->role == 'Barangay Treasurer') {
+                return view('admin/dashboard_treasurer', [
+                    'admin_info' => $admin_info,
                 ]);
             }
         }
@@ -1018,7 +1022,6 @@ class adminController extends Controller
             ], 500);
         }
     }
-
 
     public function listemployee(Request $request)
     {
@@ -1238,7 +1241,6 @@ class adminController extends Controller
         return redirect()->route('listemployee', ['list_info' => $list_info, 'admin_info' => $admin_info]);
     }
 
-
     public function requestType()
     {
         $user = Auth::user();
@@ -1324,6 +1326,34 @@ class adminController extends Controller
         $admin_info = DB::table('users')->where('id', $user->id)->get();
         $request_history = Concern_History::where('concern', Concerns::where('reference_key', $id)->first()->concern_id)->get();
         return view("admin/viewConcern", ['request' => $transactions, 'admin_info' => $admin_info, 'history' => $request_history]);
+    }
+
+
+    //PAYMENT
+
+    public function listOnlinePayment()
+    {
+
+        $user = Auth::user();
+        if ($user->role != 'Barangay Treasurer') {
+            Alert::error('UNAUTHORIZED ACCOUNT', '')->showConfirmButton('Confirm', '#AA0F0A');
+            return redirect()->route('home');
+        } else {
+
+
+            $paymentList = Payment::where('payment_status', 'PAID')->get();
+            $admin_info = DB::table('users')->where('id', $user->id)->get();
+            $transactions = Payment::join('requests', 'requests.request_id', '=', 'payment.request_id')->where('payment_status', 'PAID')->where('isConfirmed', '')->join('users', 'users.id', '=', 'payment.resident_id')->select('requests.*', 'users.*', 'payment.*', 'payment.created_at as payment_created_at')->get();
+            //dd(Payment::join('requests', 'requests.request_id', '=', 'payment.request_id')->join('users', 'users.id', '=', 'payment.resident_id')->select('requests.*', 'users.*','payment.*', 'payment.created_at as payment_created_at')->get());
+            return view("admin/listOnlinePayment", ['request' => $transactions, 'admin_info' => $admin_info]);
+        }
+    }
+    public function paymongo_details($id)
+    {
+
+        
+
+        return redirect('https://dashboard.paymongo.com/payments/'.$id );
     }
 
     public function processRequest()
