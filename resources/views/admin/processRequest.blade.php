@@ -136,6 +136,8 @@
                     @if($request->request_status == 'PROCESSING')
                     <p class="badge bg-info text-wrap status-class" style="width: 6rem;background-color:#0d6efd">PROCESSING</p>
                     @endif
+                    
+                 
                 </td>
                 @if($request->employee_name == '')
                 <td>Unassigned</td>

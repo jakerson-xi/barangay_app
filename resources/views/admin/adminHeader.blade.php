@@ -207,8 +207,8 @@
                     <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownMenuButton1">
                         <li><a class="dropdown-item" href="{{url('dashboard')}}">List of Payment</a></li>
                         <hr class="dropdown-divider">
-                        <li><a class="dropdown-item" href="{{url('dashboard')}}">Process Onsite Payment Request</a></li>
-                        <li><a class="dropdown-item" href="{{url('listOnl inePayment')}}">Process Online Payment Request</a></li>
+                        <li><a class="dropdown-item" href="{{url('listReadyForPayment')}}">Process Onsite Payment Request</a></li>
+                        <li><a class="dropdown-item" href="{{url('listOnlinePayment')}}">Process Online Payment Request</a></li>
                     </ul>
                 </div>
                 @endif

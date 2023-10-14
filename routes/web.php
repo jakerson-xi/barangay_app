@@ -99,8 +99,9 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     Route::get('/paymongo_details/{id}', [adminController::class, 'paymongo_details'])->name('paymongo_details');
     Route::get('/listOnlinePayment', [adminController::class, 'listOnlinePayment'])->name('listOnlinePayment');
-
+    Route::get('/listReadyForPayment', [adminController::class, 'listReadyForPayment'])->name('listReadyForPayment');
     Route::get('/viewPayment/{ref}', [adminController::class, 'viewPayment'])->name('viewPayment');
+    Route::post('/confirmPayment', [adminController::class, 'confirmPayment'])->name('confirmPayment');
 
 });
 

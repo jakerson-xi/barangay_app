@@ -143,6 +143,9 @@
                     @if($request->request_status == 'PROCESSING')
                     <p class="badge bg-info text-wrap status-class" style="width: 6rem;background-color:#0d6efd">PROCESSING</p>
                     @endif
+                    @if($request->request_status == 'PAID' || $request->request_status == 'CONFIRMED PAYMENT')
+                    <p class="badge  text-wrap status-class" style="width: 6rem;background-color:steelblue">PAID</p>
+                    @endif
 
                 </td>
                 @if($request->employee_name == '')

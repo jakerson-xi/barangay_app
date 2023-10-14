@@ -47,7 +47,7 @@ class adminController extends Controller
 
         $client = new \GuzzleHttp\Client();
 
-        $response = $client->request('GET', 'https://api.paymongo.com/v1/payments/'. $ref .'', [
+        $response = $client->request('GET', 'https://api.paymongo.com/v1/payments/' . $ref . '', [
             'headers' => [
                 'accept' => 'application/json',
                 'authorization' => 'Basic c2tfdGVzdF91RmF5VmQ0OW1RYU5jRG9FZEVyWU12aWY6',
@@ -56,7 +56,7 @@ class adminController extends Controller
 
         $responseData = json_decode($response->getBody(), true)['data']['attributes']['billing'];
 
-        return view('admin/processOnlinePayment', ['admin_info' => $admin_info, 'payment' => $transaction_info,'billing' => $responseData]);
+        return view('admin/processOnlinePayment', ['admin_info' => $admin_info, 'payment' => $transaction_info, 'billing' => $responseData]);
     }
 
     public function deact_admin(Request $request)
@@ -1378,15 +1378,79 @@ class adminController extends Controller
 
             $paymentList = Payment::where('payment_status', 'PAID')->get();
             $admin_info = DB::table('users')->where('id', $user->id)->get();
-            $transactions = Payment::join('requests', 'requests.request_id', '=', 'payment.request_id')->where('payment_status', 'PAID')->where('isConfirmed', '')->join('users', 'users.id', '=', 'payment.resident_id')->select('requests.*', 'users.*', 'payment.*', 'payment.created_at as payment_created_at')->get();
+            $transactions = Payment::join('requests', 'requests.request_id', '=', 'payment.request_id')->where('payment_status', 'PAID')->where('isConfirmed', 0)->join('users', 'users.id', '=', 'payment.resident_id')->select('requests.*', 'users.*', 'payment.*', 'payment.created_at as payment_created_at')->get();
             //dd(Payment::join('requests', 'requests.request_id', '=', 'payment.request_id')->join('users', 'users.id', '=', 'payment.resident_id')->select('requests.*', 'users.*','payment.*', 'payment.created_at as payment_created_at')->get());
             return view("admin/listOnlinePayment", ['request' => $transactions, 'admin_info' => $admin_info]);
         }
     }
-    public function paymongo_details($id)
+
+
+    public function confirmPayment(Request $request)
     {
 
+        $user = Auth::user();
 
+        Requests::where('request_id', $request->reference)->get()->first()->update([
+            "request_status" => "CONFIRMED PAYMENT",
+            "ctc" => $request->ctc,
+            "or_num" => $request->official_receipt,
+            "ref" => $request->ref,
+        ]);
+
+        Request_History::create([
+            'request_id' =>  $request->reference,
+            'processed_by' => $user->first_name . " " . $user->last_name,
+            'request_status' => 'CONFIRMED',
+        ]);
+
+        $payment_info = Payment::where('request_id', $request->reference)->get()->last();
+        Payment::where('request_id', $request->reference)->get()->last()->update([
+            "isConfirmed" => 1,
+        ]);
+        Payment::create([
+            "request_id" => $payment_info->request_id,
+            "resident_id" => $payment_info->resident_id,
+            "payment_ref" => $payment_info->payment_ref,
+            "payment_method" => $payment_info->payment_method,
+            "request_price" => $payment_info->request_price,
+            "service_charge" => $payment_info->service_charge,
+            "payment_status" => "CONFIRMED",
+            "description_payment" => $request->payment_descrip,
+            "isConfirmed" => 1,
+        ]);
+
+
+        Alert::success(
+            'PAYMENT CONFIRMED:',
+            Requests::where('request_id', $request->reference)->get()->first()->reference_key
+        )
+            ->showConfirmButton('Confirm', '#AA0F0A');
+
+
+        return redirect()->route('listOnlinePayment');
+    }
+    public function listReadyForPayment()
+    {
+        $user = Auth::user();
+        if ($user->role != 'Barangay Treasurer') {
+            Alert::error('UNAUTHORIZED ACCOUNT', '')->showConfirmButton('Confirm', '#AA0F0A');
+            return redirect()->route('home');
+        } else {
+            $paymentList = Requests::where('request_status', 'READY FOR PAYMENT')
+                ->join('users', 'users.id', '=', 'requests.resident_id')
+                ->join('request_type', 'request_type.request_type_id', '=', 'requests.request_type_id')
+                ->select('users.*', 'requests.*', 'request_type.*', 'requests.created_at as requests_date')
+                ->get();
+            $admin_info = DB::table('users')->where('id', $user->id)->get();
+            //$transactions = Payment::join('requests', 'requests.request_id', '=', 'payment.request_id')->where('payment_status', 'PAID')->where('isConfirmed', '')->join('users', 'users.id', '=', 'payment.resident_id')->select('requests.*', 'users.*', 'payment.*', 'payment.created_at as payment_created_at')->get();
+            //dd(Payment::join('requests', 'requests.request_id', '=', 'payment.request_id')->join('users', 'users.id', '=', 'payment.resident_id')->select('requests.*', 'users.*','payment.*', 'payment.created_at as payment_created_at')->get());
+            return view("admin/listReadyForPayment", ['request' => $paymentList, 'admin_info' => $admin_info]);
+        }
+    }
+
+
+    public function paymongo_details($id)
+    {
 
         return redirect('https://dashboard.paymongo.com/payments/' . $id);
     }
