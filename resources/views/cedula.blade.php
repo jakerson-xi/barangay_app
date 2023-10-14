@@ -235,7 +235,7 @@
                     </div>
                     <div class="" id="upload_id" style="display: none;">
                         <label class="text-start mb-2" for="">Upload your necessary document (<em>I-upload ang kinakailangang dokumento</em>)<span class="text-danger">*</span> </label>
-                        <a href="" data-bs-toggle="modal" data-bs-target="#myModal">
+                        <a href="" data-bs-toggle="modal" data-bs-target="#myModal"> 
                             here
                         </a>
                         <div class="mb-2 me-2">

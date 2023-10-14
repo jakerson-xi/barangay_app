@@ -73,7 +73,7 @@ function resizeTextarea() {
     this.style.height = this.scrollHeight + "px";
 }
 
-const fileInput = document.querySelector("#formFile");
+const fileInput = document.querySelector("#formFile"); 
 
 fileInput.addEventListener("change", function () {
     const file = fileInput.files[0];

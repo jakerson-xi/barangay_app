@@ -226,7 +226,7 @@ const fileInput2 = document.querySelector("#formFile_2");
 fileInput2.addEventListener("change", function () {
     const file = fileInput2.files[0];
     const acceptedImageTypes = ["image/jpeg", "image/png"];
-    const maxFileSize = 20 * 1024 * 1024; // 20MB in bytes
+    const maxFileSize = 20 * 1024 * 1024; // 20MB in bytes 
 
     if (!file) {
         return; // No file selected
