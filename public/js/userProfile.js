@@ -187,9 +187,14 @@ function clearImage_3() {
 
 const fileInput = document.querySelector("#formFile");
 
-fileInput.addEventListener("change", function() {
+fileInput.addEventListener("change", function () {
     const file = fileInput.files[0];
     const acceptedImageTypes = ["image/jpeg", "image/png"];
+    const maxFileSize = 20 * 1024 * 1024; // 20MB in bytes
+
+    if (!file) {
+        return; // No file selected
+    }
 
     if (!acceptedImageTypes.includes(file.type)) {
         Swal.fire({
@@ -200,10 +205,56 @@ fileInput.addEventListener("change", function() {
         });
         fileInput.value = "";
         frame.src = "";
+        return;
+    }
+
+    if (file.size > maxFileSize) {
+        Swal.fire({
+            title: "File too large",
+            text: "Please select a file that is 20MB or smaller.",
+            icon: "error",
+            confirmButtonColor: "#d33",
+        });
+        fileInput.value = "";
+        frame.src = "";
     }
 });
 
+
 const fileInput2 = document.querySelector("#formFile_2");
+
+fileInput2.addEventListener("change", function () {
+    const file = fileInput2.files[0];
+    const acceptedImageTypes = ["image/jpeg", "image/png"];
+    const maxFileSize = 20 * 1024 * 1024; // 20MB in bytes 
+
+    if (!file) {
+        return; // No file selected
+    }
+
+    if (!acceptedImageTypes.includes(file.type)) {
+        Swal.fire({
+            title: "Invalid file type",
+            text: "Please select an image file (JPEG, PNG).",
+            icon: "error",
+            confirmButtonColor: "#d33",
+        });
+        fileInput2.value = "";
+        frame.src = "";
+        return;
+    }
+
+    if (file.size > maxFileSize) {
+        Swal.fire({
+            title: "File too large",
+            text: "Please select a file that is 20MB or smaller.",
+            icon: "error",
+            confirmButtonColor: "#d33",
+        });
+        fileInput2.value = "";
+        frame_2.src = "";
+    }
+});
 
 fileInput2.addEventListener("change", function() {
     const file = fileInput2.files[0];
@@ -218,5 +269,39 @@ fileInput2.addEventListener("change", function() {
         });
         fileInput2.value = "";
         frame_2.src = "";
+    }
+});
+const fileInput3 = document.querySelector("#face");
+
+fileInput3.addEventListener("change", function () {
+    const file = fileInput3.files[0];
+    const acceptedImageTypes = ["image/jpeg", "image/png"];
+    const maxFileSize = 20 * 1024 * 1024; // 20MB in bytes
+
+    if (!file) {
+        return; // No file selected
+    }
+
+    if (!acceptedImageTypes.includes(file.type)) {
+        Swal.fire({
+            title: "Invalid file type",
+            text: "Please select an image file (JPEG, PNG).",
+            icon: "error",
+            confirmButtonColor: "#d33",
+        });
+        fileInput3.value = "";
+        frame.src = "";
+        return;
+    }
+
+    if (file.size > maxFileSize) {
+        Swal.fire({
+            title: "File too large",
+            text: "Please select a file that is 20MB or smaller.",
+            icon: "error",
+            confirmButtonColor: "#d33",
+        });
+        fileInput3.value = "";
+        frame_face.src = "";
     }
 });

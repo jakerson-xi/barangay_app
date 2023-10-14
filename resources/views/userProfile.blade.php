@@ -352,6 +352,7 @@
                   <div class="mb-5">
                     <label for="Image" class="form-label"></label>
                     <input class="form-control" accept="image/*" type="file" id="formFile" name="formFile" onchange="preview()" required>
+                    <p class="fw-bolder fs-6 fst-italic  text-danger"><i class="bi bi-exclamation-circle"></i> Maximum allowed file size 20MB</p>
                     <div class="invalid-feedback">
                       Please attach your ID.
                     </div>
@@ -370,7 +371,8 @@
                   <div class="mb-5">
                     <label for="Image" class="form-label"></label>
                     <input accept="image/*" class="form-control" type="file" id="formFile_2" name="formFile_2" onchange="preview_2()" required>
-                    <div class="invalid-feedback">
+                    <p class="fw-bolder fs-6 fst-italic  text-danger"><i class="bi bi-exclamation-circle"></i> Maximum allowed file size 20MB</p>
+                    <div class="invalid-feedback"> 
                       Please attach your ID.
                     </div>
                     <div class="text-center">
@@ -389,6 +391,7 @@
                   <div class="mb-5">
                     <label for="Image" class="form-label"></label>
                     <input class="form-control" type="file" id="face" name="face" onchange="preview_3()" required>
+                    <p class="fw-bolder fs-6 fst-italic  text-danger"><i class="bi bi-exclamation-circle"></i> Maximum allowed file size 20MB</p>
                     <div class="invalid-feedback">
                       Please attach your Face Photo.
                     </div>

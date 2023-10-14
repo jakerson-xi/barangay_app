@@ -207,8 +207,7 @@
                             <input class="form-control mb-2" value="Based on your income (batay sa iyong sahod)" type="text" readonly />
                             <input type="hidden" value="" name="price" />
 
-                            <p class="fw-bolder fs-6 fst-italic  text-danger"><i class="bi bi-exclamation-circle"></i>
-                                Payment should be done in barangay office.</p>
+                            
 
                         </div>
                     </div>
@@ -236,12 +235,13 @@
                     </div>
                     <div class="" id="upload_id" style="display: none;">
                         <label class="text-start mb-2" for="">Upload your necessary document (<em>I-upload ang kinakailangang dokumento</em>)<span class="text-danger">*</span> </label>
-                        <a href="" data-bs-toggle="modal" data-bs-target="#myModal">
+                        <a href="" data-bs-toggle="modal" data-bs-target="#myModal"> 
                             here
                         </a>
                         <div class="mb-2 me-2">
                             <label for="Image" class="form-label"></label>
                             <input class="form-control me-3 " type="file" id="formFile" name="file" onchange="preview()">
+                            <p class="fw-bolder fs-6 fst-italic  text-danger"><i class="bi bi-exclamation-circle"></i> Maximum allowed file size 20MB</p>
                             <div class="invalid-feedback m-3">
                                 Please attach your ID.
                             </div>

@@ -83,6 +83,11 @@ const fileInput = document.querySelector("#formFile");
 fileInput.addEventListener("change", function () {
     const file = fileInput.files[0];
     const acceptedImageTypes = ["image/jpeg", "image/png"];
+    const maxFileSize = 20 * 1024 * 1024; // 20MB in bytes
+
+    if (!file) {
+        return; // No file selected
+    }
 
     if (!acceptedImageTypes.includes(file.type)) {
         Swal.fire({
@@ -93,8 +98,20 @@ fileInput.addEventListener("change", function () {
         });
         fileInput.value = "";
         frame.src = "";
+        return;
     }
-}); // Example starter JavaScript for disabling form submissions if there are invalid fields
+
+    if (file.size > maxFileSize) {
+        Swal.fire({
+            title: "File too large",
+            text: "Please select a file that is 20MB or smaller.",
+            icon: "error",
+            confirmButtonColor: "#d33",
+        });
+        fileInput.value = "";
+        frame.src = "";
+    }
+});// Example starter JavaScript for disabling form submissions if there are invalid fields
 (() => {
     "use strict";
 
