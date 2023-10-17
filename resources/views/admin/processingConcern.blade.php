@@ -846,7 +846,7 @@
                                 confirmButtonColor: "#AA0F0A",
                             }).then((result) => {
                                 if (result.value) {
-                                    window.location.href = "/process-concern-pending/" + '{{$request->concern_id}}';
+                                    window.location.href = "{{url('process_concern_pending')}}/" + '{{$request->concern_id}}';
                                 }
                             });
                         } else {
@@ -859,7 +859,7 @@
                                 confirmButtonColor: "#AA0F0A",
                             }).then((result) => {
                                 if (result.value) {
-                                    window.location.href = "/process-concern-pending/" + '{{$request->concern_id}}';
+                                    window.location.href = "{{url('process_concern_pending')}}/" + '{{$request->concern_id}}';
                                 }
                             });
 

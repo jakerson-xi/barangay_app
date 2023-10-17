@@ -422,19 +422,38 @@
 <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 <script type="text/javascript">
-    var today = new Date();
-    var dd = String(today.getDate()).padStart(2, '0');
-    var mm = String(today.getMonth() + 1).padStart(2, '0'); // January is 0!
-    var yyyy = today.getFullYear();
+    function addWeekdays(date, numDays) {
+        for (var i = 0; i < numDays; i++) {
+            date.add(1, 'day');
+            while (date.isoWeekday() === 6 || date.isoWeekday() === 7) {
+                date.add(1, 'day'); // Skip Saturday (6) and Sunday (7)
+            }
+        }
+        return date;
+    }
 
-    today = mm + '/' + dd + '/' + yyyy;
+    var today = moment();
+
+    // If today is a weekend, set the default date to the next business day
+    if (today.isoWeekday() === 6 || today.isoWeekday() === 7) {
+        today = addWeekdays(today, 1);
+    }
+
+    var endDate = addWeekdays(today.clone(), 5);
+
     $('input[name="daterange"]').daterangepicker({
-        "startDate": today,
-        "minDate": today,
-        "applyButtonClasses": "btn-success",
-
+        startDate: today,
+        endDate: endDate,
+        minDate: today,
+        applyButtonClasses: "btn-success",
+        isInvalidDate: function(date) {
+            return date.isoWeekday() === 6 || date.isoWeekday() === 7;
+        }
     });
 </script>
+
+
+
 
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous">
@@ -522,7 +541,7 @@
                                 confirmButtonColor: "#AA0F0A",
                             }).then((result) => {
                                 if (result.value) {
-                                    window.location.href = "/processRequest";
+                                    window.location.href = "{{url('processRequest')}}";
                                 }
                             });
                         } else {
@@ -535,7 +554,7 @@
                                 confirmButtonColor: "#AA0F0A",
                             }).then((result) => {
                                 if (result.value) {
-                                    window.location.href = "/process-pending/" +'{{$request-> request_id}}';
+                                    window.location.href = "{{url('process_pending')}}" + '{{$request-> request_id}}';
                                 }
                             });
 
@@ -556,7 +575,7 @@
                             confirmButtonColor: "#AA0F0A",
                         }).then((result) => {
                             if (result.value) {
-                                window.location.href = "/process-pending/" + '{{$request->request_id}}';
+                                window.location.href = "{{url('process_pending')}}" + '{{$request->request_id}}';
                             }
                         });
                         $("#loadingModal").modal("hide");
@@ -634,7 +653,7 @@
                                 confirmButtonColor: "#AA0F0A",
                             }).then((result) => {
                                 if (result.value) {
-                                    window.location.href = "/processRequest";
+                                    window.location.href = "{{url('processRequest')}}";
                                 }
                             });
                         } else {
@@ -647,7 +666,7 @@
                                 confirmButtonColor: "#AA0F0A",
                             }).then((result) => {
                                 if (result.value) {
-                                    window.location.href = "/process-pending/" + '{{$request->request_id}}';
+                                    window.location.href = "{{url('process_pending')}}" + '{{$request->request_id}}';
                                 }
                             });
 

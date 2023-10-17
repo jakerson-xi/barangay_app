@@ -493,7 +493,7 @@
                                 confirmButtonColor: "#AA0F0A",
                             }).then((result) => {
                                 if (result.value) {
-                                    window.location.href = "/processRequest";
+                                    window.location.href = "{{url('processRequest')}}";
                                 }
                             });
                         } else {
@@ -506,7 +506,7 @@
                                 confirmButtonColor: "#AA0F0A",
                             }).then((result) => {
                                 if (result.value) {
-                                    window.location.href = "/processRequest";
+                                    window.location.href = "{{url('processRequest')}}";
                                 }
                             });
 
@@ -594,7 +594,7 @@
                                 confirmButtonColor: "#AA0F0A",
                             }).then((result) => {
                                 if (result.value) {
-                                    window.location.href = "/viewRequest/" + response.key;
+                                    window.location.href = "{{url('viewRequest')}}/" + response.key;
                                 }
                             });
                         } else {
@@ -607,7 +607,7 @@
                                 confirmButtonColor: "#AA0F0A",
                             }).then((result) => {
                                 if (result.value) {
-                                    window.location.href =  "/processRequest";
+                                    window.location.href =  "{{url('processRequest')}}";
                                 }
                             });
 

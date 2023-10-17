@@ -102,6 +102,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/listReadyForPayment', [adminController::class, 'listReadyForPayment'])->name('listReadyForPayment');
     Route::get('/viewPayment/{ref}', [adminController::class, 'viewPayment'])->name('viewPayment');
     Route::post('/confirmPayment', [adminController::class, 'confirmPayment'])->name('confirmPayment');
+    Route::get('/process_payment/{ref}', [adminController::class, 'process_payment'])->name('process_payment');
+    Route::post('/confirmOnsitePayment', [adminController::class, 'confirmOnsitePayment'])->name('confirmOnsitePayment');
 
 });
 

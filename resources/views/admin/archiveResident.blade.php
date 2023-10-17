@@ -129,7 +129,7 @@
                                     confirmButtonColor: "#AA0F0A",
                                 }).then((result) => {
                                     if (result.value) {
-                                        window.location.href = "/deactlistresident";
+                                        window.location.href = "{{url('deactlistresident')}}";
                                     }
                                 });
 
@@ -143,7 +143,7 @@
                                     confirmButtonColor: "#AA0F0A",
                                 }).then((result) => {
                                     if (result.value) {
-                                        window.location.href = "/deactlistresident";
+                                        window.location.href = "{{url('deactlistresident')}}";
                                     }
                                 });
 
@@ -155,7 +155,7 @@
                         });
                 }
             }).then((result) => {
-                window.location.href = "/deactlistresident";
+                window.location.href = "{{url('deactlistresident')}}";
             });;
         });
     });

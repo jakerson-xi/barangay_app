@@ -232,7 +232,7 @@
 
             @endif
             <div class="shadow p-4 mb-3 bg-body rounded text-center">
-                <a href="/view-request-list" id="btn" type="submit" style="background-color:#AA0F0A; color: white;" class="btn d-block mx-auto w-25">DONE</a>
+                <a href="{{url('view-request-list')}}" id="btn" type="submit" style="background-color:#AA0F0A; color: white;" class="btn d-block mx-auto w-25">DONE</a>
             </div>
         </div>
     </div>

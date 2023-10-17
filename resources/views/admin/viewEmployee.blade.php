@@ -166,7 +166,7 @@
                                     confirmButtonColor: "#AA0F0A",
                                 }).then((result) => {
                                     if (result.value) {
-                                        window.location.href = "/listbarangayemployee";
+                                        window.location.href = "{{url('listbarangayemployee')}}";
                                     }
                                 });
 
@@ -180,7 +180,7 @@
                                     confirmButtonColor: "#AA0F0A",
                                 }).then((result) => {
                                     if (result.value) {
-                                        window.location.href = "/listbarangayemployee";
+                                        window.location.href = "{{url('listbarangayemployee')}}";
                                     }
                                 });
 
@@ -192,7 +192,7 @@
                         });
                 }
             }).then((result) => {
-                window.location.href = "/listbarangayemployee";
+                window.location.href = "{{url('listbarangayemployee')}}";
             });;
         });
     });

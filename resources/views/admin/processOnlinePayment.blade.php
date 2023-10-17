@@ -2,6 +2,13 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
 <link rel="stylesheet" href="https://cdn.datatables.net/datetime/1.3.0/css/dataTables.dateTime.min.css">
 <style>
+    input[type=number]::-webkit-outer-spin-button,
+    input[type=number]::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+</style>
+<style>
     .my-container {
         margin: 2em 4em 2em 4em;
     }
@@ -243,8 +250,17 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body p-5">
+                    <div class="alert alert-success">
+                        <i class="bi bi-exclamation-circle-fill"></i> Please fill out the form completely and accurately.
+                    </div>
                     <input type="hidden" value='{{$payment->request_id}}' name="reference">
-                    <div class="row">
+                    <label for="exampleFormControlTextarea1" class="form-label">Ref. No: <span class="text-danger">*</span></label>
+                    <input name="ref" class="w-100 form-control mb-2" type="number" required style="-webkit-appearance: none; margin: 0;" />
+                    <label for="exampleFormControlTextarea1" class="form-label">OR. No: <span class="text-danger">*</span></label>
+                    <input name="official_receipt" class="w-100 form-control mb-2" type="number" required style="-webkit-appearance: none; margin: 0;" />
+                    <label for="exampleFormControlTextarea1" class="form-label">CTC. No: <span class="text-danger">*</span></label>
+                    <input name="ctc" class="w-100 form-control mb-2" type="number" required style="-webkit-appearance: none; margin: 0;" />
+                    <!-- <div class="row">
                         <div class="col-6">
                             <label class="fs-5 fw-semibold" for="official-receipt">Official Receipt: </label>
                         </div>
@@ -267,7 +283,8 @@
                         <div class="col-6" style="text-align: start;">
                             <input class="form-control" type="text" id="ref" name="ref" placeholder="ABC1234" required>
                         </div>
-                    </div>
+                    </div> -->
+
                     <label for="payment-descrip" class="fs-5 fw-semibold mt-3">Description:</label>
                     <textarea class="form-control mt-2" name="payment_descrip" id="payment-descrip" rows="3" placeholder="Input text here"></textarea>
 

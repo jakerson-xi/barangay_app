@@ -52,9 +52,9 @@
             <i class="bi bi-back"></i> Report
         </button>
         <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="/admin/dashboard">Services Report</a></li>
-            <li><a class="dropdown-item" href="/dashboard-resident">Resident Report</a></li>
-            <li><a class="dropdown-item" href="/dashboard-employee">Employee Report</a></li>
+            <li><a class="dropdown-item" href="{{url('dashboard')}}">Services Report</a></li>
+            <li><a class="dropdown-item" href="{{url('dashboard-resident')}}">Resident Report</a></li>
+            <li><a class="dropdown-item" href="{{url('dashboard-employee')}}">Employee Report</a></li>
         </ul>
     </div>
     <hr style="color: black;">
@@ -154,8 +154,7 @@
                                         <td style="text-transform: uppercase;">{{$admin->role}}</td>
                                         <td class="text-lowercase" style="text-transform: uppercase;">{{$admin->email}}</td>
                                         <td class="text-center">
-
-                                            <a href="/viewEmployee/{{$admin->id}}" class="btn btn-success btn-sm"><i class="bi bi-eye-fill"></i> View</a>
+                                            <a href="{{url('viewEmployee')}}/{{$admin->id}}" class="btn btn-success btn-sm"><i class="bi bi-eye-fill"></i> View</a>
                                         </td>
                                     </tr>
                                     @endforeach
@@ -187,7 +186,7 @@
                                         @foreach($requests as $requests)
                                         <h6 class="text-dark mb-2">{{$requests->employee_name}} ({{number_format($requests->computation, 2, '.', '')}}%)</h6>
                                         <div class="progress mb-4">
-                                            <div class="progress-bar bg-danger" role="progressbar" aria-label="Info example" style="width: {{$requests->computation}}%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                            <div class="progress-bar bg-danger" role="progressbar" aria-label="Info example" style="width:{{$requests->computation}}%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
                                         </div>
 
                                         @endforeach
@@ -215,14 +214,8 @@
                         </div>
                     </div>
                 </div>
-
-
-
-
-
             </div>
         </div>
-
     </div>
 </div>
 

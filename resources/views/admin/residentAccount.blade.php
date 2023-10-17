@@ -383,7 +383,7 @@
                                     confirmButtonColor: "#AA0F0A",
                                 }).then((result) => {
                                     if (result.value) {
-                                        window.location.href = "/viewResident/" + userId;
+                                        window.location.href = "{{url('viewResident')}}/" + userId;
                                     }
                                 });
 
@@ -397,7 +397,7 @@
                                     confirmButtonColor: "#AA0F0A",
                                 }).then((result) => {
                                     if (result.value) {
-                                        window.location.href = "/viewResident/" + userId;
+                                        window.location.href = "{{url('viewResident')}}/" + userId;
                                     }
                                 });
 

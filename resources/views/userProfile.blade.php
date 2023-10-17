@@ -211,7 +211,7 @@
 
 <!-- MODAL FOR CHANGE PASSWORD -->
 <div class="modal fade " id="changePassword" aria-hidden="true" aria-labelledby="changePasswordLabel" tabindex="-1">
-  <form method="post" enctype="multipart/form-data" action="{{url('/changePassword')}}" class="needs-validation" novalidate>
+  <form method="post" enctype="multipart/form-data" action="{{url('changePassword')}}" class="needs-validation" novalidate>
     @csrf
     @foreach($user_info as $user)
     <input type="hidden" name="user_id" id="user_id" value="{{$user->id}}">
@@ -283,7 +283,7 @@
 
 <!-- MODAL FOR CHANGE EMAIL -->
 <div class="modal fade " id="changeEmail" aria-hidden="true" aria-labelledby="changeEmailLabel" tabindex="-1">
-  <form method="post" enctype="multipart/form-data" action="{{url('/modifyEmail')}}" class="needs-validation" novalidate>
+  <form method="post" enctype="multipart/form-data" action="{{url('modifyEmail')}}" class="needs-validation" novalidate>
     @csrf
     @foreach($user_info as $user)
     <input type="hidden" name="user_id" id="user_id" value="{{$user->id}}">
@@ -311,7 +311,7 @@
 
 <div id="formContainer">
   <div class="modal fade " id="changeID" aria-hidden="true" aria-labelledby="changeIDLabel" tabindex="-1">
-    <form method="post" id="changeIDForm" enctype="multipart/form-data" action="{{url('/updateID')}}" class="needs-validation" novalidate>
+    <form method="post" id="changeIDForm" enctype="multipart/form-data" action="{{url('updateID')}}" class="needs-validation" novalidate>
       @csrf
       @foreach($user_info as $user)
       <input type="hidden" name="user_id" id="user_id" value="{{$user->id}}">

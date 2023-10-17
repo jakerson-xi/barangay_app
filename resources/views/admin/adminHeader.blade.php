@@ -200,13 +200,15 @@
                 </div>
                 @endif
                 @if($admin->role == 'Barangay Treasurer')
+                <a href="{{url('dashboard')}}" style="text-align: justify;" type="button" class="btn btn-primary1"><i class="bi bi-list-task"></i> List of Payment</a>
+
                 <div class="dropdown">
                     <button style="width:100%;text-align: justify;" class="btn btn-primary1 dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="bi bi-cash-stack"></i> Manage Payment
+                        <i class="bi bi-cash-stack"></i> Manage Payment
                     </button>
                     <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownMenuButton1">
-                        <li><a class="dropdown-item" href="{{url('dashboard')}}">List of Payment</a></li>
-                        <hr class="dropdown-divider">
+                        <!-- <li><a class="dropdown-item" href="{{url('dashboard')}}">List of Payment</a></li>
+                        <hr class="dropdown-divider"> -->
                         <li><a class="dropdown-item" href="{{url('listReadyForPayment')}}">Process Onsite Payment Request</a></li>
                         <li><a class="dropdown-item" href="{{url('listOnlinePayment')}}">Process Online Payment Request</a></li>
                     </ul>

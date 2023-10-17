@@ -19,6 +19,8 @@ use App\Models\Web_App;
 use App\Models\Payment;
 use App\Models\Visitor;
 use Carbon\Carbon;
+use App\Mail\OnsiteReceipt;
+use Illuminate\Support\Facades\Mail;
 
 class adminController extends Controller
 {
@@ -43,7 +45,7 @@ class adminController extends Controller
                 'requests.created_at as request_date'
             )
             ->first();
-        // dd($transaction_info);
+
 
         $client = new \GuzzleHttp\Client();
 
@@ -1385,6 +1387,70 @@ class adminController extends Controller
     }
 
 
+    public function confirmOnsitePayment(Request $request)
+    {
+
+
+        $user = Auth::user();
+
+        if ($request->price == 'FREE') {
+            $paid = 0;
+            $price = 0;
+            $change = 0;
+        } else {
+            $paid = $request->amount_paid;
+            $price = $request->price;
+            $change = $paid - $price;
+        }
+        Requests::where('reference_key', $request->reference)->get()->first()->update([
+            "request_status" => "CONFIRMED PAYMENT",
+            "ctc" => $request->ctc,
+            "or_num" => $request->official_receipt,
+            "ref" => $request->ref,
+        ]);
+        $request_info = Requests::where('reference_key', $request->reference)->get()->first();
+
+        Request_History::create([
+            'request_id' =>  $request_info->request_id,
+            'processed_by' => $user->first_name . " " . $user->last_name,
+            'request_status' => 'CONFIRMED',
+        ]);
+        Payment::create([
+            "request_id" => $request_info->request_id,
+            "resident_id" => $request_info->resident_id,
+            "payment_ref" => $request->ref,
+            "payment_method" => "ONSITE PAYMENT",
+            "request_price" => $price,
+            "payment_status" => "CONFIRMED",
+            'amount_paid' => $paid,
+            "description_payment" => $request->description_payment,
+            'payment_processed_by'    => $user->first_name . ' ' . $user->last_name,
+            "isConfirmed" => 1,
+        ]);
+
+        //ADD SENDING EMAIL
+        Alert::success('PAYMENT CONFIRMED:', $request->reference)->showConfirmButton('Confirm', '#AA0F0A');
+        // payor info
+        $user_info = User::where('id', $request_info->resident_id)->get()->first();
+        $data = [
+            'or' => $request->official_receipt,
+            'document' => Request_type::where('request_type_id', $request_info->request_type_id)->get()->first()->request_type_name,
+            'type' => $request_info->request_description,
+            'ref' => $request_info->reference_key,
+            'price' => $price,
+            'service' => 0,
+            'paid' => $paid,
+            'change' => $change,
+            'name' => $user_info->first_name . ' '.$user_info->middle_name . ' '. $user_info->last_name,
+            'mop' => "ONSITE PAYMENT",
+            'process' => $user->first_name . ' ' . $user->last_name,
+            'date' => Payment::where('request_id' ,$request_info->request_id )->where('payment_status','CONFIRMED')->get()->first()->created_at,
+
+        ];
+
+        Mail::to($user_info->email)->send(new OnsiteReceipt($data));
+        return redirect()->route('listReadyForPayment');
+    }
     public function confirmPayment(Request $request)
     {
 
@@ -1397,6 +1463,7 @@ class adminController extends Controller
             "ref" => $request->ref,
         ]);
 
+        $request_info = Requests::where('request_id', $request->reference)->get()->first();
         Request_History::create([
             'request_id' =>  $request->reference,
             'processed_by' => $user->first_name . " " . $user->last_name,
@@ -1416,11 +1483,29 @@ class adminController extends Controller
             "service_charge" => $payment_info->service_charge,
             "payment_status" => "CONFIRMED",
             "description_payment" => $request->payment_descrip,
+            'payment_processed_by'    => $user->first_name . ' ' . $user->last_name,
             "isConfirmed" => 1,
         ]);
 
+        $user_info = User::where('id', $request_info->resident_id)->get()->first();
+        $data = [
+            'or' => $request->official_receipt,
+            'document' => Request_type::where('request_type_id', $request_info->request_type_id)->get()->first()->request_type_name,
+            'type' => $request_info->request_description,
+            'ref' => $request_info->reference_key,
+            'price' => $request_info->price,
+            'paid' => $payment_info->request_price + $payment_info->service_charge,
+            'change' => 0,
+            'service' => $payment_info->service_charge,
+            'name' => $user_info->first_name . ' '.$user_info->middle_name . ' '. $user_info->last_name,
+            'mop' => $payment_info->payment_method,
+            'process' => $user->first_name . ' ' . $user->last_name,
+            'date' => Payment::where('request_id' ,$request_info->request_id )->where('payment_status','CONFIRMED')->get()->first()->created_at,
 
-        Alert::success(
+        ];
+
+        Mail::to($user_info->email)->send(new OnsiteReceipt($data));
+                Alert::success(
             'PAYMENT CONFIRMED:',
             Requests::where('request_id', $request->reference)->get()->first()->reference_key
         )
@@ -1428,6 +1513,34 @@ class adminController extends Controller
 
 
         return redirect()->route('listOnlinePayment');
+    }
+
+    public function process_payment($ref)
+    {
+
+        $user = Auth::user();
+        $admin_info = User::where('id', $user->id)->get();
+
+        if ($user->role != 'Barangay Treasurer') {
+            Alert::error('UNAUTHORIZED ACCOUNT', '')->showConfirmButton('Confirm', '#AA0F0A');
+            return redirect()->route('home');
+        } else {
+
+
+            $request_info = Requests::where('request_id', $ref)
+                ->join('users', 'users.id', '=', 'requests.resident_id')
+                ->join('request_type', 'request_type.request_type_id', '=', 'requests.request_type_id')
+                ->select('requests.*', 'request_type.*', 'users.*', 'requests.created_at as created')->get()->first();
+
+            if ($request_info == NULL || $request_info->request_status != "READY FOR PAYMENT") {
+                Alert::error('INVALID KEY', '')->showConfirmButton('Confirm', '#AA0F0A');
+                return redirect()->route('listReadyForPayment');
+            }
+
+
+
+            return view("admin/processOnsitePayment", ['admin_info' => $admin_info, 'request' => $request_info]);
+        }
     }
     public function listReadyForPayment()
     {
@@ -1442,8 +1555,6 @@ class adminController extends Controller
                 ->select('users.*', 'requests.*', 'request_type.*', 'requests.created_at as requests_date')
                 ->get();
             $admin_info = DB::table('users')->where('id', $user->id)->get();
-            //$transactions = Payment::join('requests', 'requests.request_id', '=', 'payment.request_id')->where('payment_status', 'PAID')->where('isConfirmed', '')->join('users', 'users.id', '=', 'payment.resident_id')->select('requests.*', 'users.*', 'payment.*', 'payment.created_at as payment_created_at')->get();
-            //dd(Payment::join('requests', 'requests.request_id', '=', 'payment.request_id')->join('users', 'users.id', '=', 'payment.resident_id')->select('requests.*', 'users.*','payment.*', 'payment.created_at as payment_created_at')->get());
             return view("admin/listReadyForPayment", ['request' => $paymentList, 'admin_info' => $admin_info]);
         }
     }

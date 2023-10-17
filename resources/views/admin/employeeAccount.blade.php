@@ -181,7 +181,7 @@
                                     confirmButtonColor: "#AA0F0A",
                                 }).then((result) => {
                                     if (result.value) {
-                                        window.location.href = "/viewEmployee/" + userId;
+                                        window.location.href = "{{url('viewEmployee')}}/" + userId;
                                     }
                                 });
 
@@ -195,7 +195,7 @@
                                     confirmButtonColor: "#AA0F0A",
                                 }).then((result) => {
                                     if (result.value) {
-                                        window.location.href = "/viewEmployee/" + userId;
+                                        window.location.href = "{{url('viewEmployee')}}/" + userId;
                                     }
                                 });
 

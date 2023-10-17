@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="https://cdn.datatables.net/datetime/1.3.0/css/dataTables.dateTime.min.css">
 
 <div class="content my-3">
-    <p class="display-6"><i class="bi bi-credit-card-2-front-fill"></i> <strong>Process Online Payment Request </strong></p>
+    <p class="display-6"><i class="bi bi-credit-card-2-front-fill"></i> <strong>Process Onsite Payment Request </strong></p>
     <hr style="color: black;">
 
     <div class="my-3">
@@ -15,7 +15,7 @@
 
     <div class="collapse mt-3" id="collapseExample">
         <div class="container">
-            <div class="row">
+            <!-- <div class="row">
                 <div class="col-5">
                     <label for="exampleInputEmail1" class="form-label ">Payment Method:</label>
                     <div class="md-flex mb-3 col">
@@ -27,7 +27,7 @@
                         </select>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <div class="row">
                 <div class="col-6 text-center">
                     <table border="0" cellspacing="5" cellpadding="5">
@@ -80,21 +80,18 @@
                 <td style="text-transform: uppercase;" class="text-center">{{$request->requests_date}}</td>
                 @if($request->request_type_name == 'COMMUNITY TAX CERTIFICATE')
                 <td style="text-transform: uppercase" class="text-center">BASED ON THE INCOME</td>
-                @elseif($request->request_price == 0)
+                @elseif($request->price == 0)
                 <td style="text-transform: uppercase" class="text-center">FREE</td>
                 @else
-                <td style="text-transform: uppercase" class="text-center">₱ {{number_format($request->request_price, 2, '.', '')}}</td>
+                <td style="text-transform: uppercase" class="text-center">₱ {{number_format($request->price, 2, '.', '')}}</td>
                 @endif
-                <td style="text-transform: uppercase" >{{$request->employee_name}}</td>
+                <td style="text-transform: uppercase">{{$request->employee_name}}</td>
                 <td style="text-transform: uppercase; " class="text-center">
-                    <a href="{{url('viewPayment')}}/{{$request->payment_ref}}" type="submit" class="btn btn-success btn-sm"><i class="bi bi-check2-circle"></i> Confirm</a>
+                    <a href="{{url('process_payment')}}/{{$request->request_id}}" type="submit" class="btn btn-success btn-sm"><i class="bi bi-receipt-cutoff"></i> Payment</a>
                 </td>
             </tr>
             @endforeach
-
         </tbody>
-
-
     </table>
     <hr style="color: black;">
 </div>
@@ -129,7 +126,7 @@
         function(settings, data, dataIndex) {
             var min = minDate.val();
             var max = maxDate.val();
-            var date = new Date(data[4]);
+            var date = new Date(data[3]);
 
             if (
                 (min === null && max === null) ||
