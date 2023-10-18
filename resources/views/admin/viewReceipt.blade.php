@@ -1,112 +1,17 @@
-<!DOCTYPE html>
-<html>
+@include('admin/adminHeader')
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/datetime/1.3.0/css/dataTables.dateTime.min.css">
 
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <title>Email Receipt</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <style type="text/css">
-        /**
-   * Google webfonts. Recommended to include the .woff version for cross-client compatibility.
-   */
-        @media screen {
-            @font-face {
-                font-family: "Source Sans Pro";
-                font-style: normal;
-                font-weight: 400;
-                src: local("Source Sans Pro Regular"), local("SourceSansPro-Regular"),
-                    url(https://fonts.gstatic.com/s/sourcesanspro/v10/ODelI1aHBYDBqgeIAH2zlBM0YzuT7MdOe03otPbuUS0.woff) format("woff");
-            }
+<div class="content my-3">
+<nav aria-label="breadcrumb">
+        <ol class="breadcrumb fs-6">
+            <li class="breadcrumb-item"><a href="{{url('listConfirmPayment')}}">All Payments</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{$data['ref']}}</li>
+        </ol>
+    </nav>
+    <h2 id="payment-number">{{$data['ref']}}</h2>
+    <hr>
 
-            @font-face {
-                font-family: "Source Sans Pro";
-                font-style: normal;
-                font-weight: 700;
-                src: local("Source Sans Pro Bold"), local("SourceSansPro-Bold"),
-                    url(https://fonts.gstatic.com/s/sourcesanspro/v10/toadOcfmlt9b38dHJxOBGFkQc6VGVFSmCnC_l7QZG60.woff) format("woff");
-            }
-        }
-
-        /**
-   * Avoid browser level font resizing.
-   * 1. Windows Mobile
-   * 2. iOS / OSX
-   */
-        body,
-        table,
-        td,
-        a {
-            -ms-text-size-adjust: 100%;
-            /* 1 */
-            -webkit-text-size-adjust: 100%;
-            /* 2 */
-        }
-
-        /**
-   * Remove extra space added to tables and cells in Outlook.
-   */
-        table,
-        td {
-            mso-table-rspace: 0pt;
-            mso-table-lspace: 0pt;
-        }
-
-        /**
-   * Better fluid images in Internet Explorer.
-   */
-        img {
-            -ms-interpolation-mode: bicubic;
-        }
-
-        /**
-   * Remove blue links for iOS devices.
-   */
-        a[x-apple-data-detectors] {
-            font-family: inherit !important;
-            font-size: inherit !important;
-            font-weight: inherit !important;
-            line-height: inherit !important;
-            color: inherit !important;
-            text-decoration: none !important;
-        }
-
-        /**
-   * Fix centering issues in Android 4.4.
-   */
-        div[style*="margin: 16px 0;"] {
-            margin: 0 !important;
-        }
-
-        body {
-            width: 100% !important;
-            height: 100% !important;
-            padding: 0 !important;
-            margin: 0 !important;
-        }
-
-        /**
-   * Collapse table borders to avoid space between cells.
-   */
-        table {
-            border-collapse: collapse !important;
-        }
-
-        a {
-            color: #1a82e2;
-        }
-
-        img {
-            height: auto;
-            line-height: 100%;
-            text-decoration: none;
-            border: 0;
-            outline: none;
-        }
-    </style>
-</head>
-
-<body style="background-color: #aa0f0a">
     <!-- start preheader -->
     <div class="preheader" style="
         display: none;
@@ -133,7 +38,7 @@
         <tr>
         <td align="center" valign="top" width="600">
         <![endif]-->
-                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px">
+                <!-- <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px">
                     <tr>
                         <td align="center" valign="top" style="padding: 36px 24px">
                             <a href="{{url('home')}}" target="_blank" style="display: inline-block">
@@ -146,7 +51,7 @@
                             </a>
                         </td>
                     </tr>
-                </table>
+                </table> -->
                 <!--[if (gte mso 9)|(IE)]>
         </td>
         </tr>
@@ -215,7 +120,7 @@
                   border-right: 3px solid #aa0f0a;
                 ">
                             <p style="margin: 0">
-                            Attached is a summary of your recent onsite transaction receipt for your records. For official documentation, kindly ensure you receive an official receipt issued by the barangay.
+                                Attached is a summary of your recent onsite transaction receipt for your records. For official documentation, kindly ensure you receive an official receipt issued by the barangay.
                             </p>
                         </td>
                     </tr>
@@ -500,45 +405,7 @@
         <tr>
         <td align="center" valign="top" width="600">
         <![endif]-->
-                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px">
-                    <!-- start permission -->
-                    <tr>
-                        <td align="center" bgcolor="white" style="
-                  padding: 12px 24px;
-                  font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
-                  font-size: 14px;
-                  line-height: 20px;
-                  color: #666;
-                ">
-                            <p style="margin: 0">
-                                If you have any questions or concerns regarding your
-                                transaction, please do not hesitate to contact us. We are here
-                                to assist you with any inquiries or assistance you may need.
-                            </p>
-                        </td>
-                    </tr>
-                    <!-- end permission -->
 
-                    <!-- start unsubscribe -->
-                    <tr>
-                        <td align="center" bgcolor="white" style="
-                  padding: 12px 24px;
-                  font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
-                  font-size: 14px;
-                  line-height: 20px;
-                  color: #666;
-                ">
-                            <p style="margin: 0">
-                                128 Col. Ballecer St Cor. Gen. Espino St. Zone 6 South Signal
-                                Village Taguig City
-                            </p>
-                            <p style="margin: 0">
-                                <a href="mailto:brgysouthsignal@gmail.com" target="_blank">brgysouthsignal@gmail.com</a>
-                            </p>
-                        </td>
-                    </tr>
-                    <!-- end unsubscribe -->
-                </table>
                 <!--[if (gte mso 9)|(IE)]>
         </td>
         </tr>
@@ -549,6 +416,34 @@
         <!-- end footer -->
     </table>
     <!-- end body -->
+
+</div>
+
+
 </body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.3.2/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.3.2/js/buttons.bootstrap5.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.3.2/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.3.2/js/buttons.print.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.3.2/js/buttons.colVis.min.js"></script>
+<style>
+    .hide-column {
+        display: none;
+    }
+</style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.2/moment.min.js"></script>
+<script src="https://cdn.datatables.net/datetime/1.3.0/js/dataTables.dateTime.min.js"></script>
+
 
 </html>

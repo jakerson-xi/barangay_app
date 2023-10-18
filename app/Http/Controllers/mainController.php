@@ -662,13 +662,22 @@ class mainController extends Controller
             ->where('request_status', 'READY FOR PAYMENT')
             ->whereNotIn('request_type.request_type_name', ['CONCERN', 'COMMUNITY TAX CERTIFICATE'])
             ->get();
-        $concern = Requests::join('users', 'users.id', '=', 'requests.resident_id')
-            ->join('request_type', 'request_type.request_type_id', '=', 'requests.request_type_id')
-            ->select('users.*', 'requests.*', 'request_type.*', 'requests.created_at as request_date')
-            ->where('id', $user_auth->id)
-            ->where('request_status', 'PAID')
-            ->whereNotIn('request_type.request_type_name', ['CONCERN', 'COMMUNITY TAX CERTIFICATE'])
-            ->get();
+        // $concern = Requests::join('users', 'users.id', '=', 'requests.resident_id')
+        //     ->join('request_type', 'request_type.request_type_id', '=', 'requests.request_type_id')
+        //     ->join('payment', 'payment.request_id', '=', 'requests.request_id')
+        //     ->select('payment.*','users.*', 'requests.*', 'request_type.*', 'requests.created_at as request_date')
+        //     ->where('id', $user_auth->id)
+        //     ->where('request_status', 'CONFIRMED PAYMENT')
+        //     ->whereNotIn('request_type.request_type_name', ['CONCERN', 'COMMUNITY TAX CERTIFICATE'])
+        //     ->get();
+
+        $concern = Payment::join('requests', 'requests.request_id', '=', 'payment.request_id')
+        ->join('request_type', 'request_type.request_type_id', '=', 'requests.request_type_id')
+        ->join('users', 'users.id', '=', 'requests.resident_id')
+        ->where('id', $user_auth->id)
+        ->where('payment_status', 'PAID')
+        ->select('payment.*','users.*', 'requests.*', 'request_type.*', 'requests.created_at as request_date')
+        ->get();
 
         return view("paymentList", ['user_info' => $user_info, 'transaction' => $transactions, 'paid' => $concern]);
     }

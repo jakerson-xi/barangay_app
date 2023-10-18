@@ -506,7 +506,7 @@ class RequestController extends Controller
                     // }
                 }
                 // for barangay ID and CEDULA
-                else if ($transactions->request_type_id == 1 || $transactions->request_type_id == 2) {
+                else if ($transactions->request_type_id == 1 || $transactions->request_type_id == 2 || $transactions->request_type_id == 4) {
                     Requests::where('request_id', $request->id)->update([
                         'request_status' => 'DONE',
                         'issue_on' =>  $request->issue_on,

@@ -758,9 +758,9 @@
                                                             PROCESSING
                                                         </div>
                                                         @endif
-                                                        @if($trans->request_status == 'PAID')
+                                                        @if($trans->request_status == 'CONFIRMED PAYMENT')
                                                         <div class="badge  text-wrap" style="width: 6rem; background-color:steelblue">
-                                                        <i class="bi bi-check-circle-fill"></i> PAID
+                                                        PAID
                                                         </div>
                                                         @endif
                                                     </td>

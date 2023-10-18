@@ -161,16 +161,19 @@
                     1
                     @endif
                     @if($request->request_status == 'DENIED')
-                    4
+                    6
                     @endif
                     @if($request->request_status == 'READY FOR PAYMENT')
-                    5
+                    3
                     @endif
                     @if($request->request_status == 'DONE')
-                    3
+                    4
                     @endif
                     @if($request->request_status == 'PROCESSING')
                     2
+                    @endif
+                    @if($request->request_status == 'CONFIRMED PAYMENT')
+                    5
                     @endif
                 </td>
             </tr>

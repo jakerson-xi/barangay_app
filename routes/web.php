@@ -100,9 +100,12 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/paymongo_details/{id}', [adminController::class, 'paymongo_details'])->name('paymongo_details');
     Route::get('/listOnlinePayment', [adminController::class, 'listOnlinePayment'])->name('listOnlinePayment');
     Route::get('/listReadyForPayment', [adminController::class, 'listReadyForPayment'])->name('listReadyForPayment');
+    Route::get('/listConfirmPayment', [adminController::class, 'listConfirmPayment'])->name('listConfirmPayment');
     Route::get('/viewPayment/{ref}', [adminController::class, 'viewPayment'])->name('viewPayment');
     Route::post('/confirmPayment', [adminController::class, 'confirmPayment'])->name('confirmPayment');
     Route::get('/process_payment/{ref}', [adminController::class, 'process_payment'])->name('process_payment');
+    Route::get('/view_Payment/{ref}', [adminController::class, 'view_Payment'])->name('view_Payment');
+
     Route::post('/confirmOnsitePayment', [adminController::class, 'confirmOnsitePayment'])->name('confirmOnsitePayment');
 
 });

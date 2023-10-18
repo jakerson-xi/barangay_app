@@ -154,6 +154,16 @@
                                         <td><strong>Type of application: </strong></td>
                                         <td class="text-end">{{$request->request_type_name}}<br>({{($request->request_description)}})</td>
                                     </tr>
+                                    @if($request->business_name != '')
+                                    <tr>
+                                        <td><strong>Business Name:</strong></td>
+                                        <td class="text-end">{{$request->business_name}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Business Address:</strong></td>
+                                        <td class="text-end">{{$request->business_address}}</td>
+                                    </tr>
+                                    @endif
                                     <tr class="align-middle">
                                         <td><strong>Purpose: </strong></td>
                                         <td class="text-end">{{$request->request_purpose}}</td>

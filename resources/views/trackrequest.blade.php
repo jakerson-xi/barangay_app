@@ -35,6 +35,7 @@
                                 PENDING
                             </div>
                             @endif
+                            
                             @if($info->concern_status == 'PROCESSING')
                             <div class="badge bg-info text-wrap" style="width: 6rem;">
                                 PROCESSING
@@ -79,6 +80,11 @@
                             @if($info->request_status == 'PROCESSING')
                             <div class="badge bg-info text-wrap" style="width: 6rem;">
                                 PROCESSING
+                            </div>
+                            @endif
+                            @if($info->request_status == 'CONFIRMED PAYMENT')
+                            <div class="badge bg-warning text-wrap" style="width: 6rem; background-color:steelblue">
+                                PAID
                             </div>
                             @endif
                             @if($info->request_status == 'READY FOR PAYMENT')

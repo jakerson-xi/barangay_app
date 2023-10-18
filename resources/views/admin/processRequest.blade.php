@@ -21,7 +21,7 @@
         <div class="collapse mt-3" id="collapseExample">
             <div class="container text-center">
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-8">
                         <div class="form-check">
                             <label class="form-label">Document Status:</label><br>
                             <div class="form-check form-check-inline">
@@ -42,9 +42,15 @@
                                     <p class="badge bg-SUCCESS text-wrap status-class" style="background-color:#198754">READY FOR PAYMENT</p>
                                 </label>
                             </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input filter-checkbox" type="checkbox" value="PAID">
+                                <label class="form-check-label" for="inlineCheckbox1">
+                                    <p class="badge text-wrap status-class" style="background-color:steelblue">PAID</p>
+                                </label>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-6">
+                    <div class="col-4">
                         <label for="exampleInputEmail1" class="form-label ">Type of doc. request</label>
                         <div class="md-flex mb-3 col">
                             <select id="docTypeDrop" class="form-select form-select-sm md-flex mx-auto w-50" aria-label="Default select example">
@@ -103,7 +109,8 @@
         <tbody>
             @foreach($admin_info as $admin)
             @foreach($request as $request)
-            @if($request->request_status == 'PENDING' || ($request->request_status == 'READY FOR PAYMENT' && $request->employee_name == $admin->first_name." " .$admin->last_name ) || ($request->request_status == 'PROCESSING' && $request->employee_name == $admin->first_name." " .$admin->last_name ))
+            @if($request->request_status == 'PENDING' || ($request->request_status == 'CONFIRMED PAYMENT' && $request->employee_name == $admin->first_name." " .$admin->last_name ) 
+            || ($request->request_status == 'READY FOR PAYMENT' && $request->employee_name == $admin->first_name." " .$admin->last_name ))
             @if($request->middle_name == 'N/A')
             <p hidden>{{$fullname = $request->first_name." ".$request->last_name}}</p>
 
@@ -136,6 +143,9 @@
                     @if($request->request_status == 'PROCESSING')
                     <p class="badge bg-info text-wrap status-class" style="width: 6rem;background-color:#0d6efd">PROCESSING</p>
                     @endif
+                    @if($request->request_status == 'CONFIRMED PAYMENT')
+                    <p class="badge text-wrap status-class" style="width: 6rem;background-color:steelblue">PAID</p>
+                    @endif
                     
                  
                 </td>
@@ -147,7 +157,7 @@
                 <td class="text-center">
                     @if($request->request_status == 'PENDING' || $request->request_status == 'PROCESSING')
                     <a href="process-pending/{{$request->request_id}}" type="submit" class="btn btn-dark btn-sm"><i class="bi bi-arrow-clockwise"></i> Process</a>
-                    @endif @if($request->request_status == 'READY FOR PAYMENT' )
+                    @endif @if($request->request_status == 'READY FOR PAYMENT'||$request->request_status == 'CONFIRMED PAYMENT' )
                     <a href="process_RFP/{{$request->request_id}}" type="submit" class="btn btn-dark btn-sm"><i class="bi bi-arrow-clockwise"></i> Process</a>
                     @endif
                 </td>

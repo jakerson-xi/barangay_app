@@ -200,7 +200,7 @@
                 </div>
                 @endif
                 @if($admin->role == 'Barangay Treasurer')
-                <a href="{{url('dashboard')}}" style="text-align: justify;" type="button" class="btn btn-primary1"><i class="bi bi-list-task"></i> List of Payment</a>
+                <a href="{{url('listConfirmPayment')}}" style="text-align: justify;" type="button" class="btn btn-primary1"><i class="bi bi-list-task"></i> List of Payment</a>
 
                 <div class="dropdown">
                     <button style="width:100%;text-align: justify;" class="btn btn-primary1 dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">

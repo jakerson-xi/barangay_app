@@ -714,7 +714,7 @@
                                         <th class="text-center">TYPE OF REQUEST</th>
                                         <th class="text-center">DATE & TIME</th>
                                         <th class="text-center">EXPIRATION</th>
-                                        <th class="text-center">Action:</th>
+                                        <th class="text-center">Action</th>
 
                                     </tr>
                                 </thead>
@@ -765,9 +765,9 @@
                                     <tr>
                                         <th class="text-center">Ref. Key</th>
                                         <th class="text-center">TYPE OF REQUEST</th>
+                                        <th class="text-center">MODE OF PAYMENT</th>
                                         <th class="text-center">DATE & TIME</th>
-                                        <th class="text-center">EXPIRATION</th>
-                                        <th class="text-center">Action:</th>
+                                        <th class="text-center">Action</th>
 
                                     </tr>
                                 </thead>
@@ -777,6 +777,8 @@
                                     <tr>
                                         <td style="text-transform: uppercase;">{{$paid->reference_key}}</td>
                                         <td style="text-transform: uppercase; ">{{$paid->request_type_name. " (". $paid->request_description.")"}}</td>
+                                        <td style="text-transform: uppercase; ">{{$paid->payment_method}}</td>
+
                                         <td style="text-transform: uppercase; ">{{$paid->request_date}}</td>
 
                                         <!-- <td class="text-center" style="text-transform: uppercase; ">
@@ -784,7 +786,6 @@
                                                 READY FOR PAYMENT
                                             </div>
                                         </td> -->
-                                        <td style="text-transform: uppercase; ">{{$paid->expiration}}</td>
                                         <td class="text-center">
                                             <a href="paid/{{$paid->reference_key}}" type="button" class="btn btn-dark"><i class="bi bi-cash-stack"></i> View</a>
                                         </td>

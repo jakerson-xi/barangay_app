@@ -39,6 +39,9 @@
         @if($request->request_status == 'PROCESSING')
         <div class="badge bg-info text-wrap" style="width: 6rem;background-color:#0d6efd">PROCESSING</div>
         @endif
+        @if($request->request_status == 'CONFIRMED PAYMENT')
+        <div class="badge  text-wrap" style="width: 6rem;background-color:steelblue">PAID</div>
+        @endif
     </div>
 
     <div class="myContainer">
@@ -184,122 +187,126 @@
                         @endforeach
                     </tbody>
                 </table>
-        </div>
-        @if($request->request_type_id != 5)
-        <div class="shadow p-3 mb-3 bg-body rounded ">
-            <p class="fs-4 fw-semibold text-center">OTHER INFORMATION</p>
-            <hr>
-            <div class="row my-3 ">
-                <div class="col-md-6 mb-2 text-center">
-                    <p class="fs-6  mb-2 ">Living with Relatives: <span class="text-danger">*</span></p>
-                    <strong>{{strtoupper($request->live_relatives)}}</strong>
-                </div>
-                <div class="col-md-6 mb-2 text-center">
-                    <p class="fs-6  mb-2 ">Type of Residency: <span class="text-danger">*</span></p>
-                    <strong>{{strtoupper($request->residency_type)}}</strong>
+            </div>
+            @if($request->request_type_id != 5)
+            <div class="shadow p-3 mb-3 bg-body rounded ">
+                <p class="fs-4 fw-semibold text-center">OTHER INFORMATION</p>
+                <hr>
+                <div class="row my-3 ">
+                    <div class="col-md-6 mb-2 text-center">
+                        <p class="fs-6  mb-2 ">Living with Relatives: <span class="text-danger">*</span></p>
+                        <strong>{{strtoupper($request->live_relatives)}}</strong>
+                    </div>
+                    <div class="col-md-6 mb-2 text-center">
+                        <p class="fs-6  mb-2 ">Type of Residency: <span class="text-danger">*</span></p>
+                        <strong>{{strtoupper($request->residency_type)}}</strong>
+                    </div>
                 </div>
             </div>
-        </div>
-        @else
-        <div class="shadow p-3 mb-3 bg-body rounded ">
-            <p class="fs-4 fw-semibold text-center">OTHER INFORMATION</p>
-            <hr>
-            <div class="row my-3 ">
-                <div class="col-md-6 mb-2 text-center">
-                    <p class="fs-6  mb-2 ">Business Name: <span class="text-danger">*</span></p>
-                    <strong>{{strtoupper($request->business_name)}}</strong>
-                </div>
-                <div class="col-md-6 mb-2 text-center">
-                    <p class="fs-6  mb-2 ">Business Address: <span class="text-danger">*</span></p>
-                    <strong>{{strtoupper($request->business_address)}}</strong>
-                </div>
-            </div>
-        </div>
-        @endif
-        <div class="shadow p-4 mb-3 bg-body rounded ">
-            <p class="fs-4 fw-semibold text-center">REQUEST INFORMATION</p>
-            <hr>
-            <div class="row my-3 text-center">
-                <div class="col-md-6 mb-2">
-                    <label class="text-start mb-2" for="">Type of Application<span class="text-danger">*</span>
-                    </label>
-                    <p><strong>{{strtoupper($request->request_description)}}</strong></p>
-                </div>
-                <div class="col-md-6 mb-2">
-                    <label class="text-start mb-2" for="">Purpose<span class="text-danger">*</span> </label>
-                    <p><strong>{{$request->request_purpose}}</strong></p>
-                </div>
-            </div>
-            <div class="row my-3 text-center">
-                <div class="col-md-6 mb-2">
-                    <label class="text-start mb-2" for="">Processed by:<span class="text-danger">*</span> </label>
-                    <p><strong>{{strtoupper($request->employee_name)}}</strong></p>
-                </div>
-                <div class="col-md-6 mb-2">
-                    <label class="text-start mb-2" for="">Date Requested:<span class="text-danger">*</span> </label>
-                    <p><strong>{{$request->request_date}}</strong></p>
-                </div>
-            </div>
-            <div class="row my-3 text-center">
-                <div class="col-md-12 mb-2">
-                    <label class="text-start mb-2" for="">Note:<span class="text-danger">*</span> </label>
-                    <p><strong>{{strtoupper($request->request_message)}}</strong></p>
-                </div>
-
-            </div>
-            @if($request->request_description != 'New')
-            <div class="text-center" id="upload_id">
-                <label class="text-start mb-2" for="">File attached:<span class="text-danger">*</span> </label>
-                <div class="mb-2 me-2">
-                    <img width="400" height="200" id="frame" src="{{url('images/'.$request->file)}}" class="img-fluid " />
+            @else
+            <div class="shadow p-3 mb-3 bg-body rounded ">
+                <p class="fs-4 fw-semibold text-center">OTHER INFORMATION</p>
+                <hr>
+                <div class="row my-3 ">
+                    <div class="col-md-6 mb-2 text-center">
+                        <p class="fs-6  mb-2 ">Business Name: <span class="text-danger">*</span></p>
+                        <strong>{{strtoupper($request->business_name)}}</strong>
+                    </div>
+                    <div class="col-md-6 mb-2 text-center">
+                        <p class="fs-6  mb-2 ">Business Address: <span class="text-danger">*</span></p>
+                        <strong>{{strtoupper($request->business_address)}}</strong>
+                    </div>
                 </div>
             </div>
             @endif
-        </div>
-        <div class="mb-3 text-center">
-            <a class="link-danger" data-bs-toggle="collapse" href="#historyCollapse" role="button" aria-expanded="false" aria-controls="historyCollapse">
-                Show History
-            </a>
-        </div>
-
-        <div class=" collapse shadow p-4 mb-3 bg-body rounded text-center" id="historyCollapse">
-            <p class="fs-4 fw-semibold text-center">REQUEST HISTORY</p>
-            <hr>
-            <table class="table table-hover ">
-                <thead>
-                    <tr>
-                        <th scope="col">Date</th>
-                        <th scope="col">Status</th>
-                        <th scope="col">Processed by</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($history as $history)
-                    <tr>
-                        <td>{{$history->created_at}}</td>
-                        <td>{{$history->request_status}}</td>
-                        <td>{{$history->processed_by}}</td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
-        <div class="shadow p-4 mb-3 d-grid gap-2 d-md-block bg-body rounded text-center">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-6">
-                        <a data-bs-toggle="modal" data-bs-target="#denied" href="#denied" id="btn" type="submit" type="submit" class="btn  btn-danger">
-                            <i class="bi bi-x-circle"></i> Deny the request</a>
+            <div class="shadow p-4 mb-3 bg-body rounded ">
+                <p class="fs-4 fw-semibold text-center">REQUEST INFORMATION</p>
+                <hr>
+                <div class="row my-3 text-center">
+                    <div class="col-md-6 mb-2">
+                        <label class="text-start mb-2" for="">Type of Application<span class="text-danger">*</span>
+                        </label>
+                        <p><strong>{{strtoupper($request->request_description)}}</strong></p>
                     </div>
-                    <div class="col-sm-6">
-                        <a data-bs-toggle="modal" data-bs-target="#processing" href="#processing" id="btn" type="submit" type="submit" class="btn  btn-success">
-                            <i class="bi bi-check2-circle"></i> Process the request</a>
+                    <div class="col-md-6 mb-2">
+                        <label class="text-start mb-2" for="">Purpose<span class="text-danger">*</span> </label>
+                        <p><strong>{{$request->request_purpose}}</strong></p>
+                    </div>
+                </div>
+                <div class="row my-3 text-center">
+                    <div class="col-md-6 mb-2">
+                        <label class="text-start mb-2" for="">Processed by:<span class="text-danger">*</span> </label>
+                        <p><strong>{{strtoupper($request->employee_name)}}</strong></p>
+                    </div>
+                    <div class="col-md-6 mb-2">
+                        <label class="text-start mb-2" for="">Date Requested:<span class="text-danger">*</span> </label>
+                        <p><strong>{{$request->request_date}}</strong></p>
+                    </div>
+                </div>
+                <div class="row my-3 text-center">
+                    <div class="col-md-12 mb-2">
+                        <label class="text-start mb-2" for="">Note:<span class="text-danger">*</span> </label>
+                        <p><strong>{{strtoupper($request->request_message)}}</strong></p>
+                    </div>
+
+                </div>
+                @if($request->request_description != 'New')
+                <div class="text-center" id="upload_id">
+                    <label class="text-start mb-2" for="">File attached:<span class="text-danger">*</span> </label>
+                    <div class="mb-2 me-2">
+                        <img width="400" height="200" id="frame" src="{{url('images/'.$request->file)}}" class="img-fluid " />
+                    </div>
+                </div>
+                @endif
+            </div>
+            <div class="mb-3 text-center">
+                <a class="link-danger" data-bs-toggle="collapse" href="#historyCollapse" role="button" aria-expanded="false" aria-controls="historyCollapse">
+                    Show History
+                </a>
+            </div>
+
+            <div class=" collapse shadow p-4 mb-3 bg-body rounded text-center" id="historyCollapse">
+                <p class="fs-4 fw-semibold text-center">REQUEST HISTORY</p>
+                <hr>
+                <table class="table table-hover ">
+                    <thead>
+                        <tr>
+                            <th scope="col">Date</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Processed by</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($history as $history)
+                        <tr>
+                            <td>{{$history->created_at}}</td>
+                            <td>{{$history->request_status}}</td>
+                            <td>{{$history->processed_by}}</td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+            <div class="shadow p-4 mb-3 d-grid gap-2 d-md-block bg-body rounded text-center">
+                <div class="container">
+                    <div class="row">
+                        @if($request->request_status == 'READY FOR PAYMENT')
+                        <div class="col-sm-12">
+                            <a data-bs-toggle="modal" data-bs-target="#denied" href="#denied" id="btn" type="submit" type="submit" class="btn  btn-danger">
+                                <i class="bi bi-x-circle"></i> Deny the request</a>
+                        </div>
+                        @endif
+                        @if($request->request_status == 'CONFIRMED PAYMENT')
+                        <div class="col-sm-12">
+                            <a data-bs-toggle="modal" data-bs-target="#processing" href="#processing" id="btn" type="submit" type="submit" class="btn  btn-success">
+                                <i class="bi bi-check2-circle"></i> Process the request</a>
+                        </div>
+                        @endif
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 </div>
 </div>
 
@@ -347,18 +354,20 @@
                 @csrf
                 <div class="modal-body">
                     <div class="alert alert-success">
-                    <i class="bi bi-exclamation-circle-fill"></i> Please fill out the form completely and accurately.
+                        <i class="bi bi-exclamation-circle-fill"></i> Confirm the information.
                     </div>
                     <div class="mb-3">
 
                         <input type="hidden" name="id" value="{{$request->request_id}}">
-                        <input type="hidden" name="issue_on" value="{{date('Y-m-d')}}">
+                        <label for="exampleFormControlTextarea1" class="form-label">Date confirmed: <span class="text-danger">*</span></label>
+                        <input type="text" class="w-100 form-control mb-2"  name="issue_on" value="{{date('Y-m-d')}}" readonly>
                         <label for="exampleFormControlTextarea1" class="form-label">Ref. No: <span class="text-danger">*</span></label>
-                        <input name="ref" class="w-100 form-control mb-2" type="number" required style="-webkit-appearance: none; margin: 0;" />
+                        <input type="text"name="ref" value="{{$request->ref}}"class="w-100 form-control mb-2"   readonly />
                         <label for="exampleFormControlTextarea1" class="form-label">OR. No: <span class="text-danger">*</span></label>
-                        <input name="or" class="w-100 form-control mb-2" type="number" required style="-webkit-appearance: none; margin: 0;" />
+                        <input type="text"name="or" value="{{$request->or_num}}"class="w-100 form-control mb-2"readonly  />
                         <label for="exampleFormControlTextarea1" class="form-label">CTC. No: <span class="text-danger">*</span></label>
-                        <input name="ctc" class="w-100 form-control mb-2" type="number" required style="-webkit-appearance: none; margin: 0;" />
+                        <input type="text"name="ctc" value="{{$request->ctc}}"class="w-100 form-control mb-2" readonly  />
+                   
                     </div>
                 </div>
 
@@ -607,7 +616,7 @@
                                 confirmButtonColor: "#AA0F0A",
                             }).then((result) => {
                                 if (result.value) {
-                                    window.location.href =  "{{url('processRequest')}}";
+                                    window.location.href = "{{url('processRequest')}}";
                                 }
                             });
 
