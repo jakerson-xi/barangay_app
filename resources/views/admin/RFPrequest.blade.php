@@ -119,16 +119,26 @@
                         <strong>{{strtoupper($request->validID_num)}}</strong>
                     </div>
                 </div>
+            </div>
 
-                <div class="row my-3 text-center">
-                    <div class="col-md-6 mb-2">
-                        <p class="fs-6  mb-2">Font Id: </p><img width="400" height="200" src="{{url('residentID/'.$request->validID_front)}}" class="img-fluid" alt="...">
-                    </div>
-                    <div class="col-md-6 mb-2">
-                        <p class="fs-6  mb-2">Back Id: </p> <img width="400" height="200" src="{{url('residentID/'.$request->validID_back)}}" class="img-fluid" alt="...">
+            <div class="container overflow-hidden mt-3">
+                <div class="shadow p-3 mb-3 bg-body rounded ">
+                    <p class="fs-4 fw-semibold text-center">VERIFICATION ID</p>
+                    <hr>
+                    <div class="row my-3 text-center">
+                        <div class="col-md-4 mb-2">
+                            <img width="400" height="200" src="{{url('residentID/'.$request->validID_front)}}" class="img-fluid" alt="...">
+                        </div>
+                        <div class="col-md-4 mb-2">
+                            <img width="400" height="200" src="{{url('residentID/'.$request->validID_back)}}" class="img-fluid" alt="...">
+                        </div>
+                        <div class="col-md-4 mb-2">
+                            <img width="400" height="200" src="{{url('residentID/'.$request->face)}}" class="img-fluid" alt="...">
+                        </div>
                     </div>
                 </div>
             </div>
+
             <div class="mb-3 text-center">
                 <a class="link-danger" data-bs-toggle="collapse" href="#REShistoryCollapse" role="button" aria-expanded="false" aria-controls="REShistoryCollapse">
                     Show Resident's Request History
@@ -178,6 +188,11 @@
                                 @if($trans->request_status == 'PROCESSING')
                                 <div class="badge bg-info text-wrap" style="width: 6rem;">
                                     PROCESSING
+                                </div>
+                                @endif
+                                @if($trans->request_status == 'CONFIRMED PAYMENT' || $trans->request_status == 'PAID')
+                                <div class="badge text-wrap" style="width: 6rem; background-color:steelblue">
+                                    PAID
                                 </div>
                                 @endif
                             </td>
@@ -287,6 +302,181 @@
                     </tbody>
                 </table>
             </div>
+
+
+            @if($request->request_status == 'CONFIRMED PAYMENT')
+            <div class="shadow p-4 mb-3 d-grid gap-2 d-md-block bg-body rounded text-center">
+                <p class="fs-4 fw-semibold text-center">RECEIPT</p>
+                <hr>
+                <div class="container">
+                    <div class="preheader" style="display: none;max-width: 0;max-height: 0;overflow: hidden;font-size: 1px;line-height: 1px;color: #fff; opacity: 0;">A preheader is the short summary text that follows the subject line when an email is viewed in the inbox.
+                    </div>
+
+                    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+
+                        <tr>
+                            <td align="center" bgcolor="white">
+
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td align="center" bgcolor="white">
+
+                                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px">
+                                    <tr>
+                                        <td align="left" bgcolor="#ffffff" style="padding: 36px 24px 0;font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;border-top: 3px solid #aa0f0a;border-left: 3px solid #aa0f0a;border-right: 3px solid #aa0f0a;">
+                                            <h1 style="margin: 0;font-size: 32px; font-weight: 700; letter-spacing: -1px;line-height: 48px;">
+                                                Barangay South Signal Village
+                                            </h1>
+                                            <p style="margin: 0">Online Receipt Copy</p>
+                                        </td>
+                                    </tr>
+                                </table>
+
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td align="center" bgcolor="white">
+                                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px">
+
+                                    <tr>
+                                        <td align="left" bgcolor="#ffffff" style=" padding: 24px;font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;font-size: 16px; line-height: 24px; border-left: 3px solid #aa0f0a;border-right: 3px solid #aa0f0a;">
+                                            <p style="margin: 0">
+                                                Attached is a summary of your recent onsite transaction receipt for your records. For official documentation, kindly ensure you receive an official receipt issued by the barangay.
+                                            </p>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td align="left" bgcolor="#ffffff" style="padding: 24px;font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;font-size: 16px;line-height: 24px;border-left: 3px solid #aa0f0a;border-right: 3px solid #aa0f0a;">
+                                            <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                                <tr>
+                                                    <td align="left" bgcolor="#AA0F0A" width="75%" style="padding: 12px;font-family: 'Source Sans Pro', Helvetica, Arial,sans-serif;font-size: 16px;line-height: 24px;color: white;border-left: 3px solid #aa0f0a;border-right: 3px solid #aa0f0a;">
+                                                        <strong>RECEIPT NO. </strong>
+                                                    </td>
+                                                    <td align="left" bgcolor="#AA0F0A" width="25%" style="padding: 12px;font-family: 'Source Sans Pro', Helvetica, Arial,sans-serif;font-size: 16px;line-height: 24px;color: white;border-left: 3px solid #aa0f0a;border-right: 3px solid #aa0f0a;">
+                                                        <strong>{{$data['or']}}</strong>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td align="left" width="75%" style="padding: 6px 12px;font-family: 'Source Sans Pro', Helvetica, Arial,sans-serif;font-size: 16px;line-height: 24px; ">
+                                                        {{$data['document']}} <br />({{$data['type']}}) - <br>
+                                                        <strong>{{$data['ref']}}</strong>
+                                                    </td>
+                                                    <td align="left" width="25%" style="padding: 6px 12px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;">
+
+                                                        ₱ {{number_format($data['price'], 2, '.', '')}}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td align="left" width="75%" style="padding: 6px 12px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;"></td>
+
+                                                    <strong> </strong>
+                                        </td>
+                                        <td align="left" width="25%" style="padding: 6px 12px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;"></td>
+
+                                    </tr>
+
+                                    @if($data['mop'] != 'ONSITE PAYMENT')
+                                    <tr>
+                                        <td align="left" width="75%" style="padding: 6px 12px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;">
+
+                                            Online Payment Service Charge:
+                                        </td>
+                                        <td align="left" width="25%" style="padding: 6px 12px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;">
+
+                                            ₱ {{number_format($data['service'], 2, '.', '')}}
+                                        </td>
+                                    </tr>
+
+                                    @endif
+                                    <tr>
+                                        <td align="left" width="75%" style="padding: 6px 12px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;">AMOUNT PAID</td>
+
+
+
+                                        <td align="left" width="25%" style="padding: 6px 12px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;">
+
+                                            ₱ {{number_format($data['paid'], 2, '.', '')}}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="left" width="75%" style="padding: 6px 12px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;"></td>
+
+                                        <strong> </strong>
+                            </td>
+                            <td align="left" width="25%" style="padding: 6px 12px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;"></td>
+
+                        </tr>
+                        <tr>
+                            <td align="left" width="75%" style="padding: 12px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px; border-top: 2px dashed #aa0f0a; border-bottom: 2px dashed #aa0f0a;">
+
+                                <strong>CHANGE</strong>
+                            </td>
+                            <td align="left" width="25%" style="padding: 12px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px; border-top: 2px dashed #aa0f0a; border-bottom: 2px dashed #aa0f0a;">
+
+                                <strong>₱ {{$data['change']}}</strong>
+                            </td>
+                        </tr>
+                    </table>
+                    </td>
+                    </tr>
+
+                    </table>
+
+                    </td>
+                    </tr>
+
+                    <tr>
+                        <td align="center" bgcolor="white" valign="top" width="100%">
+
+                            <table align="center" bgcolor="#ffffff" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px">
+                                <tr>
+                                    <td align="center" valign="top" style="font-size: 0; border-bottom: 3px solid white;border-left: 3px solid #aa0f0a;border-bottom: 3px solid #aa0f0a;border-right: 3px solid #aa0f0a;">
+                                        <div style=" display: inline-block; width: 100%;max-width: 50%; min-width: 240px;vertical-align: top;">
+                                            <table align="left" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 300px">
+                                                <tr>
+                                                    <td align="left" valign="top" style="padding-bottom: 36px;padding-left: 36px;font-family: 'Source Sans Pro', Helvetica, Arial,sans-serif;font-size: 16px;line-height: 24px;">
+                                                        <p><strong>Payor:</strong></p>
+                                                        <p>{{$data['name']}}</p>
+                                                        <p><strong>Mode of Payment:</strong></p>
+                                                        <p>{{$data['mop']}}</p>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+
+                                        <div style="display: inline-block; width: 100%; max-width: 50%; min-width: 240px; vertical-align: top;">
+
+                                            <table align="left" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 300px">
+                                                <tr>
+                                                    <td align="left" valign="top" style="padding-bottom: 36px; padding-left: 36px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;">
+
+                                                        <p><strong>Processed by:</strong></p>
+                                                        <p>{{$data['process']}}</p>
+                                                        <p><strong>Paid on:</strong></p>
+                                                        <p>{{$data['date']}}</p>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="center" bgcolor="white" style="padding: 24px">
+                        </td>
+                    </tr>
+                    </table>
+                </div>
+            </div>
+            @endif
+
             <div class="shadow p-4 mb-3 d-grid gap-2 d-md-block bg-body rounded text-center">
                 <div class="container">
                     <div class="row">
@@ -360,14 +550,14 @@
 
                         <input type="hidden" name="id" value="{{$request->request_id}}">
                         <label for="exampleFormControlTextarea1" class="form-label">Date confirmed: <span class="text-danger">*</span></label>
-                        <input type="text" class="w-100 form-control mb-2"  name="issue_on" value="{{date('Y-m-d')}}" readonly>
+                        <input type="text" class="w-100 form-control mb-2" name="issue_on" value="{{date('Y-m-d')}}" readonly>
                         <label for="exampleFormControlTextarea1" class="form-label">Ref. No: <span class="text-danger">*</span></label>
-                        <input type="text"name="ref" value="{{$request->ref}}"class="w-100 form-control mb-2"   readonly />
+                        <input type="text" name="ref" value="{{$request->ref}}" class="w-100 form-control mb-2" readonly />
                         <label for="exampleFormControlTextarea1" class="form-label">OR. No: <span class="text-danger">*</span></label>
-                        <input type="text"name="or" value="{{$request->or_num}}"class="w-100 form-control mb-2"readonly  />
+                        <input type="text" name="or" value="{{$request->or_num}}" class="w-100 form-control mb-2" readonly />
                         <label for="exampleFormControlTextarea1" class="form-label">CTC. No: <span class="text-danger">*</span></label>
-                        <input type="text"name="ctc" value="{{$request->ctc}}"class="w-100 form-control mb-2" readonly  />
-                   
+                        <input type="text" name="ctc" value="{{$request->ctc}}" class="w-100 form-control mb-2" readonly />
+
                     </div>
                 </div>
 

@@ -38,6 +38,7 @@ class adminController extends Controller
         $user_info = User::where('id', $request_info->resident_id)->get()->first();
 
 
+
         $data = [
             'or' => $request_info->or_num,
             'document' => Request_type::where('request_type_id', $request_info->request_type_id)->get()->first()->request_type_name,
@@ -49,14 +50,12 @@ class adminController extends Controller
             'service' => $payment_info->service_charge,
             'name' => $user_info->first_name . ' ' . $user_info->middle_name . ' ' . $user_info->last_name,
             'mop' => $payment_info->payment_method,
-            'process' =>  $payment_info->payment_processed_by	,
+            'process' =>  $payment_info->payment_processed_by,
             'date' => Payment::where('request_id', $request_info->request_id)->where('payment_status', 'CONFIRMED')->get()->first()->created_at,
 
         ];
 
-        return view('admin/viewReceipt',['data' => $data,'admin_info' => $admin_info]);
-
-
+        return view('admin/viewReceipt', ['data' => $data, 'admin_info' => $admin_info]);
     }
     public function viewPayment($ref)
     {
@@ -1479,6 +1478,8 @@ class adminController extends Controller
         Alert::success('PAYMENT CONFIRMED:', $request->reference)->showConfirmButton('Confirm', '#AA0F0A');
         // payor info
         $user_info = User::where('id', $request_info->resident_id)->get()->first();
+       
+
         $data = [
             'or' => $request->official_receipt,
             'document' => Request_type::where('request_type_id', $request_info->request_type_id)->get()->first()->request_type_name,
@@ -1535,12 +1536,18 @@ class adminController extends Controller
         ]);
 
         $user_info = User::where('id', $request_info->resident_id)->get()->first();
+
+        if (Request_type::where('request_type_id', $request_info->request_type_id)->get()->first()->request_type_name == 'COMMUNITY TAX CERTIFICATE') {
+            $price = $payment_info->request_price;
+         }else{
+             $price = $request_info->price;
+         }
         $data = [
             'or' => $request->official_receipt,
             'document' => Request_type::where('request_type_id', $request_info->request_type_id)->get()->first()->request_type_name,
             'type' => $request_info->request_description,
             'ref' => $request_info->reference_key,
-            'price' => $request_info->price,
+            'price' =>  $price ,
             'paid' => $payment_info->request_price + $payment_info->service_charge,
             'change' => 0,
             'service' => $payment_info->service_charge,
@@ -1857,9 +1864,44 @@ class adminController extends Controller
                 ->join('request_type', 'request_type.request_type_id', '=', 'requests.request_type_id')->select('users.*', 'requests.*', 'request_type.*', 'requests.created_at as request_date')->where('request_id', $id)->get();
             $admin_info = DB::table('users')->where('id', $user->id)->get();
             $request_history = Request_History::where('request_id', $id)->get();
-            $residents_history = Requests::join('users', 'users.id', '=', 'requests.resident_id')
-                ->join('request_type', 'request_type.request_type_id', '=', 'requests.request_type_id')->select('users.*', 'requests.*', 'request_type.*', 'requests.created_at as request_date')->where('id', $transactions->first()->id)->get();
-            return view("admin/RFPrequest", ['request' => $transactions, 'admin_info' => $admin_info, 'history' => $request_history, 'res_history' => $residents_history]);
+            $residents_history = Requests::join('users', 'users.id', '=', 'requests.resident_id')->join('request_type', 'request_type.request_type_id', '=', 'requests.request_type_id')->select('users.*', 'requests.*', 'request_type.*', 'requests.created_at as request_date')->where('id', $transactions->first()->id)->get();
+            
+            
+    
+            $payment_info = Payment::where('request_id', $transactions->first()->request_id)->get()->last();
+
+            if($payment_info == null){
+                return view("admin/RFPrequest", ['request' => $transactions, 'admin_info' => $admin_info, 'history' => $request_history, 'res_history' => $residents_history]);
+
+            }
+            $request_info = Requests::where('request_id', $payment_info->request_id)->get()->first();
+            $user_info = User::where('id', $request_info->resident_id)->get()->first();
+
+            if (Request_type::where('request_type_id', $request_info->request_type_id)->get()->first()->request_type_name == 'COMMUNITY TAX CERTIFICATE') {
+               $price = $payment_info->request_price;
+            }else{
+                $price = $request_info->price;
+            }
+
+            $data = [
+                'or' => $request_info->or_num,
+                'document' => Request_type::where('request_type_id', $request_info->request_type_id)->get()->first()->request_type_name,
+                'type' => $request_info->request_description,
+                'ref' => $request_info->reference_key,
+                'price' => $price,
+                'paid' => $payment_info->request_price + $payment_info->service_charge,
+                'change' => 0,
+                'service' => $payment_info->service_charge,
+                'name' => $user_info->first_name . ' ' . $user_info->middle_name . ' ' . $user_info->last_name,
+                'mop' => $payment_info->payment_method,
+                'process' =>  $payment_info->payment_processed_by,
+                'date' => Payment::where('request_id', $request_info->request_id)->where('payment_status', 'CONFIRMED')->get()->first()->created_at,
+
+            ];
+
+            return view("admin/RFPrequest", ['data' => $data ,'request' => $transactions, 'admin_info' => $admin_info, 'history' => $request_history, 'res_history' => $residents_history]);
+
+        
         } else {
             $processed_by = Requests::where('request_id', $id)->first()->employee_name;
             $message = 'THIS REQUEST HAS BEEN PROCESSING BY ' .  $processed_by;

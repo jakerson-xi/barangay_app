@@ -111,7 +111,7 @@
             <div class="container-fluid flex-sm-row">
                 <ul class="navbar-nav">
 
-                    <nobr class="nav-link text-white font-weight-bold"><span><a href="/transactionhistory" style="color:white"><i class="bi bi-arrow-left-circle-fill"></i></a> {{$request->reference_key}}</span></nobr>
+                    <nobr class="nav-link text-white font-weight-bold"><span><a href="{{url('transactionhistory')}}" style="color:white"><i class="bi bi-arrow-left-circle-fill"></i></a> {{$request->reference_key}}</span></nobr>
                 </ul>
 
 
@@ -120,9 +120,7 @@
                     <li class="nav-item ml-3">
                         <img class="nav-link img-circle " src="{{asset('assets/imgs/southsignalLogoLeft.png')}}" alt="" style="padding: 0px;width: 50px ;">
                     </li>
-                    <li class="nav-item">
-                        <nobr class="nav-link text-white font-weight-bold"><span>BARANGAY SOUTH SIGNAL VILLAGE</span></nobr>
-                    </li>
+                    
                     </li>
                 </ul>
 

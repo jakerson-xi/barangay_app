@@ -125,7 +125,7 @@
                         {{$request->request_description}}
                     </span></td>
                 <td style="text-transform: uppercase;">{{$fullname}}</td>
-                <td style="text-transform: uppercase;">{{date('Y-m-d', strtotime($request->request_date))}}</td>
+                <td style="text-transform: uppercase;">{{$request->request_date}}</td>
                 <td style="text-transform: uppercase;">
 
                     @if($request->request_status == 'PENDING')

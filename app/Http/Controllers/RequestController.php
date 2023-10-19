@@ -64,7 +64,7 @@ class RequestController extends Controller
 
             if ($request->file('file')) {
                 $file_front = $request->file('file');
-                $filename = $request->resident_id . '_' . $reference_key . $file_front->getClientOriginalExtension();
+                $filename = $request->resident_id . '_' . $reference_key . '.'. $file_front->getClientOriginalExtension();
                 $file_front->move(public_path('/images'), $filename);
             } else {
                 $filename = "";

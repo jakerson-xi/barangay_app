@@ -113,7 +113,7 @@
         </ol>
     </nav>
     <h2 id="payment-number">{{$request->reference_key}}</h2>
-    <form class="needs-validation" enctype="multipart/form-data" method="POST" action="{{URL('confirmOnsitePayment')}}" novalidate>
+    <form class="needs-validation" enctype="multipart/form-data" method="POST" action="{{url('confirmOnsitePayment')}}" novalidate>
         @csrf
         <input type="hidden" name='reference' value='{{$request->reference_key}}'>
         <div class="container-fluid details-container">

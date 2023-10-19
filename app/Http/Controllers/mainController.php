@@ -36,9 +36,9 @@ class mainController extends Controller
     {
 
         $docupass = new DocuPass(ENV('ID_ANALYZER'), "BARANGAY SOUTH SIGNAL VILLAGE WEB APP", "US");
-        $docupass->enableFaceVerification(true, 1, 0.7);
+        $docupass->enableFaceVerification(true, 1, 0.5);
         $docupass->verifyAge("18-120");
-        $docupass->enableAuthentication(true, "2", 0.7);
+        $docupass->enableAuthentication(true, "2", 0.5);
         $docupass->enableDualsideCheck(true);
         $docupass->setMaxAttempt(2);
         $docupass->setRedirectionURL(Env('APP_URL') . "/registration", "");

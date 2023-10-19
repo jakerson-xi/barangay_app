@@ -909,7 +909,7 @@
                 },
                 responsive: true,
                 order: [
-                    [5, 'asc']
+                    [2, 'desc']
                 ]
             });
         });
@@ -920,7 +920,7 @@
                 },
                 responsive: true,
                 order: [
-                    [5, 'asc']
+                    [3, 'desc']
                 ]
             });
         });

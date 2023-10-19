@@ -50,7 +50,7 @@
             <div class="container-fluid flex-sm-row">
                 <ul class="navbar-nav">
 
-                    <nobr class="nav-link text-white font-weight-bold"><span><a href="/payment" style="color:white"><i class="bi bi-arrow-left-circle-fill"></i></a> {{$request->reference_key}}</span></nobr>
+                    <nobr class="nav-link text-white font-weight-bold"><span><a href="{{url('payment')}}" style="color:white"><i class="bi bi-arrow-left-circle-fill"></i></a> {{$request->reference_key}}</span></nobr>
                 </ul>
 
 
@@ -491,7 +491,7 @@
                                                         <p class="fw-bold">₱  {{number_format(($request->price * 1.0256) , 2, '.', '')}}</p>
                                                     </td>
                                                     <td class="text-center align-middle">
-                                                        <a href="/paymongo/{{$request->reference_key}}/gcash" id="btn " type="submit" style="" class="btn btn-success">PAY</a>
+                                                        <a href="{{url('paymongo')}}/{{$request->reference_key}}/gcash" id="btn " type="submit" style="" class="btn btn-success">PAY</a>
                                                     </td>
                                                 </table>
                                             </div>
@@ -520,7 +520,7 @@
                                                         <p class="fw-bold">₱ {{$formattedNumber = number_format(($request->price * 1.0225), 2, '.', '')}}</p>
                                                     </td>
                                                     <td class="text-center align-middle">
-                                                        <a href="/paymongo/{{$request->reference_key}}/grab_pay" id="btn " type="submit" style="" class="btn btn-success">PAY</a>
+                                                        <a href="{{url('paymongo')}}/{{$request->reference_key}}/grab_pay" id="btn " type="submit" style="" class="btn btn-success">PAY</a>
                                                     </td>
                                                 </table>
 
@@ -549,7 +549,7 @@
                                                         <p class=" fw-bold">₱ {{$formattedNumber = number_format(($request->price * 1.021), 2, '.', '')}}</p>
                                                     </td>
                                                     <td class="text-center align-middle">
-                                                        <a href="/paymongo/{{$request->reference_key}}/paymaya" id="btn " type="submit" style="" class="btn btn-success">PAY</a>
+                                                        <a href="{{url('paymongo')}}/{{$request->reference_key}}/paymaya" id="btn " type="submit" style="" class="btn btn-success">PAY</a>
                                                     </td>
                                                 </table>
 
