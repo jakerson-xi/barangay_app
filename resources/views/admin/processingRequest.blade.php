@@ -5,7 +5,7 @@
 
 <div class="content mb-4">
     <p class="display-6">
-        <a href="/processRequest" id="btn" style="color:#AA0F0A"><i class="bi bi-arrow-left-circle-fill"></i></a>
+        <a href="{{URL('processRequest')}}" id="btn" style="color:#AA0F0A"><i class="bi bi-arrow-left-circle-fill"></i></a>
         <i class="bi bi-file-person"></i> <strong>{{$request->reference_key}}</strong>
     </p>
     <div class="text-center">

@@ -110,7 +110,7 @@
             @foreach($admin_info as $admin)
             @foreach($request as $request)
             @if($request->request_status == 'PENDING' || ($request->request_status == 'CONFIRMED PAYMENT' && $request->employee_name == $admin->first_name." " .$admin->last_name ) 
-            || ($request->request_status == 'READY FOR PAYMENT' && $request->employee_name == $admin->first_name." " .$admin->last_name ))
+            || ($request->request_status == 'READY FOR PAYMENT' && $request->employee_name == $admin->first_name." " .$admin->last_name ) ||  ($request->request_status == 'PROCESSING' && $request->employee_name == $admin->first_name." " .$admin->last_name ) )
             @if($request->middle_name == 'N/A')
             <p hidden>{{$fullname = $request->first_name." ".$request->last_name}}</p>
 

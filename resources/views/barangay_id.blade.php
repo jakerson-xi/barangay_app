@@ -46,7 +46,7 @@
             <div class="container-fluid flex-sm-row">
                 <ul class="navbar-nav ">
                     <li class="nav-item">
-                        <a href="/userDashboard" class="nav-link text-white font-weight-bold"><i class="bi bi-arrow-left-circle-fill"></i> BACK</a>
+                        <a href="{{URL('userDashboard')}} class="nav-link text-white font-weight-bold"><i class="bi bi-arrow-left-circle-fill"></i> BACK</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav ">
