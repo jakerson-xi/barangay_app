@@ -225,7 +225,7 @@
                         <li>
                             <hr class="dropdown-divider">
                         </li>
-                        <li><a class="dropdown-item" href="deactlistbarangayemployee">Deactivated Employee Account</a></li>
+                        <li><a class="dropdown-item" href="{{url('deactlistbarangayemployee')}}">Deactivated Employee Account</a></li>
 
                     </ul>
                 </div>

@@ -108,7 +108,7 @@
 
 
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-        <a class="btn btn-danger me-md-2 " type="button" href="/listbarangayemployee"><i class="bi bi-check-circle-fill"></i> Done</a>
+        <a class="btn btn-danger me-md-2 " type="button" href="{{ url('listbarangayemployee') }}"><i class="bi bi-check-circle-fill"></i> Done</a>
         @if($admin->role == 'Administrator')
         <a class="btn btn-danger me-md-2 " type="button" href="{{ route('editEmployee', $target->id) }}"><i class="bi bi-pencil-square"></i> Edit</a>
 
@@ -132,6 +132,7 @@
 @endforeach
 @endforeach
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+@if($target->isEnabled == 1 )
 <script>
     $(document).ready(function() {
         $('.show_confirm').click(function(e) {
@@ -153,7 +154,7 @@
                 allowOutsideClick: false,
                 showLoaderOnConfirm: true,
                 preConfirm: (password) => {
-                    return fetch('/deact', {
+                    return fetch('{{url("deact")}}', {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json',
@@ -165,6 +166,7 @@
                             })
                         })
                         .then(response => {
+                            
                             if (!response.ok) {
                                 throw new Error('Network response was not ok');
                             }
@@ -210,6 +212,87 @@
         });
     });
 </script>
+@elseif($target->isEnabled == 0 )
+<script>
+    $(document).ready(function() {
+        $('.show_confirm').click(function(e) {
+            e.preventDefault();
+
+            const userId = $(this).data('user-id');
+
+            Swal.fire({
+                title: 'Reactivate Account',
+                text: 'Please enter your password to deactivate your account:',
+                input: 'password',
+                inputAttributes: {
+                    autocapitalize: 'off'
+                },
+                showCancelButton: true,
+                confirmButtonText: 'Reactivate',
+                confirmButtonColor: "#AA0F0A",
+                cancelButtonText: 'Cancel',
+                allowOutsideClick: false,
+                showLoaderOnConfirm: true,
+                preConfirm: (password) => {
+                    return fetch('{{url("deact")}}', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            },
+                            body: JSON.stringify({
+                                id: userId,
+                                password: password
+                            })
+                        })
+                        .then(response => {
+                            
+                            if (!response.ok) {
+                                throw new Error('Network response was not ok');
+                            }
+                            return response.json();
+                        })
+                        .then(data => {
+                            if (data.success) {
+                                Swal.fire({
+                                    title: 'Account Deactivated',
+                                    text: 'Your account has been reactivated.',
+                                    icon: 'success',
+                                    showCloseButton: false,
+                                    showCancelButton: false,
+                                    confirmButtonColor: "#AA0F0A",
+                                }).then((result) => {
+                                    if (result.value) {
+                                        window.location.href = "{{url('viewEmployee')}}/" + userId;
+                                    }
+                                });
+
+                            } else {
+                                Swal.fire({
+                                    title: 'Error',
+                                    text: data.message || 'Account reactivation failed. Please check your password.',
+                                    icon: 'error',
+                                    showCloseButton: false,
+                                    showCancelButton: false,
+                                    confirmButtonColor: "#AA0F0A",
+                                }).then((result) => {
+                                    if (result.value) {
+                                        window.location.href = "{{url('viewEmployee')}}/" + userId;
+                                    }
+                                });
+
+                            }
+
+                        })
+                        .catch(error => {
+                            console.error('There was an error:', error);
+                        });
+                }
+            });
+        });
+    });
+</script>
+@endif
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 </body>

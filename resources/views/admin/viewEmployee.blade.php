@@ -36,7 +36,7 @@
                 <td class="text-lowercase" style="text-transform: uppercase;">{{$admin->email}}</td>
                 <td class="text-center">
 
-                    <a href="/viewEmployee/{{$admin->id}}" class="btn btn-success btn-sm"><i class="bi bi-eye-fill"></i> View</a>
+                    <a href="{{url('viewEmployee')}}/{{$admin->id}}" class="btn btn-success btn-sm"><i class="bi bi-eye-fill"></i> View</a>
                 </td>
                 @if($user->role == 'Administrator')
                 <td class="text-center">
@@ -138,7 +138,7 @@
                 allowOutsideClick: false,
                 showLoaderOnConfirm: true,
                 preConfirm: (password) => {
-                    return fetch('/deact', {
+                    return fetch('{{url("deact")}}', {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json',

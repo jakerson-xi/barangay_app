@@ -960,8 +960,324 @@ class adminController extends Controller
                 ]);
             }
             if ($user->role == 'Barangay Treasurer') {
+
+                $dailyTotal = DB::table('payment')
+                    ->where('payment_status', 'CONFIRMED')
+                    ->whereDate('created_at', today())
+                    ->sum('request_price');
+
+                $weeklyTotal = DB::table('payment')
+                    ->where('payment_status', 'CONFIRMED')
+                    ->whereBetween('created_at', [now()->startOfWeek(), now()->endOfWeek()])
+                    ->sum('request_price');
+
+                $monthlyTotal = DB::table('payment')
+                    ->where('payment_status', 'CONFIRMED')
+                    ->whereYear('created_at', now()->year)
+                    ->whereMonth('created_at', now()->month)
+                    ->sum('request_price');
+
+
+                $yearlyTotal = DB::table('payment')
+                    ->where('payment_status', 'CONFIRMED')
+                    ->whereYear('created_at', now()->year)
+                    ->sum('request_price');
+
+
+                $dailyTotal_online = DB::table('payment')
+                    ->where('payment_status', 'CONFIRMED')
+                    ->whereNot('payment_method', 'ONSITE PAYMENT')
+                    ->whereDate('created_at', today())
+                    ->sum('request_price');
+
+                $weeklyTotal_online = DB::table('payment')
+                    ->where('payment_status', 'CONFIRMED')
+                    ->whereNot('payment_method', 'ONSITE PAYMENT')
+                    ->whereBetween('created_at', [now()->startOfWeek(), now()->endOfWeek()])
+                    ->sum('request_price');
+
+                $monthlyTotal_online = DB::table('payment')
+                    ->where('payment_status', 'CONFIRMED')
+                    ->whereNot('payment_method', 'ONSITE PAYMENT')
+                    ->whereYear('created_at', now()->year)
+                    ->whereMonth('created_at', now()->month)
+                    ->sum('request_price');
+
+
+                $yearlyTotal_online = DB::table('payment')
+                    ->where('payment_status', 'CONFIRMED')
+                    ->whereNot('payment_method', 'ONSITE PAYMENT')
+                    ->whereYear('created_at', now()->year)
+                    ->sum('request_price');
+
+                $dailyTotal_onsite = DB::table('payment')
+                    ->where('payment_status', 'CONFIRMED')
+                    ->where('payment_method', 'ONSITE PAYMENT')
+                    ->whereDate('created_at', today())
+                    ->sum('request_price');
+
+
+                $weeklyTotal_onsite  = DB::table('payment')
+                    ->where('payment_status', 'CONFIRMED')
+                    ->where('payment_method', 'ONSITE PAYMENT')
+                    ->whereBetween('created_at', [now()->startOfWeek(), now()->endOfWeek()])
+                    ->sum('request_price');
+
+                $monthlyTotal_onsite  = DB::table('payment')
+                    ->where('payment_status', 'CONFIRMED')
+                    ->where('payment_method', 'ONSITE PAYMENT')
+                    ->whereYear('created_at', now()->year)
+                    ->whereMonth('created_at', now()->month)
+                    ->sum('request_price');
+
+
+                $yearlyTotal_onsite  = DB::table('payment')
+                    ->where('payment_status', 'CONFIRMED')
+                    ->where('payment_method', 'ONSITE PAYMENT')
+                    ->whereYear('created_at', now()->year)
+                    ->sum('request_price');
+
+                $dailyRFP = DB::table('requests')
+                    ->where('request_status', 'READY FOR PAYMENT')
+                    ->whereDate('created_at', today())
+                    ->count();
+
+
+                $weeklyRFP  = DB::table('requests')
+                    ->where('request_status', 'READY FOR PAYMENT')
+                    ->whereBetween('created_at', [now()->startOfWeek(), now()->endOfWeek()])
+                    ->count();
+
+                $monthlyRFP  = DB::table('requests')
+                    ->where('request_status', 'READY FOR PAYMENT')
+                    ->whereYear('created_at', now()->year)
+                    ->whereMonth('created_at', now()->month)
+                    ->count();
+
+
+                $yearlyRFP  = DB::table('requests')
+                    ->where('request_status', 'READY FOR PAYMENT')
+                    ->whereYear('created_at', now()->year)
+                    ->count();
+
+                $onsiteNum = DB::table('payment')
+                    ->where('payment_status', 'CONFIRMED')
+                    ->where('payment_method', 'ONSITE PAYMENT')
+                    ->count();
+
+                $onlineNum = DB::table('payment')
+                    ->where('payment_status', 'CONFIRMED')
+                    ->whereNot('payment_method', 'ONSITE PAYMENT')
+                    ->count();
+
+
+                $onlinePayment = DB::table('payment')
+                    ->selectRaw('payment_method, COUNT(payment_method) as method_count')
+                    ->where('payment_status', 'CONFIRMED')
+                    ->whereNot('payment_method', 'ONSITE PAYMENT')
+                    ->groupBy('payment_method')
+                    ->get();
+
+                //TRANSACTION REPORT FOR TOTAL INCOME ONLINE
+                $totalAmountPerDay_online = Payment::where('payment_status', 'CONFIRMED')
+                    ->whereNot('payment_method', 'ONSITE PAYMENT')
+                    ->selectRaw('DATE(created_at) as date, SUM(request_price) as total_amount')
+                    ->groupBy('date')
+                    ->get();
+
+
+                $labels_day_online = $totalAmountPerDay_online->pluck('date')->toArray();
+                $data_day_online = $totalAmountPerDay_online->pluck('total_amount')->toArray();
+
+
+                $weeklyAmount_online = Payment::where('payment_status', 'CONFIRMED')
+                    ->whereNot('payment_method', 'ONSITE PAYMENT')
+                    ->selectRaw('YEAR(created_at) as year, WEEK(created_at) as week, SUM(request_price) as total_amount')
+                    ->groupBy('year', 'week')
+                    ->orderBy('year', 'asc')
+                    ->orderBy('week', 'asc')
+                    ->get();
+
+                $labels_week_online = $weeklyAmount_online->pluck('week')->toArray();
+                $data_week_online  = $weeklyAmount_online->pluck('total_amount')->toArray();
+
+
+                $monthlyAmount_online = Payment::where('payment_status', 'CONFIRMED')
+                    ->whereNot('payment_method', 'ONSITE PAYMENT')
+                    ->selectRaw('YEAR(created_at) as year, MONTH(created_at) as month, SUM(request_price) as total_amount')
+                    ->groupBy('year', 'month')
+                    ->orderBy('year', 'asc')
+                    ->orderBy('month', 'asc')
+                    ->get();
+
+                $labels_m_online = [];
+                foreach ($monthlyAmount_online as $entry_online) {
+                    $year_online = $entry_online->year;
+                    $month_online = str_pad($entry_online->month, 2, '0', STR_PAD_LEFT); // Add leading zero if needed
+                    $label_online = $year_online . '-' . $month_online;
+                    $labels_m_online[] = $label_online;
+                }
+                $label_month_online = $labels_m_online;
+                $data_month_online  = $monthlyAmount_online->pluck('total_amount')->toArray();
+
+
+                $yearlyAmount_online = Payment::where('payment_status', 'CONFIRMED')
+                    ->whereNot('payment_method', 'ONSITE PAYMENT')
+                    ->selectRaw('YEAR(created_at) as year, SUM(request_price) as total_amount')
+                    ->groupBy('year')
+                    ->orderBy('year', 'asc')
+                    ->get();
+
+                $label_year_online = $yearlyAmount_online->pluck('year')->toArray();
+                $data_year_online  = $yearlyAmount_online->pluck('total_amount')->toArray();
+
+                //TRANSACTION REPORT FOR TOTAL  INCOME
+                $totalAmountPerDay = Payment::where('payment_status', 'CONFIRMED')
+                    ->selectRaw('DATE(created_at) as date, SUM(request_price) as total_amount')
+                    ->groupBy('date')
+                    ->get();
+
+
+                $labels_day = $totalAmountPerDay->pluck('date')->toArray();
+                $data_day = $totalAmountPerDay->pluck('total_amount')->toArray();
+
+
+                $weeklyAmount = Payment::where('payment_status', 'CONFIRMED')
+                    ->selectRaw('YEAR(created_at) as year, WEEK(created_at) as week, SUM(request_price) as total_amount')
+                    ->groupBy('year', 'week')
+                    ->orderBy('year', 'asc')
+                    ->orderBy('week', 'asc')
+                    ->get();
+
+                $labels_week = $weeklyAmount->pluck('week')->toArray();
+                $data_week  = $weeklyAmount->pluck('total_amount')->toArray();
+
+
+                $monthlyAmount = Payment::where('payment_status', 'CONFIRMED')
+                    ->selectRaw('YEAR(created_at) as year, MONTH(created_at) as month, SUM(request_price) as total_amount')
+                    ->groupBy('year', 'month')
+                    ->orderBy('year', 'asc')
+                    ->orderBy('month', 'asc')
+                    ->get();
+
+                $labels = [];
+                foreach ($monthlyAmount as $entry) {
+                    $year = $entry->year;
+                    $month = str_pad($entry->month, 2, '0', STR_PAD_LEFT); // Add leading zero if needed
+                    $label = $year . '-' . $month;
+                    $labels[] = $label;
+                }
+                $label_month = $labels;
+                $data_month  = $monthlyAmount->pluck('total_amount')->toArray();
+
+
+                $yearlyAmount = Payment::where('payment_status', 'CONFIRMED')
+                    ->selectRaw('YEAR(created_at) as year, SUM(request_price) as total_amount')
+                    ->groupBy('year')
+                    ->orderBy('year', 'asc')
+                    ->get();
+
+                $label_year = $yearlyAmount->pluck('year')->toArray();
+                $data_year  = $yearlyAmount->pluck('total_amount')->toArray();
+
+                //TRANSACTION REPORT FOR TOTAL  INCOME ONSITE
+                $totalAmountPerDay_onsite = Payment::where('payment_status', 'CONFIRMED')
+                    ->where('payment_method', 'ONSITE PAYMENT')
+                    ->selectRaw('DATE(created_at) as date, SUM(request_price) as total_amount')
+                    ->groupBy('date')
+                    ->get();
+
+
+                $labels_day_onsite = $totalAmountPerDay_onsite->pluck('date')->toArray();
+                $data_day_onsite = $totalAmountPerDay_onsite->pluck('total_amount')->toArray();
+
+
+                $weeklyAmount_onsite = Payment::where('payment_status', 'CONFIRMED')
+                    ->where('payment_method', 'ONSITE PAYMENT')
+                    ->selectRaw('YEAR(created_at) as year, WEEK(created_at) as week, SUM(request_price) as total_amount')
+                    ->groupBy('year', 'week')
+                    ->orderBy('year', 'asc')
+                    ->orderBy('week', 'asc')
+                    ->get();
+
+                $labels_week_onsite = $weeklyAmount_onsite->pluck('week')->toArray();
+                $data_week_onsite  = $weeklyAmount_onsite->pluck('total_amount')->toArray();
+
+
+                $monthlyAmount_onsite = Payment::where('payment_status', 'CONFIRMED')
+                    ->where('payment_method', 'ONSITE PAYMENT')
+                    ->selectRaw('YEAR(created_at) as year, MONTH(created_at) as month, SUM(request_price) as total_amount')
+                    ->groupBy('year', 'month')
+                    ->orderBy('year', 'asc')
+                    ->orderBy('month', 'asc')
+                    ->get();
+
+                $labels_onsite = [];
+                foreach ($monthlyAmount_onsite  as $entry) {
+                    $year_onsite  = $entry->year;
+                    $month_onsite  = str_pad($entry->month, 2, '0', STR_PAD_LEFT); // Add leading zero if needed
+                    $label_onsite  = $year_onsite  . '-' . $month_onsite;
+                    $labels_onsite[] = $label_onsite;
+                }
+                $label_month_onsite  = $labels_onsite;
+                $data_month_onsite   = $monthlyAmount_onsite->pluck('total_amount')->toArray();
+
+
+                $yearlyAmount_onsite  = Payment::where('payment_status', 'CONFIRMED')
+                    ->where('payment_method', 'ONSITE PAYMENT')
+                    ->selectRaw('YEAR(created_at) as year, SUM(request_price) as total_amount')
+                    ->groupBy('year')
+                    ->orderBy('year', 'asc')
+                    ->get();
+
+                $label_year_onsite  = $yearlyAmount_onsite->pluck('year')->toArray();
+                $data_year_onsite   = $yearlyAmount_onsite->pluck('total_amount')->toArray();
+                // dd($totalAmountPerDay);
                 return view('admin/dashboard_treasurer', [
                     'admin_info' => $admin_info,
+                    'dailyTotal' => $dailyTotal,
+                    'weeklyTotal' => $weeklyTotal,
+                    'monthlyTotal' => $monthlyTotal,
+                    'yearlyTotal' => $yearlyTotal,
+                    'dailyTotal_online' => $dailyTotal_online,
+                    'weeklyTotal_online' => $weeklyTotal_online,
+                    'monthlyTotal_online' => $monthlyTotal_online,
+                    'yearlyTotal_online' => $yearlyTotal_online,
+                    'dailyTotal_onsite' => $dailyTotal_onsite,
+                    'weeklyTotal_onsite' => $weeklyTotal_onsite,
+                    'monthlyTotal_onsite' => $monthlyTotal_onsite,
+                    'yearlyTotal_onsite' => $yearlyTotal_onsite,
+                    'dailyRFP' => $dailyRFP,
+                    'weeklyRFP' => $weeklyRFP,
+                    'monthlyRFP' => $monthlyRFP,
+                    'yearlyRFP' => $yearlyRFP,
+                    'onsiteNum' => $onsiteNum,
+                    'onlineNum' => $onlineNum,
+                    'onlinePayment' => $onlinePayment,
+                    'labels' => $labels_day,
+                    'data' => $data_day,
+                    'labels_week' => $labels_week,
+                    'data_week' => $data_week,
+                    'label_month' => $label_month,
+                    'data_month' => $data_month,
+                    'label_year' => $label_year,
+                    'data_year' => $data_year,
+                    'labels_online' => $labels_day_online,
+                    'data_online' => $data_day_online,
+                    'labels_week_online' => $labels_week_online,
+                    'data_week_online' => $data_week_online,
+                    'label_month_online' => $label_month_online,
+                    'data_month_online' => $data_month_online,
+                    'label_year_online' => $label_year_online,
+                    'data_year_online' => $data_year_online,
+                    'labels_day_onsite' => $labels_day_onsite,
+                    'data_day_onsite' => $data_day_onsite,
+                    'labels_week_onsite' => $labels_week_onsite,
+                    'data_week_onsite' => $data_week_onsite,
+                    'label_month_onsite' => $label_month_onsite,
+                    'data_month_onsite' => $data_month_onsite,
+                    'label_year_onsite' => $label_year_onsite,
+                    'data_year_onsite' => $data_year_onsite,
                 ]);
             }
         }
@@ -1478,7 +1794,7 @@ class adminController extends Controller
         Alert::success('PAYMENT CONFIRMED:', $request->reference)->showConfirmButton('Confirm', '#AA0F0A');
         // payor info
         $user_info = User::where('id', $request_info->resident_id)->get()->first();
-       
+
 
         $data = [
             'or' => $request->official_receipt,
@@ -1539,15 +1855,15 @@ class adminController extends Controller
 
         if (Request_type::where('request_type_id', $request_info->request_type_id)->get()->first()->request_type_name == 'COMMUNITY TAX CERTIFICATE') {
             $price = $payment_info->request_price;
-         }else{
-             $price = $request_info->price;
-         }
+        } else {
+            $price = $request_info->price;
+        }
         $data = [
             'or' => $request->official_receipt,
             'document' => Request_type::where('request_type_id', $request_info->request_type_id)->get()->first()->request_type_name,
             'type' => $request_info->request_description,
             'ref' => $request_info->reference_key,
-            'price' =>  $price ,
+            'price' =>  $price,
             'paid' => $payment_info->request_price + $payment_info->service_charge,
             'change' => 0,
             'service' => $payment_info->service_charge,
@@ -1865,21 +2181,20 @@ class adminController extends Controller
             $admin_info = DB::table('users')->where('id', $user->id)->get();
             $request_history = Request_History::where('request_id', $id)->get();
             $residents_history = Requests::join('users', 'users.id', '=', 'requests.resident_id')->join('request_type', 'request_type.request_type_id', '=', 'requests.request_type_id')->select('users.*', 'requests.*', 'request_type.*', 'requests.created_at as request_date')->where('id', $transactions->first()->id)->get();
-            
-            
-    
+
+
+
             $payment_info = Payment::where('request_id', $transactions->first()->request_id)->get()->last();
 
-            if($payment_info == null){
+            if ($payment_info == null) {
                 return view("admin/RFPrequest", ['request' => $transactions, 'admin_info' => $admin_info, 'history' => $request_history, 'res_history' => $residents_history]);
-
             }
             $request_info = Requests::where('request_id', $payment_info->request_id)->get()->first();
             $user_info = User::where('id', $request_info->resident_id)->get()->first();
 
             if (Request_type::where('request_type_id', $request_info->request_type_id)->get()->first()->request_type_name == 'COMMUNITY TAX CERTIFICATE') {
-               $price = $payment_info->request_price;
-            }else{
+                $price = $payment_info->request_price;
+            } else {
                 $price = $request_info->price;
             }
 
@@ -1899,9 +2214,7 @@ class adminController extends Controller
 
             ];
 
-            return view("admin/RFPrequest", ['data' => $data ,'request' => $transactions, 'admin_info' => $admin_info, 'history' => $request_history, 'res_history' => $residents_history]);
-
-        
+            return view("admin/RFPrequest", ['data' => $data, 'request' => $transactions, 'admin_info' => $admin_info, 'history' => $request_history, 'res_history' => $residents_history]);
         } else {
             $processed_by = Requests::where('request_id', $id)->first()->employee_name;
             $message = 'THIS REQUEST HAS BEEN PROCESSING BY ' .  $processed_by;

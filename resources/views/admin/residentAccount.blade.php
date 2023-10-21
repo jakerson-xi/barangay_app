@@ -92,19 +92,24 @@
 
                         <legend class="goupBoxHeader">ID Information</legend>
                         <div class="col-md-12 row mb-2">
-                            <div class="form-group col-md-6 mb-2">
-                                <label>Front ID</label>
+                            <div class="form-group col-md-4 mb-2">
                                 <div class="input-group">
                                     <img src="{{url('residentID/'.$user->validID_front)}}" class="img-fluid" alt="...">
                                 </div>
                             </div>
-                            <div class="form-group col-md-6 mb-2">
-                                <label for="mobile">Back ID</label>
+                            <div class="form-group col-md-4 mb-2">
+                             
                                 <div class="input-group">
                                     <img src="{{url('residentID/'.$user->validID_back)}}" class="img-fluid" alt="...">
                                 </div>
                             </div>
+                            <div class="form-group col-md-4 mb-2">
+                                <div class="input-group">
+                                    <img src="{{url('residentID/'.$user->face)}}" class="img-fluid" alt="...">
+                                </div>
+                            </div>
                         </div>
+                        
                         <legend class="goupBoxHeader">Account Information</legend>
 
                         <div class="col-md-12 row mb-2">
@@ -203,7 +208,17 @@
                             Your confirm password is not match with your inputted password.
                         </div>
                     </div>
-                    <script>
+                    
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary" style="background-color: #AA0F0A; color: white;">Save</button>
+                    <button type="reset" class="btn btn-secondary" class="btn-close" data-bs-dismiss="modal" aria-label="Close">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<script>
                         (() => {
                             'use strict'
 
@@ -324,16 +339,8 @@
                         }
                         // Example starter JavaScript for disabling form submissions if there are invalid fields
                     </script>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary" style="background-color: #AA0F0A; color: white;">Save</button>
-                    <button type="reset" class="btn btn-secondary" class="btn-close" data-bs-dismiss="modal" aria-label="Close">Cancel</button>
-                </div>
-            </div>
-        </div>
-    </form>
-</div>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+@if($user->isEnabled == 1 )
 <script>
     $(document).ready(function() {
         $('.show_confirm').click(function(e) {
@@ -355,7 +362,7 @@
                 allowOutsideClick: false,
                 showLoaderOnConfirm: true,
                 preConfirm: (password) => {
-                    return fetch('/deact', {
+                    return fetch('{{url("deact")}}', {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json',
@@ -412,6 +419,86 @@
         });
     });
 </script>
+@elseif($user->isEnabled == 0 )
+<script>
+    $(document).ready(function() {
+        $('.show_confirm').click(function(e) {
+            e.preventDefault();
+
+            const userId = $(this).data('user-id');
+
+            Swal.fire({
+                title: 'Reactivate Account',
+                text: 'Please enter your password to deactivate your account:',
+                input: 'password',
+                inputAttributes: {
+                    autocapitalize: 'off'
+                },
+                showCancelButton: true,
+                confirmButtonText: 'Reactivate',
+                confirmButtonColor: "#AA0F0A",
+                cancelButtonText: 'Cancel',
+                allowOutsideClick: false,
+                showLoaderOnConfirm: true,
+                preConfirm: (password) => {
+                    return fetch('{{url("deact")}}', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            },
+                            body: JSON.stringify({
+                                id: userId,
+                                password: password
+                            })
+                        })
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error('Network response was not ok');
+                            }
+                            return response.json();
+                        })
+                        .then(data => {
+                            if (data.success) {
+                                Swal.fire({
+                                    title: 'Account Deactivated',
+                                    text: 'Your account has been reactivated.',
+                                    icon: 'success',
+                                    showCloseButton: false,
+                                    showCancelButton: false,
+                                    confirmButtonColor: "#AA0F0A",
+                                }).then((result) => {
+                                    if (result.value) {
+                                        window.location.href = "{{url('viewResident')}}/" + userId;
+                                    }
+                                });
+
+                            } else {
+                                Swal.fire({
+                                    title: 'Error',
+                                    text: data.message || 'Account reactivation failed. Please check your password.',
+                                    icon: 'error',
+                                    showCloseButton: false,
+                                    showCancelButton: false,
+                                    confirmButtonColor: "#AA0F0A",
+                                }).then((result) => {
+                                    if (result.value) {
+                                        window.location.href = "{{url('viewResident')}}/" + userId;
+                                    }
+                                });
+
+                            }
+
+                        })
+                        .catch(error => {
+                            console.error('There was an error:', error);
+                        });
+                }
+            });
+        });
+    });
+</script>
+@endif
 @endforeach
 @endforeach
 

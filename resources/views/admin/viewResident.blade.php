@@ -215,7 +215,7 @@
                 allowOutsideClick: false,
                 showLoaderOnConfirm: true,
                 preConfirm: (password) => {
-                    return fetch('/deact', {
+                    return fetch('{{url("deact")}}', {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json',
