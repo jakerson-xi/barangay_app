@@ -1835,9 +1835,12 @@ class adminController extends Controller
         ]);
 
         $payment_info = Payment::where('request_id', $request->reference)->get()->last();
+     
         Payment::where('request_id', $request->reference)->get()->last()->update([
             "isConfirmed" => 1,
         ]);
+
+      
         Payment::create([
             "request_id" => $payment_info->request_id,
             "resident_id" => $payment_info->resident_id,

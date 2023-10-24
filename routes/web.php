@@ -119,6 +119,7 @@ Route::get('/', function () {
 Route::get('home', [mainController::class, 'home'])->name('home');
 Route::get('requirements', [mainController::class, 'requirements']);
 Route::get('safetySection', [mainController::class, 'safetySection']);
+Route::get('safetyProtocol', [mainController::class, 'safetyProtocol']);
 Route::get('aboutUs', [mainController::class, 'aboutUs']);
 Route::get('contact', [mainController::class, 'contact']);
 Route::get('login', [mainController::class, 'login'])->name('login');

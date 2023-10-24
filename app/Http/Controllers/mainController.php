@@ -313,7 +313,10 @@ class mainController extends Controller
     {
         return view('safetySection');
     }
-
+    public function safetyProtocol()
+    {
+        return view('safetyProtocol');
+    }
     public function contact()
     {
         $info = Web_App::get();

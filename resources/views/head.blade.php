@@ -163,18 +163,29 @@
                     <a class="dropdown-item" href="requirements">Requirements</a>
                   </li>
                   <li>
-                    <!-- <hr class="dropdown-divider">
-                  <li>
-                    <a class="dropdown-item" href="track">Track Request</a>
-                  </li> -->
+
                 </ul>
               </li>
               <li class="nav-item mx-4  active ">
                 <a class="nav-link" aria-current="page" href="contact" style="color: white;">CONTACTS</a>
               </li>
-              <li class="nav-item mx-4  active ">
-                <a class="nav-link" aria-current="page" href="safetySection" style="color: white;">SAFETY SECTION</a>
+              <li class="nav-item dropdown mx-4">
+                <a style="color: white;" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  SAFETY SECTION
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item" href="safetySection">MAP BOOK</a></li>
+                  <li>
+                    <a href="safetyProtocol"  class="dropdown-item">SAFETY PROTOCOL</a>
+                  </li>
+                  
+                  <li>
+
+                </ul>
               </li>
+              <!-- <li class="nav-item mx-4  active ">
+                <a class="nav-link" aria-current="page" href="safetySection" style="color: white;">SAFETY SECTION</a>
+              </li> -->
               <li class="nav-item mx-4  active ">
                 <a class="nav-link" aria-current="page" href="aboutUs" style="color: white;">ABOUT
                   US</a>
@@ -226,10 +237,10 @@
 
                 <div>
                   <p class="m-2">
-                  Ang online na serbisyong ito ng barangay ay para lamang sa mga gumagamit na
-                  <strong>18 taong gulang pataas</strong>. Sa pamamagitan ng pagpaparehistro sa app na
-                  ito, kinukumpirma mo na ikaw ay nasa wastong edad. Kung hindi ka pa 18 taong gulang,
-                  huwag kang magpatuloy sa pagpaparehistro. <br /><br />Salamat sa iyong pang-unawa.
+                    Ang online na serbisyong ito ng barangay ay para lamang sa mga gumagamit na
+                    <strong>18 taong gulang pataas</strong>. Sa pamamagitan ng pagpaparehistro sa app na
+                    ito, kinukumpirma mo na ikaw ay nasa wastong edad. Kung hindi ka pa 18 taong gulang,
+                    huwag kang magpatuloy sa pagpaparehistro. <br /><br />Salamat sa iyong pang-unawa.
                   </p>
                 </div>
               </div>
