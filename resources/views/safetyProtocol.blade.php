@@ -13,15 +13,9 @@
         border: 4px solid #AA0F0A;
     }
 
-    .table {
-        width: 100%;
-        border-collapse: collapse;
-    }
-
+  
     .table td {
-        border: 10px solid white;
-        background-color: #D3d3d3;
-        text-align: center;
+     
     }
 
     .table th {
@@ -29,15 +23,11 @@
     }
 
     thead {
-        background-color: #AA0F0A;
-        color: white;
-        text-align: center;
-        border: 10px solid #AA0F0A;
+        
     }
 
     tbody {
-        border: white;
-        text-align: center;
+       
 
     }
 
@@ -113,12 +103,15 @@
 <!-- SAFETY SECTION -->
 <!-- SAFETY SECTION -->
 <div class="my-container-header">
-            <h1>EARLY WARNING SYSTEM</h1>
-        </div>
+    <h1>EARLY WARNING SYSTEM</h1>
+</div>
 <div class="my-container">
     <div class="mb-2 mt-2" style="display: block;">
-        <table class="table">
-            <thead>
+        <table class="table" style="width: 100%; border-collapse: collapse;">
+            <thead style="background-color: #AA0F0A;
+        color: white;
+        text-align: center;
+        border: 10px solid #AA0F0A;">
                 <th>CALAMITY/EWS</th>
                 <th>MARKA (MARK)</th>
                 <th>BAHA (FLOOD)</th>
@@ -126,38 +119,39 @@
                 <th>SUNOG (FIRE)</th>
                 <th>BAGYO (TYPHOON)</th>
             </thead>
-            <tbody>
+            <tbody style=" border: white;
+        text-align: center;">
                 <tr>
-                    <td class="calamity pt-4" data-label="CALAMITY/EWS">SIREN</td>
-                    <td data-label="MARKA (MARK)">
+                    <td class="calamity pt-4" data-label="CALAMITY/EWS" style="border: 10px solid white;background-color: #D3d3d3;text-align: center;">SIREN</td>
+                    <td data-label="MARKA (MARK)" style="border: 10px solid white;background-color: #D3d3d3;text-align: center;">
                         <div class="vstack gap-1">
                             <div class="ready-mark">READY</div>
                             <div class="get-set-mark">GET SET</div>
                             <div class="go-mark">GO</div>
                         </div>
                     </td>
-                    <td data-label="BAHA (FLOOD)">
+                    <td data-label="BAHA (FLOOD)" style="border: 10px solid white;background-color: #D3d3d3;text-align: center;">
                         <div class="vstack gap-1">
                             <div class="table-font">6 METERS</div>
                             <div class="table-font">6-S -12 INCHES SIREN</div>
                             <div class="table-font">60 - 24 IN (M.P)</div>
                         </div>
                     </td>
-                    <td data-label="LINDOL (EARTHQUAKE)">
+                    <td data-label="LINDOL (EARTHQUAKE)" style="border: 10px solid white;background-color: #D3d3d3;text-align: center;">
                         <div class="vstack gap-1">
                             <div class="table-font">INTENSITY 3-5</div>
                             <div class="table-font">INTENSITY 5-10</div>
                             <div class="table-font">INTENSITY 10-15</div>
                         </div>
                     </td>
-                    <td data-label="SUNOG (FIRE)">
+                    <td data-label="SUNOG (FIRE)" style="border: 10px solid white;background-color: #D3d3d3;text-align: center;">
                         <div class="vstack gap-1">
                             <div class="table-font">SMOKE</div>
                             <div class="table-font">FIRE - SIREN</div>
                             <div class="table-font">FIRE & SMOKE</div>
                         </div>
                     </td>
-                    <td data-label="BAGYO (TYPHOON)">
+                    <td data-label="BAGYO (TYPHOON)" style="border: 10px solid white;background-color: #D3d3d3;text-align: center;">
                         <div class="vstack gap-1">
                             <div class="table-font">SIGNAL 1-2</div>
                             <div class="table-font">SIGNAL 2-3</div>
@@ -166,36 +160,36 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="calamity pt-4" data-label="CALAMITY/EWS">PUBLIC ADDRESS</td>
-                    <td data-label="MARKA (MARK)">
+                    <td class="calamity pt-4" data-label="CALAMITY/EWS" style="border: 10px solid white;background-color: #D3d3d3;text-align: center;">PUBLIC ADDRESS</td>
+                    <td data-label="MARKA (MARK)"  style="border: 10px solid white;background-color: #D3d3d3;text-align: center;">
                         <div class="vstack gap-1">
                             <div class="ready-mark">READY</div>
                             <div class="get-set-mark">GET SET</div>
                             <div class="go-mark">GO</div>
                         </div>
                     </td>
-                    <td data-label="BAHA (FLOOD)">
+                    <td data-label="BAHA (FLOOD)" style="border: 10px solid white;background-color: #D3d3d3;text-align: center;">
                         <div class="vstack gap-1">
                             <div class="table-font">AFTER</div>
                             <div class="table-font">SIREN</div>
                             <div class="table-font">N/A</div>
                         </div>
                     </td>
-                    <td data-label="LINDOL (EARTHQUAKE)">
+                    <td data-label="LINDOL (EARTHQUAKE)" style="border: 10px solid white;background-color: #D3d3d3;text-align: center;">
                         <div class="vstack gap-1">
                             <div class="table-font">N/A</div>
                             <div class="table-font">N/A</div>
                             <div class="table-font">N/A</div>
                         </div>
                     </td>
-                    <td data-label="SUNOG (FIRE)">
+                    <td data-label="SUNOG (FIRE)" style="border: 10px solid white;background-color: #D3d3d3;text-align: center;">
                         <div class="vstack gap-1">
                             <div class="table-font">N/A</div>
                             <div class="table-font">N/A</div>
                             <div class="table-font">N/A</div>
                         </div>
                     </td>
-                    <td data-label="BAGYO (TYPHOON)">
+                    <td data-label="BAGYO (TYPHOON)" style="border: 10px solid white;background-color: #D3d3d3;text-align: center;">
                         <div class="vstack gap-1">
                             <div class="table-font">N/A</div>
                             <div class="table-font">N/A</div>
@@ -204,36 +198,36 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="calamity pt-4" data-label="CALAMITY/EWS">TEXT BRIGRADE</td>
-                    <td data-label="MARKA (MARK)">
+                    <td class="calamity pt-4" data-label="CALAMITY/EWS" style="border: 10px solid white;background-color: #D3d3d3;text-align: center;">TEXT BRIGRADE</td>
+                    <td data-label="MARKA (MARK)" style="border: 10px solid white;background-color: #D3d3d3;text-align: center;">
                         <div class="vstack gap-1">
                             <div class="ready-mark">READY</div>
                             <div class="get-set-mark">GET SET</div>
                             <div class="go-mark">GO</div>
                         </div>
                     </td>
-                    <td data-label="BAHA (FLOOD)">
+                    <td data-label="BAHA (FLOOD)" style="border: 10px solid white;background-color: #D3d3d3;text-align: center;">
                         <div class="vstack gap-1">
                             <div class="table-font">AFTER</div>
                             <div class="table-font">P.A</div>
                             <div class="table-font">N/A</div>
                         </div>
                     </td>
-                    <td data-label="LINDOL (EARTHQUAKE)">
+                    <td data-label="LINDOL (EARTHQUAKE)" style="border: 10px solid white;background-color: #D3d3d3;text-align: center;">
                         <div class="vstack gap-1">
                             <div class="table-font">AFTER</div>
                             <div class="table-font">N/A</div>
                             <div class="table-font">N/A</div>
                         </div>
                     </td>
-                    <td data-label="SUNOG (FIRE)">
+                    <td data-label="SUNOG (FIRE)" style="border: 10px solid white;background-color: #D3d3d3;text-align: center;">
                         <div class="vstack gap-1">
                             <div class="table-font">AFTER</div>
                             <div class="table-font">N/A</div>
                             <div class="table-font">N/A</div>
                         </div>
                     </td>
-                    <td data-label="BAGYO (TYPHOON)">
+                    <td data-label="BAGYO (TYPHOON)" style="border: 10px solid white;background-color: #D3d3d3;text-align: center;">
                         <div class="vstack gap-1">
                             <div class="table-font">AFTER</div>
                             <div class="table-font">N/A</div>
@@ -242,15 +236,15 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="calamity pt-4" data-label="CALAMITY/EWS">BARANGAY ROVING TEAM</td>
-                    <td data-label="MARKA (MARK)">
+                    <td class="calamity pt-4" data-label="CALAMITY/EWS" style="border: 10px solid white;background-color: #D3d3d3;text-align: center;">BARANGAY ROVING TEAM</td>
+                    <td data-label="MARKA (MARK)" style="border: 10px solid white;background-color: #D3d3d3;text-align: center;">
                         <div class="vstack gap-1">
                             <div class="ready-mark">READY</div>
                             <div class="get-set-mark">GET SET</div>
                             <div class="go-mark">GO</div>
                         </div>
                     </td>
-                    <td data-label="BAHA (FLOOD)">
+                    <td data-label="BAHA (FLOOD)" style="border: 10px solid white;background-color: #D3d3d3;text-align: center;">
                         <div class="vstack gap-1">
                             <div class="table-font">N/A</div>
                             <div class="table-font"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
@@ -259,7 +253,7 @@
                             <div class="table-font">N/A</div>
                         </div>
                     </td>
-                    <td data-label="LINDOL (EARTHQUAKE)">
+                    <td data-label="LINDOL (EARTHQUAKE)" style="border: 10px solid white;background-color: #D3d3d3;text-align: center;">
                         <div class="vstack gap-1">
                             <div class="table-font">N/A</div>
                             <div class="table-font"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
@@ -268,14 +262,14 @@
                             <div class="table-font">N/A</div>
                         </div>
                     </td>
-                    <td data-label="SUNOG (FIRE)">
+                    <td data-label="SUNOG (FIRE)" style="border: 10px solid white;background-color: #D3d3d3;text-align: center;">
                         <div class="vstack gap-1">
                             <div class="table-font">SMOKE</div>
                             <div class="table-font">N/A</div>
                             <div class="table-font">N/A</div>
                         </div>
                     </td>
-                    <td data-label="BAGYO (TYPHOON)">
+                    <td data-label="BAGYO (TYPHOON)" style="border: 10px solid white;background-color: #D3d3d3;text-align: center;">
                         <div class="vstack gap-1">
                             <div class="table-font">N/A</div>
                             <div class="table-font">N/A</div>
@@ -284,33 +278,33 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="calamity pt-4" data-label="CALAMITY/EWS">EVACUATION AREA</td>
-                    <td class="table-font pt-2" style="font-size: 400%; color: #AA0F0A;" data-label="MARKA (MARK)">
+                    <td class="calamity pt-4" data-label="CALAMITY/EWS" style="border: 10px solid white;background-color: #D3d3d3;text-align: center;">EVACUATION AREA</td>
+                    <td class="table-font pt-2" style="font-size: 400%; color: #AA0F0A;" data-label="MARKA (MARK)" style="border: 10px solid white;background-color: #D3d3d3;text-align: center;">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
                             <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z" />
                         </svg>
                     </td>
-                    <td class="calamity pt-4" data-label="BAHA (FLOOD)">
+                    <td class="calamity pt-4" data-label="BAHA (FLOOD)" style="border: 10px solid white;background-color: #D3d3d3;text-align: center;">
                         CARDONES SCHOOL
                     </td>
-                    <td class="calamity pt-3" data-label="LINDOL (EARTHQUAKE)">
+                    <td class="calamity pt-3" data-label="LINDOL (EARTHQUAKE)" style="border: 10px solid white;background-color: #D3d3d3;text-align: center;">
                         TANYAG ST./ NAVY RD.<br>
                         (VILLAMOR-AIR BASE)
                     </td>
-                    <td class="calamity pt-3" data-label="SUNOG (FIRE)">
+                    <td class="calamity pt-3" data-label="SUNOG (FIRE)" style="border: 10px solid white;background-color: #D3d3d3;text-align: center;">
                         MAGSAYSAY<br>COVERED COURT
                     </td>
-                    <td class="calamity pt-3" data-label="BAGYO (TYPHOON)">
+                    <td class="calamity pt-3" data-label="BAGYO (TYPHOON)" style="border: 10px solid white;background-color: #D3d3d3;text-align: center;">
                         MAGSAYSAY<br>COVERED COURT
                     </td>
                 </tr>
                 <tr>
-                    <td class="calamity pt-3" data-label="CALAMITY/EWS">FREQUENCY</td>
-                    <td class="calamity pt-3" data-label="MARKA (MARK)">SIREN</td>
-                    <td class="calamity pt-3" data-label="BAHA (FLOOD)">3x 15 MINUTES</td>
-                    <td class="calamity pt-3" data-label="LINDOL (EARTHQUAKE)">1x 45 SECONDS - 1 MINUTE</td>
-                    <td class="calamity pt-3" data-label="SUNOG (FIRE)">1x 15 SECONDS</td>
-                    <td class="calamity pt-3" data-label="BAGYO (TYPHOON)">2x</td>
+                    <td class="calamity pt-3" data-label="CALAMITY/EWS" style="border: 10px solid white;background-color: #D3d3d3;text-align: center;">FREQUENCY</td>
+                    <td class="calamity pt-3" data-label="MARKA (MARK)" style="border: 10px solid white;background-color: #D3d3d3;text-align: center;">SIREN</td>
+                    <td class="calamity pt-3" data-label="BAHA (FLOOD)" style="border: 10px solid white;background-color: #D3d3d3;text-align: center;">3x 15 MINUTES</td>
+                    <td class="calamity pt-3" data-label="LINDOL (EARTHQUAKE)" style="border: 10px solid white;background-color: #D3d3d3;text-align: center;">1x 45 SECONDS - 1 MINUTE</td>
+                    <td class="calamity pt-3" data-label="SUNOG (FIRE)" style="border: 10px solid white;background-color: #D3d3d3;text-align: center;">1x 15 SECONDS</td>
+                    <td class="calamity pt-3" data-label="BAGYO (TYPHOON)" style="border: 10px solid white;background-color: #D3d3d3;text-align: center;">2x</td>
                 </tr>
 
             </tbody>
