@@ -4,13 +4,14 @@
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/dataTables.bootstrap5.min.css">
 <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.3.2/css/buttons.bootstrap5.min.css"> -->
 <link rel="stylesheet" href="https://cdn.datatables.net/datetime/1.3.0/css/dataTables.dateTime.min.css">
+
 <div class="content my-3">
 
     <p class="display-6"><i class="bi bi-people-fill"></i> <strong>Process Document Request</strong></p>
     <hr style="color: black;">
 
     <div class="alert alert-warning alert-dismissible fade show" role="alert">
-        <i class="bi bi-info-circle"></i> This pagethis page is intended for processing the requested documents. This may include reviewing, approving, or rejecting the documents, as well as any other actions required to fulfill the request.
+        <i class="bi bi-info-circle"></i> This page is intended for processing the requested documents. This may include reviewing, approving, or rejecting the documents, as well as any other actions required to fulfill the request.
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 
@@ -103,14 +104,15 @@
                 <th class="text-center">Status</th>
                 <th class="text-center">Processed by:</th>
                 <th class="text-center">Action:</th>
+                <th style="display:none" class="text-center">Order</th>
 
             </tr>
         </thead>
         <tbody>
             @foreach($admin_info as $admin)
             @foreach($request as $request)
-            @if($request->request_status == 'PENDING' || ($request->request_status == 'CONFIRMED PAYMENT' && $request->employee_name == $admin->first_name." " .$admin->last_name ) 
-            || ($request->request_status == 'READY FOR PAYMENT' && $request->employee_name == $admin->first_name." " .$admin->last_name ) ||  ($request->request_status == 'PROCESSING' && $request->employee_name == $admin->first_name." " .$admin->last_name ) )
+            @if($request->request_status == 'PENDING' || ($request->request_status == 'CONFIRMED PAYMENT' && $request->employee_name == $admin->first_name." " .$admin->last_name )
+            || ($request->request_status == 'READY FOR PAYMENT' && $request->employee_name == $admin->first_name." " .$admin->last_name ) || ($request->request_status == 'PROCESSING' && $request->employee_name == $admin->first_name." " .$admin->last_name ) )
             @if($request->middle_name == 'N/A')
             <p hidden>{{$fullname = $request->first_name." ".$request->last_name}}</p>
 
@@ -146,8 +148,8 @@
                     @if($request->request_status == 'CONFIRMED PAYMENT')
                     <p class="badge text-wrap status-class" style="width: 6rem;background-color:steelblue">PAID</p>
                     @endif
-                    
-                 
+
+
                 </td>
                 @if($request->employee_name == '')
                 <td>Unassigned</td>
@@ -159,6 +161,22 @@
                     <a href="process-pending/{{$request->request_id}}" type="submit" class="btn btn-dark btn-sm"><i class="bi bi-arrow-clockwise"></i> Process</a>
                     @endif @if($request->request_status == 'READY FOR PAYMENT'||$request->request_status == 'CONFIRMED PAYMENT' )
                     <a href="process_RFP/{{$request->request_id}}" type="submit" class="btn btn-dark btn-sm"><i class="bi bi-arrow-clockwise"></i> Process</a>
+                    @endif
+                </td>
+                <td style="display:none">
+                    @if($request->request_status == 'PENDING')
+                    1
+                    @endif
+
+                    @if($request->request_status == 'READY FOR PAYMENT')
+                    3
+                    @endif
+
+                    @if($request->request_status == 'PROCESSING')
+                    2
+                    @endif
+                    @if($request->request_status == 'CONFIRMED PAYMENT')
+                    4
                     @endif
                 </td>
             </tr>
@@ -219,19 +237,24 @@
 
 
     $(document).ready(function() {
+
         minDate = new DateTime($('#min'), {
             format: 'MMMM Do YYYY'
         });
         maxDate = new DateTime($('#max'), {
             format: 'MMMM Do YYYY'
         });
+
+
+
+
         var table = $('#resident').DataTable({
             "search": {
                 regex: true
             },
             responsive: true,
             order: [
-                [5, 'asc'],
+                [8, 'asc'],
                 [4, 'asc']
             ],
             responsive: true,
@@ -259,6 +282,7 @@
         $('#min, #max').on('change', function() {
             table.draw();
         });
+        // Define the custom sorting function
 
         table.buttons().container()
             .appendTo('#resident_wrapper .col-md-6:eq(0)');

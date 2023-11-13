@@ -284,7 +284,7 @@
                                 </tr>
                                 <tr>
                                     <td class="align-middle">
-                                        <label for="exampleFormControlTextarea1" class="form-label">Description: <span class="text-danger">*</span></label>
+                                        <label for="exampleFormControlTextarea1" class="form-label">Description: </label>
                                     </td>
                                     <td>
                                         <div class="input-group mb-3">
@@ -441,8 +441,14 @@
             // Check input validity on input or blur events
             $('input, textarea').on('input blur', checkInputValidity);
             $('#amount_paid').on('input', function() {
+
+                if($(this).val() == 0){
+                    var  amountPaid = 0;
+                }else{
+                    var amountPaid = parseFloat($(this).val());
+                };
                 // Get the value of "Payment Amount" input
-                var amountPaid = parseFloat($(this).val());
+               
 
                 // Get the initial price value (remove the currency symbol and parse as a float)
                 var initialPrice = parseFloat(parseFloat($('#price').val()));

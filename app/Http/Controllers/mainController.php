@@ -782,6 +782,7 @@ class mainController extends Controller
 
             $responseData = json_decode($response->getBody(), true);
             // Access the 'checkout_url' attribute        
+            dd($responseData );
             $checkoutUrl = $responseData['data']['attributes']['checkout_url'];
 
             if (Payment::where('request_id', $request->request_id)->where('payment_status', 'PENDING PAYMENT')->exists() == false) {
@@ -862,8 +863,6 @@ class mainController extends Controller
 
     public function paymongo_success($id)
     {
-
-
 
         $info_request = Requests::join('users', 'users.id', '=', 'requests.resident_id')
             ->join('request_type', 'request_type.request_type_id', '=', 'requests.request_type_id')

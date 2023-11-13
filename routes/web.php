@@ -89,6 +89,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/updateContact', [ManageWebAppContoller::class, 'updateContact'])->name('updateContact');
     Route::post('/deact_admin', [adminController::class, 'deact_admin'])->name('deact_admin');
     Route::get('/dashboard-resident', [adminController::class, 'dashboard_resident'])->name('dashboard_resident');
+    Route::get('/dashboard-payment', [adminController::class, 'dashboard_payment'])->name('dashboard_payment');
     Route::get('/dashboard-employee', [adminController::class, 'dashboard_employee'])->name('dashboard_employee');
     Route::get('/payment', [mainController::class, 'paymentList'])->name('paymentList');
     Route::get('/payment_request/{id}', [mainController::class, 'payment_request'])->name('payment_request');

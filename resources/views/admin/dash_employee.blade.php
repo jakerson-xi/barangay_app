@@ -54,6 +54,7 @@
         <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="{{url('dashboard')}}">Services Report</a></li>
             <li><a class="dropdown-item" href="{{url('dashboard-resident')}}">Resident Report</a></li>
+            <li><a class="dropdown-item" href="{{url('dashboard-payment')}}">Payment Report</a></li>
             <li><a class="dropdown-item" href="{{url('dashboard-employee')}}">Employee Report</a></li>
         </ul>
     </div>
