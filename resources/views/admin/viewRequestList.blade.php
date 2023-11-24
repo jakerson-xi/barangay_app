@@ -246,7 +246,7 @@
             buttons: [{
                 extend: 'excel',
                 className: 'btn btn-warning mt-3 me-1 border border-secondary',
-                text: '<i class="bi bi-download"></i> Download as Excel',
+                text: 'Download as Excel',
                 filename: 'BARANGAY SOUTH SIGNAL VILLAGE REQUEST LIST',
                 title: 'BARANGAY SOUTH SIGNAL VILLAGE REQUEST LIST',
                 exportOptions: {
@@ -255,7 +255,7 @@
             }, {
                 extend: 'pdf',
                 className: 'btn btn-warning mt-3 border border-secondary',
-                text: '<i class="bi bi-download"></i> Download as PDF',
+                text: 'Download as PDF',
                 filename: 'BARANGAY SOUTH SIGNAL VILLAGE REQUEST LIST',
                 title: 'BARANGAY SOUTH SIGNAL VILLAGE REQUEST LIST',
                 exportOptions: {

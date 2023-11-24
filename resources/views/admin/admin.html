@@ -1,0 +1,484 @@
+<!doctype html>
+<html lang="en">
+
+
+<head>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/sidebars/">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <title>{{$admin->role}} Dashboard </title>
+    <link rel="icon" href="{{asset('assets/imgs/southsignalLogoLeft.png')}}" type="image/png">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script>
+
+
+    <script src="https://code.jquery.com/jquery-1.9.1.min.js">
+        function clock() {
+            const timeDisplay = document.getElementById("clock");
+            const dateString = new Date().toLocaleString();
+            const formattedString = dateString.replace(", ", " - ");
+            timeDisplay.textContent = formattedString;
+        }
+
+        setInterval(clock, 1000);
+    </script>
+    <style>
+        .img-container {
+            height: 350px;
+            /* Set the fixed height for the image container */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .img-container img {
+            object-fit: cover;
+            /* Maintain aspect ratio and cover the container */
+            width: 100%;
+            height: 100%;
+        }
+
+        .btn-primary1 {
+            color: #fff;
+            background-color: #720602;
+            border-color: #720602;
+            /*set the color you want here*/
+        }
+
+        .btn-primary1:hover,
+        .btn-primary1:focus,
+        .btn-primary1:active,
+        .btn-primary1.active,
+        .open>.dropdown-toggle.btn-primary1 {
+            color: #720602;
+            background-color: #fff;
+            border-color: #fff;
+            /*set the color you want here*/
+        }
+
+        .top_nav {
+            position: fixed;
+            top: 0px;
+            width: 100%-280px;
+            left: 280px;
+            right: 0;
+            z-index: 2;
+
+        }
+
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 280px;
+            z-index: 2;
+        }
+
+        .groupBox {
+            border: 2.5px solid lightgray;
+            padding-left: 10px;
+            padding-right: 10px;
+            padding-bottom: 10px;
+            padding-top: 2px;
+            border-radius: 10px;
+
+        }
+
+        .goupBoxHeader {
+            margin-top: 10px;
+            padding: 0.2em 0.5em;
+            border: 1px solid rgb(255, 255, 255);
+            font-size: 100%;
+            text-align: center;
+            width: 50%;
+            border-radius: 6px;
+            background-color: rgba(192, 1, 1, 0.932);
+            color: white;
+            font-weight: bold;
+            margin-left: 25%;
+
+        }
+
+        .content {
+            position: relative;
+            width: 100%;
+            padding-top: 65px;
+            /* Use the topbar's height + something more? */
+            padding-left: 315px;
+            /* Use the sidebar's width + something more? */
+            padding-right: 25px;
+            /* Set box-sizing to border-box, to ensure the content block stays within the window, and not expand due to padding */
+            box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+
+        }
+    </style>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+</head>
+
+<body>
+    <header>
+        <div style="background-color:#720602" class="sidebar d-flex flex-column flex-shrink-0 p-3 text-white">
+            <div class="" style="text-align: center;"><img src="{{url('adminID/'.$admin->profilePic)}}" class="rounded-circle " style="width: 100px;" alt="Avatar" />
+                <h5 class=""><strong>{{$admin->first_name." ".$admin->last_name}}</strong></h6>
+                    <p class="">{{$admin->role}}</p>
+            </div>
+            <hr>
+            <ul class="nav nav-pills flex-column mb-auto">
+
+                <a href="{{url('dashboard')}}" style="text-align: justify;" type="button" class="btn btn-primary1"><i class="bi bi-bar-chart-fill"></i> Dashboard</a>
+                <div class="dropdown">
+                    <button style="width:100%;text-align: justify;" class="btn btn-primary1 dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-file-earmark-text-fill"></i> Requests
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownMenuButton1">
+
+                        <li><a class="dropdown-item" href="{{url('requestType')}}">Manage Services</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                 
+                        <li><a class="dropdown-item" href="{{url('view-request-list')}}">View Document Requests</a></li>
+                        <li><a class="dropdown-item" href="{{url('processRequest')}}">Process Document Request</a></li>
+                    </ul>
+                </div>
+
+                <div class="dropdown">
+                    <button style="width:100%;text-align: justify;" class="btn btn-primary1 dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-ticket-perforated-fill"></i> Concern
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownMenuButton1">
+                        <li><a class="dropdown-item" href="{{url('view-concern-list')}}">View Concerns</a></li>
+                        <li><a class="dropdown-item" href="{{url('processConcern')}}">Process Concern</a></li>
+                    </ul>
+                </div>
+                <div class="dropdown">
+                    <button style="width:100%;text-align: justify;" class="btn btn-primary1 dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-database-fill-lock"></i> Barangay Data Report
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownMenuButton1">
+                        <li><a class="dropdown-item" href="{{url('listresident')}}">List of Resident account</a></li>
+                        <li><a class="dropdown-item" href="{{url('deactlistresident')}}">Deactivated Resident account</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="{{url('listbarangayemployee')}}">List of Barangay employee account</a></li>
+                        <li><a class="dropdown-item" href="{{url('deactlistbarangayemployee')}}">Deactivated Employee Account</a></li>
+                        <hr class="dropdown-divider">
+                        <li><a class="dropdown-item" href="{{url('view-request-list')}}">View Document Requests</a></li>
+                        <li><a class="dropdown-item" href="{{url('view-concern-list')}}">View Concerns</a></li>
+                    </ul>
+                </div>
+                @endif
+                @if($admin->role == 'Barangay Secretary' || $admin->role == 'Administrator')
+                <div class="dropdown">
+                    <button style="width:100%;text-align: justify;" class="btn btn-primary1 dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-people-fill"></i> Manage Resident Account
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownMenuButton1">
+                        <li><a class="dropdown-item" href="{{url('listresident')}}">List of Resident account</a></li>
+                        <li><a class="dropdown-item" href="{{url('deactlistresident')}}">Deactivated Resident account</a></li>
+                    </ul>
+                </div>
+                @endif
+                @if($admin->role == 'Barangay Treasurer')
+                <div class="dropdown">
+                    <button style="width:100%;text-align: justify;" class="btn btn-primary1 dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="bi bi-cash-stack"></i> Manage Payment
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownMenuButton1">
+                        <li><a class="dropdown-item" href="{{url('dashboard')}}">List of Payment</a></li>
+                        <hr class="dropdown-divider">
+                        <li><a class="dropdown-item" href="{{url('listReadyForPayment')}}">Process Onsite Payment Request</a></li>
+                        <li><a class="dropdown-item" href="{{url('listOnlinePayment')}}">Process Online Payment Request</a></li>
+                    </ul>
+                </div>
+                @endif
+                @if($admin->role == 'Administrator')
+                <div class="dropdown">
+                    <button style="width:100%;text-align: justify;" class="btn btn-primary1 dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-person-badge-fill"></i></i> Manage Employee Account
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownMenuButton1">
+                        <li><a class="dropdown-item" href="{{url('listbarangayemployee')}}">List of Barangay employee account</a></li>
+                        <li><a class="dropdown-item" href="{{url('addbarangayemployee')}}">Add employee account</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="deactlistbarangayemployee">Deactivated Employee Account</a></li>
+
+                    </ul>
+                </div>
+
+                <a href="manageWebApp" style="text-align: justify;" type="button" class="btn btn-primary1"><i class="bi bi-gear-wide-connected"></i> Manage Website</a>
+                @endif
+            </ul>
+            <hr>
+            <div class="dropdown">
+                <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src="{{url('adminID/'.$admin->profilePic)}}" alt="" width="32" height="32" class="rounded-circle me-2">
+                    @if($admin->middle_name == 'N/A')
+                    <p hidden>{{$initial=Strtolower($admin->first_name[0]."".$admin->middle_name[0]."".$admin->last_name[0])}}</p>
+                    @else
+                    <p hidden>{{$initial=Strtolower($admin->first_name[0]."".$admin->last_name[0])}}</p>
+                    @endif
+                    <strong>{{$initial}}</strong>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
+                    <li><a class="dropdown-item" href="{{url('myAccount')}}">Account Setting</a></li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li><a class="dropdown-item" href="{{url('signout')}}">Sign out</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <div class="top_nav">
+        <nav class="main-header navbar navbar-expand " style="background-color: #720602;">
+            <div class="container-fluid flex-sm-row">
+                <ul class="navbar-nav">
+                </ul>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                    <li class="nav-item ml-3">
+                        <img class="nav-link img-circle " src="imgs/SOUTHSIGNAL LOGO.png" alt="" style="padding: 0px;width: 50px ;">
+                    </li>
+                    <li class="nav-item">
+                        <nobr class="nav-link text-white font-weight-bold"><span>BARANGAY SOUTH SIGNAL VILLAGE</span></nobr>
+                    </li>
+                    </li>
+
+                </ul>
+            </div>
+        </nav>
+    </div>
+    @endforeach
+    @include('admin/adminHeader')
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/datetime/1.3.0/css/dataTables.dateTime.min.css">
+<style>
+    .my-container {
+        margin: 2em 4em 2em 4em;
+    }
+
+    .details-container {
+        margin-top: 2em;
+        border-top: 4px solid #AA0F0A;
+        box-shadow: 0px 8px 8px 8px rgba(0, 0, 0, 0.2);
+        border-radius: 7px;
+    }
+
+    .col-4 {
+        padding: 2em 5em 0em 5em;
+    }
+
+    #payment-number {
+        padding-top: 10px;
+    }
+
+    .hr-container {
+        text-align: center;
+    }
+
+    .centered-hr {
+        width: 100%;
+        /* Set the desired width for the horizontal rule */
+        margin: auto;
+        padding-bottom: 2em;
+        /* Center the horizontal rule */
+    }
+
+    .page-title {
+        padding: 15px;
+    }
+
+    .container-bottom {
+        text-align: center;
+        padding-top: 3em;
+
+    }
+
+    #confirm-payment {
+        font-size: 110%;
+        background-color: #AA0F0A;
+        border: #AA0F0A;
+    }
+
+    #confirm-payment:hover {
+        background-color: white;
+        color: black;
+        border: 2px solid #AA0F0A;
+    }
+
+
+    .tooltip-inner {
+        font-size: 50px;
+        /* Adjust the font size as needed */
+    }
+</style>
+<div class="content my-3">
+
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb fs-6">
+            <li class="breadcrumb-item"><a href="{{url('listOnlinePayment')}}">All Payments</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{$payment->payment_ref}}</li>
+        </ol>
+    </nav>
+    <h2 id="payment-number">{{$payment->payment_ref}}</h2>
+    <div class="container-fluid details-container">
+        <div class="row">
+            <div class="col-4">
+                <h4 class="text-uppercase">Payment Details</h4>
+                <div class="row pt-3 ">
+                    <table class="table  table-borderless ms-2">
+                        <tbody>
+                            <tr>
+                                <td>Gross Amount:</td>
+                                <td>
+                                    <p class="text-end">
+                                        ₱ {{number_format($payment->request_price, 2, '.', '')}}
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Fees <i class="bi bi-info-circle-fill" data-toggle="tooltip" title="Paymongo Service Charge" sty></i>
+                                    : </td>
+                                <td>
+                                    <p class="text-end ">
+                                        ₱ {{number_format($payment->service_charge, 2, '.', '')}}
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <hr style="width:100%">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="align-middle">
+                                    <p class="fw-semibold fs-5 ">Total Amount: </p>
+                                </td>
+                                <td class="align-middle">
+                                    <p id="total-amount" class="fw-semibold fs-5 text-end">
+
+                                        ₱ {{number_format($payment->service_charge + $payment->request_price, 2, '.', '')}}
+                                    </p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <hr>
+                    <div class="row mb-2" >
+                        @if($payment->payment_method == "gcash")
+                        <!-- <h4 id="payment-method" class="pb-2">GCASH</h4> -->
+                        <img src="https://assets-global.website-files.com/60c6db70dedd88514dfdf8e9/6149e904ea884776b634fd9d_GCash_Horizontal%20-%20Full%20Blue%20(Transparent).png" class="img-thumbnail" alt="...">
+
+                        @elseif($payment->payment_method == "paymaya")
+                        <!-- <h4 id="payment-method" class="pb-2">MAYA</h4> -->
+                        <img src="https://assets-global.website-files.com/60c6db70dedd88514dfdf8e9/62ff6cd412d11d5bb2b55342_maya-logo.png" class="img-thumbnail" alt="...">
+                        @else
+                        <!-- <h4 id="payment-method" class="pb-2">GRAB PAY</h4> -->
+                        <img src="https://assets-global.website-files.com/60c6db70dedd88514dfdf8e9/6149e904ea8847973534fda6_GCash_Horizontal---Full-Blue-(Transparent).png" class="img-thumbnail" alt="...">
+                        @endif
+
+                        <p class=" fst-italic mt-3" style="font-size: 12px;">Paid on: {{date("F j, Y g:i:s A", strtotime($payment->payment_date))}}</p>
+                        <!-- <div class="col-2 pt-2">
+                            <p>Paid on:</p>
+                        </div>
+                        <div class="col-10  pt-2" style="text-align: end;">
+                            <p id="payment-date">
+
+                            {{date("F j, Y g:i:s A", strtotime($payment->payment_date))}}
+                       
+                            </p>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+            <div class="col-5 " style="border-right: 4px solid #AA0F0A;">
+                <h4 class="text-uppercase mt-4">Request Details</h4>
+                <div class="row pt-3 pe-5" style="padding-top: 10px;">
+                    <table class="table table-borderless  ms-2 me-3">
+                        <tbody>
+                            <tr>
+                                <td><strong>Reference Key:</strong></td>
+                                <td class="text-end">{{$payment->reference_key}}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Resident Name: </strong></td>
+                                <td class="text-end">{{$payment->first_name . " " .$payment->middle_name . " " . $payment->last_name}}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Type of application: </strong></td>
+                                <td class="text-end">{{$payment->request_type_name}} <br>({{$payment->request_description}})</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Date of Request: </strong></td>
+                                <td class="text-end">{{date("F j, Y g:i:s A", strtotime($payment->request_date))}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="hr-container">
+                        <hr class="">
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="col-3" style="background-color: rgb(238, 238, 238);">
+
+                <div class="ms-3">
+                    <h4 class="mt-4  text-uppercase">Billing Details</h4>
+                    <h5 id="resident-name" class="mt-4">{{($billing['name'])}}</h5>
+                </div>
+                <div class="contact-details mt-4 ms-3">
+                    <i class="bi bi-envelope-at-fill" id="customer-email"> {{($billing['email'])}}</i>
+                    <br>
+                    <br>
+                    <i class="bi bi-telephone-fill" id="contact-num"> {{($billing['phone'])}}</i>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid container-bottom">
+        <button id="confirm-payment" type="btn" class="btn btn-primary">Confirm</button>
+    </div>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.3.2/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.3.2/js/buttons.bootstrap5.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.3.2/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.3.2/js/buttons.print.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.3.2/js/buttons.colVis.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.2/moment.min.js"></script>
+<script src="https://cdn.datatables.net/datetime/1.3.0/js/dataTables.dateTime.min.js"></script>
+
+
+</html>
